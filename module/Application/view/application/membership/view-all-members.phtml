@@ -1,0 +1,22 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div class="jumbotron">
+    <h1 class="display-4">Viewing all members</h1>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+        <?php foreach ($allmembers as $member) : ?>
+            <tr>
+                <td><?= $this->escapeHtml($member->id) ?></td>
+                <td><?= $this->escapeHtml($member->name) ?></td>
+                <td><?= $this->escapeHtml($member->email) ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

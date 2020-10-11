@@ -13,5 +13,8 @@
  */
 
 return [
-    // ...
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost;charset=utf8',
+    ],
 ];

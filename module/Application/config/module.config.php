@@ -37,14 +37,55 @@ return [
                     ],
                 ],
             ],
+            'membership' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/membership',
+                    'defaults' => [
+                        'controller' => Controller\MembershipController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'login' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/login',
+                            'defaults' => [
+                                'action' => 'login',
+                            ],
+                        ],
+                    ],
+                    'logout' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/logout',
+                            'defaults' => [
+                                'action' => 'logout',
+                            ],
+                        ],
+                    ],
+                    'allmembers' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/allmembers',
+                            'defaults' => [
+                                'action' => 'viewAllMembers',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
-    'controllers' => [
-        'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
-            Controller\AboutController::class => InvokableFactory::class,
-        ],
-    ],
+    // 'controllers' => [
+    //     'factories' => [
+    //         Controller\IndexController::class      => InvokableFactory::class,
+    //         Controller\AboutController::class      => InvokableFactory::class,
+    //         Controller\MembershipController::class => InvokableFactory::class,
+    //     ],
+    // ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -52,11 +93,14 @@ return [
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',
         'template_map' => [
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
-            'application/about/about' => __DIR__ . '/../view/application/about/about.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'layout/layout'                     => __DIR__ . '/../view/layout/layout.phtml',
+            'application/index/index'           => __DIR__ . '/../view/application/index/index.phtml',
+            'application/about/about'           => __DIR__ . '/../view/application/about/about.phtml',
+            'application/membership/index'      => __DIR__ . '/../view/application/membership/membership.phtml',
+            'application/membership/login'      => __DIR__ . '/../view/application/membership/membership.phtml',
+            'application/membership/logout'     => __DIR__ . '/../view/application/membership/membership.phtml',
+            'error/404'                         => __DIR__ . '/../view/error/404.phtml',
+            'error/index'                       => __DIR__ . '/../view/error/index.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',
