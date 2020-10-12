@@ -14,9 +14,9 @@ use Laminas\Db\Adapter\AdapterInterface;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Application\Model\MemberTable;
 
-class Module
-{
+class Module {
     public function getConfig() : array
     {
         return include __DIR__ . '/../config/module.config.php';
@@ -44,11 +44,13 @@ class Module
     {
         return [
             'factories' => [
-                Controller\MembershipController::class => function($container) {
-                    return new Controller\MembershipController(
-                        $container->get(Model\MemberTable::class)
-                    );
-                },
+                // Controller\MembershipController::class => function($container) {
+                //     return new Controller\MembershipController(
+                //         $container->get(MemberTable::class),
+                //         $formManager->get(LoginForm::class)
+                //     );
+                // },
+                Controller\MembershipController::class => Factory\MembershipControllerFactory::class,
                 Controller\IndexController::class => function($container) {
                     return new Controller\IndexController();
                 },

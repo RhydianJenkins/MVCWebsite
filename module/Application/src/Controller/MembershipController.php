@@ -14,12 +14,19 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Application\Model\MemberTable as MemberTable;
 use Laminas\Db\Adapter\Adapter as DbAdapter;
+use Application\Form\LoginForm as LoginForm;
 
 class MembershipController extends AbstractActionController {
     private $table;
 
-    public function __construct(MemberTable $table) {
+    /**
+     * @var LoginForm
+     */
+    private $loginForm;
+
+    public function __construct(MemberTable $table, LoginForm $form) {
         $this->table = $table;
+        $this->loginForm = $form;
     }
 
     public function indexAction() {
@@ -28,7 +35,8 @@ class MembershipController extends AbstractActionController {
 
     public function loginAction() {
         $view = new ViewModel([
-            'message' => 'You have selected log in',
+            'message' => 'Please log in',
+            'loginform' => $this->loginForm,
         ]);
         return $view;
     }

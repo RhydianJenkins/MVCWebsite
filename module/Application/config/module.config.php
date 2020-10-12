@@ -94,11 +94,8 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'                     => __DIR__ . '/../view/layout/layout.phtml',
-            'application/index/index'           => __DIR__ . '/../view/application/index/index.phtml',
-            'application/about/about'           => __DIR__ . '/../view/application/about/about.phtml',
-            'application/membership/index'      => __DIR__ . '/../view/application/membership/membership.phtml',
-            'application/membership/login'      => __DIR__ . '/../view/application/membership/membership.phtml',
-            'application/membership/logout'     => __DIR__ . '/../view/application/membership/membership.phtml',
+            'application/about/about'           => __DIR__ . '/../view/application/about/index.phtml',
+            'application/membership/logout'     => __DIR__ . '/../view/application/membership/index.phtml',
             'error/404'                         => __DIR__ . '/../view/error/404.phtml',
             'error/index'                       => __DIR__ . '/../view/error/index.phtml',
         ],
