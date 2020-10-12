@@ -13,6 +13,8 @@ namespace Application;
 use Laminas\Router\Http\Literal;
 use Laminas\Router\Http\Segment;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use Laminas\Authentication\AuthenticationService;
+use Application\Factory\LoginAuthenticatorFactory;
 
 return [
     'router' => [
@@ -73,6 +75,7 @@ return [
     'service_manager' => [
         'factories' => [
             'Application\Db\ReadOnlyDBAdapter' => Laminas\Db\Adapter\Driver\DriverInterface::class,
+            AuthenticationService::class => LoginAuthenticatorFactory::class,
         ],
     ],
     // 'controllers' => [

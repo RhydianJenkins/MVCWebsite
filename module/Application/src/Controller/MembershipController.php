@@ -22,7 +22,6 @@ use Laminas\Authentication\Storage\Session;
 
 class MembershipController extends AbstractActionController {
     const IDENTITY_SESSION_ID = 'identity';
-    const LOGGED_IN_SESSION_ID = 'loggedin';
 
     /**
      * @var LoginForm
@@ -56,7 +55,6 @@ class MembershipController extends AbstractActionController {
 
         // get session data and populate view with it
         $sessionID = $this->session->read(MembershipController::IDENTITY_SESSION_ID);
-        $sessionLoggedIn = $this->session->read(MembershipController::LOGGED_IN_SESSION_ID);
         $view = new ViewModel([
             'loggedin' => $sessionLoggedIn,
             'username' => $sessionID,
@@ -89,7 +87,7 @@ class MembershipController extends AbstractActionController {
                     break;
                 case Result::SUCCESS:
                     // success!
-                    $this->session->write([MembershipController::IDENTITY_SESSION_ID => $username]);
+                    $this->session->write([MembershipController::IDENTITY_SESSION_ID => $result->getIdentity()]);
                     $message = $result->getMessages()[0];
                     break;
                 default:

@@ -4,7 +4,6 @@
  */
 ?>
 <div class="container">
-    <h1>Log in</h1>
     </h2><?php echo($this->message) ?></h2>
     <br/>
     <?php
@@ -17,24 +16,35 @@
         $form->prepare();
         echo $this->form()->openTag($form);
     ?>
+</div>
 
-    <fieldset>
-        <div class="form-group">
-            <?= $this->formLabel($username) ?>
-            <?= $this->formElement($username) ?>
-            <?= $this->formElementErrors()->render($username, ['class' => 'help-block']) ?>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Log in</div>
+                <div class="card-body">
+                    <fieldset>
+                        <div class="form-group">
+                            <?= $this->formLabel($username) ?>
+                            <?= $this->formElement($username) ?>
+                            <?= $this->formElementErrors()->render($username, ['class' => 'help-block']) ?>
+                        </div>
+
+                        <div class="form-group">
+                            <?= $this->formLabel($password) ?>
+                            <?= $this->formElement($password) ?>
+                            <?= $this->formElementErrors()->render($password, ['class' => 'help-block']) ?>
+                        </div>
+                    </fieldset>
+
+                    <?php
+                        echo $this->formSubmit($submit);
+                        echo $this->formHidden($fieldset->get('id'));
+                        echo $this->form()->closeTag();
+                    ?>
+                </div>
+            </div>
         </div>
-
-        <div class="form-group">
-            <?= $this->formLabel($password) ?>
-            <?= $this->formElement($password) ?>
-            <?= $this->formElementErrors()->render($password, ['class' => 'help-block']) ?>
-        </div>
-    </fieldset>
-
-    <?php
-        echo $this->formSubmit($submit);
-        echo $this->formHidden($fieldset->get('id'));
-        echo $this->form()->closeTag();
-    ?>
+    </div>
 </div>

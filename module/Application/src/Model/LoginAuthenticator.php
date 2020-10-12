@@ -27,19 +27,13 @@ class LoginAuthenticator extends AuthenticationService {
      * @var Laminas\Authentication\Adapter\Adapter
      */
     private $dbAdapter;
-
-    /**
-     * The session.
-     * @var Laminas\Authentication\Storage\Session
-     */
-    private $session;
         
     /**
      * Constructor.
      */
     public function __construct(Session $session, Adapter $dbAdapter) {
         $this->dbAdapter = $dbAdapter;
-        $this->session = $session;
+        $this->setStorage($session);
     }
     
     /**
@@ -91,9 +85,5 @@ class LoginAuthenticator extends AuthenticationService {
         
         // If password check didn't pass return 'Invalid Credential' failure status.
         return new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid credentials.']);        
-    }
-
-    public function getSession() {
-        return $this->session;
     }
 }

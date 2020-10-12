@@ -1,12 +1,21 @@
 :root {
-    --brand-color: #013755;
+    --primary-color: #013755;
+    --secondary-color: #e9ecef;
+    --tertiary-color: #ffffff;
 }
 
 .navbar {
-    background-color: var(--brand-color);
+    background-color: var(--primary-color);
 }
 
 .btn-primary {
-    background-color: var(--brand-color);
-    border-color: var(--brand-color);
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* login button container */
+.navbar .login-container .nav-link {
+    float: right;
+    border: none;
+    cursor: pointer;
 }
