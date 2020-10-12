@@ -1,14 +1,15 @@
 <?php
 namespace Application\Model;
 
+use Laminas\Authentication\AuthenticationService;
 use Laminas\Authentication\Result;
 use Laminas\Authentication\Storage\Session;
-use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Db\Sql\Sql;
 
-class LoginAuthAdapter {
+class LoginAuthenticator extends AuthenticationService {
     /**
      * Username.
      * @var string 
@@ -23,7 +24,7 @@ class LoginAuthAdapter {
     
     /**
      * The database adapter.
-     * @var Laminas\Db\Adapter\Adapter
+     * @var Laminas\Authentication\Adapter\Adapter
      */
     private $dbAdapter;
 
@@ -58,9 +59,13 @@ class LoginAuthAdapter {
     /**
      * Performs an authentication attempt.
      */
-    public function authenticate() {                
+    public function authenticate(AdapterInterface $adapter = NULL) {                
         // query the database to check if there's a user with such username
-        $sql = new SQL($this->dbAdapter);
+        if ($adapter == NULL) {
+            $sql = new SQL($this->dbAdapter);
+        } else {
+            $sql = new SQL($adapter);
+        }
         $select = $sql->select()->from('members')->where(['username' => $this->username]);
         $PDOStatement = $sql->prepareStatementForSqlObject($select);
         $result = $PDOStatement->execute();

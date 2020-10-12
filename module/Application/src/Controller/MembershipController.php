@@ -15,15 +15,14 @@ use Laminas\View\Model\ViewModel;
 use Application\Model\MemberTable as MemberTable;
 use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Application\Form\LoginForm as LoginForm;
-use Application\Model\LoginAuthAdapter;
+use Application\Model\LoginAuthenticator;
 use Laminas\Authentication\Result;
 use Laminas\Session\Container;
 use Laminas\Authentication\Storage\Session;
 
 class MembershipController extends AbstractActionController {
     const IDENTITY_SESSION_ID = 'identity';
-
-    private $table;
+    const LOGGED_IN_SESSION_ID = 'loggedin';
 
     /**
      * @var LoginForm
@@ -31,9 +30,9 @@ class MembershipController extends AbstractActionController {
     private $loginForm;
 
     /**
-     * @var LoginAuthAdapter
+     * @var LoginAuthenticator
      */
-    private $LoginAdapter;
+    private $loginAuthenticator;
 
     /**
      * The session.
@@ -41,24 +40,26 @@ class MembershipController extends AbstractActionController {
      */
     private $session;
 
-    public function __construct(MemberTable $table, LoginForm $form, LoginAuthAdapter $loginAdapter, Session $session) {
-        $this->table = $table;
+    public function __construct(LoginForm $form, LoginAuthenticator $loginAuthenticator, Session $session) {
         $this->loginForm = $form;
-        $this->loginAdapter = $loginAdapter;
+        $this->loginAuthenticator = $loginAuthenticator;
         $this->session = $session;
     }
 
     public function indexAction() {
+        // no session? return 'not logged in'
         if ($this->session == null) {
             return new ViewModel([
                 'loggedin' => 'false',
             ]);
         }
 
-        // we're logged in, return a view model with a username from session
+        // get session data and populate view with it
+        $sessionID = $this->session->read(MembershipController::IDENTITY_SESSION_ID);
+        $sessionLoggedIn = $this->session->read(MembershipController::LOGGED_IN_SESSION_ID);
         $view = new ViewModel([
-            'loggedin' => 'true',
-            'username' => $this->session->read(MembershipController::IDENTITY_SESSION_ID),
+            'loggedin' => $sessionLoggedIn,
+            'username' => $sessionID,
         ]);
         return $view;
     }
@@ -74,9 +75,9 @@ class MembershipController extends AbstractActionController {
         $password = $this->getRequest()->getPost()->toArray()['post']['password'];
         if ($username != null && $password != null) {
             // login attempt, authenticate
-            $this->loginAdapter->setUsername($username);
-            $this->loginAdapter->setPassword($password);
-            $result = $this->loginAdapter->authenticate();
+            $this->loginAuthenticator->setUsername($username);
+            $this->loginAuthenticator->setPassword($password);
+            $result = $this->loginAuthenticator->authenticate();
             switch ($result->getCode()) {
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
                     // username not found
@@ -107,20 +108,14 @@ class MembershipController extends AbstractActionController {
     }
 
     /**
-     * Clear session in LoginAuthAdapter and redirect to index.
+     * Clears session, logging out
      */
     public function logoutAction() {
         $this->session->clear();
+        $this->session->write([MembershipController::IDENTITY_SESSION_ID => $username]);
         return new ViewModel([
             'loggedin' => false,
         ]);
         // TODO, change URI to remove the 'logout'?
-    }
-
-    public function viewAllMembersAction() {
-        $view = new ViewModel([
-            'allmembers' => $this->table->fetchAll(),
-        ]);
-        return $view;
     }
 }

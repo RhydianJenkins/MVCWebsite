@@ -13,9 +13,17 @@
  */
 
 return [
+    // 'db' => [
+    //     'driver' => 'Pdo',
+    //     'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost;charset=utf8',
+    // ],
     'db' => [
-        'driver' => 'Pdo',
-        'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost;charset=utf8',
+        'adapters' => [
+            'Application\DB\ReadOnlyDBAdapter' => [
+                'driver' => 'Pdo',
+                'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost;charset=utf8',
+            ],
+        ],
     ],
     'session_manager' => [
         'config' => [

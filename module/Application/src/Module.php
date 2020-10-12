@@ -10,13 +10,15 @@ declare(strict_types=1);
 
 namespace Application;
 
-use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Authentication\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Application\Model\MemberTable;
 use Laminas\Session\SessionManager;
 use Laminas\Authentication\Storage\Session;
+use Laminas\Db\Adapter\Driver\DriverInterface;
 
 class Module {
     public function getConfig() : array
@@ -33,16 +35,19 @@ class Module {
                     return new Model\MemberTable($tableGateway);
                 },
                 Model\MemberTableGateway::class => function ($container) {
-                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $dbAdapter = $container->get(Factory\DBAdapterFactory::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Member());
                     return new TableGateway('members', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\LoginAuthenticator::class => Factory\LoginAuthenticatorFactory::class,
                 Factory\SessionStorageFactory::class => function ($container) {
                     $sessionManager = new SessionManager();
                     return new Session('Laminas_Auth', 'session', $sessionManager);
                 },
-                Model\LoginAuthAdapter::class => Factory\LoginAuthAdapterFactory::class,
+                Factory\DBAdapterFactory::class => function ($container) {
+                    return $container->get('Application\DB\ReadOnlyDBAdapter');
+                },
             ],
         ];
     }

@@ -66,17 +66,13 @@ return [
                             ],
                         ],
                     ],
-                    'allmembers' => [
-                        'type' => Literal::class,
-                        'options' => [
-                            'route' => '/allmembers',
-                            'defaults' => [
-                                'action' => 'viewAllMembers',
-                            ],
-                        ],
-                    ],
                 ],
             ],
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            'Application\Db\ReadOnlyDBAdapter' => Laminas\Db\Adapter\Driver\DriverInterface::class,
         ],
     ],
     // 'controllers' => [

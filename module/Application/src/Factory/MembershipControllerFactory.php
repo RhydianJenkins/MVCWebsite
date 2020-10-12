@@ -3,10 +3,9 @@ namespace Application\Factory;
 
 use Application\Controller\MembershipController;
 use Application\Form\LoginForm;
-use Application\Model\MemberTable;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
-use Application\Model\LoginAuthAdapter;
+use Application\Model\LoginAuthenticator;
 
 class MembershipControllerFactory implements FactoryInterface {
     /**
@@ -20,9 +19,8 @@ class MembershipControllerFactory implements FactoryInterface {
         $authStorage = $container->get(SessionStorageFactory::class);
 
         return new MembershipController(
-            $container->get(MemberTable::class),
             $formManager->get(LoginForm::class),
-            $container->get(LoginAuthAdapter::class),
+            $container->get(LoginAuthenticator::class),
             $authStorage
         );
     }
