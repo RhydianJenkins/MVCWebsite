@@ -60,15 +60,12 @@ class LoginAuthAdapter implements AdapterInterface {
      * Performs an authentication attempt.
      */
     public function authenticate() {                
-        // TODO: Check the database if there is a user with such username.
+        // query the database to check if there's a user with such username
         $sql = new SQL($this->dbAdapter);
-        $select = $sql->select();
-        $select->from('members');
-        $select->where(['username' => $this->username]);
+        $select = $sql->select()->from('members')->where(['username' => $this->username]);
         $PDOStatement = $sql->prepareStatementForSqlObject($select);
         $result = $PDOStatement->execute();
         $member = $result->current();
-        echo("<pre>");var_dump($member);echo("</pre>");
 
         // If there is no such user, return 'Identity Not Found' status.
         if ($member==null) {
@@ -77,11 +74,12 @@ class LoginAuthAdapter implements AdapterInterface {
         
         // Now we need to calculate hash based on user-entered password and compare
         // it with the password hash stored in database.
-        $bcrypt = new Bcrypt();
-        $passwordHash = $member['password'];
-        
-        //if ($bcrypt->verify($this->password, $passwordHash)) {
-        if ($this->password == $passwordHash) {
+        $salt = $member['salt'];
+        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT, ['salt' => $salt]);
+        $storedPasswordHash = $member['password'];
+
+        // compare passwords
+        if ($hashedPassword == $storedPasswordHash) {
             // Great! The password hash matches. Return user identity (email) to be
             // saved in session for later use.
             return new Result(Result::SUCCESS, $this->email, ['Authenticated successfully.']);        

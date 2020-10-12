@@ -55,23 +55,22 @@ class MembershipController extends AbstractActionController {
             $result = $this->loginAdapter->authenticate();
             switch ($result->getCode()) {
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
-                    /** do stuff for nonexistent identity **/
-                    echo("no such member");
+                    // username not found
+                    $message = "No user found by that name.";
                     break;
                 case Result::FAILURE_CREDENTIAL_INVALID:
-                    /** do stuff for invalid credential **/
-                    echo("invalid credentials");
+                    // wrong password
+                    $message = "Incorrect password.";
                     break;
                 case Result::SUCCESS:
-                    /** do stuff for successful authentication **/
-                    echo("successful authentication");
+                    // success!
+                    $message = "Successful login.";
                     break;
                 default:
-                    /** do stuff for other failure **/
-                    echo("other failure");
+                    // other issue
+                    $message = "Something went wrong.";
                     break;
             }
-            echo("<pre>");var_dump($result);echo("</pre>");
         }
 
         // print login form

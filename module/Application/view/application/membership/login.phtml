@@ -5,6 +5,8 @@
 ?>
 <div class="container">
     <h1>Log in</h1>
+    </h2><?php echo($this->message) ?></h2>
+    <br/>
     <?php
         $form = $this->loginform;
         $form->setAttribute('action', $this->url());
