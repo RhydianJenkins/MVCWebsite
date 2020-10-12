@@ -2,10 +2,7 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
-$isLoggedIn = false;
-echo("<pre>");
-var_dump($this->identity());
-echo("</pre>");
+$user = $this->identity()['identity'];
 ?>
 <?= $this->doctype() ?>
 <html lang="en">
@@ -52,8 +49,8 @@ echo("</pre>");
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item active login-container">
-                            <?php if($isLoggedIn) : ?>
-                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Log out</a>
+                            <?php if($user != null) : ?>
+                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello, <?= $user ?> (Log out)</a>
                             <?php else : ?>
                                 <a class="nav-link" href="<?= $this->url('membership/login') ?>">Log in</a>
                             <?php endif; ?>

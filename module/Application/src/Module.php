@@ -30,16 +30,6 @@ class Module {
     {
         return [
             'factories' => [
-                Model\MemberTable::class => function($container) {
-                    $tableGateway = $container->get(Model\MemberTableGateway::class);
-                    return new Model\MemberTable($tableGateway);
-                },
-                Model\MemberTableGateway::class => function ($container) {
-                    $dbAdapter = $container->get(Factory\DBAdapterFactory::class);
-                    $resultSetPrototype = new ResultSet();
-                    $resultSetPrototype->setArrayObjectPrototype(new Model\Member());
-                    return new TableGateway('members', $dbAdapter, null, $resultSetPrototype);
-                },
                 Model\LoginAuthenticator::class => Factory\LoginAuthenticatorFactory::class,
                 Factory\SessionStorageFactory::class => function ($container) {
                     $sessionManager = new SessionManager();

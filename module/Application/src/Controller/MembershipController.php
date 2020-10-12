@@ -46,19 +46,7 @@ class MembershipController extends AbstractActionController {
     }
 
     public function indexAction() {
-        // no session? return 'not logged in'
-        if ($this->session == null) {
-            return new ViewModel([
-                'loggedin' => 'false',
-            ]);
-        }
-
-        // get session data and populate view with it
-        $sessionID = $this->session->read(MembershipController::IDENTITY_SESSION_ID);
-        $view = new ViewModel([
-            'loggedin' => $sessionLoggedIn,
-            'username' => $sessionID,
-        ]);
+        $view = new ViewModel();
         return $view;
     }
 

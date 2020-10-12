@@ -4,7 +4,5 @@
  */
 ?>
 <div class="container">
-    <h1>Membership</h1>
-    <p>username: <?php print_r($this->username) ?></p>
-    <p>loggedin: <?php print_r($this->loggedin) ?></p>
+    <h1>Welcome, <?= $this->identity()['identity'] ?></h1>
 </div>
