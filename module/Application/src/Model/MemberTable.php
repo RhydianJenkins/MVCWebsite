@@ -3,6 +3,7 @@ namespace Application\Model;
 
 use RuntimeException;
 use Laminas\Db\TableGateway\TableGatewayInterface;
+use Laminas\Authentication\Adapter\DbTable\CredentialTreatmentAdapter;
 
 class MemberTable {
     private $tableGateway;
@@ -15,8 +16,7 @@ class MemberTable {
         return $this->tableGateway->select();
     }
 
-    public function getMember($id)
-    {
+    public function getMember($id) {
         $id = (int) $id;
         $rowset = $this->tableGateway->select(['id' => $id]);
         $row = $rowset->current();

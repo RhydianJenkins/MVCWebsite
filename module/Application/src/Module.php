@@ -36,6 +36,7 @@ class Module {
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Member());
                     return new TableGateway('members', $dbAdapter, null, $resultSetPrototype);
                 },
+                Model\LoginAuthAdapter::class => Factory\LoginAuthAdapterFactory::class,
             ],
         ];
     }
@@ -44,12 +45,6 @@ class Module {
     {
         return [
             'factories' => [
-                // Controller\MembershipController::class => function($container) {
-                //     return new Controller\MembershipController(
-                //         $container->get(MemberTable::class),
-                //         $formManager->get(LoginForm::class)
-                //     );
-                // },
                 Controller\MembershipController::class => Factory\MembershipControllerFactory::class,
                 Controller\IndexController::class => function($container) {
                     return new Controller\IndexController();

@@ -17,4 +17,17 @@ return [
         'driver' => 'Pdo',
         'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost;charset=utf8',
     ],
+    'session_manager' => [
+        'config' => [
+            'class' => Session\Config\SessionConfig::class,
+            'options' => [
+                'name' => 'MVCWebsite',
+            ],
+        ],
+        'storage' => Session\Storage\SessionArrayStorage::class,
+        'validators' => [
+            Session\Validator\RemoteAddr::class,
+            Session\Validator\HttpUserAgent::class,
+        ],
+    ],
 ];

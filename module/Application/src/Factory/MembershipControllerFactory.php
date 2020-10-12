@@ -6,6 +6,7 @@ use Application\Form\LoginForm;
 use Application\Model\MemberTable;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Application\Model\LoginAuthAdapter;
 
 class MembershipControllerFactory implements FactoryInterface {
     /**
@@ -18,7 +19,8 @@ class MembershipControllerFactory implements FactoryInterface {
         $formManager = $container->get('FormElementManager');
         return new MembershipController(
             $container->get(MemberTable::class),
-            $formManager->get(LoginForm::class)
+            $formManager->get(LoginForm::class),
+            $container->get(LoginAuthAdapter::class)
         );
     }
 }
