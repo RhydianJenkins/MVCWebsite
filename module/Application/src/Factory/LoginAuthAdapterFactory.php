@@ -11,9 +11,7 @@ use Laminas\Db\Adapter\AdapterInterface;
 
 class LoginAuthAdapterFactory implements FactoryInterface {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
-        //$sessionManager = $container->get(SessionManager::class);
-        $sessionManager = new SessionManager();
-        $authStorage = new SessionStorage('Laminas_Auth', 'session', $sessionManager);
+        $authStorage = $container->get(SessionStorageFactory::class);
         $authAdapter = $container->get(AdapterInterface::class);
         return new LoginAuthAdapter($authStorage, $authAdapter);
     }

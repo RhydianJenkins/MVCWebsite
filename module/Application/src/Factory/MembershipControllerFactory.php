@@ -17,10 +17,13 @@ class MembershipControllerFactory implements FactoryInterface {
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
         $formManager = $container->get('FormElementManager');
+        $authStorage = $container->get(SessionStorageFactory::class);
+
         return new MembershipController(
             $container->get(MemberTable::class),
             $formManager->get(LoginForm::class),
-            $container->get(LoginAuthAdapter::class)
+            $container->get(LoginAuthAdapter::class),
+            $authStorage
         );
     }
 }

@@ -5,6 +5,8 @@
 ?>
 <div class="container">
     <h1>Membership</h1>
+    <p>view username: <?php var_dump($this->username) ?></p>
+    <p>view logged in: <?php var_dump($this->loggedin) ?></p>
     <a class="btn btn-primary btn-lg" href="<?= $this->url('membership/allmembers') ?>">View all members</a>
     <a class="btn btn-primary btn-lg" href="<?= $this->url('membership/login') ?>">Login</a>
 </div>

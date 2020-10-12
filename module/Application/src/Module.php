@@ -15,6 +15,8 @@ use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Application\Model\MemberTable;
+use Laminas\Session\SessionManager;
+use Laminas\Authentication\Storage\Session;
 
 class Module {
     public function getConfig() : array
@@ -35,6 +37,10 @@ class Module {
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Model\Member());
                     return new TableGateway('members', $dbAdapter, null, $resultSetPrototype);
+                },
+                Factory\SessionStorageFactory::class => function ($container) {
+                    $sessionManager = new SessionManager();
+                    return new Session('Laminas_Auth', 'session', $sessionManager);
                 },
                 Model\LoginAuthAdapter::class => Factory\LoginAuthAdapterFactory::class,
             ],

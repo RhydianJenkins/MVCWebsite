@@ -1,7 +1,6 @@
 <?php
 namespace Application\Model;
 
-use Application\Model\LoginAuthAdapter;
 use Laminas\Authentication\Result;
 use Laminas\Authentication\Storage\Session;
 use Laminas\Db\Adapter\AdapterInterface;
@@ -9,7 +8,7 @@ use Laminas\Db\Adapter\Adapter;
 use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Db\Sql\Sql;
 
-class LoginAuthAdapter implements AdapterInterface {
+class LoginAuthAdapter {
     /**
      * Username.
      * @var string 
@@ -80,23 +79,16 @@ class LoginAuthAdapter implements AdapterInterface {
 
         // compare passwords
         if ($hashedPassword == $storedPasswordHash) {
-            // Great! The password hash matches. Return user identity (email) to be
+            // Great! The password hash matches. Return user identity (username) to be
             // saved in session for later use.
-            return new Result(Result::SUCCESS, $this->email, ['Authenticated successfully.']);        
+            return new Result(Result::SUCCESS, $this->username, ['Authenticated successfully.']);        
         }             
         
         // If password check didn't pass return 'Invalid Credential' failure status.
         return new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid credentials.']);        
     }
 
-    public function getDriver() {
-        if ($this->driver === null) {
-            throw new Exception\RuntimeException('Driver has not been set or configured for this adapter.');
-        }
-        return $this->driver;
-    }
-
-    public function getPlatform() {
-        return $this->platform;
+    public function getSession() {
+        return $this->session;
     }
 }

@@ -17,8 +17,12 @@ use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Application\Form\LoginForm as LoginForm;
 use Application\Model\LoginAuthAdapter;
 use Laminas\Authentication\Result;
+use Laminas\Session\Container;
+use Laminas\Authentication\Storage\Session;
 
 class MembershipController extends AbstractActionController {
+    const IDENTITY_SESSION_ID = 'identity';
+
     private $table;
 
     /**
@@ -31,17 +35,37 @@ class MembershipController extends AbstractActionController {
      */
     private $LoginAdapter;
 
-    public function __construct(MemberTable $table, LoginForm $form, LoginAuthAdapter $loginAdapter) {
+    /**
+     * The session.
+     * @var Laminas\Authentication\Storage\Session
+     */
+    private $session;
+
+    public function __construct(MemberTable $table, LoginForm $form, LoginAuthAdapter $loginAdapter, Session $session) {
         $this->table = $table;
         $this->loginForm = $form;
         $this->loginAdapter = $loginAdapter;
+        $this->session = $session;
     }
 
     public function indexAction() {
-        return new ViewModel();
+        if ($this->session == null) {
+            return new ViewModel([
+                'loggedin' => 'false',
+            ]);
+        }
+
+        // we're logged in, return a view model with a username from session
+        $view = new ViewModel([
+            'loggedin' => 'true',
+            'username' => $this->session->read(MembershipController::IDENTITY_SESSION_ID),
+        ]);
+        return $view;
     }
 
     public function loginAction() {
+        // TODO, redirect away if we're already logged in
+
         // message to display
         $message = "";
 
@@ -56,19 +80,20 @@ class MembershipController extends AbstractActionController {
             switch ($result->getCode()) {
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
                     // username not found
-                    $message = "No user found by that name.";
+                    $message = $result->getMessages()[0];
                     break;
                 case Result::FAILURE_CREDENTIAL_INVALID:
                     // wrong password
-                    $message = "Incorrect password.";
+                    $message = $result->getMessages()[0];
                     break;
                 case Result::SUCCESS:
                     // success!
-                    $message = "Successful login.";
+                    $this->session->write([MembershipController::IDENTITY_SESSION_ID => $username]);
+                    $message = $result->getMessages()[0];
                     break;
                 default:
                     // other issue
-                    $message = "Something went wrong.";
+                    $message = $result->getMessages()[0];
                     break;
             }
         }
@@ -81,11 +106,15 @@ class MembershipController extends AbstractActionController {
         return $view;
     }
 
+    /**
+     * Clear session in LoginAuthAdapter and redirect to index.
+     */
     public function logoutAction() {
-        $view = new ViewModel([
-            'message' => 'You have selected log out',
+        $this->session->clear();
+        return new ViewModel([
+            'loggedin' => false,
         ]);
-        return $view;
+        // TODO, change URI to remove the 'logout'?
     }
 
     public function viewAllMembersAction() {
