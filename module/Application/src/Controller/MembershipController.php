@@ -59,20 +59,20 @@ class MembershipController extends AbstractActionController {
     }
 
     public function loginAction() {
-        // TODO, redirect away if we're already logged in
-
-        // message to display
+        // message and code to pass to view
         $message = "";
+        $code = Result::FAILURE_UNCATEGORIZED;
 
         // check to see if usr/pass was POSTed, authenticate if so
-        $username = $this->getRequest()->getPost()->toArray()['post']['username'];
-        $password = $this->getRequest()->getPost()->toArray()['post']['password'];
+        $username = $this->getRequest()->getPost()->toArray()['username'];
+        $password = $this->getRequest()->getPost()->toArray()['password'];
         if ($username != null && $password != null) {
             // login attempt, authenticate
             $this->loginAuthenticator->setUsername($username);
             $this->loginAuthenticator->setPassword($password);
             $result = $this->loginAuthenticator->authenticate();
-            switch ($result->getCode()) {
+            $code = $result->getCode();
+            switch ($code) {
                 case Result::FAILURE_IDENTITY_NOT_FOUND:
                     // username not found
                     $message = $result->getMessages()[0];
@@ -97,6 +97,7 @@ class MembershipController extends AbstractActionController {
         // print login form
         $view = new ViewModel([
             'message' => $message,
+            'code' => $code,
             'loginform' => $this->loginForm,
         ]);
         return $view;
@@ -132,13 +133,19 @@ class MembershipController extends AbstractActionController {
         if (!$this->registerForm->isValid()) {
             return [
                 'message' => 'Invalid form.',
-                'registerform' => $form,
+                'registerform' => $this->registerForm,
             ];
         }
 
         // populate user object
-        $user->exchangeArray($this->registerForm->getData());
-        //var_dump($user);
+        $data = $this->registerForm->getData();
+        $user->exchangeArray($data);
+        echo("<pre>"); var_dump($this->getRequest()->getPost()); echo("</pre>");
+
+        return [
+            'message' => 'Valid form.',
+            'registerform' => $this->registerForm,
+        ];
         //return $this->redirect()->toRoute('membership');
     }
 }
