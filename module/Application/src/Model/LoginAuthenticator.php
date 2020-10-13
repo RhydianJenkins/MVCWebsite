@@ -10,8 +10,19 @@ use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Db\Sql\Sql;
 use Application\Model\User;
 use Laminas\Math\Rand;
+use Laminas\Validator\Db\RecordExists;
 
 class LoginAuthenticator extends AuthenticationService {
+    /**
+     * The length of the salt to add to new records.
+     */
+    const SALT_SIZE = 32;
+
+    /**
+     * The length of the salt to add to new records.
+     */
+    const MEMBERS_TABLE_NAME = 'members';
+    
     /**
      * Username.
      * @var string 
@@ -62,13 +73,13 @@ class LoginAuthenticator extends AuthenticationService {
         } else {
             $sql = new SQL($adapter);
         }
-        $select = $sql->select()->from('members')->where(['username' => $this->username]);
+        $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where(['username' => $this->username]);
         $PDOStatement = $sql->prepareStatementForSqlObject($select);
         $result = $PDOStatement->execute();
         $member = $result->current();
 
         // If there is no such user, return 'Identity Not Found' status.
-        if ($member==null) {
+        if ($member == null) {
             return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid credentials.']);        
         }
         
@@ -90,6 +101,7 @@ class LoginAuthenticator extends AuthenticationService {
     }
 
     public function addNewUser(User $newUser, AdapterInterface $adapter = NULL) {
+
         // get information from User object
         $username = $newUser->getUsername();
         $name = $newUser->getName();
@@ -104,12 +116,12 @@ class LoginAuthenticator extends AuthenticationService {
         }
 
         // generate a salt
-        $salt = base64_encode(Rand::getBytes(32));
+        $salt = base64_encode(Rand::getBytes(self::SALT_SIZE));
         $hashedPassword = password_hash($rawPassword, PASSWORD_BCRYPT, ['salt' => $salt]);
 
         // build sql statement to add to database
         // INSERT INTO `members` (`id`, `username`, `password`, `salt`, `name`, `email`) VALUES (NULL, 'andrew', 'password', 'salt', 'name', 'email');
-        $insert = $sql->insert()->into('members')->values([
+        $insert = $sql->insert()->into(self::MEMBERS_TABLE_NAME)->values([
             'id' => NULL, 
             'username' => $username,
             'password' => $hashedPassword,
@@ -122,5 +134,49 @@ class LoginAuthenticator extends AuthenticationService {
         // execute statement
         $result = $PDOStatement->execute();
         return $result;
+    }
+
+    /**
+     * Returns true if a record exists with the given email in the database.
+     */
+    public function emailAlreadyExists($email, AdapterInterface $adapter = NULL) {
+        // get sql from adapter
+        if ($adapter == NULL) {
+            $validator = new RecordExists([
+                'table'   => self::MEMBERS_TABLE_NAME,
+                'field'   => 'email',
+                'adapter' => $this->dbAdapter,
+            ]);
+        } else {
+            $validator = new RecordExists([
+                'table'   => self::MEMBERS_TABLE_NAME,
+                'field'   => 'email',
+                'adapter' => $adapter,
+            ]);
+        }
+
+        return $validator->isValid($email);
+    }
+
+    /**
+     * Returns true if a record exists with the given username in the database.
+     */
+    public function usernameAlreadyExists($username, AdapterInterface $adapter = NULL) {
+        // get sql from adapter
+        if ($adapter == NULL) {
+            $validator = new RecordExists([
+                'table'   => self::MEMBERS_TABLE_NAME,
+                'field'   => 'username',
+                'adapter' => $this->dbAdapter,
+            ]);
+        } else {
+            $validator = new RecordExists([
+                'table'   => self::MEMBERS_TABLE_NAME,
+                'field'   => 'username',
+                'adapter' => $this->adapter,
+            ]);
+        }
+        
+        return $validator->isValid($username);
     }
 }

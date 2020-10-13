@@ -115,9 +115,8 @@ class MembershipController extends AbstractActionController {
      * Displays a form to register a new user.
      */
     public function registerAction() {
+        // check if the form is submitted
         $formSubmitted = $this->getRequest()->isPost();
-
-        // form not submitted?
         if (!$formSubmitted) {
             return ['registerform' => $this->registerForm];
         }
@@ -134,11 +133,26 @@ class MembershipController extends AbstractActionController {
                 'registerform' => $this->registerForm,
             ];
         }
+        
+        // check record doesn't exist
+        $emailExists = $this->loginAuthenticator->emailAlreadyExists($this->registerForm->getData()['email']);
+        $usernameExists = $this->loginAuthenticator->usernameAlreadyExists($this->registerForm->getData()['username']);
+        if ($emailExists) {
+            return [
+                'message' => 'An account with that email address already exists.',
+                'registerform' => $this->registerForm,
+            ];
+        } else if ($usernameExists) {
+            return [
+                'message' => 'An account with that username already exists.',
+                'registerform' => $this->registerForm,
+            ];
+        }
 
-        // populate user object
+        // populate user object and add to db
         $data = $this->registerForm->getData();
         $user->exchangeArray($data);
-        $this->loginAuthenticator->addNewUser($user);
+        $result = $this->loginAuthenticator->addNewUser($user);
 
         return [
             'message' => 'Account created.',
