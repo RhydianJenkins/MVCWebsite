@@ -140,7 +140,6 @@ class MembershipController extends AbstractActionController {
         // populate user object
         $data = $this->registerForm->getData();
         $user->exchangeArray($data);
-        echo("<pre>"); var_dump($this->getRequest()->getPost()); echo("</pre>");
 
         return [
             'message' => 'Valid form.',

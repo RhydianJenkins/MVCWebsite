@@ -6,6 +6,7 @@ use Laminas\InputFilter\InputFilterInterface;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilter\Input;
 use Laminas\Validator;
+use Laminas\I18n\Validator\Alpha;
 
 class User implements InputFilterAwareInterface {
     private $id;
@@ -35,68 +36,80 @@ class User implements InputFilterAwareInterface {
 
         $inputFilter = new InputFilter();
 
-        // ID
-        // $inputFilter->add([
-        //     'name' => 'id',
-        //     'required' => true,
-        //     'filters' => [
-        //         ['name' => Validator\Digits::class],
-        //     ],
-        // ]);
-
         // username
-        // $inputFilter->add([
-        //     'name' => 'username',
-        //     'required' => true,
-        //     // 'filters' => [
-        //     //     ['name' => Validator\NotEmpty::class],
-        //     // ],
-        // ]);
+        $inputFilter->add([
+            'name' => 'username',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\StringLength::class,
+                    'options' => [
+                        'min' => 3,
+                        'max' => 20,
+                    ]
+                ],
+            ],
+        ]);
 
-        // // name
-        // $inputFilter->add([
-        //     'name' => 'name',
-        //     'required' => true,
-        //     // 'filters' => [
-        //     //     ['name' => Validator\NotEmpty::class],
-        //     // ],
-        // ]);
+        // name
+        $inputFilter->add([
+            'name' => 'name',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\StringLength::class,
+                    'options' => [
+                        'min' => 2,
+                        'max' => 50,
+                    ]
+                ],
+                [
+                    'name' => Alpha::class,
+                    'options' => [
+                        'allowWhiteSpace' => true,
+                    ],
+                ],
+            ],
+        ]);
 
-        // // email
-        // $inputFilter->add([
-        //     'name' => 'email',
-        //     'required' => true,
-        //     // 'filters' => [
-        //     //     ['name' => Validator\EmailAddress::class],
-        //     // ],
-        // ]);
+        // email
+        $inputFilter->add([
+            'name' => 'email',
+            'required' => true,
+            'validators' => [
+                ['name' => Validator\EmailAddress::class],
+            ],
+        ]);
 
-        // // password
-        // $inputFilter->add([
-        //     'name' => 'password',
-        //     'required' => true,
-        //     // 'filters' => [
-        //     //     ['name' => Validator\NotEmpty::class],
-        //     // ],
-        // ]);
+        // password
+        $inputFilter->add([
+            'name' => 'password',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\StringLength::class,
+                    'options' => [
+                        'min' => 6,
+                        'max' => 50,
+                    ]
+                ],
+            ],
+        ]);
 
-        // // password-confirm
-        // $inputFilter->add([
-        //     'name' => 'password-confirm',
-        //     'required' => true,
-        //     // 'validators' => [
-        //     //     [
-        //     //         'name'    => Validator\Identical::class,
-        //     //         'options' => [
-        //     //             'token' => 'password',
-        //     //         ],
-        //     //     ],
-        //     // ],
-
-        //     // 'filters' => [
-        //     //     ['name' => Validator\NotEmpty::class],
-        //     // ],
-        // ]);
+        // password-confirm
+        $inputFilter->add([
+            'name' => 'password-confirm',
+            'required' => true,
+            'validators' => [
+                [
+                    'name'    => Validator\Identical::class,
+                    'options' => [
+                        'token' => 'password',
+                        'message' => 'Passwords did not match.'
+                    ],
+                ],
+            ],
+        ]);
 
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
