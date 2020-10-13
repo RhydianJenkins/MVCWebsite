@@ -3,6 +3,7 @@ namespace Application\Factory;
 
 use Application\Controller\MembershipController;
 use Application\Form\LoginForm;
+use Application\Form\RegisterForm;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Application\Model\LoginAuthenticator;
@@ -17,9 +18,11 @@ class MembershipControllerFactory implements FactoryInterface {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
         $formManager = $container->get('FormElementManager');
         $authStorage = $container->get(SessionStorageFactory::class);
-
+        $loginForm = $formManager->get(LoginForm::class);
+        $registerForm = $formManager->get(RegisterForm::class);
         return new MembershipController(
-            $formManager->get(LoginForm::class),
+            $loginForm,
+            $registerForm,
             $container->get(LoginAuthenticator::class),
             $authStorage
         );

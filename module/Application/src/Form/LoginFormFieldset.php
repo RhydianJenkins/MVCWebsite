@@ -27,7 +27,7 @@ class LoginFormFieldset extends Fieldset {
 
         // password
         $this->add([
-            'type' => 'text',
+            'type' => 'password',
             'name' => 'password',
             'options' => [
                 'label' => 'Password',

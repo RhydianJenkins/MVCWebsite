@@ -15,10 +15,12 @@ use Laminas\View\Model\ViewModel;
 use Application\Model\MemberTable as MemberTable;
 use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Application\Form\LoginForm as LoginForm;
+use Application\Form\RegisterForm as RegisterForm;
 use Application\Model\LoginAuthenticator;
 use Laminas\Authentication\Result;
 use Laminas\Session\Container;
 use Laminas\Authentication\Storage\Session;
+use Application\Model\User;
 
 class MembershipController extends AbstractActionController {
     const IDENTITY_SESSION_ID = 'identity';
@@ -27,6 +29,11 @@ class MembershipController extends AbstractActionController {
      * @var LoginForm
      */
     private $loginForm;
+
+    /**
+     * @var RegisterForm
+     */
+    private $registerForm;
 
     /**
      * @var LoginAuthenticator
@@ -39,8 +46,9 @@ class MembershipController extends AbstractActionController {
      */
     private $session;
 
-    public function __construct(LoginForm $form, LoginAuthenticator $loginAuthenticator, Session $session) {
-        $this->loginForm = $form;
+    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, LoginAuthenticator $loginAuthenticator, Session $session) {
+        $this->loginForm = $loginForm;
+        $this->registerForm = $registerForm;
         $this->loginAuthenticator = $loginAuthenticator;
         $this->session = $session;
     }
@@ -77,6 +85,7 @@ class MembershipController extends AbstractActionController {
                     // success!
                     $this->session->write([MembershipController::IDENTITY_SESSION_ID => $result->getIdentity()]);
                     $message = $result->getMessages()[0];
+                    return $this->redirect()->toRoute('membership');
                     break;
                 default:
                     // other issue
@@ -97,11 +106,39 @@ class MembershipController extends AbstractActionController {
      * Clears session, logging out
      */
     public function logoutAction() {
-        $this->session->clear();
-        $this->session->write([MembershipController::IDENTITY_SESSION_ID => $username]);
-        return new ViewModel([
-            'loggedin' => false,
-        ]);
-        // TODO, change URI to remove the 'logout'?
+        $this->loginAuthenticator->clearIdentity();
+        return $this->redirect()->toRoute('membership');
+    }
+
+    /**
+     * Displays a form to register a new user.
+     */
+    public function registerAction() {
+        $message = "";
+        $formSubmitted = $this->getRequest()->isPost();
+
+        // form not submitted?
+        if (!$formSubmitted) {
+            echo("Form not submitted");
+            return ['registerform' => $this->registerForm];
+        }
+
+        // get form data
+        $user = new User();
+        $this->registerForm->setInputFilter($user->getInputFilter());
+        $this->registerForm->setData($this->getRequest()->getPost());
+
+        // check form's validity
+        if (!$this->registerForm->isValid()) {
+            return [
+                'message' => 'Invalid form.',
+                'registerform' => $form,
+            ];
+        }
+
+        // populate user object
+        $user->exchangeArray($this->registerForm->getData());
+        //var_dump($user);
+        //return $this->redirect()->toRoute('membership');
     }
 }

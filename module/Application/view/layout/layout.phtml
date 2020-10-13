@@ -53,6 +53,7 @@ $user = $this->identity()['identity'];
                                 <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello, <?= $user ?> (Log out)</a>
                             <?php else : ?>
                                 <a class="nav-link" href="<?= $this->url('membership/login') ?>">Log in</a>
+                                <a class="nav-link" href="<?= $this->url('membership/register') ?>">Register</a>
                             <?php endif; ?>
                         </li>
                     </ul>

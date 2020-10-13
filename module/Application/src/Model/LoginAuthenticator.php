@@ -8,6 +8,7 @@ use Laminas\Authentication\Adapter\AdapterInterface;
 use Laminas\Db\Adapter\Adapter;
 use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Db\Sql\Sql;
+use Application\Model\User;
 
 class LoginAuthenticator extends AuthenticationService {
     /**
@@ -85,5 +86,9 @@ class LoginAuthenticator extends AuthenticationService {
         
         // If password check didn't pass return 'Invalid Credential' failure status.
         return new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid credentials.']);        
+    }
+
+    public function addNewUser(User $newUser) {
+        echo("<pre>"); var_dump($newUser); echo("</pre>");
     }
 }

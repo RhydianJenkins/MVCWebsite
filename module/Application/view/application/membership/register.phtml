@@ -5,11 +5,14 @@
 ?>
 <div class="container">
     <?php
-        $form = $this->loginform;
+        $form = $this->registerform;
         $form->setAttribute('action', $this->url());
         $fieldset = $form->get('post');
         $username = $fieldset->get('username');
+        $name = $fieldset->get('name');
+        $email = $fieldset->get('email');
         $password = $fieldset->get('password');
+        $passwordConfirm = $fieldset->get('password-confirm');
         $submit = $fieldset->get('submit');
         $form->prepare();
         echo $this->form()->openTag($form);
@@ -23,19 +26,37 @@
                 <div class="alert alert-warning" role="alert"><?= $this->message ?></div>
             <?php endif; ?>
             <div class="card">
-                <div class="card-header">Log in</div>
+                <div class="card-header">Register</div>
                 <div class="card-body">
                     <fieldset>
-                        <div class="form-group">
+                    <div class="form-group">
                             <?= $this->formLabel($username) ?>
                             <?= $this->formElement($username) ?>
                             <?= $this->formElementErrors()->render($username, ['class' => 'help-block']) ?>
                         </div>
 
                         <div class="form-group">
+                            <?= $this->formLabel($name) ?>
+                            <?= $this->formElement($name) ?>
+                            <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
+                        </div>
+
+                        <div class="form-group">
+                            <?= $this->formLabel($email) ?>
+                            <?= $this->formElement($email) ?>
+                            <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+                        </div>
+
+                        <div class="form-group">
                             <?= $this->formLabel($password) ?>
                             <?= $this->formElement($password) ?>
                             <?= $this->formElementErrors()->render($password, ['class' => 'help-block']) ?>
+                        </div>
+
+                        <div class="form-group">
+                            <?= $this->formLabel($passwordConfirm) ?>
+                            <?= $this->formElement($passwordConfirm) ?>
+                            <?= $this->formElementErrors()->render($passwordConfirm, ['class' => 'help-block']) ?>
                         </div>
                     </fieldset>
 

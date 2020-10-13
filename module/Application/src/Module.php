@@ -31,6 +31,9 @@ class Module {
         return [
             'factories' => [
                 Model\LoginAuthenticator::class => Factory\LoginAuthenticatorFactory::class,
+                Model\User::class => function ($container) {
+                    return new User();
+                },
                 Factory\SessionStorageFactory::class => function ($container) {
                     $sessionManager = new SessionManager();
                     return new Session('Laminas_Auth', 'session', $sessionManager);

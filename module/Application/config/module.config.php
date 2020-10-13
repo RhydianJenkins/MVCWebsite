@@ -68,6 +68,15 @@ return [
                             ],
                         ],
                     ],
+                    'register' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/register',
+                            'defaults' => [
+                                'action' => 'register',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
