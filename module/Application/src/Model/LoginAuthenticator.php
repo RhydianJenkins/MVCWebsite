@@ -9,6 +9,7 @@ use Laminas\Db\Adapter\Adapter;
 use Laminas\Crypt\Password\Bcrypt;
 use Laminas\Db\Sql\Sql;
 use Application\Model\User;
+use Laminas\Math\Rand;
 
 class LoginAuthenticator extends AuthenticationService {
     /**
@@ -88,7 +89,38 @@ class LoginAuthenticator extends AuthenticationService {
         return new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid credentials.']);        
     }
 
-    public function addNewUser(User $newUser) {
-        echo("<pre>"); var_dump($newUser); echo("</pre>");
+    public function addNewUser(User $newUser, AdapterInterface $adapter = NULL) {
+        // get information from User object
+        $username = $newUser->getUsername();
+        $name = $newUser->getName();
+        $rawPassword = $newUser->getPassword();
+        $email = $newUser->getEmail();
+
+        // get sql from adapter
+        if ($adapter == NULL) {
+            $sql = new SQL($this->dbAdapter);
+        } else {
+            $sql = new SQL($adapter);
+        }
+
+        // generate a salt
+        $salt = base64_encode(Rand::getBytes(32));
+        $hashedPassword = password_hash($rawPassword, PASSWORD_BCRYPT, ['salt' => $salt]);
+
+        // build sql statement to add to database
+        // INSERT INTO `members` (`id`, `username`, `password`, `salt`, `name`, `email`) VALUES (NULL, 'andrew', 'password', 'salt', 'name', 'email');
+        $insert = $sql->insert()->into('members')->values([
+            'id' => NULL, 
+            'username' => $username,
+            'password' => $hashedPassword,
+            'salt' => $salt,
+            'name' => $name,
+            'email' => $email,
+        ]);
+        $PDOStatement = $sql->prepareStatementForSqlObject($insert);
+
+        // execute statement
+        $result = $PDOStatement->execute();
+        return $result;
     }
 }

@@ -115,12 +115,10 @@ class MembershipController extends AbstractActionController {
      * Displays a form to register a new user.
      */
     public function registerAction() {
-        $message = "";
         $formSubmitted = $this->getRequest()->isPost();
 
         // form not submitted?
         if (!$formSubmitted) {
-            echo("Form not submitted");
             return ['registerform' => $this->registerForm];
         }
 
@@ -140,9 +138,10 @@ class MembershipController extends AbstractActionController {
         // populate user object
         $data = $this->registerForm->getData();
         $user->exchangeArray($data);
+        $this->loginAuthenticator->addNewUser($user);
 
         return [
-            'message' => 'Valid form.',
+            'message' => 'Account created.',
             'registerform' => $this->registerForm,
         ];
         //return $this->redirect()->toRoute('membership');
