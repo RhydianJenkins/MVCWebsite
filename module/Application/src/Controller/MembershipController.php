@@ -130,6 +130,7 @@ class MembershipController extends AbstractActionController {
         if (!$this->registerForm->isValid()) {
             return [
                 'message' => 'Invalid form.',
+                'success' => false,
                 'registerform' => $this->registerForm,
             ];
         }
@@ -140,11 +141,13 @@ class MembershipController extends AbstractActionController {
         if ($emailExists) {
             return [
                 'message' => 'An account with that email address already exists.',
+                'success' => false,
                 'registerform' => $this->registerForm,
             ];
         } else if ($usernameExists) {
             return [
                 'message' => 'An account with that username already exists.',
+                'success' => false,
                 'registerform' => $this->registerForm,
             ];
         }
@@ -154,10 +157,15 @@ class MembershipController extends AbstractActionController {
         $user->exchangeArray($data);
         $result = $this->loginAuthenticator->addNewUser($user);
 
+        // check 1 row was affected from results object
+        $numAffectedRows = $result->getAffectedRows();
+
+        // generate return successcode
+        $success = ($numAffectedRows == 1);
+
         return [
             'message' => 'Account created.',
-            'registerform' => $this->registerForm,
+            'success' => $success,
         ];
-        //return $this->redirect()->toRoute('membership');
     }
 }

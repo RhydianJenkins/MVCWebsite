@@ -132,8 +132,7 @@ class LoginAuthenticator extends AuthenticationService {
         $PDOStatement = $sql->prepareStatementForSqlObject($insert);
 
         // execute statement
-        $result = $PDOStatement->execute();
-        return $result;
+        return $PDOStatement->execute();
     }
 
     /**
