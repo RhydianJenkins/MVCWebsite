@@ -23,6 +23,10 @@ return [
                 'driver' => 'Pdo',
                 'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost;charset=utf8',
             ],
+            'Application\DB\ReadWriteDBAdapter' => [
+                'driver' => 'Pdo',
+                'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost;charset=utf8',
+            ],
         ],
     ],
     'session_manager' => [

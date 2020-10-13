@@ -75,6 +75,7 @@ return [
     'service_manager' => [
         'factories' => [
             'Application\Db\ReadOnlyDBAdapter' => Laminas\Db\Adapter\Driver\DriverInterface::class,
+            'Application\DB\ReadWriteDBAdapter' => Laminas\Db\Adapter\Driver\DriverInterface::class,
             AuthenticationService::class => LoginAuthenticatorFactory::class,
         ],
     ],
