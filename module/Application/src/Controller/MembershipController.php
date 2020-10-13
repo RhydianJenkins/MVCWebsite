@@ -54,6 +54,12 @@ class MembershipController extends AbstractActionController {
     }
 
     public function indexAction() {
+        // redirect to login page if we're not logged in
+        if (!$this->loginAuthenticator->hasIdentity()) {
+            return $this->redirect()->toRoute('membership/login');
+        }
+
+        // create (empty) view and return
         $view = new ViewModel();
         return $view;
     }
