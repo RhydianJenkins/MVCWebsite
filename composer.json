@@ -1,13 +1,14 @@
 {
-    "name": "laminas/laminas-mvc-skeleton",
-    "description": "Laminas MVC Skeleton Application",
+    "name": "website/tata-steel-sailing",
+    "description": "Tata steel sailing club website",
     "type": "project",
     "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "mvc",
-        "skeleton",
-        "framework"
+        "framework",
+		"tata",
+		"sailing"
     ],
     "require": {
         "php": "^7.3",
