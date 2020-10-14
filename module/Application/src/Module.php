@@ -54,6 +54,9 @@ class Module {
                 Controller\IndexController::class => function($container) {
                     return new Controller\IndexController();
                 },
+                Controller\GalleryController::class => function($container) {
+                    return new Controller\GalleryController();
+                },
                 Controller\AboutController::class => function($container) {
                     return new Controller\AboutController();
                 },

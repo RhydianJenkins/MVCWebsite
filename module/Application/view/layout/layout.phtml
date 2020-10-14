@@ -44,19 +44,22 @@ $user = $this->identity()['identity'];
                             <a class="nav-link" href="<?= $this->url('about') ?>">About</a>
                         </li>
                         <li class="nav-item active">
+                            <a class="nav-link" href="<?= $this->url('gallery') ?>">Gallery</a>
+                        </li>
+                        <li class="nav-item active">
                             <a class="nav-link" href="<?= $this->url('membership') ?>">Membership</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav ml-auto">
                         <?php if($user != null) : ?>
-                            <li class="nav-item active login-container">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello, <?= $user ?> (Log out)</a>
                             </li>
                         <?php else : ?>
-                            <li class="nav-item active login-container">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="<?= $this->url('membership/login') ?>">Log in</a>
                             </li>
-                            <li class="nav-item active login-container">
+                            <li class="nav-item active">
                                 <a class="nav-link" href="<?= $this->url('membership/register') ?>">Register</a>
                             </li>
                         <?php endif; ?>
@@ -64,7 +67,7 @@ $user = $this->identity()['identity'];
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container-fluid">
             <?= $this->content ?>
             <hr>
             <footer>

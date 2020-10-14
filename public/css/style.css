@@ -12,10 +12,3 @@
     background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
-
-/* login button container */
-.navbar .login-container .nav-link {
-    float: right;
-    border: none;
-    cursor: pointer;
-}
