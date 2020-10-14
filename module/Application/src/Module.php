@@ -34,6 +34,7 @@ class Module {
                 Model\User::class => function ($container) {
                     return new User();
                 },
+                Model\AlbumReader::class => Factory\AlbumReaderFactory::class,
                 Factory\SessionStorageFactory::class => function ($container) {
                     $sessionManager = new SessionManager();
                     return new Session('Laminas_Auth', 'session', $sessionManager);
@@ -55,7 +56,8 @@ class Module {
                     return new Controller\IndexController();
                 },
                 Controller\GalleryController::class => function($container) {
-                    return new Controller\GalleryController();
+                    $albumReader = $container->get(Model\AlbumReader::class);
+                    return new Controller\GalleryController($albumReader);
                 },
                 Controller\AboutController::class => function($container) {
                     return new Controller\AboutController();
