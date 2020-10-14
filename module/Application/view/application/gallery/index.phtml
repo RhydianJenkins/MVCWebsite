@@ -7,20 +7,12 @@
     <h1 class="display-4">Welcome to the gallery</h1>
 </div>
 
-<div class="card-deck">
+<!-- <div class="row justify-content-center"> -->
+<div class="row justify-content-center">
     <?php foreach($this->albums as $album): ?>
-        <?php
-            $dir = $album['path'] . $album['name'];// . '/*.{jpg,jpeg,png,gif}';
-            $images = scandir($dir);
-            $images = array_values(preg_grep('/\.(jpg|jpeg|png|gif)(?:[\?\#].*)?$/i', $images));
-            $randomImg = $images[array_rand($images)];
-            $randomImgPath = '/img/albums/' . $album['name'] . '/' . $randomImg;
-
-        ?>
-
         <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 col-centered thumb pointer-hover padding-0 sr2">
             <a class="thumbnail" href="<?= $this->url('gallery') ?>">
-                <img class="img-fluid center-block" src="<?= $randomImgPath ?>">
+                <img class="img-fluid center-block" src="<?= $album['thumbnail'] ?>">
                 <p class="text-center padding-10 margin-0" style="white-space: nowrap;"><?= $album['title'] ?></p>
             </a>
         </div>

@@ -21,11 +21,18 @@ class AlbumReader {
             $title = preg_replace("/[^A-Za-z0-9 ]/", '', $title);   // remove non-alphabet chars
             $title = ucfirst(strtolower($title));   // capitalise only first char
 
+            // create image thumbnail (from public root)
+            $images = scandir($d);
+            $images = array_values(preg_grep('/\.(jpg|jpeg|png|gif)(?:[\?\#].*)?$/i', $images));
+            $randomImg = $images[array_rand($images)];
+            $thumbnail = '/img/albums/' . $albumName . '/' . $randomImg;
+
             // add to array
             array_push($albums, [
                 'name' => $albumName,
                 'title' => $title,
                 'path' => $dir,
+                'thumbnail' => $thumbnail,
             ]);
         }
         return $albums;
