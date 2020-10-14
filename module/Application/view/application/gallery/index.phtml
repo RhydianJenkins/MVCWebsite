@@ -4,16 +4,18 @@
  */
 ?>
 <div class="jumbotron">
-    <h1 class="display-4">Welcome to the gallery</h1>
+    <h1 class="container display-4">Albums</h1>
 </div>
 
 <!-- <div class="row justify-content-center"> -->
-<div class="row justify-content-center">
+<div class="row">
     <?php foreach($this->albums as $album): ?>
-        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12 col-centered thumb pointer-hover padding-0 sr2">
-            <a class="thumbnail" href="<?= $this->url('gallery') ?>">
-                <img class="img-fluid center-block" src="<?= $album['thumbnail'] ?>">
-                <p class="text-center padding-10 margin-0" style="white-space: nowrap;"><?= $album['title'] ?></p>
+        <div class="col-lg-4 col-md-6 col-sm-12 col-centered thumb pointer-hover">
+            <a class="card thumbnail" href="<?= $this->url('gallery') ?>">
+                <img class="img-fluid card-img-top" src="<?= $album['thumbnail'] ?>">
+                <div class="card-body">
+                    <p class="text-center padding-10 margin-0 card-text" style="white-space: nowrap;"><?= $album['title'] ?></p>
+                </div>
             </a>
         </div>
     <?php endforeach; ?>
