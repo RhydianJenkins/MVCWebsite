@@ -23,7 +23,7 @@ class RegisterForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Username',
-                'class' => 'form-control',
+                'class' => 'form-control input-group',
             ],
         ]);
 
@@ -37,7 +37,7 @@ class RegisterForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Name',
-                'class' => 'form-control',
+                'class' => 'form-control input-group',
             ],
         ]);
         
@@ -51,7 +51,7 @@ class RegisterForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'you@email.com',
-                'class' => 'form-control',
+                'class' => 'form-control input-group',
             ],
         ]);
 
@@ -65,7 +65,7 @@ class RegisterForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Password',
-                'class' => 'form-control',
+                'class' => 'form-control input-group',
             ],
         ]);
 
@@ -79,7 +79,7 @@ class RegisterForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Password',
-                'class' => 'form-control',
+                'class' => 'form-control input-group',
             ],
         ]);
 

@@ -3,7 +3,7 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 ?>
-<div class="container">
+<div class="container pt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <?php 
@@ -29,42 +29,42 @@
 
 <?php if($this->registerform != null) : ?>
     <!-- form passed to view, render it -->
-    <div class="container">
+    <div class="container pb-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Register</div>
+                    <div class="card-header"><h3 class="display-5">Register</h3></div>
                     <div class="card-body">
                         <?= $this->form()->openTag($form); ?>
                         <fieldset>
                             <div class="form-group">
                                 <?= $this->formLabel($username) ?>
                                 <?= $this->formElement($username) ?>
-                                <?= $this->formElementErrors()->render($username, ['class' => 'help-block']) ?>
+                                <?= $this->formElementErrors()->render($username) ?>
                             </div>
 
                             <div class="form-group">
                                 <?= $this->formLabel($name) ?>
                                 <?= $this->formElement($name) ?>
-                                <?= $this->formElementErrors()->render($name, ['class' => 'help-block']) ?>
+                                <?= $this->formElementErrors()->render($name) ?>
                             </div>
 
                             <div class="form-group">
                                 <?= $this->formLabel($email) ?>
                                 <?= $this->formElement($email) ?>
-                                <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+                                <?= $this->formElementErrors()->render($email) ?>
                             </div>
 
                             <div class="form-group">
                                 <?= $this->formLabel($password) ?>
                                 <?= $this->formElement($password) ?>
-                                <?= $this->formElementErrors()->render($password, ['class' => 'help-block']) ?>
+                                <?= $this->formElementErrors()->render($password) ?>
                             </div>
 
                             <div class="form-group">
                                 <?= $this->formLabel($passwordConfirm) ?>
                                 <?= $this->formElement($passwordConfirm) ?>
-                                <?= $this->formElementErrors()->render($passwordConfirm, ['class' => 'help-block']) ?>
+                                <?= $this->formElementErrors()->render($passwordConfirm) ?>
                             </div>
                         </fieldset>
 
@@ -73,6 +73,11 @@
                             echo $this->formHidden($form->get('id'));
                             echo $this->form()->closeTag();
                         ?>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center links">
+                            Already have an account?<a href="<?= $this->url('membership/login') ?>">Log In</a>
+                        </div>
                     </div>
                 </div>
             </div>

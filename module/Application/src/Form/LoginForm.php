@@ -23,7 +23,7 @@ class LoginForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Username',
-                'class' => 'form-control',
+                'class' => 'form-control input-group',
             ],
         ]);
 
@@ -37,7 +37,7 @@ class LoginForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Password',
-                'class' => 'form-control',
+                'class' => 'form-control input-group',
             ],
         ]);
 
