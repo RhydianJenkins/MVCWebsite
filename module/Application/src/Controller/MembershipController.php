@@ -16,6 +16,7 @@ use Application\Model\MemberTable as MemberTable;
 use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Application\Form\LoginForm as LoginForm;
 use Application\Form\RegisterForm as RegisterForm;
+use Application\Form\ResetForm as ResetForm;
 use Application\Model\LoginAuthenticator;
 use Laminas\Authentication\Result;
 use Laminas\Session\Container;
@@ -36,6 +37,12 @@ class MembershipController extends AbstractActionController {
     private $registerForm;
 
     /**
+     * @var ResetForm
+     */
+    private $resetForm;
+
+
+    /**
      * @var LoginAuthenticator
      */
     private $loginAuthenticator;
@@ -46,9 +53,10 @@ class MembershipController extends AbstractActionController {
      */
     private $session;
 
-    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, LoginAuthenticator $loginAuthenticator, Session $session) {
+    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, ResetForm $resetForm, LoginAuthenticator $loginAuthenticator, Session $session) {
         $this->loginForm = $loginForm;
         $this->registerForm = $registerForm;
+        $this->resetForm = $resetForm;
         $this->loginAuthenticator = $loginAuthenticator;
         $this->session = $session;
     }
@@ -173,5 +181,18 @@ class MembershipController extends AbstractActionController {
             'message' => 'Account created.',
             'success' => $success,
         ];
+    }
+
+    /**
+     * Allows users to reset their passwords
+     */
+    public function resetAction() {
+        $formSubmitted = $this->getRequest()->isPost();
+        if (!$formSubmitted) {
+            return ['resetForm' => $this->resetForm];
+        }
+
+        // We've submitted the form
+        
     }
 }

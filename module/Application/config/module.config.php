@@ -91,6 +91,15 @@ return [
                             ],
                         ],
                     ],
+                    'reset' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/reset',
+                            'defaults' => [
+                                'action' => 'reset',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
