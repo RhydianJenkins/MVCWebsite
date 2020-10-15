@@ -1,7 +1,10 @@
 :root {
     --primary-color: #013755;
+    --primary-color-rgb: 0, 22, 33;
     --secondary-color: #e9ecef;
+    --secondary-color-rgb: 91, 93, 94;
     --tertiary-color: #ffffff;
+    --tertiary-color-rgb: 100, 100, 100
 }
 
 .navbar {
@@ -22,6 +25,7 @@
 .secondary-color {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .tertiary-color {
@@ -44,4 +48,18 @@
     height: 256px;
     border: 3px solid;
 	border-color: var(--primary-color);
+}
+
+.carousel-item {
+    height: 90vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.faded-bg {
+    background-color: rgba(var(--primary-color-rgb), 0.5);
 }
