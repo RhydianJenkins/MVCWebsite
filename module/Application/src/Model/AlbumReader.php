@@ -19,7 +19,6 @@ class AlbumReader {
             // create pretty album title
             $title = $albumName;
             $title = preg_replace("/[^A-Za-z0-9 ]/", '', $title);   // remove non-alphabet chars
-            $title = ucfirst(strtolower($title));   // capitalise only first char
 
             // create image thumbnail (from public root)
             $images = scandir($d);
