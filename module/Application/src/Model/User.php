@@ -10,17 +10,17 @@ use Laminas\I18n\Validator\Alpha;
 
 class User implements InputFilterAwareInterface {
     private $id;
-    private $username;
     private $password;
     private $email;
-    private $name;
+    private $firstname;
+    private $surname;
 
     public function exchangeArray(array $data) {
         $this->id = !empty($data['id']) ? $data['id'] : null;
-        $this->username = !empty($data['username']) ? $data['username'] : null;
         $this->password = !empty($data['password']) ? $data['password'] : null;
         $this->email = !empty($data['email']) ? $data['email'] : null;
-        $this->name = !empty($data['name']) ? $data['name'] : null;
+        $this->firstname = !empty($data['firstname']) ? $data['firstname'] : null;
+        $this->surname = !empty($data['surname']) ? $data['surname'] : null;
     }
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new DomainException(sprintf(
@@ -36,24 +36,9 @@ class User implements InputFilterAwareInterface {
 
         $inputFilter = new InputFilter();
 
-        // username
+        // firstname
         $inputFilter->add([
-            'name' => 'username',
-            'required' => true,
-            'validators' => [
-                [
-                    'name' => Validator\StringLength::class,
-                    'options' => [
-                        'min' => 3,
-                        'max' => 20,
-                    ]
-                ],
-            ],
-        ]);
-
-        // name
-        $inputFilter->add([
-            'name' => 'name',
+            'name' => 'firstname',
             'required' => true,
             'validators' => [
                 [
@@ -66,7 +51,28 @@ class User implements InputFilterAwareInterface {
                 [
                     'name' => Alpha::class,
                     'options' => [
-                        'allowWhiteSpace' => true,
+                        'allowWhiteSpace' => false,
+                    ],
+                ],
+            ],
+        ]);
+
+        // surname
+        $inputFilter->add([
+            'name' => 'surname',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\StringLength::class,
+                    'options' => [
+                        'min' => 2,
+                        'max' => 50,
+                    ]
+                ],
+                [
+                    'name' => Alpha::class,
+                    'options' => [
+                        'allowWhiteSpace' => false,
                     ],
                 ],
             ],
@@ -114,8 +120,9 @@ class User implements InputFilterAwareInterface {
         $this->inputFilter = $inputFilter;
         return $this->inputFilter;
     }
-    public function getUsername() {
-        return $this->username;
+
+    public function getID() {
+        return $this->id;
     }
 
     public function getPassword() {
@@ -126,7 +133,11 @@ class User implements InputFilterAwareInterface {
         return $this->email;
     }
 
-    public function getName() {
-        return $this->name;
+    public function getFirstname() {
+        return $this->firstname;
+    }
+
+    public function getSurname() {
+        return $this->surname;
     }
 }

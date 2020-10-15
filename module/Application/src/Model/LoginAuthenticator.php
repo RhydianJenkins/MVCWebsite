@@ -22,13 +22,24 @@ class LoginAuthenticator extends AuthenticationService {
      * The length of the salt to add to new records.
      */
     const MEMBERS_TABLE_NAME = 'members';
-    
+
     /**
-     * Username.
+     * First name
      * @var string 
      */
-    private $username;
-    
+    private $firstname;
+
+    /**
+     * Surname
+     * @var string 
+     */
+    private $surname;
+    /**
+     * Email
+     * @var string 
+     */
+    private $email;
+
     /**
      * Password
      * @var string 
@@ -50,12 +61,26 @@ class LoginAuthenticator extends AuthenticationService {
     }
     
     /**
-     * Sets username.     
+     * Sets email.     
      */
-    public function setUsername($username) {
-        $this->username = $username;        
+    public function setEmail($email) {
+        $this->email = $email;        
     }
     
+    /**
+     * Sets first name.     
+     */
+    public function setFirstname($firstname) {
+        $this->firstname = $firstname;        
+    }
+
+    /**
+     * Sets surname.     
+     */
+    public function setSurame($surname) {
+        $this->surname = $surname;        
+    }
+
     /**
      * Sets password.     
      */
@@ -73,7 +98,7 @@ class LoginAuthenticator extends AuthenticationService {
         } else {
             $sql = new SQL($adapter);
         }
-        $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where(['username' => $this->username]);
+        $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where(['email' => $this->email]);
         $PDOStatement = $sql->prepareStatementForSqlObject($select);
         $result = $PDOStatement->execute();
         $member = $result->current();
@@ -88,12 +113,25 @@ class LoginAuthenticator extends AuthenticationService {
         $salt = $member['salt'];
         $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT, ['salt' => $salt]);
         $storedPasswordHash = $member['password'];
+        $firstname = $member['firstname'];
+        $surname = $member['surname'];
 
         // compare passwords
         if ($hashedPassword == $storedPasswordHash) {
-            // Great! The password hash matches. Return user identity (username) to be
-            // saved in session for later use.
-            return new Result(Result::SUCCESS, $this->username, ['Authenticated successfully.']);        
+            // successful login, get user details for identity
+            $this->setFirstname($firstname);
+            $this->setSurame($surname);
+
+            // build identity to save
+            $identity = [
+                'firstname' => $this->firstname,
+                'surname' => $this->surname,
+                'username' => $this->username,
+                'email' => $this->email,
+            ];
+
+            // return user identity (name) to be saved in session for later use
+            return new Result(Result::SUCCESS, $identity, ['Authenticated successfully.']);        
         }             
         
         // If password check didn't pass return 'Invalid Credential' failure status.
@@ -103,8 +141,8 @@ class LoginAuthenticator extends AuthenticationService {
     public function addNewUser(User $newUser, AdapterInterface $adapter = NULL) {
 
         // get information from User object
-        $username = $newUser->getUsername();
-        $name = $newUser->getName();
+        $firstname = $newUser->getFirstname();
+        $surname = $newUser->getSurname();
         $rawPassword = $newUser->getPassword();
         $email = $newUser->getEmail();
 
@@ -120,13 +158,12 @@ class LoginAuthenticator extends AuthenticationService {
         $hashedPassword = password_hash($rawPassword, PASSWORD_BCRYPT, ['salt' => $salt]);
 
         // build sql statement to add to database
-        // INSERT INTO `members` (`id`, `username`, `password`, `salt`, `name`, `email`) VALUES (NULL, 'andrew', 'password', 'salt', 'name', 'email');
         $insert = $sql->insert()->into(self::MEMBERS_TABLE_NAME)->values([
             'id' => NULL, 
-            'username' => $username,
             'password' => $hashedPassword,
             'salt' => $salt,
-            'name' => $name,
+            'firstname' => $firstname,
+            'surname' => $surname,
             'email' => $email,
         ]);
         $PDOStatement = $sql->prepareStatementForSqlObject($insert);
@@ -155,27 +192,5 @@ class LoginAuthenticator extends AuthenticationService {
         }
 
         return $validator->isValid($email);
-    }
-
-    /**
-     * Returns true if a record exists with the given username in the database.
-     */
-    public function usernameAlreadyExists($username, AdapterInterface $adapter = NULL) {
-        // get sql from adapter
-        if ($adapter == NULL) {
-            $validator = new RecordExists([
-                'table'   => self::MEMBERS_TABLE_NAME,
-                'field'   => 'username',
-                'adapter' => $this->dbAdapter,
-            ]);
-        } else {
-            $validator = new RecordExists([
-                'table'   => self::MEMBERS_TABLE_NAME,
-                'field'   => 'username',
-                'adapter' => $this->adapter,
-            ]);
-        }
-        
-        return $validator->isValid($username);
     }
 }

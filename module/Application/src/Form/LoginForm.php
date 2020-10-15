@@ -13,16 +13,16 @@ class LoginForm extends Form {
             'name' => 'id',
         ]);
 
-        // username
+        // email
         $this->add([
-            'type' => 'text',
-            'name' => 'username',
+            'type' => 'Email',
+            'name' => 'email',
             'options' => [
-                'label' => 'Username',
+                'label' => 'Email',
             ],
             'attributes' => [
                 'required' => 'required',
-                'placeholder' => 'Username',
+                'placeholder' => 'you@email.com',
                 'class' => 'form-control input-group',
             ],
         ]);

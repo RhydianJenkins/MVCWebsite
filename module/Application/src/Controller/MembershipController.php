@@ -78,11 +78,11 @@ class MembershipController extends AbstractActionController {
         $code = Result::FAILURE_UNCATEGORIZED;
 
         // check to see if usr/pass was POSTed, authenticate if so
-        $username = $this->getRequest()->getPost()->toArray()['username'];
+        $email = $this->getRequest()->getPost()->toArray()['email'];
         $password = $this->getRequest()->getPost()->toArray()['password'];
-        if ($username != null && $password != null) {
+        if ($email != null && $password != null) {
             // login attempt, authenticate
-            $this->loginAuthenticator->setUsername($username);
+            $this->loginAuthenticator->setEmail($email);
             $this->loginAuthenticator->setPassword($password);
             $result = $this->loginAuthenticator->authenticate();
             $code = $result->getCode();
@@ -151,16 +151,9 @@ class MembershipController extends AbstractActionController {
         
         // check record doesn't exist
         $emailExists = $this->loginAuthenticator->emailAlreadyExists($this->registerForm->getData()['email']);
-        $usernameExists = $this->loginAuthenticator->usernameAlreadyExists($this->registerForm->getData()['username']);
         if ($emailExists) {
             return [
                 'message' => 'An account with that email address already exists.',
-                'success' => false,
-                'registerform' => $this->registerForm,
-            ];
-        } else if ($usernameExists) {
-            return [
-                'message' => 'An account with that username already exists.',
                 'success' => false,
                 'registerform' => $this->registerForm,
             ];

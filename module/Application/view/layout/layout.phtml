@@ -53,7 +53,7 @@ $user = $this->identity()['identity'];
                     <ul class="navbar-nav ml-auto">
                         <?php if($user != null) : ?>
                             <li class="nav-item active">
-                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello, <?= $user ?> (Log out)</a>
+                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello, <?= $user['firstname'] ?> (Log out)</a>
                             </li>
                         <?php else : ?>
                             <li class="nav-item active">

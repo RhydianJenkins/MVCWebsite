@@ -13,30 +13,30 @@ class RegisterForm extends Form {
             'name' => 'id',
         ]);
 
-        // username
+        // firstname
         $this->add([
             'type' => 'text',
-            'name' => 'username',
+            'name' => 'firstname',
             'options' => [
-                'label' => 'Username',
+                'label' => 'First name',
             ],
             'attributes' => [
                 'required' => 'required',
-                'placeholder' => 'Username',
+                'placeholder' => 'First name',
                 'class' => 'form-control input-group',
             ],
         ]);
 
-        // name
+        // surname
         $this->add([
             'type' => 'text',
-            'name' => 'name',
+            'name' => 'surname',
             'options' => [
-                'label' => 'Name',
+                'label' => 'Surname',
             ],
             'attributes' => [
                 'required' => 'required',
-                'placeholder' => 'Name',
+                'placeholder' => 'Surname',
                 'class' => 'form-control input-group',
             ],
         ]);
