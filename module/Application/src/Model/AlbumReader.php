@@ -38,13 +38,23 @@ class AlbumReader {
         return $albums;
     }
 
-    public function readAlbums($albumDir = self::ALBUM_DIR) {
-        echo("reading from: " . $albumDir);
-        echo("album: " . $albumFile);
-    }
+    public function readAlbumImages($albumFilename, $albumDir = self::ALBUM_DIR) {
+        $images = [];
+        $albumPath = $albumDir . $albumFilename . '/';
+        $counter = 0;
+        foreach(glob($albumPath . '*.{jpg,png,gif}', GLOB_BRACE) as $i) {
+            $counter = $counter + 1;    // useful for displaying carousel models
+            $filename = substr($i, strrpos($i, '/') + 1);   // get image filename
+            $path = '/img/albums/' . $albumFilename . '/';  // get image path (client side)
 
-    public function readAlbumImages($albumFile, $albumDir = self::ALBUM_DIR) {
-        echo("reading from: " . $albumDir);
-        echo("album: " . $albumFile);
+            // add to array
+            array_push($images, [
+                'id' => $counter,
+                'path' => $path,
+                'filename' => $filename,
+            ]);
+        }
+
+        return $images;
     }
 }

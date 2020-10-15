@@ -20,15 +20,30 @@ class GalleryController extends AbstractActionController {
 
     public function indexAction() {
         // did we specify an album?
+        $albumFromRoute = $this->params()->fromRoute('album');
         $albums = $this->albumReader->getAlbumFiles();
-        $album = $this->params()->fromRoute('album');
-        if ($album == NULL) {
-            // echo("no album specified.<br />");
-            $view = new ViewModel([
-                'albums' => $albums,
-            ]);
+        $viewArray = [];
+        $images = [];
+        $view = new ViewModel();
+
+        // if we have a specified album from route
+        if ($albumFromRoute != NULL) {
+            $images = $this->albumReader->readAlbumImages($albumFromRoute);
         }
 
-        return $view;
+        // add imagesFound
+        $viewArray['imagesFound'] = !empty($images);
+
+        // add albums
+        $viewArray['albums'] = $albums;
+
+        // add images, if they exist
+        if (!empty($images)) {
+            $viewArray['images'] = $images;
+            $viewArray['albumName'] = $albumFromRoute;
+        }
+
+        // build and return view
+        return new ViewModel($viewArray);
     }
 }

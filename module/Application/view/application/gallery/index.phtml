@@ -4,21 +4,63 @@
  */
 ?>
 <div class="jumbotron">
-    <h1 class="container display-4">Albums</h1>
+    <h1 class="container display-4"><a href="<?= $this->url('gallery') ?>">Albums</a><?= $this->imagesFound ? (' / ' . $this->albumName) : '' ?></h1>
 </div>
 
-<!-- <div class="row justify-content-center"> -->
-<div class="container">
-    <div class="row">
-        <?php foreach($this->albums as $album): ?>
-            <div class="col-lg-4 col-md-6 col-sm-12 pointer-hover pb-2 gallery-item">
-                <a class="card" href="<?= $this->url('gallery') ?>">
-                    <img class="card-img-top square-image" src="<?= $album['thumbnail'] ?>">
-                    <div class="card-body primary-color rounded-bottom">
-                        <p class="card-text text-center m-0"><?= $album['title'] ?></p>
-                    </div>
-                </a>
-            </div>
-        <?php endforeach; ?>
+<?php if($this->imagesFound) : ?>
+    <!-- display images in given album -->
+    <div class="container">
+        <div class="row">
+            <?php foreach($this->images as $image): ?>
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-2 gallery-item">
+                    <img data-toggle="modal" data-target="#imageModal" class="cursor-pointer card-img-top square-image" src="<?= $image['path'] . $image['filename'] ?>">
+                </div>
+            <?php endforeach; ?>
+        </div>
     </div>
-</div>
+
+    <div id="imageModal" class="modal hide fade in" role="dialog">
+        <div class="vertical-alignment-helper">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img id="large-image" class="w-100 h-100" src="" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+        // add js driving modal
+        $this->inlineScript()->captureStart();
+        echo <<<JS
+            $(document).ready(function () {
+                $('#imageModal').on('show.bs.modal', function (e) {
+                    var image = $(e.relatedTarget).attr('src');
+                    $("#large-image").attr("src", image);
+                });
+            });
+        JS;
+        $this->inlineScript()->captureEnd();
+    ?>
+<?php else: ?>
+    <!-- display all albums -->
+    <div class="container">
+        <div class="row">
+            <?php foreach($this->albums as $album): ?>
+                <div class="col-lg-4 col-md-6 col-sm-12 pb-2 gallery-item">
+                    <a class="card" href="<?= $this->url('gallery', ['album' => $album['name']]) ?>">
+                        <img class="card-img-top square-image" src="<?= $album['thumbnail'] ?>">
+                        <div class="card-body primary-color rounded-bottom">
+                            <p class="card-text text-center m-0"><?= $album['title'] ?></p>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>
