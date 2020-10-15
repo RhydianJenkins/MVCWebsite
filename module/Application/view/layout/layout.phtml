@@ -69,9 +69,30 @@ $user = $this->identity()['identity'];
         </nav>
         <div class="container-fluid">
             <?= $this->content ?>
+        </div>
+        <div class="container-fluid">
             <hr>
-            <footer>
-                <p><?= date('Y') ?> Tata Steel Sailing Club</p>
+            <footer class="d-flex justify-content-center m-0 p-0">
+                <div class="row row-centered">
+                    <div class="col-lg-4 col-sm-12 text-center">
+                        <img class="rounded-circle footer-img" src="<?= 'img/tssc_logo.jpg'; ?>" alt="Club Logo" />
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12 text-center">
+                        <h4><?= date('Y') ?> Tata Steel Sailing Club</h4>
+                        <address>
+                            Eglwys Nunydd Reservoir<br />
+                            Off Longlands Lane<br />
+                            Margam<br />
+                            Port Talbot<br />
+                            SA13 2NS
+                        </address>
+                    </div>
+
+                    <div class="col-lg-4 col-sm-12 text-center">
+                        <img class="rounded-circle footer-img" src="<?= 'img/RYA_TC_Logo.jpg'; ?>" alt="RYA Approved" />
+                    </div>
+                </div>
             </footer>
         </div>
         <?= $this->inlineScript()
