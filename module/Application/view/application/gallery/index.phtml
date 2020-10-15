@@ -11,11 +11,11 @@
 <div class="container">
     <div class="row">
         <?php foreach($this->albums as $album): ?>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-centered thumb pointer-hover pb-1">
-                <a class="card thumbnail" href="<?= $this->url('gallery') ?>">
-                    <img class="img-fluid card-img-top" src="<?= $album['thumbnail'] ?>">
-                    <div class="card-body">
-                        <p class="text-center padding-10 margin-0 card-text" style="white-space: nowrap;"><?= $album['title'] ?></p>
+            <div class="col-lg-4 col-md-6 col-sm-12 pointer-hover pb-2 gallery-item">
+                <a class="card" href="<?= $this->url('gallery') ?>">
+                    <img class="card-img-top square-image" src="<?= $album['thumbnail'] ?>">
+                    <div class="card-body primary-color rounded-bottom">
+                        <p class="card-text text-center m-0"><?= $album['title'] ?></p>
                     </div>
                 </a>
             </div>
