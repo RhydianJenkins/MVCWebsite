@@ -59,9 +59,16 @@ class LoginAuthenticator extends AuthenticationService {
         $this->dbAdapter = $dbAdapter;
         $this->setStorage($session);
     }
-    
+
     /**
-     * Sets email.     
+     * Sets ID.
+     */
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    /**
+     * Sets email.
      */
     public function setEmail($email) {
         $this->email = $email;        
@@ -108,30 +115,34 @@ class LoginAuthenticator extends AuthenticationService {
             return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid credentials.']);        
         }
         
-        // Now we need to calculate hash based on user-entered password and compare
-        // it with the password hash stored in database.
+        // grab the results from the database
         $salt = $member['salt'];
-        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT, ['salt' => $salt]);
+        $id = $member['id'];
         $storedPasswordHash = $member['password'];
         $firstname = $member['firstname'];
         $surname = $member['surname'];
 
+        // Now we need to calculate hash based on user-entered password and compare
+        // it with the password hash stored in database.
+        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT, ['salt' => $salt]);
+        
         // compare passwords
         if ($hashedPassword == $storedPasswordHash) {
             // successful login, get user details for identity
+            $this->setId($id);
             $this->setFirstname($firstname);
             $this->setSurame($surname);
 
-            // build identity to save
-            $identity = [
+            // build user identity to save
+            $identityArray = [
+                'id' => $this->id,
                 'firstname' => $this->firstname,
                 'surname' => $this->surname,
-                'username' => $this->username,
                 'email' => $this->email,
             ];
 
             // return user identity (name) to be saved in session for later use
-            return new Result(Result::SUCCESS, $identity, ['Authenticated successfully.']);        
+            return new Result(Result::SUCCESS, $identityArray, ['Authenticated successfully.']);        
         }             
         
         // If password check didn't pass return 'Invalid Credential' failure status.

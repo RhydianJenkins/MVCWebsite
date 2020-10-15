@@ -100,6 +100,15 @@ return [
                             ],
                         ],
                     ],
+                    'my_account' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/my-account',
+                            'defaults' => [
+                                'action' => 'my-account',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],

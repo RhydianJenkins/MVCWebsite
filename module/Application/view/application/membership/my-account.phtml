@@ -1,0 +1,18 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+$user = $this->identity()['identity'];
+?>
+<div class="jumbotron secondary-color">
+    <div class="container">
+        <h1 class="display-4">My Account</h1>
+    </div>
+</div>
+
+<div class="container">
+    <p>ID: <?= $user['id'] ?></p>
+    <p>Name: <?= $user['firstname'] ?></p>
+    <p>Surame: <?= $user['surname'] ?></p>
+    <p>Email: <?= $user['email'] ?></p>
+</div>

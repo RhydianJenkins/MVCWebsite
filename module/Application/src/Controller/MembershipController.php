@@ -188,4 +188,14 @@ class MembershipController extends AbstractActionController {
         // We've submitted the form
         
     }
+
+    /**
+     * Allows users to see their account details.
+     */
+    public function myAccountAction() {
+        // redirect to login page if we're not logged in
+        if (!$this->loginAuthenticator->hasIdentity()) {
+            return $this->redirect()->toRoute('membership/login');
+        }
+    }
 }
