@@ -41,7 +41,7 @@ class AlbumReader {
         $images = [];
         $albumPath = $albumDir . $albumFilename . '/';
         $counter = 0;
-        foreach(glob($albumPath . '*.{jpg,png,gif}', GLOB_BRACE) as $i) {
+        foreach(glob($albumPath . '*.{jpg,jpeg,png,gif}', GLOB_BRACE) as $i) {
             $counter = $counter + 1;    // useful for displaying carousel models
             $filename = substr($i, strrpos($i, '/') + 1);   // get image filename
             $path = '/img/albums/' . $albumFilename . '/';  // get image path (client side)
