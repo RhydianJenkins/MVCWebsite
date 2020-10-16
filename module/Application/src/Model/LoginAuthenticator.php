@@ -19,6 +19,11 @@ class LoginAuthenticator extends AuthenticationService {
     const SALT_SIZE = 32;
 
     /**
+     * The length of the reset string generated when the user wants to reset their password.
+     */
+    const RESET_CODE_LENGTH = 6;
+
+    /**
      * The length of the salt to add to new records.
      */
     const MEMBERS_TABLE_NAME = 'members';
@@ -203,5 +208,36 @@ class LoginAuthenticator extends AuthenticationService {
         }
 
         return $validator->isValid($email);
+    }
+
+    /**
+     * Generates and returns a 6-digit reset string. This reset string will be written to the database member with the given email.
+     */
+    public function generateAndAddResetCode($email, AdapterInterface $adapter = NULL) {
+        // generate a reset code
+        $resetCode = Rand::getString(self::RESET_CODE_LENGTH);
+
+        // get sql from adapter
+        if ($adapter == NULL) {
+            $sql = new SQL($this->dbAdapter);
+        } else {
+            $sql = new SQL($adapter);
+        }
+        $update = $sql
+            ->update(self::MEMBERS_TABLE_NAME)
+            ->where(['email' => $email])
+            ->set(['resetcode' => $resetCode]);
+        $PDOStatement = $sql->prepareStatementForSqlObject($update);
+
+        // add reset code to the record
+        $PDOResult = $PDOStatement->execute();
+
+        // generate result array to return
+        $resultArray = [
+            'resetCode' => $resetCode,
+        ];
+
+        // return reset array
+        return $resultArray;
     }
 }

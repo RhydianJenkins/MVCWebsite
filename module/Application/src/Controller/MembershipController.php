@@ -18,6 +18,7 @@ use Application\Form\LoginForm as LoginForm;
 use Application\Form\RegisterForm as RegisterForm;
 use Application\Form\ResetForm as ResetForm;
 use Application\Model\LoginAuthenticator;
+use Application\Model\Emailer;
 use Laminas\Authentication\Result;
 use Laminas\Session\Container;
 use Laminas\Authentication\Storage\Session;
@@ -53,12 +54,19 @@ class MembershipController extends AbstractActionController {
      */
     private $session;
 
-    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, ResetForm $resetForm, LoginAuthenticator $loginAuthenticator, Session $session) {
+    /**
+     * The emailer Model that sends emails.
+     * @var Model\Emailer
+     */
+    private $emailer;
+
+    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, ResetForm $resetForm, LoginAuthenticator $loginAuthenticator, Session $session, Emailer $emailer) {
         $this->loginForm = $loginForm;
         $this->registerForm = $registerForm;
         $this->resetForm = $resetForm;
         $this->loginAuthenticator = $loginAuthenticator;
         $this->session = $session;
+        $this->emailer = $emailer;
     }
 
     public function indexAction() {
@@ -185,8 +193,35 @@ class MembershipController extends AbstractActionController {
             return ['resetForm' => $this->resetForm];
         }
 
-        // We've submitted the form
-        
+        // We've submitted the form, check validity
+        $this->resetForm->setData($this->getRequest()->getPost());
+        if (!$this->resetForm->isValid()) {
+            return [
+                'message' => 'Invalid form.',
+                'success' => false,
+                'resetForm' => $this->resetForm,
+            ];
+        }
+
+        // check email exists
+        $email = $this->resetForm->getData()['email'];
+        $emailExists = $this->loginAuthenticator->emailAlreadyExists($email);
+        if (!$emailExists) {
+            return [
+                'message' => 'No account with that email address exists.',
+                'success' => false,
+                'resetForm' => $this->resetForm,
+            ];
+        }
+
+        // email exists, generate a new code
+        $resetCode = $this->loginAuthenticator->generateAndAddResetCode($email);
+
+        // send an email to the email address with the reset code
+        $name = "Tester";
+        $subject = "Test Subject";
+        $message = "This is your reset code: " . $resetCode;
+        $this->emailer->sendMail($email, $name, $subject, $message);
     }
 
     /**

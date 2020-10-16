@@ -8,6 +8,7 @@ use Application\Form\ResetForm;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Application\Model\LoginAuthenticator;
+use Application\Model\Emailer;
 
 class MembershipControllerFactory implements FactoryInterface {
     /**
@@ -23,12 +24,14 @@ class MembershipControllerFactory implements FactoryInterface {
         $resetForm = $formManager->get(ResetForm::class);
         $authenticator = $container->get(LoginAuthenticator::class);
         $authStorage = $container->get(SessionStorageFactory::class);
+        $emailer = $container->get(Emailer::class);
         return new MembershipController(
             $loginForm,
             $registerForm,
             $resetForm,
             $authenticator,
-            $authStorage
+            $authStorage,
+            $emailer
         );
     }
 }

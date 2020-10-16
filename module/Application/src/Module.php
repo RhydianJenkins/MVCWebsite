@@ -30,6 +30,7 @@ class Module {
     {
         return [
             'factories' => [
+                Model\Emailer::class => Factory\EmailerFactory::class,
                 Model\LoginAuthenticator::class => Factory\LoginAuthenticatorFactory::class,
                 Model\User::class => function ($container) {
                     return new User();
