@@ -122,7 +122,7 @@ class LoginAuthenticator extends AuthenticationService {
         
         // grab the results from the database
         $salt = $member['salt'];
-        $id = $member['id'];
+        $id = $member['ID'];
         $storedPasswordHash = $member['password'];
         $firstname = $member['firstname'];
         $surname = $member['surname'];
