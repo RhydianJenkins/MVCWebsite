@@ -46,8 +46,8 @@ class LoginForm extends Form {
             'type' => 'submit',
             'name' => 'submit',
             'attributes' => [
-                'value' => 'Login',
-                'class' => 'btn btn-primary',
+                'value' => 'Log in',
+                'class' => 'btn btn-primary d-flex mx-auto',
             ],
         ]);
     }

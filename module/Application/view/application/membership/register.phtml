@@ -2,42 +2,38 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+if ($this->registerform != null) {
+    $form = $this->registerform;
+    $form->setAttribute('action', $this->url());
+    $firstname = $form->get('firstname');
+    $surname = $form->get('surname');
+    $email = $form->get('email');
+    $password = $form->get('password');
+    $passwordConfirm = $form->get('password-confirm');
+    $submit = $form->get('submit');
+    $form->prepare();
+}
 ?>
-<div class="container pt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <?php 
-            if($this->message != null) {
-                echo('<div class="alert alert-' . ($this->success ? 'success' : 'warning') . '" role="alert">' . $this->message . '</div>');
-            }
 
-            if ($this->registerform != null) {
-                $form = $this->registerform;
-                $form->setAttribute('action', $this->url());
-                $firstname = $form->get('firstname');
-                $surname = $form->get('surname');
-                $email = $form->get('email');
-                $password = $form->get('password');
-                $passwordConfirm = $form->get('password-confirm');
-                $submit = $form->get('submit');
-                $form->prepare();
-            }
-            ?>
+<?php if($this->message != null) : ?>
+    <!-- message container -->
+    <div class="container pt-5">
+        <div class="d-flex justify-content-center">
+            <div class="alert alert-<?= $this->success ? 'success' : 'warning'?>" role="alert"> <?= $this->message ?> </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
 
 <?php if($this->registerform != null) : ?>
-    <!-- form passed to view, render it -->
-    <div class="container pb-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
+    <!-- render registration form -->
+    <div class="container p-5">
+        <div class="d-flex justify-content-center">
                 <div class="card">
-                    <div class="card-header"><h3 class="display-5">Register</h3></div>
+                    <div class="card-header"><h3 class="text-center">Register</h3></div>
                     <div class="card-body">
                         <?= $this->form()->openTag($form); ?>
                         <fieldset>
-                        <div class="form-group">
+                            <div class="form-group">
                                 <?= $this->formLabel($firstname) ?>
                                 <?= $this->formElement($firstname) ?>
                                 <?= $this->formElementErrors()->render($firstname) ?>
@@ -76,10 +72,10 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center links">
-                            Already have an account?<a href="<?= $this->url('membership/login') ?>">Log In</a>
+                            Already have an account? <a href="<?= $this->url('membership/login') ?>">Log In</a>
                         </div>
                     </div>
-                </div>
+
             </div>
         </div>
     </div>

@@ -89,7 +89,7 @@ class RegisterForm extends Form {
             'name' => 'submit',
             'attributes' => [
                 'value' => 'Register',
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-primary d-flex mx-auto',
             ],
         ]);
     }

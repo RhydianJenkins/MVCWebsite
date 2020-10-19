@@ -3,8 +3,8 @@
     --primary-color-rgb: 0, 22, 33;
     --secondary-color: #e9ecef;
     --secondary-color-rgb: 91, 93, 94;
-    --tertiary-color: #ffffff;
-    --tertiary-color-rgb: 100, 100, 100
+    --tertiary-color: #e9ecef;
+    --tertiary-color-rgb: 91, 93, 94;
 }
 
 .navbar {
@@ -62,4 +62,24 @@
 
 .faded-bg {
     background-color: rgba(var(--primary-color-rgb), 0.5);
+}
+
+.vertical-align {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.about-contents .container-fluid {
+    padding-top: 15vh;
+    padding-bottom: 15vh;
+}
+
+.about-contents .container-fluid h2 {
+    border-color: var(--primary-color) !important;
+    border-width: 2px !important;
+}
+
+.about-contents .container-fluid:nth-child(even)  {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
 }

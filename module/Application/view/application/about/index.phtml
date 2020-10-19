@@ -3,96 +3,109 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 ?>
-<div class="jumbotron secondary-color">
+<div class="jumbotron mb-0 secondary-color">
     <h1 class="container display-4">About the Club</h1>
 </div>
 
-<div class="container pb-5">
-    <div class="row">
-        <div class="col-lg-6 col-sm-12">
-            <img class="w-100" src="img/clubhouse.jpg" alt="Clubhouse" />
-        </div>
-        <div class="col-lg-6 col-sm-12">
-            <h2 class="page-header">Galley and Dining Hall</h2>
-            <p>Hot food and drinks are available. We operate an honesty box system with a hot water boiler for drinks, microwave ovens, gas cooker and dishwasher facilities avaiable for use.</p>
-            <p>Snacks are available at all times.</p>
-            <p>The galley is normally manned during Open events, with a ful hot menu available on the day</p>
-        </div>
-    </div>
-</div>
-
-<div class="container pb-5">
-    <div class="row">
-        <div class="col-lg-6 col-sm-12">
-            <img class="w-100" src="img/showers.jpg" alt="Showers" />
-        </div>
-        <div class="col-lg-6 col-sm-12">
-            <h2 class="page-header">Changing and Shower Facilities</h2>
-            <p>Fully central heated changing facilities and hot showers are avaiable for both male and female members and guests.</p>
-            <p>Toilets suitable for wheelchair users are available whenever the club is open.</p>
-            <!-- TODO: point to clubhouse gallery -->
-            <p>More photographs can be seen in the <a href="<?= $this->url('gallery', ['album' => 'clubhouse']) ?>">Clubhouse Gallery</a></p>
+<div class="about-contents">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row my-auto align-items-center">
+                <div class="col-lg-6 col-sm-12">
+                    <img class="w-100" src="img/clubhouse.jpg" alt="Clubhouse" />
+                </div>
+                <div class="col-lg-6 col-sm-12 text-center">
+                    <h2 class="border-bottom pb-3 m-3">Galley and Dining Hall</h2>
+                    <p>Hot food and drinks are available. We operate an honesty box system with a hot water boiler for drinks, microwave ovens, gas cooker and dishwasher facilities avaiable for use.</p>
+                    <p>Snacks are available at all times.</p>
+                    <p>The galley is normally manned during Open events, with a full hot menu available in the day.</p>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container pb-5">
-    <h2 class="page-header">Location</h2>
-    <p>Tata Steel Sailing Club is located just off Junction 38 of the M4.</p>
-    <p>If traveling from the East, i.e. traveling from the Cardiff direction take the first exit off the J38 roundabout.</p>
-    <p>If traveling from the West, i.e.  traveling, from the Swansea direction take the 3rd exit off the J38 roundabout.</p>
-    <p>The exit off the roundabout is signposted "Crematorium". The Crematorium is a few yards on the left, carry on past this and follow the road round, passing the British Oxygen Plant on your right, until you see the entrance gates of the reservoir on your left.<br/>
-    Speed limit on the reservoir roads is 20mph. You will see the club house on your right on a promontory into the reservoir. Look out for the right turn, up a narrow lane, which is obscured by bushes as you approach.</p>
-    <p>To gain entry to the reservoir you will need the code to the sailing club's combination lock;  this is given to members when membership fees have been paid. Visitors, or prospective members who may be interested in finding out more about the club need to ring the clubhouse on 07951 553 488; a member will then come to the gate to let you in.</p>
-</div>
-
-<div class="container pb-5">
-    <div class="row">
-        <div class="col-lg-6 col-sm-12">
-            <img class="w-100" src="img/reservoir.jpg" alt="Reservoir" />
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row my-auto align-items-center">
+                <div class="col-lg-6 col-sm-12 text-center">
+                    <h2 class="border-bottom pb-3 m-3">Changing and Shower Facilities</h2>
+                    <p>Fully central heated changing facilities and hot showers are avaiable for both male and female members and guests.</p>
+                    <p>Toilets suitable for wheelchair users are available whenever the club is open.</p>
+                    <p>More photographs can be seen in the <a href="<?= $this->url('gallery', ['album' => 'clubhouse']) ?>">Clubhouse Gallery</a></p>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <img class="w-100" src="img/showers.jpg" alt="Showers" />
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6 col-sm-12">
-            <h2 class="page-header">Eglwys Nunydd<br />What’s in the name?</h2>
+    </div>
+
+    <div class="container-fluid">
+        <div class="container text-center">
+            <h2 class="border-bottom pb-3 m-3">Location</h2>
+            <p>Tata Steel Sailing Club is located just off Junction 38 of the M4.</p>
+            <p>If traveling from the East, i.e. traveling from the Cardiff direction take the first exit off the J38 roundabout.</p>
+            <p>If traveling from the West, i.e.  traveling, from the Swansea direction take the 3rd exit off the J38 roundabout.</p>
+            <p>The exit off the roundabout is signposted "Crematorium". The Crematorium is a few yards on the left, carry on past this and follow the road round, passing the British Oxygen Plant on your right, until you see the entrance gates of the reservoir on your left.<br/>
+            Speed limit on the reservoir roads is 20mph. You will see the club house on your right on a promontory into the reservoir. Look out for the right turn, up a narrow lane, which is obscured by bushes as you approach.</p>
+            <p>To gain entry to the reservoir you will need the code to the sailing club's combination lock;  this is given to members when membership fees have been paid. Visitors, or prospective members who may be interested in finding out more about the club need to ring the clubhouse on 07951 553 488; a member will then come to the gate to let you in.</p>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="container">
+            <div class="row my-auto align-items-center">
+                <div class="col-lg-6 col-sm-12">
+                    <img class="w-100" src="img/reservoir.jpg" alt="Reservoir" />
+                </div>
+                <div class="col-lg-6 col-sm-12 text-center">
+                    <h2 class="border-bottom pb-3 m-3">Eglwys Nunydd;<br />What’s in the Name?</h2>
+                    <blockquote>
+                        <p class="mb-0">Eglwys Nunydd is the name given to an area of land South East of Margam which at one time was a Grange belonging to Margam Abbey. It is often thought that there was a Nunnery or even a Convent there but this is not the case. Eglwys Nunydd was not a Convent, but from records of the 16<sup>th</sup> Century there existed a pre Norman church named Eglwys Nunney which was thought to be dedicated to Saint Non the mother of Saint David. Over the many years the name has become altered until today the area is called Eglwys Nunedd.</p>
+                        <footer class="blockquote-footer text-right">A. L. Evans, <cite title="Source Title">Margam Abbey</cite></footer>
+                    </blockquote>
+                    <blockquote>
+                        <p class="mb-0">The reservoir was constructed on marshy land within this area by surrounding the marsh with walls on three sides and allowing the area to flood. "The Steel Company of Wales Sailing Club" from whom we are descended, moved to this artificial lake in 1963 having previously sailed on Port Talbot docks. It has been suggested that the "Club" may be sailing on Holy water. Should this be true then there are many members who have experienced an involuntary baptism.</p>
+                        <footer class="blockquote-footer text-right">Stan Williams, <cite title="Source Title">December 2013</cite></footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="container">
+            <h2 class="border-bottom pb-3 m-3 text-center">The Early Years</h2>
+            <p>The Club was founded in 1953 and moved to its present site in 1963 and is a section of to the Tata Steel Sports and Social club. It is open to Tata Steel employees and all members of the public wishing to sail mono hull dinghies and windsurfers throughout the  whole year.</p>
+            <p>Originally with the Steel Company of Wales Sailing Club sailing took place in works holding pools and later moved to the docks of Port Talbot. The Steel Company of Wales became part of British Steel in 1957. Under the stewardship of Mr Fred Cartwright who was the manager of the the British Steel works at Port Talbot and Mr Ray James who was the planning engineer Eglwys Nunydd&nbsp; reservoir was opened in 1963 to service the works. Both keen sailors they were instrumental in moving the works sailing club from the docks to the reservoir.</p>
+            <p>In 1957 the Porthcawl and Kenfig sailing club was founded using Kenfig pool, now part of Kenfig nature reserve, as a base. During  the 1966 season it became clear to the members that the British Steel sailing club provided a size and facilities which would much better suite the development of sailing. Porthcawl and Kenfig sailing club was disbanded and its members joined the British steel sailing club.</p>
+            <p>As a result of this &quot;merger&quot; there followed a period of close association between Porthcawl and British Steel sailing club which can be seen from the clubs trophy cabinet.</p>
             <blockquote>
-                <p class="mb-0">Eglwys Nunydd is the name given to an area of land South East of Margam which at one time was a Grange belonging to Margam Abbey. It is often thought that there was a Nunnery or even a Convent there but this is not the case. Eglwys Nunydd was not a Convent, but from records of the 16<sup>th</sup> Century there existed a pre Norman church named Eglwys Nunney which was thought to be dedicated to Saint Non the mother of Saint David. Over the many years the name has become altered until today the area is called Eglwys Nunedd.</p>
-                <footer class="blockquote-footer">A. L. Evans, <cite title="Source Title">Margam Abbey</cite></footer>
+                <ul>
+                    <li>The Offshore Challenge Shield - originally presented to the club by Porthcawl Town Council. Councilor David Howell-Jones was chair of Porthcawl Town council and was instrumental in providing sponsorship. The offshore race was originally held off Porthcawl and is now awarded to the winning Corus club member at the Llanstephan Offshore Weekend.</li>
+                    <li>Porthcawl and Kenfig Open Regatta Trophy (awarded between 1957 and 1966)</li>
+                    <li>Porthcawl Marine Fireball Cup</li>
+                </ul>
             </blockquote>
+                <p>The association with the steel works is also represented by a number of trophies.</p>
             <blockquote>
-                <p class="mb-0">The reservoir was constructed on marshy land within this area by surrounding the marsh with walls on three sides and allowing the area to flood. "The Steel Company of Wales Sailing Club" from whom we are descended, moved to this artificial lake in 1963 having previously sailed on Port Talbot docks. It has been suggested that the "Club" may be sailing on Holy water. Should this be true then there are many members who have experienced an involuntary baptism.</p>
-                <footer class="blockquote-footer">Stan Williams, <cite title="Source Title">December 2013</cite></footer>
+                <ul>
+                    <li>The Commanders Anchor - engraved SCWYC (Steel Company of Wales Sailing Club) and first awarded in 1966</li>
+                    <li>The Junior Champion Helmsman Challenge Cup, engraved with the letters SCWYC and first awarded in 1957.</li>
+                    <li>The Handsome Transom originally awarded for the Enterprise class and being in the shape of a dinghy transom. Presented to the club by Mr Fred Cartwright.</li>
+                </ul>
             </blockquote>
+            <p>The club began to outgrow the clubhouse which was of wooden construction. Under the clubs longest serving commodore, Arthur Gough, a new clubhouse was constructed. Arthur was a draftsman at British Steel and drew the plans up himself. A loan of £10,000 was arranged with British Steel to be paid back over 10 years. Construction was undertaken by the Borough of Afan Community Program Agency with help from British Steel and club members as part of the Manpower Services Commission  Community Program. The new clubhouse was opened on the 14th September 1985 by Mr. D C Williams M.A. J.P. Chairman, Area Manpower Board. A plaque above the kitchen servery commemorates the event. The old wooden clubhouse was removed and rebuild adjacent to the British Steel Sports  and Social club where it remains to this day and is used as the Band practice room.</p>
         </div>
     </div>
-</div>
 
-<div class="container pb-5">
-	<h2 class="page-header">The Early Years</h2>
-	<p>The Club was founded in 1953 and moved to its present site in 1963 and is a section of to the Tata Steel Sports and Social club. It is open to Tata Steel employees and all members of the public wishing to sail mono hull dinghies and windsurfers throughout the  whole year.</p>
-	<p>Originally with the Steel Company of Wales Sailing Club sailing took place in works holding pools and later moved to the docks of Port Talbot. The Steel Company of Wales became part of British Steel in 1957. Under the stewardship of Mr Fred Cartwright who was the manager of the the British Steel works at Port Talbot and Mr Ray James who was the planning engineer Eglwys Nunydd&nbsp; reservoir was opened in 1963 to service the works. Both keen sailors they were instrumental in moving the works sailing club from the docks to the reservoir.</p>
-	<p>In 1957 the Porthcawl and Kenfig sailing club was founded using Kenfig pool, now part of Kenfig nature reserve, as a base. During  the 1966 season it became clear to the members that the British Steel sailing club provided a size and facilities which would much better suite the development of sailing. Porthcawl and Kenfig sailing club was disbanded and its members joined the British steel sailing club.</p>
-	<p>As a result of this &quot;merger&quot; there followed a period of close association between Porthcawl and British Steel sailing club which can be seen from the clubs trophy cabinet.</p>
-	<blockquote>
-        <ul>
-            <li>The Offshore Challenge Shield - originally presented to the club by Porthcawl Town Council. Councilor David Howell-Jones was chair of Porthcawl Town council and was instrumental in providing sponsorship. The offshore race was originally held off Porthcawl and is now awarded to the winning Corus club member at the Llanstephan Offshore Weekend.</li>
-            <li>Porthcawl and Kenfig Open Regatta Trophy (awarded between 1957 and 1966)</li>
-            <li>Porthcawl Marine Fireball Cup</li>
-		</ul>
-	</blockquote>
-		<p>The association with the steel works is also represented by a number of trophies.</p>
-	<blockquote>
-		<ul>
-            <li>The Commanders Anchor - engraved SCWYC (Steel Company of Wales Sailing Club) and first awarded in 1966</li>
-            <li>The Junior Champion Helmsman Challenge Cup, engraved with the letters SCWYC and first awarded in 1957.</li>
-            <li>The Handsome Transom originally awarded for the Enterprise class and being in the shape of a dinghy transom. Presented to the club by Mr Fred Cartwright.</li>
-        </ul>
-    </blockquote>
-	<p>The club began to outgrow the clubhouse which was of wooden construction. Under the clubs longest serving commodore, Arthur Gough, a new clubhouse was constructed. Arthur was a draftsman at British Steel and drew the plans up himself. A loan of £10,000 was arranged with British Steel to be paid back over 10 years. Construction was undertaken by the Borough of Afan Community Program Agency with help from British Steel and club members as part of the Manpower Services Commission  Community Program. The new clubhouse was opened on the 14th September 1985 by Mr. D C Williams M.A. J.P. Chairman, Area Manpower Board. A plaque above the kitchen servery commemorates the event. The old wooden clubhouse was removed and rebuild adjacent to the British Steel Sports  and Social club where it remains to this day and is used as the Band practice room.</p>
-</div>
-
-<div class="container pb-5">
-	<h2 class="page-header">The Reservoir</h2>
-	<p>Eglwys Nunydd reservoir is fairly shallow averaging about 14 feet below its top level. The depth contour map shows where the deep and shallow areas are.</p>
-	<p>The map was supplied by Stan Williams July 2009.</p>
-	<img class="mw-100" src="img/Reservoir_Contour_Map.jpg" alt="Reservoir Contour Map">
-	<p>Corus was formed out of the 1999 merger of British Steel and Dutch  group Hoogovens. Anglo-Dutch steel firm Corus was taken over by Indian rival Tata Steel in October 2006. At the sailing clubs Special General Meeting of 7th November 2010 the sailing sections name was changed to Tata Steel Sailing Club, Margam.</p>
+    <div class="container-fluid">
+        <div class="container text-center">
+            <h2 class="border-bottom pb-3 m-3">The Reservoir</h2>
+            <p>Eglwys Nunydd reservoir is fairly shallow averaging about 14 feet below its top level. The depth contour map shows where the deep and shallow areas are.</p>
+            <p>The map was supplied by Stan Williams July 2009.</p>
+            <img class="mw-100" src="img/Reservoir_Contour_Map.jpg" alt="Reservoir Contour Map">
+            <p>Corus was formed out of the 1999 merger of British Steel and Dutch  group Hoogovens. Anglo-Dutch steel firm Corus was taken over by Indian rival Tata Steel in October 2006. At the sailing clubs Special General Meeting of 7th November 2010 the sailing sections name was changed to Tata Steel Sailing Club, Margam.</p>
+        </div>
+    </div>
 </div>
