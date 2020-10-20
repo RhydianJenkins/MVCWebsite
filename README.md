@@ -92,6 +92,6 @@ project and you should be ready to go! It should look something like below:
 </VirtualHost>
 ```
 
-## License
+## Credit
 
-The project was originally build from the [Laminas Skeleton](https://github.com/laminas/laminas-mvc-skeleton).
+The project was originally built from the [Laminas Skeleton](https://github.com/laminas/laminas-mvc-skeleton).
