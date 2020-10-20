@@ -6,7 +6,6 @@ use Laminas\InputFilter\InputFilterInterface;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilter\Input;
 use Laminas\Validator;
-use Laminas\I18n\Validator\Alpha;
 
 class User implements InputFilterAwareInterface {
     private $id;
@@ -46,13 +45,8 @@ class User implements InputFilterAwareInterface {
                     'options' => [
                         'min' => 2,
                         'max' => 50,
+                        'encoding' => 'UTF-8',
                     ]
-                ],
-                [
-                    'name' => Alpha::class,
-                    'options' => [
-                        'allowWhiteSpace' => false,
-                    ],
                 ],
             ],
         ]);
@@ -67,13 +61,8 @@ class User implements InputFilterAwareInterface {
                     'options' => [
                         'min' => 2,
                         'max' => 50,
+                        'encoding' => 'UTF-8',
                     ]
-                ],
-                [
-                    'name' => Alpha::class,
-                    'options' => [
-                        'allowWhiteSpace' => false,
-                    ],
                 ],
             ],
         ]);
@@ -83,7 +72,12 @@ class User implements InputFilterAwareInterface {
             'name' => 'email',
             'required' => true,
             'validators' => [
-                ['name' => Validator\EmailAddress::class],
+                [
+                    'name' => Validator\EmailAddress::class,
+                ],   
+                [
+                    'name' => Validator\NotEmpty::class,
+                ],
             ],
         ]);
 

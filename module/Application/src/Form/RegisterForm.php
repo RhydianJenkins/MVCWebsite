@@ -1,6 +1,7 @@
 <?php
 namespace Application\Form;
 
+use Laminas\Form\Element;
 use Laminas\Form\Form;
 
 class RegisterForm extends Form {
@@ -9,13 +10,13 @@ class RegisterForm extends Form {
 
         // hidden ID
         $this->add([
-            'type' => 'hidden',
+            'type' => Element\Hidden::class,
             'name' => 'id',
         ]);
 
         // firstname
         $this->add([
-            'type' => 'text',
+            'type' => Element\Text::class,
             'name' => 'firstname',
             'options' => [
                 'label' => 'First name',
@@ -29,7 +30,7 @@ class RegisterForm extends Form {
 
         // surname
         $this->add([
-            'type' => 'text',
+            'type' => Element\Text::class,
             'name' => 'surname',
             'options' => [
                 'label' => 'Surname',
@@ -43,7 +44,7 @@ class RegisterForm extends Form {
         
         // email
         $this->add([
-            'type' => 'Email',
+            'type' => Element\Email::class,
             'name' => 'email',
             'options' => [
                 'label' => 'Email',
@@ -57,7 +58,7 @@ class RegisterForm extends Form {
 
         // password
         $this->add([
-            'type' => 'password',
+            'type' => Element\Password::class,
             'name' => 'password',
             'options' => [
                 'label' => 'Password',
@@ -71,7 +72,7 @@ class RegisterForm extends Form {
 
         // password confirm
         $this->add([
-            'type' => 'password',
+            'type' => Element\Password::class,
             'name' => 'password-confirm',
             'options' => [
                 'label' => 'Password (again)',
@@ -85,7 +86,7 @@ class RegisterForm extends Form {
 
         // submit button
         $this->add([
-            'type' => 'submit',
+            'type' => Element\Submit::class,
             'name' => 'submit',
             'attributes' => [
                 'value' => 'Register',

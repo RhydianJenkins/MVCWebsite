@@ -75,15 +75,22 @@ class MembershipController extends AbstractActionController {
             return $this->redirect()->toRoute('membership/login');
         }
 
-        // create (empty) view and return
-        $view = new ViewModel();
-        return $view;
+        // get user identity
+        $user = $this->loginAuthenticator->getIdentity()['identity'];
+
+        // return view with user in it
+        return ['user' => $user];
     }
 
     public function loginAction() {
         // message and code to pass to view
         $message = "";
         $code = Result::FAILURE_UNCATEGORIZED;
+
+        // if no post (form not submitted), just return form in view
+        if (empty($this->getRequest()->getPost()->toArray())) {
+            return ['loginform' => $this->loginForm];
+        }
 
         // check to see if usr/pass was POSTed, authenticate if so
         $email = $this->getRequest()->getPost()->toArray()['email'];
@@ -215,7 +222,8 @@ class MembershipController extends AbstractActionController {
         }
 
         // email exists, generate a new code
-        $resetCode = $this->loginAuthenticator->generateAndAddResetCode($email);
+        $resultArray = $this->loginAuthenticator->generateAndAddResetCode($email);
+        $resetCode = $resultArray['resetCode'];
 
         // send an email to the email address with the reset code
         $name = "Tester";
@@ -232,5 +240,11 @@ class MembershipController extends AbstractActionController {
         if (!$this->loginAuthenticator->hasIdentity()) {
             return $this->redirect()->toRoute('membership/login');
         }
+
+        // get user identity
+        $user = $this->loginAuthenticator->getIdentity()['identity'];
+
+        // return view with user in it
+        return ['user' => $user];
     }
 }

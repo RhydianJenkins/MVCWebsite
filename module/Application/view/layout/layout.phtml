@@ -2,7 +2,7 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
-$user = $this->identity()['identity'];
+$user = $this->identity() == null ? null : $this->identity()['identity'];
 ?>
 <?= $this->doctype() ?>
 <html lang="en">

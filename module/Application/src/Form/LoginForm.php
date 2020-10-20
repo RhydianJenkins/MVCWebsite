@@ -1,6 +1,7 @@
 <?php
 namespace Application\Form;
 
+use Laminas\Form\Element;
 use Laminas\Form\Form;
 
 class LoginForm extends Form {
@@ -9,13 +10,13 @@ class LoginForm extends Form {
 
         // hidden ID
         $this->add([
-            'type' => 'hidden',
+            'type' => Element\Hidden::class,
             'name' => 'id',
         ]);
 
         // email
         $this->add([
-            'type' => 'Email',
+            'type' => Element\Email::class,
             'name' => 'email',
             'options' => [
                 'label' => 'Email',
@@ -29,7 +30,7 @@ class LoginForm extends Form {
 
         // password
         $this->add([
-            'type' => 'password',
+            'type' => Element\Password::class,
             'name' => 'password',
             'options' => [
                 'label' => 'Password',
@@ -43,7 +44,7 @@ class LoginForm extends Form {
 
         // submit button
         $this->add([
-            'type' => 'submit',
+            'type' => Element\Submit::class,
             'name' => 'submit',
             'attributes' => [
                 'value' => 'Log in',
