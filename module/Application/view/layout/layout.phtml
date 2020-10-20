@@ -99,6 +99,9 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
 
         <?= $this->inlineScript()
             ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery-3.5.1.min.js')) ?>
+            ->prependFile($this->basePath('js/jquery-3.5.1.min.js'))
+            ->prependFile($this->basePath('js/map.driver.js'))
+            ->prependFile('http://maps.google.com/maps/api/js?key=AIzaSyBL4LO7Tj2Ao6LdcFYFlC9Kf0Lo5__QYzQ')
+        ?>
     </body>
 </html>
