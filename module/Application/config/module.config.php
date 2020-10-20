@@ -53,6 +53,20 @@ return [
                     ],
                 ],
             ],
+            'news' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/news[/:article]',
+                    'constraints' => [
+                        'controller' => '[a-zA-Z][a-zA-Z0-9_-]+',
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\NewsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'membership' => [
                 'type'    => Literal::class,
                 'options' => [

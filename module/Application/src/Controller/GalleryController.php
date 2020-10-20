@@ -24,7 +24,6 @@ class GalleryController extends AbstractActionController {
         $albums = $this->albumReader->getAlbumFiles();
         $viewArray = [];
         $images = [];
-        $view = new ViewModel();
 
         // if we have a specified album from route
         if ($albumFromRoute != NULL) {

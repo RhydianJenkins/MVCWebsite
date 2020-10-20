@@ -15,7 +15,6 @@ use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
-use Application\Model\MemberTable;
 use Laminas\Session\SessionManager;
 use Laminas\Authentication\Storage\Session;
 use Laminas\Db\Adapter\Driver\DriverInterface;
@@ -36,6 +35,7 @@ class Module {
                     return new User();
                 },
                 Model\AlbumReader::class => Factory\AlbumReaderFactory::class,
+                Model\ArticleReader::class => Factory\ArticleReaderFactory::class,
                 Factory\SessionStorageFactory::class => function ($container) {
                     $sessionManager = new SessionManager();
                     return new Session('Laminas_Auth', 'session', $sessionManager);
@@ -53,6 +53,7 @@ class Module {
         return [
             'factories' => [
                 Controller\MembershipController::class => Factory\MembershipControllerFactory::class,
+                Controller\NewsController::class => Factory\NewsControllerFactory::class,
                 Controller\IndexController::class => function($container) {
                     return new Controller\IndexController();
                 },

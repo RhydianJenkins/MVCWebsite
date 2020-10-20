@@ -1,0 +1,32 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div class="jumbotron mb-0 secondary-color">
+    <h1 class="container display-4">News</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="container"> 
+        <div class="row">
+            <?php foreach($this->articles as $article): ?>
+                <div class="col-lg-4 col-md-6 col-sm-12 p-5">
+                    <a href="<?= $this->url('news', ['article' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $article['filename'])]) ?>">
+                        <div class="card">
+                            <div class="secondary-color rounded card-body text-center">
+                                <?= $article['title'] ?>
+                            </div>
+                            <?php if($article['date'] != null) : ?>
+                                <!-- date set, display -->
+                                <div class="card-footer text-muted text-center">
+                                    <?= $article['date']->format('d-m-y') ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>

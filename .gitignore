@@ -7,3 +7,4 @@ phpunit.xml
 composer.lock
 .phpunit.result.cache
 public/img/albums/*
+public/articles/*.pdf
