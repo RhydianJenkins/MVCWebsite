@@ -3,17 +3,20 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 ?>
-<div class="jumbotron mb-0 secondary-color">
-    <h1 class="container display-4">News</h1>
-</div>
-
 <?php if($this->selected) : ?>
+    <div class="jumbotron mb-0 secondary-color">
+        <h1 class="container text-center display-4"><?= $this->selectedArticle['title'] ?></h1>
+    </div>
     <!-- article selected, view pdf -->
-    <div class="container">
+    <div class="container pb-5">
         <object class="w-100 page-90" data="<?= $this->selectedArticle['path']; ?>"></object>
-        <h3 class="text-center">Not working? <a target="blank" href="<?= $this->selectedArticle['path']; ?>">Click here</a> to see pdf in separate window</h3>
+        <h4 class="text-center text-muted">Not working? <a target="blank" href="<?= $this->selectedArticle['path']; ?>">Click here</a> to see pdf in separate window</h3>
     </div>
 <?php endif; ?>
+
+<div class="jumbotron mb-0 secondary-color">
+    <h1 class="container display-4"><?= $this->selected ? 'Other ' : ''; ?>News</h1>
+</div>
 
 <?php foreach($this->articles as $article): ?>
     <div class="container mt-5 rounded secondary-color p-5">
