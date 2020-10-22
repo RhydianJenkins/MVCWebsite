@@ -14,12 +14,12 @@
     </div>
 <?php endif; ?>
 
-<div class="jumbotron mb-0 secondary-color">
+<div class="jumbotron mb-5 secondary-color">
     <h1 class="container display-4"><?= $this->selected ? 'Other ' : ''; ?>News</h1>
 </div>
 
 <?php foreach($this->articles as $article): ?>
-    <div class="container mt-5 rounded secondary-color p-5">
+    <div class="container mb-5 rounded secondary-color p-5">
         <a href="<?= $this->url('news', ['article' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $article['filename'])]) ?>">
             <div class="row">
                 <div class="col-md-10 col-sm-12">

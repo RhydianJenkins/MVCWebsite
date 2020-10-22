@@ -13,13 +13,13 @@
         <div class="row">
             <?php foreach($this->images as $image): ?>
                 <div class="col-lg-4 col-md-6 col-sm-12 pb-2 gallery-item">
-                    <img data-toggle="modal" data-target="#imageModal" class="cursor-pointer card-img-top square-image" src="<?= $image['path'] . $image['filename'] ?>">
+                    <img data-toggle="modal" data-target="#imageModal" class="cursor-pointer card-img square-image shadow-lg" src="<?= $image['path'] . $image['filename'] ?>">
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
 
-    <div id="imageModal" class="modal fade" role="dialog">
+    <div id="imageModal" class="modal fade shadow-lg" role="dialog">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-body">
@@ -51,7 +51,7 @@
         <div class="row">
             <?php foreach($this->albums as $album): ?>
                 <div class="col-lg-4 col-md-6 col-sm-12 pb-2 gallery-item">
-                    <a class="card" href="<?= $this->url('gallery', ['album' => $album['name']]) ?>">
+                    <a class="card shadow-lg" href="<?= $this->url('gallery', ['album' => $album['name']]) ?>">
                         <img class="card-img-top square-image" src="<?= $album['thumbnail'] ?>">
                         <div class="card-body primary-color rounded-bottom">
                             <p class="card-text text-center m-0"><?= $album['title'] ?></p>
