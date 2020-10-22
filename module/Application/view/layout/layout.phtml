@@ -19,10 +19,13 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
             ->prependStylesheet($this->basePath('css/style.css'))
             ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+            ->prependStylesheet($this->basePath('css/font-awesome.min.css'))
         ?>
 
         <!-- Scripts -->
-        <?= $this->headScript() ?>
+        <?= $this->headScript()
+            ->prependFile($this->basePath('js/fa.all.min.js'))
+        ?>
     </head>
     <body>
         <nav class="navbar navbar-expand-md navbar-dark" role="navigation">
@@ -79,28 +82,39 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
 
         <?= $this->content ?>
 
-        <hr class="pb-5 m-0">
+        <footer class="primary-color pt-5">
+            <div class="container">
+                <div class="row">
+                    <!-- images -->
+                    <div class="col-lg-4 col-sm-12 text-center mb-4">
+                        <img class="rounded-circle footer-img" src="<?= '/img/tssc_logo.jpg'; ?>" alt="Club Logo" />
+                        <img class="rounded-circle footer-img" src="<?= '/img/RYA_TC_Logo.jpg'; ?>" alt="RYA Approved" />
+                    </div>
 
-        <footer class="d-flex justify-content-center m-0 p-0">
-            <div class="row row-centered">
-                <div class="col-lg-4 col-sm-12 text-center">
-                    <img class="rounded-circle footer-img" src="<?= '/img/tssc_logo.jpg'; ?>" alt="Club Logo" />
-                </div>
+                    <!-- address -->
+                    <div class="col-lg-4 col-sm-12 text-center mb-4">
+                        <h5><i class="fa fa-map-marker-alt"></i> Address</h5>
+                        <address>
+                            Eglwys Nunydd Reservoir<br />
+                            Off Longlands Lane<br />
+                            Margam<br />
+                            Port Talbot<br />
+                            SA13 2NS
+                        </address>
+                    </div>
 
-                <div class="col-lg-4 col-sm-12 text-center">
-                    <h4><?= date('Y') ?> Tata Steel Sailing Club</h4>
-                    <address>
-                        Eglwys Nunydd Reservoir<br />
-                        Off Longlands Lane<br />
-                        Margam<br />
-                        Port Talbot<br />
-                        SA13 2NS
-                    </address>
+                    <!-- contact -->
+                    <div class="col-lg-4 col-sm-12 text-center mb-4">
+                        <h5><i class="fa fa-envelope"></i> Contact</h5>
+                        <a href="mailto:membership@tatasteelsailing.org.uk">membership@tatasteelsailing.org.uk</a><br />
+                        <a href="mailto:training@tatasteelsailing.org.uk">training@tatasteelsailing.org.uk</a><br />
+                        <a href="mailto:webmaster@tatasteelsailing.org.uk">webmaster@tatasteelsailing.org.uk</a>
+                    </div>
                 </div>
+            </div>
 
-                <div class="col-lg-4 col-sm-12 text-center">
-                    <img class="rounded-circle footer-img" src="<?= '/img/RYA_TC_Logo.jpg'; ?>" alt="RYA Approved" />
-                </div>
+            <div class="faded-bg text-center p-2 text-muted">
+                <h5><i class="fa fa-copyright"></i> <?= date('Y') ?> Tata Steel Sailing Club</h5>
             </div>
         </footer>
 
