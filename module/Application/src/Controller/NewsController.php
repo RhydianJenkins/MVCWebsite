@@ -34,12 +34,23 @@ class NewsController extends AbstractActionController {
         $articles = $this->articleReader->getAllArticles();
         $viewArray = [];
 
-        // if we have a specified an article from route
-        if ($articleFromRoute != NULL) {
-            $selectedArticle = $this->articleReader->getArticleFromName($articleFromRoute);
-        }
         // add all articles
         $viewArray['articles'] = $articles;
+
+        // if we have not specified an article from route
+        if ($articleFromRoute == NULL) {
+            $viewArray['selected'] = false;
+            return new ViewModel($viewArray);
+        }
+
+        // article selected, go fetch it
+        $selectedArticle = $this->articleReader->getArticleFromName($articleFromRoute);
+
+        // did we find the article?
+        if ($selectedArticle['found']) {
+            $viewArray['selected'] = true;
+            $viewArray['selectedArticle'] = $selectedArticle;
+        }
 
         // return constructed view from array
         return new ViewModel($viewArray);

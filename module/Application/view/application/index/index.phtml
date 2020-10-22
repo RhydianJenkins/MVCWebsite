@@ -125,3 +125,8 @@
         <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
     </div>
 </div>
+
+<?php
+    // for google map
+    $this->inlineScript()->prependFile($this->basePath('js/map.driver.js'));
+?>

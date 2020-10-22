@@ -7,26 +7,27 @@
     <h1 class="container display-4">News</h1>
 </div>
 
-<div class="container-fluid">
-    <div class="container"> 
-        <div class="row">
-            <?php foreach($this->articles as $article): ?>
-                <div class="col-lg-4 col-md-6 col-sm-12 p-5">
-                    <a href="<?= $this->url('news', ['article' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $article['filename'])]) ?>">
-                        <div class="card">
-                            <div class="secondary-color rounded card-body text-center">
-                                <?= $article['title'] ?>
-                            </div>
-                            <?php if($article['date'] != null) : ?>
-                                <!-- date set, display -->
-                                <div class="card-footer text-muted text-center">
-                                    <?= $article['date']->format('d-m-y') ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        </div>
+<?php if($this->selected) : ?>
+    <!-- article selected, view pdf -->
+    <div class="container">
+        <object class="w-100 page-90" data="<?= $this->selectedArticle['path']; ?>"></object>
+        <h3 class="text-center">Not working? <a target="blank" href="<?= $this->selectedArticle['path']; ?>">Click here</a> to see pdf in separate window</h3>
     </div>
-</div>
+<?php endif; ?>
+
+<?php foreach($this->articles as $article): ?>
+    <div class="container mt-5 rounded secondary-color p-5">
+        <a href="<?= $this->url('news', ['article' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $article['filename'])]) ?>">
+            <div class="row">
+                <div class="col-md-10 col-sm-12">
+                    <h2><?= $article['title'] ?></h2>
+                </div>
+                <?php if($article['date'] != null) : ?>
+                    <!-- date set, display -->
+                    <div class="text-muted text-right col-md-2 col-sm-12 my-auto"><?= $article['date']->format('d-m-y') ?></div>
+                <?php endif; ?>
+            </div>
+        </a>
+    </div>
+<?php endforeach; ?>
+

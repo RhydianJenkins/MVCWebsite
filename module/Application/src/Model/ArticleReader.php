@@ -12,12 +12,12 @@ class ArticleReader {
     const ARTICLE_DIR = 'public/articles/';
 
     /**
-     * Returns a array of articles.
+     * Returns an array of articles.
      */
     public function getAllArticles($dir = self::ARTICLE_DIR) {
         $dateValiadtor = new Date();
         $articles = [];
-        foreach(glob($dir . '/*.{pdf}', GLOB_BRACE) as $d) {
+        foreach(glob($dir . '*.{pdf}', GLOB_BRACE) as $d) {
             // get article filename from path
             $filename = substr($d, strrpos($d, '/') + 1);
 
@@ -56,8 +56,43 @@ class ArticleReader {
     /**
      * Gets an article from a given name. The name will have come from route, so will no include file extension.
      */
-    public function getArticleFromName($name) {
-        // TODO
-        var_dump($name);
+    public function getArticleFromName($searchname, $dir = self::ARTICLE_DIR) {
+        $dateValiadtor = new Date();
+        foreach(glob($dir . '*.{pdf}', GLOB_BRACE) as $d) {
+            // remove path and extension
+            $filename = str_replace($dir, '', $d);
+            $filename = str_replace('.pdf', '', $filename);
+
+            // check if they match (without extension)
+            if ($searchname == $filename) {
+                // get date from front of article
+                $dateString = explode('_', $filename, 2)[0];
+                if ($dateValiadtor->isValid($dateString)) {
+                    $date = new DateTime($dateString, new DateTimeZone('GMT'));
+                    $title = explode('_', $filename, 2)[1]; // remove date from front of string
+                } else {
+                    $date = null;
+                    $title = $filename;
+                }
+
+                // add extension to filename again
+                $filename .= '.pdf';
+
+                // get path
+                $path = '/articles/' . $filename;
+
+                // article found, return
+                return [
+                    'found' => true,
+                    'path' => $path,
+                    'filename' => $filename,
+                    'title' => $title,
+                    'date' => $date,
+                ];
+            }
+        }
+
+        // no article with that name found, return null
+        return ['found' => false];
     }
 }
