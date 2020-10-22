@@ -38,6 +38,27 @@ return [
                         'action'     => 'about',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'club' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/club',
+                            'defaults' => [
+                                'action' => 'index',
+                            ],
+                        ],
+                    ],
+                    'team' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/team',
+                            'defaults' => [
+                                'action' => 'team',
+                            ],
+                        ],
+                    ],
+                ],
             ],
             'gallery' => [
                 'type'    => Segment::class,
