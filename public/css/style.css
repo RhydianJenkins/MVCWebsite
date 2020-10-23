@@ -140,6 +140,7 @@
 .weather-table {
     border-bottom: 3px var(--primary-color) solid;
     text-align: center;
+    max-width: 100%;
 }
 
 .weather-table th {
