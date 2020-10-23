@@ -20,9 +20,9 @@ class WeatherReader {
     const FORECAST_DAYS = 3;
 
     /**
-     * The city to get weather for.
+     * The area to get weather for.
      */
-    const CITY = 'Swansea';
+    const AREA = 'Margam';
 
     /**
      * API timeout in seconds.
@@ -55,7 +55,7 @@ class WeatherReader {
         $client->setParameterGet([
             'days' => self::FORECAST_DAYS,
             'key' => $this->key,
-            'q' => self::CITY,
+            'q' => self::AREA,
         ]);
 
         // call the API
@@ -74,8 +74,8 @@ class WeatherReader {
         $forecast = [];
         foreach ($rawForecast as $forecastDay) {
             foreach ($forecastDay as $f) {
-                $date = new \DateTime($f['date']);
-                $forecast[$date->format('d-m-Y')] = $f;
+                $datetime = new \DateTime($f['date']);
+                $forecast[$datetime->format('D d')] = $f;
             }
         }
 

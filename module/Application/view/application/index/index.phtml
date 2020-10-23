@@ -134,11 +134,40 @@
 </div>
 
 <!-- weather -->
-<div class="container-fluid p-0">
+<div class="container-fluid">
+    <h2 class="container page-header pb-3 mb-3 text-center">Margam Weather</h2>
     <?php if($this->weatherOk): ?>
-        <?php foreach($this->weather as $date => $forecast): ?>
-            <p><?= $date ?></p>
-        <?php endforeach;?>
+        <div class="row">
+            <?php foreach($this->weather as $date => $forecast): ?>
+                <div id="<?= $forecast['date_epoch'] ?>" class="col-xl-4">
+                    <h3 class="text-center"><?= $date ?></h3>
+                    <table class="table shadow text-center table-striped table-hover table-sm weather-table">
+                        <thead class="primary-color">
+                            <tr>
+                                <th scope="col">Hour</th>
+                                <th scope="col">Wind Direction</th>
+                                <th scope="col">Wind (mph)</th>
+                                <th scope="col">Gust (mph)</th>
+                                <th scope="col">Temp (c)</th>
+                                <th scope="col">Condition</th>
+                            </tr>
+                        </thead>
+                        <tbody class="secondary-color">
+                            <?php foreach($forecast['hour'] as $hour => $data): ?>
+                                <tr>
+                                    <td><?= $hour ?></td>
+                                    <td><?= $data['wind_dir'] ?></td>
+                                    <td><?= $data['wind_mph'] ?></td>
+                                    <td><?= $data['gust_mph'] ?></td>
+                                    <td><?= $data['temp_c'] ?></td>
+                                    <td><img class="img-fluid"  src="<?= $data['condition']['icon'] ?>" alt="condition"></img></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endforeach;?>
+        </div>
     <?php else: ?>
         <p>Oops! Something went wrong when loading weather, check back later.</p>
     <?php endif; ?>
