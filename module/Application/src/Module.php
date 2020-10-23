@@ -11,9 +11,6 @@ declare(strict_types=1);
 namespace Application;
 
 use Laminas\Authentication\Adapter\AdapterInterface;
-use Laminas\Db\Adapter\Adapter as DbAdapter;
-use Laminas\Db\ResultSet\ResultSet;
-use Laminas\Db\TableGateway\TableGateway;
 use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 use Laminas\Session\SessionManager;
 use Laminas\Authentication\Storage\Session;
@@ -36,6 +33,10 @@ class Module {
                 },
                 Model\AlbumReader::class => Factory\AlbumReaderFactory::class,
                 Model\ArticleReader::class => Factory\ArticleReaderFactory::class,
+                Model\WeatherReader::class => function ($container) {
+                    $key = $container->get('config')['keystore']['api']['weather'];
+                    return new Model\WeatherReader($key);
+                },
                 Factory\SessionStorageFactory::class => function ($container) {
                     $sessionManager = new SessionManager();
                     return new Session('Laminas_Auth', 'session', $sessionManager);
@@ -55,7 +56,8 @@ class Module {
                 Controller\MembershipController::class => Factory\MembershipControllerFactory::class,
                 Controller\NewsController::class => Factory\NewsControllerFactory::class,
                 Controller\IndexController::class => function($container) {
-                    return new Controller\IndexController();
+                    $weatherReader = $container->get(Model\WeatherReader::class);
+                    return new Controller\IndexController($weatherReader);
                 },
                 Controller\GalleryController::class => function($container) {
                     $albumReader = $container->get(Model\AlbumReader::class);

@@ -133,6 +133,17 @@
     </div>
 </div>
 
+<!-- weather -->
+<div class="container-fluid p-0">
+    <?php if($this->weatherOk): ?>
+        <?php foreach($this->weather as $date => $forecast): ?>
+            <p><?= $date ?></p>
+        <?php endforeach;?>
+    <?php else: ?>
+        <p>Oops! Something went wrong when loading weather, check back later.</p>
+    <?php endif; ?>
+</div>
+
 <!-- map -->
 <div class="container-fluid p-0">
     <div id="gmap_canvas" class="page-90">

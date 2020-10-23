@@ -12,16 +12,33 @@ namespace Application\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
+use Application\Model\WeatherReader;
 
-class IndexController extends AbstractActionController
-{
-    public function indexAction()
-    {
-        return new ViewModel();
+class IndexController extends AbstractActionController {
+    /**
+     * Model which reads weather from API.
+     */
+    private $weatherReader;
+
+    /**
+     * Constructor.
+     */
+    public function __construct(WeatherReader $weatherReader) {
+        $this->weatherReader = $weatherReader;
     }
 
-    public function loginAction()
-    {
-        return new ViewModel();
+    public function indexAction() {
+        $weather = $this->weatherReader->getWeather();
+        if ($weather != null) {
+            $viewArray = [
+                'weatherOk' => true,
+                'weather' => $weather,
+            ];
+        } else {
+            $viewArray = [
+                'weatherOk' => false,
+            ];
+        }
+        return new ViewModel($viewArray);
     }
 }
