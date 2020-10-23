@@ -46,6 +46,55 @@
     </a>
 </div>
 
+<!-- weather -->
+<div class="container-fluid pt-5">
+    <h2 class="container page-header pb-3 mb-3 text-center">Margam Weather</h2>
+    <?php if($this->weatherOk): ?>
+        <div class="row">
+            <?php foreach($this->weather as $date => $forecast): ?>
+                <div id="<?= $forecast['date_epoch'] ?>" class="col-xl-4 rounded">
+                    <h3 class="text-center"><?= $date ?></h3>
+                    <table class="table shadow table-striped table-hover table-sm weather-table">
+                        <thead class="primary-color">
+                            <tr>
+                                <th scope="col">Hour</th>
+                                <th scope="col">Wind (mph)</th>
+                                <th scope="col">Gust (mph)</th>
+                                <th scope="col">Temp</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="secondary-color">
+                            <?php foreach($forecast['hour'] as $hour => $data): ?>
+                                <tr>
+                                    <td><?= date("H:i", strtotime($hour.':00')) ?></td>
+                                    <td><i class="fa fa-arrow-up" style="transform: rotate(<?= $data['wind_degree'] ?>deg)"></i> <?= $data['wind_mph'] ?></td>
+                                    <td><?= $data['gust_mph'] ?></td>
+                                    <td><?= $data['temp_c'] ?> &deg;</td>
+                                    <td><img class="img-fluid"  src="<?= $data['condition']['icon'] ?>" alt="condition"></img></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endforeach;?>
+        </div>
+        <!-- credit to WeatherAPI.com -->
+        <h6 class="text-muted text-right">
+            Powered by <a target="blank" href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
+        </h6>
+    <?php else: ?>
+        <p>Oops! Something went wrong when loading weather, check back later.</p>
+    <?php endif; ?>
+</div>
+
+<!-- map -->
+<div class="container-fluid p-0">
+    <div id="gmap_canvas" class="page-90">
+        <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
+    </div>
+</div>
+
 <!-- faq -->
 <div class="container-fluid">
     <div class="container pt-5 pb-5">
@@ -130,57 +179,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-<!-- weather -->
-<div class="container-fluid">
-    <h2 class="container page-header pb-3 mb-3 text-center">Margam Weather</h2>
-    <?php if($this->weatherOk): ?>
-        <div class="row">
-            <?php foreach($this->weather as $date => $forecast): ?>
-                <div id="<?= $forecast['date_epoch'] ?>" class="col-xl-4 rounded">
-                    <h3 class="text-center"><?= $date ?></h3>
-                    <table class="table shadow table-striped table-hover table-sm weather-table">
-                        <thead class="primary-color">
-                            <tr>
-                                <th scope="col">Hour</th>
-                                <th scope="col">Wind Direction</th>
-                                <th scope="col">Wind (mph)</th>
-                                <th scope="col">Gust (mph)</th>
-                                <th scope="col">Temp (c)</th>
-                                <th scope="col">Condition</th>
-                            </tr>
-                        </thead>
-                        <tbody class="secondary-color">
-                            <?php foreach($forecast['hour'] as $hour => $data): ?>
-                                <tr>
-                                    <td><?= $hour ?></td>
-                                    <td><?= $data['wind_dir'] ?></td>
-                                    <td><?= $data['wind_mph'] ?></td>
-                                    <td><?= $data['gust_mph'] ?></td>
-                                    <td><?= $data['temp_c'] ?></td>
-                                    <td><img class="img-fluid"  src="<?= $data['condition']['icon'] ?>" alt="condition"></img></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            <?php endforeach;?>
-        </div>
-        <!-- credit to WeatherAPI.com -->
-        <h6 class="text-muted text-right">
-            Powered by <a target="blank" href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
-        </h6>
-    <?php else: ?>
-        <p>Oops! Something went wrong when loading weather, check back later.</p>
-    <?php endif; ?>
-</div>
-
-<!-- map -->
-<div class="container-fluid p-0">
-    <div id="gmap_canvas" class="page-90">
-        <style>#gmap_canvas img{max-width:none!important;background:none!important}</style>
     </div>
 </div>
 

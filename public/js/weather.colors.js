@@ -5,7 +5,7 @@ var tables = document.getElementsByClassName('weather-table');
 var windColours = {74:"#700", 64:"#a00", 55:"#d30", 47:"#f30", 39:"#f63", 32:"#f96", 25:"#fc9", 20:"#ff8", 13:"#afa", 8:"#cff", 5:"#9ff", 1:"#9cf", 0:"#69f"};
 
 // define the table headers that we want to index
-var windIndexes = [2, 3];
+var windIndexes = [1, 2];
 
 // go through all tables
 for (var i = 0; i < tables.length; i++) {

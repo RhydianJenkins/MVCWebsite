@@ -144,14 +144,15 @@
 }
 
 .weather-table th {
-    padding: 10px;
     vertical-align: middle;
+    padding: 0px;
 }
 
 .weather-table td {
     vertical-align: middle;
+    margin: 0px;
 }
 
 .weather-table img {
-    width: 40px;
+    width: 50px;
 }
