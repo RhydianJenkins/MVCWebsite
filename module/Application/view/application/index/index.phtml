@@ -139,9 +139,9 @@
     <?php if($this->weatherOk): ?>
         <div class="row">
             <?php foreach($this->weather as $date => $forecast): ?>
-                <div id="<?= $forecast['date_epoch'] ?>" class="col-xl-4">
+                <div id="<?= $forecast['date_epoch'] ?>" class="col-xl-4 rounded">
                     <h3 class="text-center"><?= $date ?></h3>
-                    <table class="table shadow text-center table-striped table-hover table-sm weather-table">
+                    <table class="table shadow table-striped table-hover table-sm weather-table">
                         <thead class="primary-color">
                             <tr>
                                 <th scope="col">Hour</th>
@@ -168,6 +168,10 @@
                 </div>
             <?php endforeach;?>
         </div>
+        <!-- credit to WeatherAPI.com -->
+        <h6 class="text-muted text-right">
+            Powered by <a target="blank" href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
+        </h6>
     <?php else: ?>
         <p>Oops! Something went wrong when loading weather, check back later.</p>
     <?php endif; ?>

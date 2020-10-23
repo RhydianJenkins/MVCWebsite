@@ -137,6 +137,11 @@
     transition: 0.5s;
 }
 
+.weather-table {
+    border-bottom: 3px var(--primary-color) solid;
+    text-align: center;
+}
+
 .weather-table th {
     padding: 10px;
     vertical-align: middle;
