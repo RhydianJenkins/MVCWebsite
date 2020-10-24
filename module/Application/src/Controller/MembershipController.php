@@ -17,6 +17,7 @@ use Laminas\Db\Adapter\Adapter as DbAdapter;
 use Application\Form\LoginForm as LoginForm;
 use Application\Form\RegisterForm as RegisterForm;
 use Application\Form\ResetForm as ResetForm;
+use Application\Form\ResetPasswordForm as ResetPasswordForm;
 use Application\Model\LoginAuthenticator;
 use Application\Model\Emailer;
 use Laminas\Authentication\Result;
@@ -42,6 +43,10 @@ class MembershipController extends AbstractActionController {
      */
     private $resetForm;
 
+    /**
+     * @var ResetPasswordForm
+     */
+    private $resetPasswordForm;
 
     /**
      * @var LoginAuthenticator
@@ -60,10 +65,11 @@ class MembershipController extends AbstractActionController {
      */
     private $emailer;
 
-    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, ResetForm $resetForm, LoginAuthenticator $loginAuthenticator, Session $session, Emailer $emailer) {
+    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, ResetForm $resetForm, ResetPasswordForm $resetPasswordForm, LoginAuthenticator $loginAuthenticator, Session $session, Emailer $emailer) {
         $this->loginForm = $loginForm;
         $this->registerForm = $registerForm;
         $this->resetForm = $resetForm;
+        $this->resetPasswordForm = $resetPasswordForm;
         $this->loginAuthenticator = $loginAuthenticator;
         $this->session = $session;
         $this->emailer = $emailer;
@@ -195,41 +201,114 @@ class MembershipController extends AbstractActionController {
      * Allows users to reset their passwords
      */
     public function resetAction() {
+        // check if a form was submitted
         $formSubmitted = $this->getRequest()->isPost();
-        if (!$formSubmitted) {
-            return ['resetForm' => $this->resetForm];
+
+        // get reset code from URL
+        $resetCodeFromUrl = preg_replace('/[^A-Za-z0-9\-]/', '', $this->params()->fromRoute('resetcode'));
+        if ($resetCodeFromUrl != null) {
+            return $this->resetFormStageTwo($resetCodeFromUrl, $formSubmitted);
         }
 
-        // We've submitted the form, check validity
-        $this->resetForm->setData($this->getRequest()->getPost());
-        if (!$this->resetForm->isValid()) {
+        // email not sent, return first stage reset form if not already submitted
+        if (!$formSubmitted) {
             return [
-                'message' => 'Invalid form.',
-                'success' => false,
                 'resetForm' => $this->resetForm,
             ];
         }
 
-        // check email exists
+        // submitted the first state reset form, check form's validity
+        $this->resetForm->setData($this->getRequest()->getPost());
+        if (!$this->resetForm->isValid()) {
+            return [
+                'message' => 'Invalid form.',
+                'messageAlert' => 'danger',
+                'resetForm' => $this->resetForm,
+            ];
+        }
+
+        // form valid, check email exists in database
         $email = $this->resetForm->getData()['email'];
         $emailExists = $this->loginAuthenticator->emailAlreadyExists($email);
         if (!$emailExists) {
             return [
                 'message' => 'No account with that email address exists.',
-                'success' => false,
+                'messageAlert' => 'danger',
                 'resetForm' => $this->resetForm,
             ];
         }
 
-        // email exists, generate a new code
+        // email exists, generate a new code and add to the database record
         $resultArray = $this->loginAuthenticator->generateAndAddResetCode($email);
         $resetCode = $resultArray['resetCode'];
 
         // send an email to the email address with the reset code
+        $resetLink = $this->url()->fromRoute('membership/reset', ['resetcode' => $resetCode], ['force_canonical' => true]);
         $name = "Tester";
-        $subject = "Test Subject";
-        $message = "This is your reset code: " . $resetCode;
-        $this->emailer->sendMail($email, $name, $subject, $message);
+        $subject = "Password Reset";
+        $message = "Someone has requested to reset your password on Tata Steel Sailing. ";
+        $message .= "If this wasn't you, no action needs to be taken. ";
+        $message .= "To reset your password, <a href=".$resetLink.">CLICK HERE</a>.";
+
+        print_r($resetLink);
+        // $this->emailer->sendMail($email, $name, $subject, $message);
+
+        // return view of success message telling user to check their emails
+        return [
+            'message' => 'Email reset link sent. Check your emails for further instructions.<br>Remember to check your junk inbox.',
+            'messageAlert' => 'success',
+        ];
+    }
+
+    /**
+     * Stage two of the reset password, from the reset action.
+     */
+    private function resetFormStageTwo($resetCodeFromUrl, $formSubmitted) {
+        // get record with that reset code
+        $codeExistArray = $this->loginAuthenticator->checkResetCodeExists($resetCodeFromUrl);
+
+        // if not found, redirect to original login screen
+        if (!$codeExistArray['found']) {
+            return $this->redirect()->toRoute('membership/reset');
+        }
+
+        // grab some data from the codeExistArray
+        $email = $codeExistArray['email'];
+        $code = $codeExistArray['code'];
+
+        // email found, show reset form stage 2 if not already submitted
+        if (!$formSubmitted) {
+            return [
+                'resetPasswordForm' => $this->resetPasswordForm,
+                'email' => $email,
+                'code' => $code,
+            ];       
+        }
+
+        // form submitted, reset code in url, record found. check form's valid
+        $this->resetPasswordForm->setData($this->getRequest()->getPost());
+        if (!$this->resetPasswordForm->isValid()) {
+            return [
+                'message' => 'Invalid form.',
+                'messageAlert' => 'danger',
+                'resetPasswordForm' => $this->resetPasswordForm,
+                'email' => $email,
+                'code' => $code,
+            ];
+        }
+
+        // form submitted, reset code in url, record found, form valid. Reset password.
+        $newPassword = $this->resetPasswordForm->getData()['password'];
+        $result = $this->loginAuthenticator->resetPassword($email, $newPassword, $code);
+
+        echo("<pre>");
+        var_dump($result);
+        echo("</pre>");
+
+        return [
+            'message' => 'The password for ' . $email . ' has been reset.',
+            'messageAlert' => 'success',
+        ];
     }
 
     /**

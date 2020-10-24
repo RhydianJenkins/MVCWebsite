@@ -127,9 +127,13 @@ return [
                         ],
                     ],
                     'reset' => [
-                        'type' => Literal::class,
+                        'type' => Segment::class,
                         'options' => [
-                            'route' => '/reset',
+                            'route' => '/reset[/:resetcode]',
+                            'constraints' => [
+                                'controller' => '[a-zA-Z][a-zA-Z0-9]+',
+                                'action'     => '[a-zA-Z][a-zA-Z0-9]+',
+                            ],
                             'defaults' => [
                                 'action' => 'reset',
                             ],

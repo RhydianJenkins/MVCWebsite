@@ -79,8 +79,17 @@ class RegisterForm extends Form {
             ],
             'attributes' => [
                 'required' => 'required',
-                'placeholder' => 'Password',
+                'placeholder' => 'Confirm Password',
                 'class' => 'form-control input-group',
+            ],
+            'validators' => [
+                [
+                    'name'    => Validator\Identical::class,
+                    'options' => [
+                        'token' => 'password',
+                        'message' => 'Passwords did not match.'
+                    ],
+                ],
             ],
         ]);
 

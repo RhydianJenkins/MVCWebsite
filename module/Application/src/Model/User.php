@@ -21,6 +21,7 @@ class User implements InputFilterAwareInterface {
         $this->firstname = !empty($data['firstname']) ? $data['firstname'] : null;
         $this->surname = !empty($data['surname']) ? $data['surname'] : null;
     }
+
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new DomainException(sprintf(
             '%s does not allow injection of an alternate input filter',

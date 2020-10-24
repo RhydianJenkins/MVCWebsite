@@ -29,6 +29,14 @@ class LoginAuthenticator extends AuthenticationService {
     const MEMBERS_TABLE_NAME = 'members';
 
     /**
+     * The database fieldnames.
+     */
+    const RESET_CODE_FIELDNAME = 'resetcode';
+    const EMAIL_FIELDNAME = 'email';
+    const PASSWORD_FIELDNAME = 'password';
+    const SALT_FIELDNAME = 'salt';
+
+    /**
      * First name
      * @var string 
      */
@@ -76,7 +84,7 @@ class LoginAuthenticator extends AuthenticationService {
      * Sets email.
      */
     public function setEmail($email) {
-        $this->email = $email;        
+        $this->email = $email;
     }
     
     /**
@@ -110,7 +118,7 @@ class LoginAuthenticator extends AuthenticationService {
         } else {
             $sql = new SQL($adapter);
         }
-        $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where(['email' => $this->email]);
+        $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where([self::EMAIL_FIELDNAME => $this->email]);
         $PDOStatement = $sql->prepareStatementForSqlObject($select);
         $result = $PDOStatement->execute();
         $member = $result->current();
@@ -180,7 +188,7 @@ class LoginAuthenticator extends AuthenticationService {
             'salt' => $salt,
             'firstname' => $firstname,
             'surname' => $surname,
-            'email' => $email,
+            self::EMAIL_FIELDNAME => $email,
         ]);
         $PDOStatement = $sql->prepareStatementForSqlObject($insert);
 
@@ -196,13 +204,13 @@ class LoginAuthenticator extends AuthenticationService {
         if ($adapter == NULL) {
             $validator = new RecordExists([
                 'table'   => self::MEMBERS_TABLE_NAME,
-                'field'   => 'email',
+                'field'   => self::EMAIL_FIELDNAME,
                 'adapter' => $this->dbAdapter,
             ]);
         } else {
             $validator = new RecordExists([
                 'table'   => self::MEMBERS_TABLE_NAME,
-                'field'   => 'email',
+                'field'   => self::EMAIL_FIELDNAME,
                 'adapter' => $adapter,
             ]);
         }
@@ -215,7 +223,7 @@ class LoginAuthenticator extends AuthenticationService {
      */
     public function generateAndAddResetCode($email, AdapterInterface $adapter = NULL) {
         // generate a reset code
-        $resetCode = Rand::getString(self::RESET_CODE_LENGTH);
+        $resetCode = Rand::getString(self::RESET_CODE_LENGTH, 'abcdefghijklmnopqrstuvwxyz');
 
         // get sql from adapter
         if ($adapter == NULL) {
@@ -225,8 +233,8 @@ class LoginAuthenticator extends AuthenticationService {
         }
         $update = $sql
             ->update(self::MEMBERS_TABLE_NAME)
-            ->where(['email' => $email])
-            ->set(['resetcode' => $resetCode]);
+            ->where([self::EMAIL_FIELDNAME => $email])
+            ->set([self::RESET_CODE_FIELDNAME => $resetCode]);
         $PDOStatement = $sql->prepareStatementForSqlObject($update);
 
         // add reset code to the record
@@ -239,5 +247,79 @@ class LoginAuthenticator extends AuthenticationService {
 
         // return reset array
         return $resultArray;
+    }
+
+    /**
+     * Checks a given reset code exists in the database. If the code exists, the email attached to it is returned.
+     */
+    public function checkResetCodeExists($code, $email = NULL, AdapterInterface $adapter = NULL) {
+        // get sql from adapter
+        if ($adapter == NULL) {
+            $sql = new SQL($this->dbAdapter);
+        } else {
+            $sql = new SQL($adapter);
+        }
+
+        // if we've entered an email, get records with that email also
+        if ($email != NULL) {
+            $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where([
+                self::RESET_CODE_FIELDNAME => $code,
+                self::EMAIL_FIELDNAME => $email,
+            ]);
+        } else {
+            $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where([self::RESET_CODE_FIELDNAME => $code]);
+        }
+
+        // execute statement
+        $PDOStatement = $sql->prepareStatementForSqlObject($select);
+        $result = $PDOStatement->execute();
+        $member = $result->current();
+
+        // check if no member exists with that reset code
+        if ($member === false) {
+            return [
+                'found' => false,
+                'code' => $code,
+            ];
+        }
+
+        // member exists, return their email
+        $returnArray = [
+            'found' => true,
+            'email' => $member[self::EMAIL_FIELDNAME],
+            'code' => $code,
+        ];
+        return $returnArray;
+    }
+
+    /**
+     * Resets a given user's password. Does one final verification that the reset code is valid before it updates the record.
+     * This also removes the resetcode from the record.
+     */
+    public function resetPassword($email, $newPassword, $code, AdapterInterface $adapter = NULL) {
+        // generate a salt and hash password
+        $salt = base64_encode(Rand::getBytes(self::SALT_SIZE));
+        $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT, ['salt' => $salt]);
+
+        // get sql from adapter
+        if ($adapter == NULL) {
+            $sql = new SQL($this->dbAdapter);
+        } else {
+            $sql = new SQL($adapter);
+        }
+        $update = $sql
+            ->update(self::MEMBERS_TABLE_NAME)
+            ->where([
+                self::EMAIL_FIELDNAME => $email,
+                self::RESET_CODE_FIELDNAME => $code,
+            ])
+            ->set([
+                self::PASSWORD_FIELDNAME => $hashedPassword,
+                self::SALT_FIELDNAME => $salt,
+                self::RESET_CODE_FIELDNAME => NULL,
+            ]);
+        $PDOStatement = $sql->prepareStatementForSqlObject($update);
+        $result = $PDOStatement->execute();
+        return $result;
     }
 }

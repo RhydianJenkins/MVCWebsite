@@ -1,24 +1,35 @@
 <?php
-/**
- * @var Laminas\View\Renderer\PhpRenderer $this
- */
+    /**
+     * @var Laminas\View\Renderer\PhpRenderer $this
+     */
+
+    if($this->resetForm != null) {
+        // stage 1 reset? (enter email)
+        $form = $this->resetForm;
+        $form->setAttribute('action', $this->url());
+        $email = $form->get('email');
+        $submit = $form->get('submit');
+        $form->prepare();
+    } else if($this->resetPasswordForm != null) {
+        // stage 2 reset? (enter new password)
+        $form = $this->resetPasswordForm;
+        $form->setAttribute('action', $this->url('membership/reset', ['resetcode' => $this->code]));
+        $password = $form->get('password');
+        $passwordConfirm = $form->get('password-confirm');
+        $submit = $form->get('submit');
+        $form->prepare();
+    }
 ?>
-<?php
-if($this->resetForm != null) {
-    $form = $this->resetForm;
-    $form->setAttribute('action', $this->url());
-    $email = $form->get('email');
-    $submit = $form->get('submit');
-    $form->prepare();
-}
-?>
+
+<?php if ($this->message != null) : ?>
+    <div class="container pt-5">
+        <div class="text-center alert alert-<?= $this->messageAlert ?>" role="alert"><?= $this->message ?></div>
+    </div>
+<?php endif; ?>
 
 <?php if($this->resetForm != null) : ?>
     <!-- form passed to view, render it -->
     <div class="container p-5">
-        <?php if($this->message != null) : ?>
-            <div class="alert " role="alert"><?= $this->message ?></div>
-        <?php endif; ?>
         <div class="d-flex justify-content-center">
             <div class="card">
                 <div class="card-header"><h3 class="text-center">Reset Password</h3></div>
@@ -29,6 +40,36 @@ if($this->resetForm != null) {
                             <?= $this->formLabel($email) ?>
                             <?= $this->formElement($email) ?>
                             <?= $this->formElementErrors()->render($email) ?>
+                        </div>
+                    </fieldset>
+
+                    <?php
+                        echo $this->formSubmit($submit);
+                        echo $this->formHidden($form->get('id'));
+                        echo $this->form()->closeTag();
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php elseif($this->resetPasswordForm != null): ?>
+    <!-- stage 2 form passed to view, render it -->
+    <div class="container p-5">
+        <div class="d-flex justify-content-center">
+            <div class="card">
+                <div class="card-header"><h3 class="text-center"><?= $this->email ?><br />Enter New Password</h3></div>
+                <div class="card-body">
+                    <?= $this->form()->openTag($form); ?>
+                    <fieldset>
+                    <div class="form-group">
+                            <?= $this->formLabel($password) ?>
+                            <?= $this->formElement($password) ?>
+                            <?= $this->formElementErrors()->render($password) ?>
+                        </div>
+                        <div class="form-group">
+                            <?= $this->formLabel($passwordConfirm) ?>
+                            <?= $this->formElement($passwordConfirm) ?>
+                            <?= $this->formElementErrors()->render($passwordConfirm) ?>
                         </div>
                     </fieldset>
 
