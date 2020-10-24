@@ -3,6 +3,85 @@
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
 ?>
-<div class="jumbotron secondary-color">
-    <h1>Training index</h1>
+<div class="jumbotron mb-5 secondary-color">
+    <div class="container">
+        <h1 class="display-4">Training</h1>
+    </div>
+</div>
+
+<!-- logos -->
+<div class="container">
+    <img class="d-inline rounded text-center img-small" src="<?= $this->basePath('/img/RYA_TC_Logo.jpg') ?>" alt="RYA Approved" />
+    <img class="d-inline rounded text-center img-small" src="<?= $this->basePath('/img/tssc_logo.jpg') ?>" alt="Club Logo" />
+</div>
+
+<!-- intro text -->
+<div class="container">
+    <p>Training is available to all Club Members only. To take part in any training sessions, you must first join the club and become a member.</p>
+    <p>Training and membership of the club is open to almost anyone. You do not need to be employed by Tata Steel to join the club and start a training course.</p>
+    <p>The club is recognised by the Royal Yachting Association (RYA) as an approved training centre offering dinghy sailing, powerboat, safety boat, and 1st aid courses. Our instructors hold the appropriate RYA qualifications. Why not visit the club on a Sunday to gain an understanding of our activities. Any of our members will be able to direct you to one of our instructors.</p>
+</div>
+
+<!-- links to sail/wind/race/power pages -->
+<div class="container">
+    <div class="row">
+
+        <!-- Sailing/Windsurfing -->
+        <div class="col-lg-4">
+            <a href="<?= $this->url('training/sailing') ?>">
+                <div class="our-team-main cursor-pointer secondary-color">
+                    <div class="team-front secondary-color">
+                        <img src="http://placehold.it/110x110/9c27b0/fff?text=Webmaster" class="img-fluid" />
+                        <h3>Sailing/Windsurfing</h3>
+                    </div>
+                    <div class="team-back text-center">
+                        <span>    
+                            These courses are suited for all levels of experience.
+                            Whether you are a complete beginner looking to find your sea legs, 
+                            or a more experienced sailer looking to touch up your skills, 
+                            you will find the courses fun and educational.
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Racing -->
+        <div class="col-lg-4">
+            <a href="<?= $this->url('training/racing') ?>">
+                <div class="our-team-main cursor-pointer">
+                    <div class="team-front">
+                        <img src="http://placehold.it/110x110/9c27b0/fff?text=Dilip" class="img-fluid" />
+                        <h3>Racing</h3>
+                    </div>
+                    <div class="team-back text-center">
+                        <span>
+                            "Start Racing" courses are held in June and July, 
+                            and will teach you the necessary rules you will need to know in order to take part in a sailing race.
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Powerboat -->
+        <div class="col-lg-4">
+            <a href="<?= $this->url('training/powerboat') ?>">
+                <div class="our-team-main cursor-pointer">
+                    <div class="team-front">
+                        <img src="http://placehold.it/110x110/9c27b0/fff?text=Dilip" class="img-fluid" />
+                        <h3>Powerboating</h3>
+                    </div>
+                    <div class="team-back text-center">
+                        <span>
+                            RYA Powerboat / safety boat level 1 and 2 courses are held to ensure our sailing members have the necessary 
+                            skills and knowledge to operate the patrol boats competently and safely.
+                            The courses prepare members for their roster duties, and provide a pathway to becoming dinghy instructors.
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    </div>
 </div>

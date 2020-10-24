@@ -1,8 +1,8 @@
 :root {
     --primary-color: #013755;
     --primary-color-rgb: 0, 22, 33;
-    --secondary-color: #e9ecef;
-    --secondary-color-rgb: 91, 93, 94;
+    --secondary-color: #f7f7f7;
+    --secondary-color-rgb: 96.9, 96.9, 96.9;
     --tertiary-color: #e9ecef;
     --tertiary-color-rgb: 91, 93, 94;
 }
@@ -178,4 +178,11 @@ body {
 
 .weather-table img {
     width: 50px;
+}
+
+.img-small {
+    width: 128px;
+    height: 128px;
+    border: 3px solid;
+	border-color: var(--primary-color);
 }
