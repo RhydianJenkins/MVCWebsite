@@ -244,8 +244,8 @@ class MembershipController extends AbstractActionController {
 
         // send an email to the email address with the reset code
         $resetLink = $this->url()->fromRoute('membership/reset', ['resetcode' => $resetCode], ['force_canonical' => true]);
-        $name = "Tester";
-        $subject = "Password Reset";
+        $name = "Tata Member";
+        $subject = "[NO REPLY] Password Reset";
         $message = "Someone has requested to reset your password on Tata Steel Sailing. ";
         $message .= "If this wasn't you, no action needs to be taken. ";
         $message .= "To reset your password, <a href=".$resetLink.">CLICK HERE</a>.";
@@ -299,6 +299,17 @@ class MembershipController extends AbstractActionController {
         $newPassword = $this->resetPasswordForm->getData()['password'];
         $result = $this->loginAuthenticator->resetPassword($email, $newPassword, $code);
 
+        // email password change
+        $name = "Tata Member";
+        $subject = "[NO REPLY] Your password has been changed";
+        $message = "Dear member,<br /><br />";
+        $message .= "Your password for Tata Steel Sailing has been successfully changed!<br /><br />";
+        $message .= "If this wasn't you and you are unaware of this change, please contact the membership secretary immediately at membership@tatasteelsailing.org.uk.<br /><br />";
+        $message .= "Regards,<br />";
+        $message .= "Tata Steel Sailing.";
+        $this->emailer->sendMail($email, $name, $subject, $message);
+
+        // return success to view
         return [
             'message' => 'The password for ' . $email . ' has been reset.',
             'messageAlert' => 'success',

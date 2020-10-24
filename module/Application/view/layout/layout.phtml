@@ -79,9 +79,11 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
             </div>
         </nav>
 
-        <?= $this->content ?>
+        <div class="content">
+            <?= $this->content ?>
+        </div>
 
-        <footer class="primary-color pt-5">
+        <footer class="footer primary-color pt-5">
             <div class="container">
                 <div class="row">
                     <!-- address -->
