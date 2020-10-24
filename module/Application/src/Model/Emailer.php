@@ -2,8 +2,11 @@
 namespace Application\Model;
 
 use Laminas\Mail\Message;
-use Laminas\Mail\Transport\Sendmail;
+use Laminas\Mail\Transport\SendMail;
 use Laminas\Mail\Headers;
+use Laminas\Mime\Message as MimeMessage;
+use Laminas\Mime\Mime;
+use Laminas\Mime\Part as MimePart;
 
 class Emailer {
     /**
@@ -16,17 +19,34 @@ class Emailer {
      */
     const FROM_NAME = "Tata Steel Sailing Club";
 
-    public function sendMail($address, $name, $subject, $message, $from = self::MEMBERSHIP_EMAIL, $fromName = self::FROM_NAME) {
-        $mail = new Message();
-        $mail->setBody($message);
-        $mail->setFrom($from, $fromName);
-        $mail->addTo($address, $name);
-        $mail->setSubject($subject);
-        $mail->getHeaders()
-        ->addHeaderLine('Content-Type', 'text/html')
-        ->addHeaderLine('charset', 'UTF-8');
+    /**
+     * Sends an email.
+     */
+    public function sendMail($address, $name, $subject, $html, $text = NULL, $from = self::MEMBERSHIP_EMAIL, $fromName = self::FROM_NAME) {
+        if ($text === NULL) {
+            $text = $html;
+        }
 
-        $transport = new Sendmail();
-        $transport->send($mail);
+        $html = new MimePart($text);
+        $html->type = Mime::TYPE_HTML;
+
+        $text = new MimePart($text);
+        $text->type = Mime::TYPE_TEXT;
+
+        $body = new MimeMessage();
+        $body->setParts([$text, $html]);
+
+        $message = new Message();
+        $message->setBody($body);
+        $message->setFrom($from, $fromName);
+        $message->addReplyTo(self::MEMBERSHIP_EMAIL, self::FROM_NAME);
+        $message->addTo($address, $name);
+        $message->setSubject($subject);
+
+        $contentTypeHeader = $message->getHeaders()->get('Content-Type');
+        $contentTypeHeader->setType('multipart/alternative');
+
+        $transport = new SendMail();
+        $transport->send($message);
     }
 }
