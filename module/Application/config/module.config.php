@@ -88,6 +88,55 @@ return [
                     ],
                 ],
             ],
+            'training' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/training',
+                    'defaults' => [
+                        'controller' => Controller\TrainingController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'sailing' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/sailing',
+                            'defaults' => [
+                                'action' => 'sailing',
+                            ],
+                        ],
+                    ],
+                    'windsurfing' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/windsurfing',
+                            'defaults' => [
+                                'action' => 'windsurfing',
+                            ],
+                        ],
+                    ],
+                    'racing' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/racing',
+                            'defaults' => [
+                                'action' => 'racing',
+                            ],
+                        ],
+                    ],
+                    'powerboat' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/powerboat',
+                            'defaults' => [
+                                'action' => 'powerboat',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'membership' => [
                 'type'    => Literal::class,
                 'options' => [
