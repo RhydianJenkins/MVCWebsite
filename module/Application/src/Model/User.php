@@ -30,7 +30,7 @@ class User implements InputFilterAwareInterface {
     }
 
     public function getInputFilter() {
-        if ($this->inputFilter) {
+        if (property_exists($this, 'inputFilter')) {
             return $this->inputFilter;
         }
 

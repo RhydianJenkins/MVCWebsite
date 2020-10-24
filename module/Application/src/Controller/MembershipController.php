@@ -249,9 +249,7 @@ class MembershipController extends AbstractActionController {
         $message = "Someone has requested to reset your password on Tata Steel Sailing. ";
         $message .= "If this wasn't you, no action needs to be taken. ";
         $message .= "To reset your password, <a href=".$resetLink.">CLICK HERE</a>.";
-
-        print_r($resetLink);
-        // $this->emailer->sendMail($email, $name, $subject, $message);
+        $this->emailer->sendMail($email, $name, $subject, $message);
 
         // return view of success message telling user to check their emails
         return [
@@ -300,10 +298,6 @@ class MembershipController extends AbstractActionController {
         // form submitted, reset code in url, record found, form valid. Reset password.
         $newPassword = $this->resetPasswordForm->getData()['password'];
         $result = $this->loginAuthenticator->resetPassword($email, $newPassword, $code);
-
-        echo("<pre>");
-        var_dump($result);
-        echo("</pre>");
 
         return [
             'message' => 'The password for ' . $email . ' has been reset.',
