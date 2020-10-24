@@ -2,7 +2,7 @@
 var tables = document.getElementsByClassName('weather-table');
 
 // define which colours correspond to which wind/temp
-var windColours = {74:"#700", 64:"#a00", 55:"#d30", 47:"#f30", 39:"#f63", 32:"#f96", 25:"#fc9", 20:"#ff8", 13:"#afa", 8:"#cff", 5:"#9ff", 1:"#9cf", 0:"#69f"};
+var windColours = {999:"#700", 74:"#a00", 64:"#d30", 55:"#f30", 47:"#f63", 39:"#f96", 32:"#fc9", 25:"#ff8", 20:"#afa", 13:"#cff", 8:"#9ff", 5:"#9cf", 1:"#69f"};
 
 // define the table headers that we want to index
 var windIndexes = [1, 2];
@@ -23,7 +23,7 @@ for (var i = 0; i < tables.length; i++) {
 
 function getColorForWind(wind) {
     for (const [cap, col] of Object.entries(windColours)) {
-        if (wind < cap) {
+        if (wind <= cap) {
             return col;
         }
     }

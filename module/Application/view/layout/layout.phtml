@@ -98,8 +98,8 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
 
                     <!-- images -->
                     <div class="col-lg-4 col-sm-12 mb-4 text-center">
-                        <img class="rounded-circle footer-img" src="<?= '/img/tssc_logo.jpg'; ?>" alt="Club Logo" />
-                        <img class="rounded-circle footer-img" src="<?= '/img/RYA_TC_Logo.jpg'; ?>" alt="RYA Approved" />
+                        <img class="rounded-circle footer-img" src="<?= $this->basePath('/img/tssc_logo.jpg') ?>" alt="Club Logo" />
+                        <img class="rounded-circle footer-img" src="<?= $this->basePath('/img/RYA_TC_Logo.jpg') ?>" alt="RYA Approved" />
                     </div>
 
                     <!-- contact -->

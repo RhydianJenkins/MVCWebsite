@@ -9,7 +9,7 @@
     </div>
     <!-- article selected, view pdf -->
     <div class="container pb-5">
-        <object class="w-100 page-90" data="<?= $this->selectedArticle['path']; ?>"></object>
+        <object class="w-100 page-90" data="<?= $this->basePath($this->selectedArticle['path']) ?>"></object>
         <h4 class="text-center text-muted">Not working? <a target="blank" href="<?= $this->selectedArticle['path']; ?>">Click here</a> to see pdf in separate window</h3>
     </div>
 <?php endif; ?>
@@ -19,7 +19,7 @@
 </div>
 
 <?php foreach($this->articles as $article): ?>
-    <div class="container mb-5 rounded secondary-color p-5">
+    <div class="container mb-3 rounded secondary-color p-5">
         <a href="<?= $this->url('news', ['article' => preg_replace('/\\.[^.\\s]{3,4}$/', '', $article['filename'])]) ?>">
             <div class="row">
                 <div class="col-md-10 col-sm-12">
