@@ -5,9 +5,10 @@ use Laminas\Form\Element;
 use Laminas\Form\Form;
 use Laminas\Captcha;
 use Laminas\Captcha\Dumb;
+use Laminas\Captcha\ReCaptcha as ReCaptcha;
 
 class LoginForm extends Form {
-    public function __construct($name = null) {
+    public function __construct($name = null, $recaptchaOptions) {
         parent::__construct($name);
 
         // hidden ID
@@ -50,10 +51,11 @@ class LoginForm extends Form {
             'name' => 'captcha',
             'options' => [
                 'label' => 'Please verify you are human',
-                'captcha' => new Dumb(),
+                'captcha' => new ReCaptcha($recaptchaOptions),
             ],
             'attributes' => [
                 'required' => 'required',
+                'message' => 'Failed, bitch!'
             ],
         ]);
 

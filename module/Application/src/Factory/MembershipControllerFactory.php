@@ -20,9 +20,11 @@ class MembershipControllerFactory implements FactoryInterface {
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null) {
         $formManager = $container->get('FormElementManager');
-        $loginForm = $formManager->get(LoginForm::class);
-        $registerForm = $formManager->get(RegisterForm::class);
-        $resetForm = $formManager->get(ResetForm::class);
+        $siteKey = $container->get('config')['keystore']['api']['reCaptchaSite'];
+        $secretKey = $container->get('config')['keystore']['api']['reCaptchaSecret'];
+        $loginForm = $formManager->get(LoginForm::class, ['site_key' => $siteKey, 'secret_key' => $secretKey]);
+        $registerForm = $formManager->get(RegisterForm::class, ['site_key' => $siteKey, 'secret_key' => $secretKey]);
+        $resetForm = $formManager->get(ResetForm::class, ['site_key' => $siteKey, 'secret_key' => $secretKey]);
         $resetPasswordForm = $formManager->get(ResetPasswordForm::class);
         $authenticator = $container->get(LoginAuthenticator::class);
         $authStorage = $container->get(SessionStorageFactory::class);
