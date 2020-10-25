@@ -54,7 +54,6 @@ class LoginForm extends Form {
             ],
             'attributes' => [
                 'required' => 'required',
-                'message' => 'Failed, bitch!'
             ],
         ]);
 

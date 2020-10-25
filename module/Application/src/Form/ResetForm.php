@@ -3,9 +3,11 @@ namespace Application\Form;
 
 use Laminas\Form\Element;
 use Laminas\Form\Form;
+use Laminas\Captcha;
+use Laminas\Captcha\ReCaptcha as ReCaptcha;
 
 class ResetForm extends Form {
-    public function __construct($name = null) {
+    public function __construct($name = null, $recaptchaOptions) {
         parent::__construct($name);
 
         // hidden ID
@@ -25,6 +27,19 @@ class ResetForm extends Form {
                 'required' => 'required',
                 'placeholder' => 'you@email.com',
                 'class' => 'form-control input-group',
+            ],
+        ]);
+
+        // captcha
+        $this->add([
+            'type' => Element\Captcha::class,
+            'name' => 'captcha',
+            'options' => [
+                'label' => 'Please verify you are human',
+                'captcha' => new ReCaptcha($recaptchaOptions),
+            ],
+            'attributes' => [
+                'required' => 'required',
             ],
         ]);
 
