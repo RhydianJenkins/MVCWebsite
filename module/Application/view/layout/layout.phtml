@@ -27,7 +27,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
         ?>
     </head>
     <body>
-        <nav class="navbar fixed-top navbar-expand-md navbar-dark" role="navigation">
+        <nav class="navbar fixed-top navbar-expand-xl navbar-dark" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,6 +49,12 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                                 <a class="dropdown-item" href="<?= $this->url('about/team') ?>">Our Team</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sailing</a>
+                            <div class="dropdown-menu" aria-labelledby="aboutDropdown">
+                                <a class="dropdown-item" href="<?= $this->url('sailing/results') ?>">Results</a>
+                            </div>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $this->url('gallery') ?>">Gallery</a>
                         </li>
@@ -67,7 +73,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                     <ul class="navbar-nav ml-auto">
                         <?php if($user != null) : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello, <?= $user['firstname'] ?> (Log out)</a>
+                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello <?= $user['firstname'] ?> (Log out)</a>
                             </li>
                         <?php else : ?>
                             <li class="nav-item">

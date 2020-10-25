@@ -137,6 +137,28 @@ return [
                     ],
                 ],
             ],
+            'sailing' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/sailing',
+                    'defaults' => [
+                        'controller' => Controller\SailingController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'results' => [
+                        'type' => Segment::class,
+                        'options' => [
+                            'route' => '/results[/:result]',
+                            'defaults' => [
+                                'action' => 'results',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'membership' => [
                 'type'    => Literal::class,
                 'options' => [

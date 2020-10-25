@@ -32,6 +32,7 @@ class Module {
                     return new User();
                 },
                 Model\AlbumReader::class => Factory\AlbumReaderFactory::class,
+                Model\ResultsReader::class => Factory\ResultsReaderFactory::class,
                 Model\ArticleReader::class => Factory\ArticleReaderFactory::class,
                 Model\WeatherReader::class => function ($container) {
                     $key = $container->get('config')['keystore']['api']['weather'];
@@ -54,6 +55,7 @@ class Module {
         return [
             'factories' => [
                 Controller\MembershipController::class => Factory\MembershipControllerFactory::class,
+                Controller\SailingController::class => Factory\SailingControllerFactory::class,
                 Controller\NewsController::class => Factory\NewsControllerFactory::class,
                 Controller\TrainingController::class => Factory\TrainingControllerFactory::class,
                 Controller\IndexController::class => function($container) {
