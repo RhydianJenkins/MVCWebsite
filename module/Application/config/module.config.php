@@ -151,7 +151,7 @@ return [
                     'results' => [
                         'type' => Segment::class,
                         'options' => [
-                            'route' => '/results[/:result]',
+                            'route' => '/results[/:year/:result]',
                             'defaults' => [
                                 'action' => 'results',
                             ],

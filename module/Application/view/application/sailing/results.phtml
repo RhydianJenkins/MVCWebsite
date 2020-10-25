@@ -1,0 +1,46 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div class="jumbotron mb-5 secondary-color">
+    <div class="container">
+        <h1 class="display-4">Sailing Results</h1>
+    </div>
+</div>
+
+<?php if($this->selected): ?>
+    <!-- display selected result -->
+    <div class="container-fluid pb-3">
+        <?= $this->content ?>
+    </div>
+
+    <?php
+        // include styleing script
+        $this->inlineScript()->captureStart();
+            echo <<<JS
+                // $('table').addClass('table-striped table-hover');
+                // $('th').addClass('col');
+                // $('h3').addClass('page-header');
+                // $('h3').css('margin-top', '50px');
+                // $('table').css('margin', '0 auto');
+                // $('table').addClass('table table-hover');
+                // $('tr').css('border', 'solid 1px');
+                // $('tr').css('padding-top', '10px');
+                // $('td').css('padding-bottom', '10px');
+                // $('td').css('padding-right', '10px');
+            JS;
+        $this->inlineScript()->captureEnd();
+    ?>
+
+<?php endif; ?>
+
+<!-- display all results -->
+<?php foreach($this->allResults as $year => $results): ?>
+    <div class="container pb-3">
+        <h2 class="page-header mb-1 pb-1"><?= $year ?></h2>
+        <?php foreach($results as $result): ?>
+            <a href="<?= $this->url('sailing/results', ['year' => $result['year'], 'result' => $result['title']]) ?>"><?= $result['title'] ?></a><br />
+        <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>

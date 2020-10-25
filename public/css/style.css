@@ -20,6 +20,12 @@ body {
     flex: 1 0 auto;
 }
 
+.content::before {
+    display: block;
+    content: '';
+    height: 66px;   /* height of navbar */
+}
+
 .footer {
     flex-shrink: 0;
 }

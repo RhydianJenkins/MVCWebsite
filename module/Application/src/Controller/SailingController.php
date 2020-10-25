@@ -33,6 +33,27 @@ class SailingController extends AbstractActionController {
     }
 
     public function resultsAction() {
-        return new ViewModel();
+        // read all results from file
+        $allResults = $this->resultsReader->getAllresults();
+        $resultsArray = [
+            'allResults' => $allResults,
+            'selected' => false,
+        ];
+
+        // if we have a specified a result from route, add to view
+        $yearFromRoute = $this->params()->fromRoute('year');
+        $resultFromRoute = $this->params()->fromRoute('result');
+        if ($yearFromRoute != NULL && $resultFromRoute != NULL) {
+            $result = $this->resultsReader->getResult($resultFromRoute, $yearFromRoute);
+            if ($result['found']) {
+                $resultsArray['selected'] = true;
+                $resultsArray['selectedTitle'] = $result['title'];
+                $resultsArray['selectedPath'] = $result['path'];
+                $resultsArray['content'] = $result['content'];
+            }
+        }
+
+        // return view array
+        return $resultsArray;
     }
 }
