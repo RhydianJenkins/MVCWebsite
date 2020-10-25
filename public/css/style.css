@@ -119,7 +119,6 @@ body {
     width:100%;
     height:auto;
     border-bottom: 3px var(--primary-color) solid;
-    background:#fff;
     text-align:center;
     border-radius:10px;
     overflow:hidden;
@@ -134,7 +133,26 @@ body {
     width: 128px;
 }
 
-.team-front {
+.training-panel-main {
+    width:100%;
+    height:auto;
+    border-bottom: 3px var(--primary-color) solid;
+    background:#fff;
+    text-align:center;
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+    transition:0.5s;
+    margin-bottom:28px;
+}
+
+.training-panel-main img {
+    border-radius:50%;
+    margin-bottom:20px;
+    width: 128px;
+}
+
+.training-panel-front {
     width:100%;
     height:auto;
     position:relative;
@@ -145,7 +163,7 @@ body {
     transition: all 0.5s ease;
 }
 
-.team-back {
+.training-panel-back {
     width:100%;
     height:auto;
     position:absolute;
@@ -156,12 +174,12 @@ body {
     background:#fff;
 }
 
-.our-team-main:hover .team-front {
+.training-panel-main:hover .training-panel-front {
     bottom:-200px;
     transition: all 0.5s ease;
 }
 
-.our-team-main:hover {
+.training-panel-main:hover {
     border-color: var(--secondary-color);
     transition: 0.5s;
 }
