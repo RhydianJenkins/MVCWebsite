@@ -88,6 +88,16 @@ return [
                     ],
                 ],
             ],
+            'calendar' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/calendar',
+                    'defaults' => [
+                        'controller' => Controller\CalendarController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
             'training' => [
                 'type'    => Literal::class,
                 'options' => [

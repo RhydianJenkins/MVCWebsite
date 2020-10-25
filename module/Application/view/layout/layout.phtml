@@ -28,7 +28,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
     </head>
     <body>
         <nav class="navbar fixed-top navbar-expand-xl navbar-dark" role="navigation">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -63,6 +63,9 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $this->url('training') ?>">Training</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= $this->url('calendar') ?>">Calendar</a>
                         </li>
                         <?php if($user != null) : ?>
                             <li class="nav-item">

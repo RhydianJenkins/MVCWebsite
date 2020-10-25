@@ -58,6 +58,9 @@ class Module {
                 Controller\SailingController::class => Factory\SailingControllerFactory::class,
                 Controller\NewsController::class => Factory\NewsControllerFactory::class,
                 Controller\TrainingController::class => Factory\TrainingControllerFactory::class,
+                Controller\CalendarController::class => function($container) {
+                    return new Controller\CalendarController();
+                },
                 Controller\IndexController::class => function($container) {
                     $weatherReader = $container->get(Model\WeatherReader::class);
                     return new Controller\IndexController($weatherReader);
