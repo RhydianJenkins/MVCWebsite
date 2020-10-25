@@ -56,4 +56,8 @@ class SailingController extends AbstractActionController {
         // return view array
         return $resultsArray;
     }
+
+    public function instructionsAction() {
+        return new ViewModel();
+    }
 }

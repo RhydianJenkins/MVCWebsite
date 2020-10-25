@@ -26,8 +26,8 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
             ->prependFile($this->basePath('js/fa.all.min.js'))
         ?>
     </head>
-    <body>
-        <nav class="navbar fixed-top navbar-expand-xl navbar-dark" role="navigation">
+    <body data-spy="scroll" data-target="#toc">
+        <nav class="navbar navbar-expand-xl navbar-dark" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,6 +53,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                             <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sailing</a>
                             <div class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <a class="dropdown-item" href="<?= $this->url('sailing/results') ?>">Results</a>
+                                <a class="dropdown-item" href="<?= $this->url('sailing/instructions') ?>">Instructions</a>
                             </div>
                         </li>
                         <li class="nav-item">

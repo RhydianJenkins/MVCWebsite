@@ -167,6 +167,15 @@ return [
                             ],
                         ],
                     ],
+                    'instructions' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/instructions',
+                            'defaults' => [
+                                'action' => 'instructions',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'membership' => [
