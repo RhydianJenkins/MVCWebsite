@@ -4,7 +4,6 @@ namespace Application\Form;
 use Laminas\Form\Element;
 use Laminas\Form\Form;
 use Laminas\Captcha;
-use Laminas\Captcha\Dumb;
 use Laminas\Captcha\ReCaptcha as ReCaptcha;
 
 class LoginForm extends Form {
