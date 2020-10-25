@@ -11,28 +11,9 @@
 
 <?php if($this->selected): ?>
     <!-- display selected result -->
-    <div class="container-fluid pb-3">
+    <div class="container-fluid justify-content-center text-center pb-3">
         <?= $this->content ?>
     </div>
-
-    <?php
-        // include styleing script
-        $this->inlineScript()->captureStart();
-            echo <<<JS
-                // $('table').addClass('table-striped table-hover');
-                // $('th').addClass('col');
-                // $('h3').addClass('page-header');
-                // $('h3').css('margin-top', '50px');
-                // $('table').css('margin', '0 auto');
-                // $('table').addClass('table table-hover');
-                // $('tr').css('border', 'solid 1px');
-                // $('tr').css('padding-top', '10px');
-                // $('td').css('padding-bottom', '10px');
-                // $('td').css('padding-right', '10px');
-            JS;
-        $this->inlineScript()->captureEnd();
-    ?>
-
 <?php endif; ?>
 
 <!-- display all results -->

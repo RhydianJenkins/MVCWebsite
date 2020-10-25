@@ -39,16 +39,15 @@ class ResultsReader {
     public function getResult($name, $year, $dir = self::RESULTS_DIR) {
         $results = array_diff(scandir($dir . '/' . $year), array('.', '..'));
         $returnArray = ['found' => false];
-        $filteredInputName = $this->filterName($name);
+        $filteredInputName = $this->filterName($name);   // make name pretty
         foreach($results as $result) {
-            $filteredResultName = $this->filterName($result);    // capitalise letters
+            $filteredResultName = $this->filterName($result);   // make name pretty
             if (strcmp($filteredResultName, $filteredInputName)) {
                 $path = $dir . '/' . $year . '/' . $result;
                 $returnArray['title'] = $filteredResultName;
                 $returnArray['path'] = $dir . '/' . $year . '/' . $result;
                 $returnArray['found'] = true;
                 $returnArray['content'] = $this->clean(file_get_contents($returnArray['path']));
-                //$returnArray['content'] = file_get_contents($returnArray['path']);
             }
         }
         return $returnArray;
@@ -62,7 +61,7 @@ class ResultsReader {
     }
 
     /**
-     * Cleans a given file and returns the cleaned html
+     * Cleans and returns a given file by removing inline styling, classes etx, before adding custom styles.
      */
     private function clean($html) {
         // create a new DomDocument object
@@ -75,15 +74,25 @@ class ResultsReader {
         $doc->preserveWhitespace = false;
         libxml_use_internal_errors(false);
 
-        // remove the script and style elements
+        // remove some tags
+        $this->removeElement('header', $doc);
         $this->removeElement('script', $doc);
         $this->removeElement('style', $doc);
-        $this->removeElement('class', $doc);
-        $this->generateStyle($doc);
+        $this->removeElement('meta', $doc);
+        $this->removeElement('footer', $doc);
 
         // remove inline styles
         $cleanHtml = $doc->saveHtml();
         $cleanHtml = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $cleanHtml);
+        $cleanHtml = preg_replace('/(<[^>]+) class=".*?"/i', '$1', $cleanHtml);
+        $cleanHtml = preg_replace('/(<[^>]+) cellspacing=".*?"/i', '$1', $cleanHtml);
+        $cleanHtml = preg_replace('/(<[^>]+) cellpadding=".*?"/i', '$1', $cleanHtml);
+        $cleanHtml = preg_replace('/(<[^>]+) border=".*?"/i', '$1', $cleanHtml);
+        $doc->loadHTML($cleanHtml);
+
+        // add custom styles
+        $this->generateStyle($doc);
+        $cleanHtml = $doc->saveHtml();
 
         // Return cleaned html
         return $cleanHtml;
@@ -92,7 +101,7 @@ class ResultsReader {
     /**
      * Removes the string $tag element from the DOMDocument $doc
      */
-    private function removeElement($tag, $doc) {
+    private function removeElement($tag, \DOMDocument $doc) {
         $nodeList = $doc->getElementsByTagName($tag);
         for ($nodeIdx = $nodeList->length; --$nodeIdx >= 0; ) {
             $node = $nodeList->item($nodeIdx);
@@ -101,9 +110,28 @@ class ResultsReader {
     }
 
     private function generateStyle($doc) {
-        $headers = $doc->getElementsByTagName('h3');
+        // grab elements
+        $h1 = $doc->getElementsByTagName('h1');
+        $h2 = $doc->getElementsByTagName('h2');
+        $h3 = $doc->getElementsByTagName('h3');
+        $tables = $doc->getElementsByTagName('table');
+        $cells = $doc->getElementsByTagName('td');
+        $headers = $doc->getElementsByTagName('th');
+
+        // h3 page-header text-center pt-5 pb-1
+        for ($i = 0; $i < $h3->length; $i ++) {
+            $h3[$i]->setAttribute('class', 'pt-5 pb-1');
+        }
+
+        // table table-striped table-hover table-responsive 
+        for ($i = 0; $i < $tables->length; $i ++) {
+            //$tables[$i]->setAttribute('class', 'd-inline justify-content-center border-bottom-table table table-bordered table-striped table-hover table-responsive');
+            $tables[$i]->setAttribute('class', 'table border-bottom-table table-bordered table-striped table-hover table-responsive');
+        }
+
+        // td p-2
         for ($i = 0; $i < $headers->length; $i ++) {
-            $headers[$i]->setAttribute('color', 'red');
+            $headers[$i]->setAttribute('class', 'primary-color p-2');
         }
     }
 }
