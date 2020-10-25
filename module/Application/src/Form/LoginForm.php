@@ -3,6 +3,8 @@ namespace Application\Form;
 
 use Laminas\Form\Element;
 use Laminas\Form\Form;
+use Laminas\Captcha;
+use Laminas\Captcha\Dumb;
 
 class LoginForm extends Form {
     public function __construct($name = null) {
@@ -39,6 +41,19 @@ class LoginForm extends Form {
                 'required' => 'required',
                 'placeholder' => 'Password',
                 'class' => 'form-control input-group',
+            ],
+        ]);
+
+        // captcha
+        $this->add([
+            'type' => Element\Captcha::class,
+            'name' => 'captcha',
+            'options' => [
+                'label' => 'Please verify you are human',
+                'captcha' => new Dumb(),
+            ],
+            'attributes' => [
+                'required' => 'required',
             ],
         ]);
 

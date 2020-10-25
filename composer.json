@@ -23,7 +23,8 @@
         "laminas/laminas-mvc-plugin-prg": "^1.2",
         "laminas/laminas-mvc-plugin-identity": "^1.1",
         "laminas/laminas-mail": "^2.12",
-        "laminas/laminas-i18n": "^2.10"
+        "laminas/laminas-i18n": "^2.10",
+        "laminas/laminas-captcha": "^2.9"
     },
     "autoload": {
         "psr-4": {

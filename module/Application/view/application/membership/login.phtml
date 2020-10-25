@@ -8,6 +8,7 @@
     $form->setAttribute('action', $this->url());
     $email = $form->get('email');
     $password = $form->get('password');
+    $captcha = $form->get('captcha');
     $submit = $form->get('submit');
     $form->prepare();
 ?>
@@ -31,6 +32,12 @@
                         <?= $this->formLabel($password) ?>
                         <?= $this->formElement($password) ?>
                         <?= $this->formElementErrors()->render($password) ?>
+                    </div>
+
+                    <div class="form-group">
+                        <?= $this->formLabel($captcha) ?>
+                        <?= $this->formElement($captcha) ?>
+                        <?= $this->formElementErrors()->render($captcha) ?>
                     </div>
                 </fieldset>
 

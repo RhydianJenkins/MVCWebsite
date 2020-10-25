@@ -98,35 +98,45 @@ class MembershipController extends AbstractActionController {
             return ['loginform' => $this->loginForm];
         }
 
+        // check captcha is valid
+        $this->loginForm->setData($this->getRequest()->getPost());
+        if (!$this->loginForm->isValid()) {
+            return [
+                'message' => 'Invalid Form',
+                'code' => Result::FAILURE_CREDENTIAL_INVALID,
+                'loginform' => $this->loginForm,
+            ];
+        }
+
         // check to see if usr/pass was POSTed, authenticate if so
-        $email = $this->getRequest()->getPost()->toArray()['email'];
-        $password = $this->getRequest()->getPost()->toArray()['password'];
-        if ($email != null && $password != null) {
-            // login attempt, authenticate
-            $this->loginAuthenticator->setEmail($email);
-            $this->loginAuthenticator->setPassword($password);
-            $result = $this->loginAuthenticator->authenticate();
-            $code = $result->getCode();
-            switch ($code) {
-                case Result::FAILURE_IDENTITY_NOT_FOUND:
-                    // username not found
-                    $message = $result->getMessages()[0];
-                    break;
-                case Result::FAILURE_CREDENTIAL_INVALID:
-                    // wrong password
-                    $message = $result->getMessages()[0];
-                    break;
-                case Result::SUCCESS:
-                    // success!
-                    $this->session->write([MembershipController::IDENTITY_SESSION_ID => $result->getIdentity()]);
-                    $message = $result->getMessages()[0];
-                    return $this->redirect()->toRoute('membership');
-                    break;
-                default:
-                    // other issue
-                    $message = $result->getMessages()[0];
-                    break;
-            }
+        $email = $this->loginForm->getData()['email'];
+        $password = $this->loginForm->getData()['password'];
+        $captcha = $this->loginForm->getData()['captcha'];
+        
+        // login attempt, authenticate
+        $this->loginAuthenticator->setEmail($email);
+        $this->loginAuthenticator->setPassword($password);
+        $result = $this->loginAuthenticator->authenticate();
+        $code = $result->getCode();
+        switch ($code) {
+            case Result::FAILURE_IDENTITY_NOT_FOUND:
+                // username not found
+                $message = $result->getMessages()[0];
+                break;
+            case Result::FAILURE_CREDENTIAL_INVALID:
+                // wrong password
+                $message = $result->getMessages()[0];
+                break;
+            case Result::SUCCESS:
+                // success!
+                $this->session->write([MembershipController::IDENTITY_SESSION_ID => $result->getIdentity()]);
+                $message = $result->getMessages()[0];
+                return $this->redirect()->toRoute('membership');
+                break;
+            default:
+                // other issue
+                $message = $result->getMessages()[0];
+                break;
         }
 
         // print login form
