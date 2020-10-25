@@ -1,0 +1,1 @@
+Results to display on the sailing results page are dropped here.

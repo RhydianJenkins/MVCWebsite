@@ -7,4 +7,6 @@ phpunit.xml
 composer.lock
 .phpunit.result.cache
 public/img/albums/*
+public/results/*
+!public/results/README.md
 public/articles/*.pdf
