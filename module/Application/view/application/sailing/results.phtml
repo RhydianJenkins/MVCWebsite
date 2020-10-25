@@ -21,7 +21,9 @@
     <div class="container pb-3">
         <h2 class="page-header mb-1 pb-1"><?= $year ?></h2>
         <?php foreach($results as $result): ?>
-            <a href="<?= $this->url('sailing/results', ['year' => $result['year'], 'result' => $result['title']]) ?>"><?= $result['title'] ?></a><br />
+            <div class="p-1">
+                <a href="<?= $this->url('sailing/results', ['year' => $result['year'], 'result' => $result['title']]) ?>"><?= $result['title'] ?></a>
+            </div>
         <?php endforeach; ?>
     </div>
 <?php endforeach; ?>
