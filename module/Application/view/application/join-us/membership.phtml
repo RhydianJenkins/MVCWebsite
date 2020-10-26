@@ -4,6 +4,36 @@
  */
     $form = $this->membershipForm;
     $form->setAttribute('action', $this->url());
+    $firstname = $form->get('firstname');
+    $surname = $form->get('surname');
+    $email = $form->get('email');
+    $address1 = $form->get('address1');
+    $address2 = $form->get('address2');
+    $city = $form->get('city');
+    $postcode = $form->get('postcode');
+    $medicalconditions = $form->get('medicalconditions');
+    $medicaldetails = $form->get('medicaldetails');
+    $emergencyname = $form->get('emergencyname');
+    $emergencynumber = $form->get('emergencynumber');
+    $boat1class = $form->get('boat1class');
+    $boat1number = $form->get('boat1number');
+    $boat1owned = $form->get('boat1owned');
+    $boat2class = $form->get('boat2class');
+    $boat2number = $form->get('boat2number');
+    $boat2owned = $form->get('boat2owned');
+    $firstaid = $form->get('firstaid');
+    $firstaidexpire = $form->get('firstaidexpire');
+    $existingqualifications = $form->get('existingqualifications');
+    $oodcheck = $form->get('oodcheck');
+    $photocheck = $form->get('photocheck');
+    $insurancecheck = $form->get('insurancecheck');
+    $clubtccheck = $form->get('clubtccheck');
+    $newmember = $form->get('newmember');
+    $tataemployee = $form->get('tataemployee');
+    $tataemployeenumber = $form->get('tataemployeenumber');
+    $membershipplannonemployee = $form->get('membershipplannonemployee');
+    $membershipplanemployee = $form->get('membershipplanemployee');
+    $paymentplan = $form->get('paymentplan');
     $captcha = $form->get('captcha');
     $submit = $form->get('submit');
     $form->prepare();
@@ -17,10 +47,212 @@
     <?php if($this->message != null) : ?>
         <div class="alert alert-<?= $this->messageAlert ?>" role="alert"><?= $this->message ?></div>
     <?php endif; ?>
-    <div class="d-flex justify-content-center">
         <?= $this->form()->openTag($form); ?>
             <fieldset>
+                <!-- personal information -->
                 <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Personal Information</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($firstname) ?>
+                            <?= $this->formElement($firstname) ?>
+                            <?= $this->formElementErrors()->render($firstname) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($surname) ?>
+                            <?= $this->formElement($surname) ?>
+                            <?= $this->formElementErrors()->render($surname) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($email) ?>
+                            <?= $this->formElement($email) ?>
+                            <?= $this->formElementErrors()->render($email) ?>
+                        </div>
+                    </div>
+                    <?= $this->formLabel($address1) ?>
+                    <?= $this->formElement($address1) ?>
+                    <?= $this->formElementErrors()->render($address1) ?>
+                    <?= $this->formElement($address2) ?>
+                    <?= $this->formElementErrors()->render($address2) ?>
+                    <?= $this->formElement($city) ?>
+                    <?= $this->formElementErrors()->render($city) ?>
+                    <?= $this->formElement($postcode) ?>
+                    <?= $this->formElementErrors()->render($postcode) ?>
+                </div>
+
+                <!-- emergency information -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Emergency Information</h3>
+                    <?= $this->formLabel($medicalconditions) ?>
+                    <?= $this->formElement($medicalconditions) ?>
+                    <?= $this->formElementErrors()->render($medicalconditions) ?>
+
+                    <div id="medicalDetails" class="d-none">
+                        <?= $this->formLabel($medicaldetails) ?>
+                        <?= $this->formElement($medicaldetails) ?>
+                        <?= $this->formElementErrors()->render($medicaldetails) ?>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($emergencyname) ?>
+                            <?= $this->formElement($emergencyname) ?>
+                            <?= $this->formElementErrors()->render($emergencyname) ?>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($emergencynumber) ?>
+                            <?= $this->formElement($emergencynumber) ?>
+                            <?= $this->formElementErrors()->render($emergencynumber) ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- boats -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Boats</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat1class) ?>
+                            <?= $this->formElement($boat1class) ?>
+                            <?= $this->formElementErrors()->render($boat1class) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat1number) ?>
+                            <?= $this->formElement($boat1number) ?>
+                            <?= $this->formElementErrors()->render($boat1number) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat1owned) ?>
+                            <?= $this->formElement($boat1owned) ?>
+                            <?= $this->formElementErrors()->render($boat1owned) ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat2class) ?>
+                            <?= $this->formElement($boat2class) ?>
+                            <?= $this->formElementErrors()->render($boat2class) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat2number) ?>
+                            <?= $this->formElement($boat2number) ?>
+                            <?= $this->formElementErrors()->render($boat2number) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat2owned) ?>
+                            <?= $this->formElement($boat2owned) ?>
+                            <?= $this->formElementErrors()->render($boat2owned) ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- existing qualifications -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Existing Qualifications (optional)</h3>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($firstaid) ?>
+                            <?= $this->formElement($firstaid) ?>
+                            <?= $this->formElementErrors()->render($firstaid) ?>
+                        </div>
+                        <div id="firstAidExpire" class="col-lg-6 col-sm-12 d-none">
+                            <?= $this->formLabel($firstaidexpire) ?>
+                            <?= $this->formElement($firstaidexpire) ?>
+                            <?= $this->formElementErrors()->render($firstaidexpire) ?>
+                        </div>
+                    </div>
+                    <?= $this->formLabel($existingqualifications) ?>
+                    <?= $this->formElement($existingqualifications) ?>
+                    <?= $this->formElementErrors()->render($existingqualifications) ?>
+                </div>
+
+                <!-- terms and conditions -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Terms and Conditions</h3>
+                    <?= $this->formLabel($oodcheck) ?>
+                    <?= $this->formElement($oodcheck) ?>
+                    <?= $this->formElementErrors()->render($oodcheck) ?>
+
+                    <?= $this->formLabel($photocheck) ?>
+                    <?= $this->formElement($photocheck) ?>
+                    <?= $this->formElementErrors()->render($photocheck) ?>
+
+                    <?= $this->formLabel($insurancecheck) ?>
+                    <?= $this->formElement($insurancecheck) ?>
+                    <?= $this->formElementErrors()->render($insurancecheck) ?>
+
+                    <?= $this->formLabel($clubtccheck) ?>
+                    <?= $this->formElement($clubtccheck) ?>
+                    <?= $this->formElementErrors()->render($clubtccheck) ?>
+                </div>
+
+                <!-- membership plan -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Membership Plan</h3>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($newmember) ?>
+                            <?= $this->formElement($newmember) ?>
+                            <?= $this->formElementErrors()->render($newmember) ?>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($tataemployee) ?>
+                            <?= $this->formElement($tataemployee) ?>
+                            <?= $this->formElementErrors()->render($tataemployee) ?>
+                        </div>
+
+                        <div id="employeeMembershipNumber" class="col-lg-4 col-sm-12 d-none">
+                            <?= $this->formLabel($tataemployeenumber) ?>
+                            <?= $this->formElement($tataemployeenumber) ?>
+                            <?= $this->formElementErrors()->render($tataemployeenumber) ?>
+                        </div>
+                    </div>
+
+                    <div id="employeeMembershipPlan" class="d-none">
+                        <?= $this->formLabel($membershipplanemployee) ?>
+                        <?= $this->formElement($membershipplanemployee) ?>
+                        <?= $this->formElementErrors()->render($membershipplanemployee) ?>
+                    </div>
+
+                    <div id="membershipPlan">
+                        <?= $this->formLabel($membershipplannonemployee) ?>
+                        <?= $this->formElement($membershipplannonemployee) ?>
+                        <?= $this->formElementErrors()->render($membershipplannonemployee) ?>
+                    </div>
+                </div>
+
+                <!-- payment -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Payment</h3>
+                    <?= $this->formLabel($paymentplan) ?>
+                    <?= $this->formElement($paymentplan) ?>
+                    <?= $this->formElementErrors()->render($paymentplan) ?>
+
+                    <div id="chequePaymentInstructions" class="d-none">
+                        <p class="pt-3">
+                            Cheques must be payable to "Tata Steel Sailing Club Margam" and sent to the Membership Secretary at:<br><br>
+                            2 The Burrows<br>
+                            Danygraig<br>
+                            Porthcawl<br>
+                            CF36 5AJ
+                        </p>
+                    </div>
+
+                    <div id="bankPaymentInstructions" class="d-none">
+                        <p class="pt-3">
+                            Card details to pay to:<br><br>
+                            Lloyds Bank PLC<br>
+                            Sort Code: <span class="font-weight-bold">30-91-18</span><br>
+                            Account Number: <span class="font-weight-bold">02386779</span><br>
+                            Reference: <span class="font-italic">Your Name</span><br>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- captcha -->
+                <div class="form-group pt-5">
                     <?= $this->formLabel($captcha) ?>
                     <?= $this->formElement($captcha) ?>
                     <?= $this->formElementErrors()->render($captcha) ?>
@@ -32,7 +264,76 @@
                 echo $this->formHidden($form->get('id'));
                 echo $this->form()->closeTag();
             ?>
-            </div>
         </div>
     </div>
 </div>
+
+<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+
+$('#medicalconditions').change(function() {
+    if (document.getElementById("medicalconditions").checked) {
+        $('#medicalDetails').removeClass("d-none");
+    } else {
+        $('#medicalDetails').addClass("d-none");
+    }
+});
+
+$('#firstaid').change(function() {
+    if (document.getElementById("firstaid").checked) {
+        $('#firstAidExpire').removeClass("d-none");
+    } else {
+        $('#firstAidExpire').addClass("d-none");
+    }
+});
+
+$('#tataemployee').change(function() {
+    if (document.getElementById("tataemployee").checked) {
+        $('#employeeMembershipNumber').removeClass("d-none");
+        $('#employeeMembershipPlan').removeClass("d-none");
+        $('#membershipPlan').addClass("d-none");
+    } else {
+        $('#employeeMembershipNumber').addClass("d-none");
+        $('#employeeMembershipPlan').addClass("d-none");
+        $('#membershipPlan').removeClass("d-none");
+    }
+});
+
+$('#paymentType').change(function() {
+    $('#chequePaymentInstructions').addClass("d-none");
+    $('#bankPaymentInstructions').addClass("d-none");
+    if (document.getElementById("paymentType").value == 'cheque') {
+        $('#chequePaymentInstructions').removeClass("d-none");
+    } else if (document.getElementById("paymentType").value == 'bank') {
+        $('#bankPaymentInstructions').removeClass("d-none");
+    }
+});
+
+// // calculate total payable every 2 seconds
+// window.setInterval(function(){
+//     var totalcharge = parseInt(0);
+//     if (document.getElementById("late-fee").checked) { totalcharge += parseInt(10); }
+
+//     if (document.getElementById("eployee").checked) {
+//         var text = $("#mem-type-employee option:selected").val().split("£").pop();
+//     } else {
+//         var text = $("#mem-type option:selected").val().split("£").pop();
+//     }
+//     ;
+
+//     {if (Number.isInteger(parseInt(text))) {
+//         totalcharge += parseInt(text);}
+//     };
+
+//     $('#total-charge-header').text("Total payable: £" + totalcharge);
+//     if (totalcharge != 0) {
+//         $('#payment-method').removeClass("hidden");
+//     } else {
+//         $('#payment-method').addClass("hidden");
+//     }
+//     document.getElementById('total-payable').value = totalcharge;
+// }, 2000);
+JS;
+$this->inlineScript()->captureEnd();
+?>

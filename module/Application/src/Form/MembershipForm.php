@@ -7,6 +7,12 @@ use Laminas\Captcha;
 use Laminas\Captcha\ReCaptcha as ReCaptcha;
 
 class MembershipForm extends Form {
+    /**
+     * How long a first aid certificate is assumed to last.
+     * This is added to the current year to give the maximum expiry date.
+     */
+    const FIRST_AID_LIFETIME = 5;
+
     public function __construct($name = null, $recaptchaOptions) {
         parent::__construct($name);
 
@@ -14,6 +20,512 @@ class MembershipForm extends Form {
         $this->add([
             'type' => Element\Hidden::class,
             'name' => 'id',
+        ]);
+
+        /**
+         * Personal Details
+         */
+        // First Name
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'firstname',
+            'options' => [
+                'label' => 'First name*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'First name',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Surname
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'surname',
+            'options' => [
+                'label' => 'Surname*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Surname',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Email
+        $this->add([
+            'type' => Element\Email::class,
+            'name' => 'email',
+            'options' => [
+                'label' => 'Email*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'you@email.com',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Address Line 1
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'address1',
+            'options' => [
+                'label' => 'Address*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Address Line 1',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Address Line 2
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'address2',
+            'options' => [
+                'label' => 'Address Line 2',
+            ],
+            'attributes' => [
+                'placeholder' => 'Address Line 2',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // City
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'city',
+            'options' => [
+                'label' => 'City',
+            ],
+            'attributes' => [
+                'placeholder' => 'City',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Post Code
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'postcode',
+            'options' => [
+                'label' => 'Post Code*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Post Code',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        /**
+         * Emergency Information
+         */
+        // Medical Conditions
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'medicalconditions',
+            'options' => [
+                'label' => 'Medical Conditions',
+            ],
+            'attributes' => [
+                'placeholder' => 'Medical Conditions',
+                'class' => 'form-control input-group mb-3',
+                'id' => 'medicalconditions',
+            ],
+        ]);
+
+        // Medical Details
+        $this->add([
+            'type' => Element\TextArea::class,
+            'name' => 'medicaldetails',
+            'options' => [
+                'label' => 'Medical Details',
+            ],
+            'attributes' => [
+                'placeholder' => 'Medical Details',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Emergency Contact Name
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'emergencyname',
+            'options' => [
+                'label' => 'Emergency Contact Name',
+            ],
+            'attributes' => [
+                'placeholder' => 'Emergency Contact Name',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Emergency Contact Number
+        $this->add([
+            'type' => Element\Tel::class,
+            'name' => 'emergencynumber',
+            'options' => [
+                'label' => 'Emergency Contact Number',
+            ],
+            'attributes' => [
+                'placeholder' => 'Emergency Contact Number',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        /**
+         * Boats
+         */
+        // Boat 1 Class
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'boat1class',
+            'options' => [
+                'label' => 'Boat 1 Class*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Boat 1 Class',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Boat 1 Number
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'boat1number',
+            'options' => [
+                'label' => 'Boat 1 Number*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Boat 1 Number',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Boat 1 Owned
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'boat1owned',
+            'options' => [
+                'label' => 'I own this boat',
+            ],
+            'attributes' => [
+                'placeholder' => 'I own this boat',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Boat 2 Class
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'boat2class',
+            'options' => [
+                'label' => 'Boat 2 Class',
+            ],
+            'attributes' => [
+                'placeholder' => 'Boat Class',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Boat 2 Number
+        $this->add([
+            'type' => Element\Text::class,
+            'name' => 'boat2number',
+            'options' => [
+                'label' => 'Boat 2 Number',
+            ],
+            'attributes' => [
+                'placeholder' => 'Boat 2 Number',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Boat 1 Owned
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'boat2owned',
+            'options' => [
+                'label' => 'I own this boat',
+            ],
+            'attributes' => [
+                'placeholder' => 'I own this boat',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        /**
+         * Qualifications
+         */
+        // First Aid
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'firstaid',
+            'options' => [
+                'label' => 'First Aid',
+            ],
+            'attributes' => [
+                'placeholder' => 'First Aid',
+                'class' => 'form-control input-group mb-3',
+                'id' => 'firstaid',
+            ],
+        ]);
+
+        // First Aid Expiry
+        $this->add([
+            'type' => Element\DateSelect::class,
+            'name' => 'firstaidexpire',
+            'options' => [
+                'label' => 'First Aid Expiry Date',
+                'min_year' => date('Y'),
+                'max_year' => date('Y') + self::FIRST_AID_LIFETIME,
+            ],
+            'attributes' => [
+                'placeholder' => 'First Aid Expiry Date',
+                'class' => 'd-none form-control input-group',
+            ],
+        ]);
+
+        // Existing Qualifications
+        $this->add([
+            'type' => Element\TextArea::class,
+            'name' => 'existingqualifications',
+            'options' => [
+                'label' => 'Existing Qualifications',
+            ],
+            'attributes' => [
+                'placeholder' => 'Existing Qualifications',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        /**
+         * Terms and Conditions
+         */
+        // OOD Checkbox
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'oodcheck',
+            'options' => [
+                'label' => 'OOD*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'OOD',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Photograhs Checkbox
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'photocheck',
+            'options' => [
+                'label' => 'Photographs*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Photographs',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Insurance Checkbox
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'insurancecheck',
+            'options' => [
+                'label' => 'Insurance*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Insurance',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // Club's terms Checkbox
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'clubtccheck',
+            'options' => [
+                'label' => 'Club Terms and Conditions*',
+            ],
+            'attributes' => [
+                'required' => 'required',
+                'placeholder' => 'Club Terms and Conditions',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        /**
+         * Membership Plan
+         */
+        // new member
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'newmember',
+            'options' => [
+                'label' => 'New Member?',
+            ],
+            'attributes' => [
+                'placeholder' => 'Are you a new member?',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // employee
+        $this->add([
+            'type' => Element\Checkbox::class,
+            'name' => 'tataemployee',
+            'options' => [
+                'label' => 'Are you a Tata Steel employee/retiree?',
+            ],
+            'attributes' => [
+                'placeholder' => 'Are you employed or retired from Tata Steel?',
+                'class' => 'form-control input-group mb-3',
+                'id' => 'tataemployee',
+            ],
+        ]);
+
+        // employee number
+        $this->add([
+            'type' => Element\Number::class,
+            'name' => 'tataemployeenumber',
+            'options' => [
+                'label' => 'Tata Steel Employee Number',
+            ],
+            'attributes' => [
+                'placeholder' => 'Tata Steel Employee Number',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // membership plan (employee)
+        $this->add([
+            'type' => Element\Select::class,
+            'name' => 'membershipplanemployee',
+            'options' => [
+                'label' => 'Select Employee/Retiree Membership Plan',
+                'empty_option' => 'Please select...',
+                'value_options' => [
+                    '0' => [
+                        'label' =>'Family (yourself, partner, all children under 18) - £184',
+                        'value' => 184,
+                    ],
+                    '1' => [
+                        'label' => 'Single adult (18 - 64 years of age at 1st Jan this year) - £152',
+                        'value' => 152,
+                    ],
+                    '2' => [
+                        'label' => 'Single adult (65 and over) - £116',
+                        'value' => 116,
+                    ],
+                    '3' => [
+                        'label' => 'Student / apprentice - £50',
+                        'value' => 50,
+                    ],
+                    '4' => [
+                        'label' => 'Junior (Not yet 18 at 1st Jan this year) - Free',
+                        'value' => 0,
+                    ],
+                    '5' => [
+                        'label' => 'Crew (non-boat owning adult) - £50',
+                        'value' => 50,
+                    ],
+					'6' => [
+                        'label' => 'Approved Special Membership - £30',
+                        'value' => 30,
+                    ],
+					'7' => [
+                        'label' => 'Honorary Membership - Free',
+                        'value' => 0,
+                    ],
+                ],
+            ],
+            'attributes' => [
+                'placeholder' => 'Membership Plan',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // membership plan (non employee)
+        $this->add([
+            'type' => Element\Select::class,
+            'name' => 'membershipplannonemployee',
+            'options' => [
+                'label' => 'Select Membership Plan',
+                'empty_option' => 'Please select...',
+                'value_options' => [
+                    '0' => [
+                        'label' =>'Family (yourself, partner, all children under 18) - £205',
+                        'value' => 205,
+                    ],
+                    '1' => [
+                        'label' => 'Single adult (18 - 64 years of age at 1st Jan this year) - £174',
+                        'value' => 174,
+                    ],
+                    '2' => [
+                        'label' => 'Single adult (65 and over) - £127',
+                        'value' => 127,
+                    ],
+                    '3' => [
+                        'label' => 'Student / apprentice - £60',
+                        'value' => 60,
+                    ],
+                    '4' => [
+                        'label' => 'Junior (Not yet 18 at 1st Jan this year) - $35',
+                        'value' => 35,
+                    ],
+                    '5' => [
+                        'label' => 'Crew (non-boat owning adult) - £67',
+                        'value' => 67,
+                    ],
+					'6' => [
+                        'label' => 'Approved Special Membership - £30',
+                        'value' => 30,
+                    ],
+					'7' => [
+                        'label' => 'Honorary Membership - Free',
+                        'value' => 0,
+                    ],
+                ],
+            ],
+            'attributes' => [
+                'placeholder' => 'Membership Plan (For Employees/Retirees)',
+                'class' => 'form-control input-group mb-3',
+            ],
+        ]);
+
+        // payment plan
+        $this->add([
+            'type' => Element\Select::class,
+            'name' => 'paymentplan',
+            'options' => [
+                'label' => 'Select Payment Plan',
+                'empty_option' => 'Please select...',
+                'value_options' => [
+                    '0' => [
+                        'label' => 'I will write a cheque',
+                        'value' => 'cheque',
+                    ],
+                    '1' => [
+                        'label' => 'I will pay the above amount via Bank Transfer',
+                        'value' => 'bank',
+                    ],
+                ],
+            ],
+            'attributes' => [
+                'placeholder' => 'Your Tata Steel Employee Number',
+                'class' => 'form-control input-group mb-3',
+                'id' => 'paymentType',
+            ],
         ]);
 
         // captcha
@@ -35,7 +547,7 @@ class MembershipForm extends Form {
             'name' => 'submit',
             'attributes' => [
                 'value' => 'Submit',
-                'class' => 'btn btn-primary d-flex mx-auto',
+                'class' => 'btn btn-primary',
             ],
         ]);
     }
