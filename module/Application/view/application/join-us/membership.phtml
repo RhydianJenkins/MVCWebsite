@@ -2,7 +2,37 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+    $form = $this->membershipForm;
+    $form->setAttribute('action', $this->url());
+    $captcha = $form->get('captcha');
+    $submit = $form->get('submit');
+    $form->prepare();
 ?>
+
 <div class="jumbotron mb-0 secondary-color">
     <h1 class="container display-4">Membership Application Form</h1>
+</div>
+
+<div class="container p-5">
+    <?php if($this->message != null) : ?>
+        <div class="alert alert-<?= $this->messageAlert ?>" role="alert"><?= $this->message ?></div>
+    <?php endif; ?>
+    <div class="d-flex justify-content-center">
+        <?= $this->form()->openTag($form); ?>
+            <fieldset>
+                <div class="form-group">
+                    <?= $this->formLabel($captcha) ?>
+                    <?= $this->formElement($captcha) ?>
+                    <?= $this->formElementErrors()->render($captcha) ?>
+                </div>
+            </fieldset>
+
+            <?php
+                echo $this->formSubmit($submit);
+                echo $this->formHidden($form->get('id'));
+                echo $this->form()->closeTag();
+            ?>
+            </div>
+        </div>
+    </div>
 </div>

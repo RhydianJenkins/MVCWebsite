@@ -108,7 +108,7 @@ class MembershipController extends AbstractActionController {
             ];
         }
 
-        // check to see if usr/pass was POSTed, authenticate if so
+        // grab valid form data
         $email = $this->loginForm->getData()['email'];
         $password = $this->loginForm->getData()['password'];
         $captcha = $this->loginForm->getData()['captcha'];
