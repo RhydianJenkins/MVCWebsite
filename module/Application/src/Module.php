@@ -34,6 +34,7 @@ class Module {
                 Model\AlbumReader::class => Factory\AlbumReaderFactory::class,
                 Model\ResultsReader::class => Factory\ResultsReaderFactory::class,
                 Model\ArticleReader::class => Factory\ArticleReaderFactory::class,
+                Model\MembershipApplicationManager::class => Factory\MembershipApplicationManagerFactory::class,
                 Model\WeatherReader::class => function ($container) {
                     $key = $container->get('config')['keystore']['api']['weather'];
                     return new Model\WeatherReader($key);
@@ -58,6 +59,7 @@ class Module {
                 Controller\SailingController::class => Factory\SailingControllerFactory::class,
                 Controller\NewsController::class => Factory\NewsControllerFactory::class,
                 Controller\TrainingController::class => Factory\TrainingControllerFactory::class,
+                Controller\JoinUsController::class => Factory\JoinUsControllerFactory::class,
                 Controller\CalendarController::class => function($container) {
                     return new Controller\CalendarController();
                 },

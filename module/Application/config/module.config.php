@@ -178,6 +178,46 @@ return [
                     ],
                 ],
             ],
+            'join' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/join',
+                    'defaults' => [
+                        'controller' => Controller\JoinUsController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'open' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/open-series',
+                            'defaults' => [
+                                'action' => 'open',
+                            ],
+                        ],
+                    ],
+                    'membership' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/membership',
+                            'defaults' => [
+                                'action' => 'membership',
+                            ],
+                        ],
+                    ],
+                    'group' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/group',
+                            'defaults' => [
+                                'action' => 'group',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
             'membership' => [
                 'type'    => Literal::class,
                 'options' => [
