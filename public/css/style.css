@@ -210,15 +210,12 @@ body {
     height: 80vh;
 }
 
-h4, p {
+h4 {
     display: inline;
     vertical-align: top;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
-    line-height: 28px
-}
-
-h4 {
+    line-height: 28px;
     font-weight: bold;
 }
 
