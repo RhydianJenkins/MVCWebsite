@@ -12,26 +12,32 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
     </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row d-flex justify-content-center">
+<div class="container-fluid document">
+    <div data-spy="scroll" data-target="#toc" class="row d-flex justify-content-center pb-5">
         <div class="col-lg-3 col-sm-12">
-            <!-- table of contents -->
-            <nav id="toc" data-spy="affix" data-toggle="toc"></nav>
+            <div class="sticky-top">
+                <!-- table of contents -->
+                <nav class="navbar navbar-light bg-light" id="toc" data-toggle="toc"></nav>
+            </div>
         </div>
 
-        <div class="col-lg-8 col-sm-12">
+        <div id="documentContent" class="col-lg-8 col-sm-12">
             
             <!-- 1. Rules -->
             <h1 class="page-header">1. Rules</h1>
             <h4>1.1</h4>
-            <p>Events will be governed by the Rules as defined in The Racing Rules of sailing 2017-2020 and these Instructions. These instructions change RRS rules 26, 29, 32, 41, 63.1, A2, A5 and Race Signal AP, and incorporate the Exoneration Penalty and the Advisory hearing and Arbitration of the RYA Rules Disputes Procedures.</p>
+            <p>
+                Events will be governed by the Rules as defined in The Racing Rules of sailing 2017-2020 and these Instructions.
+                These instructions change RRS rules 26, 29, 32, 41, 63.1, A2, A5 and Race Signal AP,
+                and incorporate the Exoneration Penalty and the Advisory hearing and Arbitration of the RYA Rules Disputes Procedures.
+            </p><br />
             <h4>1.2</h4>
             <p>Instructions specific to particular competitions are contained in the relevant appendix:<br />Appendix A - Club Long Series Racing<br />Appendix B - Bank Holiday series, Pursuit Races and Club Regatta.<p>
 
             <!-- 2. Notice to Competitors -->
             <h1 class="page-header">2. Notice to Competitors</h1>
             <h4>2.1</h4>
-            <p>Notices to competitors will be posted on the secretary’s notice board in the clubhouse foyer and/or at the race control hut.</p>
+            <p>Notices to competitors will be posted on the secretary’s notice board in the clubhouse foyer and/or at the race control hut.</p><br />
 
             <!-- 3. Changes to Sailing Instructions -->
             <h1 class="page-header">3. Changes to Sailing Instructions</h1>
@@ -40,14 +46,18 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 Any changes to these Instructions will be posted on the club website at least a week before the race affected.
                 Attention to changes will be brought to the attention of all club members via email and will be posted on the secretary’s
                 notice board in the clubhouse foyer and/or at the race control hut at least one hour before the affected race.
-            </p>
+            </p><br />
 
             <!-- 4. Signals Made Ashore -->
             <h1 class="page-header">4. Signals Made Ashore</h1>
             <h4>4.1</h4>
-            <p>Signals made ashore will be hoisted on the signal mast at the race control hut.</p>
+            <p>Signals made ashore will be hoisted on the signal mast at the race control hut.</p><br />
             <h4>4.2</h4>
-            <p>If 'AP' is displayed ashore to postpone a race for which boats have not launched, it will be removed (with sound signal) at least 10 minutes before the subsequent warning signal. This changes Race Signal AP in RRS.</p>
+            <p>
+                If 'AP' is displayed ashore to postpone a race for which boats have not launched,
+                it will be removed (with sound signal) at least 10 minutes before the subsequent warning signal.
+                This changes Race Signal AP in RRS.
+            </p><br />
 
             <!-- 5. Schedule of races -->
             <h1 class="page-header">5. Schedule of Races</h1>
@@ -56,7 +66,7 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 The numbers of races in a series are approximations; they may be slightly less owing to open meetings which are yet to be finalised.
                 If less than the qualifying numbers of races are sailed, then the number of races to qualify will be the total number of races sailed in that series.
                 The programme of race series for the year can be found in the document entitled "Racing Programme".
-            </p>
+            </p><br />
 
             <!-- 6. Classes and Class Flag -->
             <h1 class="page-header">6. Classes and Class Flag</h1>
@@ -68,14 +78,14 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                     <li class="list-group-item">Solo: Numeral '1'</li>
                     <li class="list-group-item">Optimist: Flag O</li>
                 </ul>
-            </p>
+            </p><br />
             <h4>6.2</h4>
-            <p>Changes to classes may be made by the Management Committee and announced on the secretary's notice board.</p>
+            <p>Changes to classes may be made by the Management Committee and announced on the secretary's notice board.</p><br />
 
             <!-- 7. Racing Area, Course Plan, and Marks -->
             <h1 class="page-header">7. Racing Area, Course Plan, and Marks</h1>
             <h4>7.1</h4>
-            <p>The course plan and marks will be displayed on the course board at the race control hut.</p>
+            <p>The course plan and marks will be displayed on the course board at the race control hut.</p><br />
 
             <!-- 8. The Start -->
             <h1 class="page-header">8. The Start</h1>
@@ -93,7 +103,7 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 Flag P will be left hoisted at a fleet start if the next fleet is commencing its preparatory period.
                 A sound system failure will be disregarded, other than the warning signal.
                 Signals will be as follows, illustrated for 2 starts: (See opposite)
-            </p>
+            </p><br />
             <table class="table table-responsive">
                 <thead class="primary-color"></thead>
                 <tbody class="secondary-color">
@@ -149,7 +159,7 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 The start line for a shore start will be shown by a transit from two masts on the shore,
                 and an outer distance mark which may not be exactly in line with the transit.
                 An inner distance mark may be laid, and in this case boats approaching the line to start shall pass between this mark and the outer distance mark.
-            </p>
+            </p><br />
 
             <!-- 9. Recalls -->
             <h1 class="page-header">9. Recalls</h1>
@@ -157,7 +167,7 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
             <p>
                 Individual recalls will be signaled with one sound signal and the class flag held at the dip (part way
                 down), until all boats have started correctly or for a maximum of 4 minutes. This changes RRS 29.1.
-            </p>
+            </p><br />
             <h4>9.2</h4>
             <p>
                 A general recall will be signaled by the displaying of the First Substitute flag (two sound signals) as soon as possible after the class start.
@@ -165,57 +175,57 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 The warning signal for a new start for the recalled class shall be made one minute after the First Substitute is removed.
                 Subsequent classes will still start at their scheduled time.
                 This changes RRS 29.2. An explanatory document with diagrams is available on the website.
-            </p>
+            </p><br />
 
             <!-- 10. The Finish -->
             <h1 class="page-header">10. The Finish</h1>
             <h4>10.1</h4>
-            <p>Shore-based - The finishing line will be between the signal mast and a finishing mark.</p>
+            <p>Shore-based - The finishing line will be between the signal mast and a finishing mark.</p><br />
             <h4>10.2</h4>
             <p>
                 Each boat will sail the defined number of laps or until flag 'S' is displayed, with class flag(s) if only selected class(es) are to finish.
                 The leading boat of each class will then finish when next crossing the finishing line and other boats will finish thereafter.
                 Any boat more than one lap behind a class leader may be finished on next crossing the finishing line,
                 and given the position held at that time. This changes RRS 32 and A2.
-            </p>
+            </p><br />
             <h4>10.3</h4>
-            <p>It is not a requirement that all boats in the handicap fleets complete the same number of laps.</p>
+            <p>It is not a requirement that all boats in the handicap fleets complete the same number of laps.</p><br />
             <h4>10.4</h4>
-            <p>The time limit will be two hours unless otherwise announced on a notice at the race control hut.</p>
+            <p>The time limit will be two hours unless otherwise announced on a notice at the race control hut.</p><br />
             <h4>10.5</h4>
-            <p>In the event of abandonment, places may be awarded from positions at the end of the last completed lap</p>
+            <p>In the event of abandonment, places may be awarded from positions at the end of the last completed lap</p><br />
 
             <!-- 11. Protests -->
             <h1 class="page-header">11. Protests</h1>
             <h4>11.1</h4>
-            <p>Protests shall be written on forms available at the clubhouse and lodged with the OOD within 30 minutes of finishing the last race of the day.</p>
+            <p>Protests shall be written on forms available at the clubhouse and lodged with the OOD within 30 minutes of finishing the last race of the day.</p><br />
             <h4>11.2</h4>
-            <p>The Advisory hearing and Arbitration of the RYA Rules Disputes Procedures will be available.</p>
+            <p>The Advisory hearing and Arbitration of the RYA Rules Disputes Procedures will be available.</p><br />
 
             <!-- 12. Scoring -->
             <h1 class="page-header">12. Scoring</h1>
             <h4>12.1</h4>
-            <p>Scoring will follow the low point system of RRS Appendix A.</p>
+            <p>Scoring will follow the low point system of RRS Appendix A.</p><br />
             <h4>12.2</h4>
             <p>
                 Average lap times will determine the results for handicap racing, calculated using the RYA Portsmouth Yardstick scheme.
                 (Club Portsmouth Numbers are calculated using the RYA PYOnline system).
                 The Club Portsmouth Number list can be found on the Club’s website.
-            </p>
+            </p><br />
             <h4>12.3</h4>
-            <p>Series points can only be aggregated for the same class of boat</p>
+            <p>Series points can only be aggregated for the same class of boat</p><br />
             <h4>12.4</h4>
-            <p>Series discards will be introduced using a profile throughout the series duration.</p>
+            <p>Series discards will be introduced using a profile throughout the series duration.</p><br />
             <h4>12.5</h4>
             <p>
                 Sailing Correct Course – when the Race Committee observes a boat failing to sail the correct course,
                 the boat so observed will be disqualified without a hearing. This changes RRS63.1 and A5.
-            </p>
+            </p><br />
 
             <!-- 13. Retirements -->
             <h1 class="page-header">13. Retirements</h1>
             <h4>13.1</h4>
-            <p>Any competitor retiring shall inform the OOD/Patrol-boats at the earliest opportunity. Failure to do so may result in with-holding of any race result.</p>
+            <p>Any competitor retiring shall inform the OOD/Patrol-boats at the earliest opportunity. Failure to do so may result in with-holding of any race result.</p><br />
 
             <!-- 14. Outside Assistance -->
             <h1 class="page-header">14. Outside Assistance</h1>
@@ -224,7 +234,7 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 Competitors who have received assistance from a patrol boat may continue to race provided that it is safe for them to do so.
                 Each incident will be noted by the Patrol boat and no penalty applied unless a significant advantage in result has been gained,
                 in which case a time or place penalty may be applied. This changes RRS 41.
-            </p>
+            </p><br />
 
             <!-- 15. Responsibilities -->
             <h1 class="page-header">15. Responsibilities</h1>
@@ -236,34 +246,33 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 Nothing done by the organisers can reduce the responsibility of the owners and/or competitors, nor will it make the organisers responsible for any loss,
                 damage, death or personal injury, however it may have occurred, as a result of the boat taking part in the racing.
                 The organisers encompass everyone helping to run the event. The provision of Powerboats does not relieve owners and competitors of their responsibilities.
-            </p>
+            </p><br />
 
             <!-- Appendix A - Club Long Series -->
             <h1 class="page-header">Appendix A - Club Long Series</h1>
             <h3>A1 Conditions of Entry</h3>
             <h4>A1.1</h4>
-            <p>All helms shall sign on for each series on each day before racing. Failure to do so may be penalised by with-holding any race result.</p>
+            <p>All helms shall sign on for each series on each day before racing. Failure to do so may be penalised by with-holding any race result.</p><br />
             <h4>A1.2</h4>
-            <p>The club website will indicate which series are open to non-members. In these cases non-members must complete an entry form and pay the required fee before racing.</p>
+            <p>The club website will indicate which series are open to non-members. In these cases non-members must complete an entry form and pay the required fee before racing.</p><br />
             <h3>A2 Classes</h3>
             <h4>A2.1</h4>
             <p>
                 Classes having separate class racing will be listed in the club website and other classes will race in a handicap fleet,
                 unless changed by announcement from the Committee on the secretary’s notice board.
-            </p>
+            </p><br />
             <h3>A3 Scoring</h3>
             <h4>A3.1</h4>
             <p>
                 The club website will list for each series the number of race results required for a series result.
                 This number may be changed by announcement from the Committee on the secretary's notice board if races are cancelled due to unforeseen circumstances.
                 This changes RRS A2.
-            </p>
+            </p><br />
 
             <!-- Appendix B - Bank Holiday Series and Club Regatta -->
             <h1 class="page-header">Appendix B - Bank Holiday Series and Club Regatta</h1>
             <h4>A2.1</h4>
-            <p>Bank Holiday, Regatta, Pursuit and all other Open Events shall have their own set of Sailing Instructions</p>
+            <p>Bank Holiday, Regatta, Pursuit and all other Open Events shall have their own set of Sailing Instructions</p><br />
         </div>
     </div>
 </div>
-        

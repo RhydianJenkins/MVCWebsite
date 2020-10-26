@@ -209,3 +209,19 @@ body {
     width: 100%;
     height: 80vh;
 }
+
+h4, p {
+    display: inline;
+    vertical-align: top;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 28px
+}
+
+h4 {
+    font-weight: bold;
+}
+
+h1:not(:first-child) {
+    padding-top: 20px;
+}
