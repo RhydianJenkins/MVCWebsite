@@ -8,6 +8,9 @@ use Laminas\InputFilter\InputFilter\Input;
 use Laminas\Validator;
 
 class MembershipApplication implements InputFilterAwareInterface {
+    /**
+     * Form values.
+     */
     private $id;
     private $firstname;
     private $surname;
@@ -42,11 +45,14 @@ class MembershipApplication implements InputFilterAwareInterface {
     private $captcha;
     private $submit;
 
+    /**
+     * Populates object from array data.
+     */
     public function exchangeArray(array $data) {
         $this->id = !empty($data['id']) ? $data['id'] : null;
-        $this->password = !empty($data['firstname']) ? $data['firstname'] : null;
-        $this->email = !empty($data['surname']) ? $data['surname'] : null;
-        $this->firstname = !empty($data['address1']) ? $data['address1'] : null;
+        $this->firstname = !empty($data['firstname']) ? $data['firstname'] : null;
+        $this->surname = !empty($data['surname']) ? $data['surname'] : null;
+        $this->address1 = !empty($data['address1']) ? $data['address1'] : null;
         $this->address2 = !empty($data['address2']) ? $data['address2'] : null;
         $this->city = !empty($data['city']) ? $data['city'] : null;
         $this->postcode = !empty($data['postcode']) ? $data['postcode'] : null;
@@ -76,6 +82,9 @@ class MembershipApplication implements InputFilterAwareInterface {
         $this->submit = !empty($data['submit']) ? $data['submit'] : null;
     }
 
+    /**
+     * Invalid. Does not support new input filters. The input filter comes from the $this->getInputFilter() function.
+     */
     public function setInputFilter(InputFilterInterface $inputFilter) {
         throw new DomainException(sprintf(
             '%s does not allow injection of an alternate input filter',
@@ -83,6 +92,9 @@ class MembershipApplication implements InputFilterAwareInterface {
         ));
     }
 
+    /**
+     * Generates a new input filter if an existing one has not been set from a previous function call.
+     */
     public function getInputFilter() {
         if (property_exists($this, 'inputFilter')) {
             return $this->inputFilter;
@@ -101,7 +113,7 @@ class MembershipApplication implements InputFilterAwareInterface {
                         'min' => 2,
                         'max' => 50,
                         'encoding' => 'UTF-8',
-                    ]
+                    ],
                 ],
             ],
         ]);
@@ -117,7 +129,7 @@ class MembershipApplication implements InputFilterAwareInterface {
                         'min' => 2,
                         'max' => 50,
                         'encoding' => 'UTF-8',
-                    ]
+                    ],
                 ],
             ],
         ]);
@@ -136,17 +148,78 @@ class MembershipApplication implements InputFilterAwareInterface {
             ],
         ]);
 
-        // password-confirm
+        // address1
         $inputFilter->add([
-            'name' => 'password-confirm',
+            'name' => 'address1',
             'required' => true,
             'validators' => [
                 [
-                    'name'    => Validator\Identical::class,
+                    'name' => Validator\StringLength::class,
                     'options' => [
-                        'token' => 'password',
-                        'message' => 'Passwords did not match.'
+                        'min' => 2,
+                        'max' => 50,
+                        'encoding' => 'UTF-8',
                     ],
+                ],
+            ],
+        ]);
+
+        // city
+        $inputFilter->add([
+            'name' => 'city',
+            'required' => false,
+            'validators' => [
+                [
+                    'name' => Validator\StringLength::class,
+                    'options' => [
+                        'min' => 2,
+                        'max' => 50,
+                        'encoding' => 'UTF-8',
+                    ],
+                ],
+            ],
+        ]);
+
+        // postcode
+        $inputFilter->add([
+            'name' => 'postcode',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\NotEmpty::class,
+                ],
+            ],
+        ]);
+
+        // boat1class
+        $inputFilter->add([
+            'name' => 'boat1class',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\NotEmpty::class,
+                ],
+            ],
+        ]);
+
+        // boat1number
+        $inputFilter->add([
+            'name' => 'boat1number',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\NotEmpty::class,
+                ],
+            ],
+        ]);
+
+        // paymentplan
+        $inputFilter->add([
+            'name' => 'paymentplan',
+            'required' => true,
+            'validators' => [
+                [
+                    'name' => Validator\Notempty::class,
                 ],
             ],
         ]);

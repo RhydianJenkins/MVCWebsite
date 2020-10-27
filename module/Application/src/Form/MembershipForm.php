@@ -309,7 +309,7 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'firstaid',
             'options' => [
-                'label' => 'First Aid',
+                'label' => 'I hold a First Aid certificate',
             ],
             'attributes' => [
                 'placeholder' => 'First Aid',
@@ -429,9 +429,10 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'newmember',
             'options' => [
-                'label' => 'I am a new Member',
+                'label' => 'I am a new Member (£10 admin fee)',
             ],
             'attributes' => [
+                'id' => 'newmember',
                 'placeholder' => 'Are you a new member?',
                 'class' => 'form-control-inline input-group mb-3',
                 'data-toggle' => 'tooltip',
@@ -460,7 +461,7 @@ class MembershipForm extends Form {
             'type' => Element\Text::class,
             'name' => 'tataemployeenumber',
             'options' => [
-                'label' => 'Tata Steel Employee Number',
+                'label' => 'Tata Steel Employee Number*',
             ],
             'attributes' => [
                 'placeholder' => 'Tata Steel Employee Number',

@@ -47,7 +47,9 @@ if ($this->membershipForm != NULL) {
 
 <?php if($this->message != null) : ?>
     <div class="container p-5">
-        <div class="alert alert-<?= $this->messageAlert ?>" role="alert"><?= $this->message ?></div>
+        <div class="alert alert-<?= $this->messageAlert ?>" role="alert">
+            <?= $this->message ?>
+        </div>
     </div>
 <?php endif; ?>
 
@@ -237,7 +239,7 @@ if ($this->membershipForm != NULL) {
 
                 <!-- payment -->
                 <div class="form-group">
-                    <h3 class="page-header pb-3 mb-3">Payment</h3>
+                    <h3 id="payment-header" class="page-header pb-3 mb-3">Payment</h3>
                     <?= $this->formLabel($paymentplan) ?>
                     <?= $this->formElement($paymentplan) ?>
                     <?= $this->formElementErrors()->render($paymentplan, ['class' => 'text-danger']) ?>
@@ -321,30 +323,32 @@ $('#paymentType').change(function() {
     }
 });
 
-// // calculate total payable every 2 seconds
-// window.setInterval(function(){
-//     var totalcharge = parseInt(0);
-//     if (document.getElementById("late-fee").checked) { totalcharge += parseInt(10); }
+/**
+ * Note: this function is only called to inform the user on how much their membership is going to cost.
+ * The true cost is calculated server side.
+ */
+$('#membershipform').change(function() {
+    var totalcharge = parseInt(0);
 
-//     if (document.getElementById("eployee").checked) {
-//         var text = $("#mem-type-employee option:selected").val().split("£").pop();
-//     } else {
-//         var text = $("#mem-type option:selected").val().split("£").pop();
-//     }
-//     ;
+    // check if new member fee is applied
+    if (document.getElementById("newmember").checked) {
+        totalcharge += parseInt(10);
+    }
 
-//     {if (Number.isInteger(parseInt(text))) {
-//         totalcharge += parseInt(text);}
-//     };
+    // add membership type
+    if (document.getElementById("tataemployee").checked) {
+        totalcharge += parseInt($("#membershipplanemployee").val());
+    } else {
+        totalcharge += parseInt($("#membershipplannonemployee").val())
+    }
 
-//     $('#total-charge-header').text("Total payable: £" + totalcharge);
-//     if (totalcharge != 0) {
-//         $('#payment-method').removeClass("hidden");
-//     } else {
-//         $('#payment-method').addClass("hidden");
-//     }
-//     document.getElementById('total-payable').value = totalcharge;
-// }, 2000);
+    // update header
+    if (totalcharge > 0) {
+        $('#payment-header').text("Payment: £" + totalcharge);
+    } else {
+        $('#payment-header').text("Payment");
+    }
+});
 JS;
 $this->inlineScript()->captureEnd();
 ?>
