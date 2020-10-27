@@ -178,6 +178,10 @@ body {
     transition: 0.5s;
 }
 
+.border-bottom {
+    border-bottom: 3px var(--primary-color) solid !important;
+}
+
 .border-bottom-table {
     border-bottom: 3px var(--primary-color) solid;
     text-align: center;
