@@ -89,7 +89,7 @@ class MembershipForm extends Form {
                 'label' => 'Address Line 2',
             ],
             'attributes' => [
-                'placeholder' => 'Address Line 2',
+                'placeholder' => 'Address Line 2 (optional)',
                 'class' => 'form-control input-group mb-3',
             ],
         ]);
@@ -102,7 +102,7 @@ class MembershipForm extends Form {
                 'label' => 'City',
             ],
             'attributes' => [
-                'placeholder' => 'City',
+                'placeholder' => 'City (optional)',
                 'class' => 'form-control input-group mb-3',
             ],
         ]);
@@ -112,7 +112,7 @@ class MembershipForm extends Form {
             'type' => Element\Text::class,
             'name' => 'postcode',
             'options' => [
-                'label' => 'Post Code*',
+                'label' => 'Post Code',
             ],
             'attributes' => [
                 'required' => 'required',
@@ -129,11 +129,11 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'medicalconditions',
             'options' => [
-                'label' => 'Medical Conditions',
+                'label' => 'I Have Medical Conditions',
             ],
             'attributes' => [
                 'placeholder' => 'Medical Conditions',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
                 'id' => 'medicalconditions',
             ],
         ]);
@@ -146,7 +146,7 @@ class MembershipForm extends Form {
                 'label' => 'Medical Details',
             ],
             'attributes' => [
-                'placeholder' => 'Medical Details',
+                'placeholder' => 'Please Specify',
                 'class' => 'form-control input-group mb-3',
             ],
         ]);
@@ -217,7 +217,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'placeholder' => 'I own this boat',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
             ],
         ]);
 
@@ -256,7 +256,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'placeholder' => 'I own this boat',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
             ],
         ]);
 
@@ -272,7 +272,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'placeholder' => 'First Aid',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
                 'id' => 'firstaid',
             ],
         ]);
@@ -288,7 +288,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'placeholder' => 'First Aid Expiry Date',
-                'class' => 'd-none form-control input-group',
+                'class' => 'form-control input-group mb-3',
             ],
         ]);
 
@@ -318,7 +318,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'OOD',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
             ],
         ]);
 
@@ -332,7 +332,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Photographs',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
             ],
         ]);
 
@@ -346,7 +346,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Insurance',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
             ],
         ]);
 
@@ -360,7 +360,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Club Terms and Conditions',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
             ],
         ]);
 
@@ -376,7 +376,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'placeholder' => 'Are you a new member?',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
             ],
         ]);
 
@@ -389,7 +389,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'placeholder' => 'Are you employed or retired from Tata Steel?',
-                'class' => 'form-control input-group mb-3',
+                'class' => 'form-control-inline input-group mb-3',
                 'id' => 'tataemployee',
             ],
         ]);
@@ -404,6 +404,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Tata Steel Employee Number',
                 'class' => 'form-control input-group mb-3',
+                'id' => 'tataemployeenumber',
             ],
         ]);
 
@@ -452,6 +453,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Membership Plan',
                 'class' => 'form-control input-group mb-3',
+                'id' => 'membershipplanemployee',
             ],
         ]);
 
@@ -500,6 +502,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Membership Plan (For Employees/Retirees)',
                 'class' => 'form-control input-group mb-3',
+                'id' => 'membershipplannonemployee',
             ],
         ]);
 

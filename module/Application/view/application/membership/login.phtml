@@ -25,19 +25,19 @@
                     <div class="form-group">
                         <?= $this->formLabel($email) ?>
                         <?= $this->formElement($email) ?>
-                        <?= $this->formElementErrors()->render($email) ?>
+                        <?= $this->formElementErrors()->render($email, ['class' => 'text-danger']) ?>
                     </div>
 
                     <div class="form-group">
                         <?= $this->formLabel($password) ?>
                         <?= $this->formElement($password) ?>
-                        <?= $this->formElementErrors()->render($password) ?>
+                        <?= $this->formElementErrors()->render($password, ['class' => 'text-danger']) ?>
                     </div>
 
                     <div class="form-group">
                         <?= $this->formLabel($captcha) ?>
                         <?= $this->formElement($captcha) ?>
-                        <?= $this->formElementErrors()->render($captcha) ?>
+                        <?= $this->formElementErrors()->render($captcha, ['class' => 'text-danger']) ?>
                     </div>
                 </fieldset>
 

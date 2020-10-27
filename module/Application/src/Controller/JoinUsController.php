@@ -56,19 +56,22 @@ class JoinUsController extends AbstractActionController {
         }
 
         // check form is valid
-        $this->membershipForm>setData($this->getRequest()->getPost());
+        $this->membershipForm->setData($this->getRequest()->getPost());
         if (!$this->membershipForm->isValid()) {
             return [
                 'message' => 'Invalid Form',
-                'code' => Result::FAILURE_CREDENTIAL_INVALID,
+                'messageAlert' => 'danger',
                 'membershipForm' => $this->membershipForm,
             ];
         }
 
-        // grab valid form data
-        $captcha = $this->membershipForm->getData()['captcha'];
+        // TODO grab valid form data
+        //$captcha = $this->membershipForm->getData()['captcha'];
 
-        return new ViewModel();
+        return [
+            'message' => 'Form Submitted Succssfully.',
+            'messageAlert' => 'success',
+        ];
     }
 
     public function openAction() {

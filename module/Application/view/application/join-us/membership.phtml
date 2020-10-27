@@ -2,6 +2,7 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+if ($this->membershipForm != NULL) {
     $form = $this->membershipForm;
     $form->setAttribute('action', $this->url());
     $firstname = $form->get('firstname');
@@ -37,16 +38,21 @@
     $captcha = $form->get('captcha');
     $submit = $form->get('submit');
     $form->prepare();
+}
 ?>
 
 <div class="jumbotron mb-0 secondary-color">
     <h1 class="container display-4">Membership Application Form</h1>
 </div>
 
-<div class="container p-5">
-    <?php if($this->message != null) : ?>
+<?php if($this->message != null) : ?>
+    <div class="container p-5">
         <div class="alert alert-<?= $this->messageAlert ?>" role="alert"><?= $this->message ?></div>
-    <?php endif; ?>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->membershipForm != NULL): ?>
+    <div class="container p-5">
         <?= $this->form()->openTag($form); ?>
             <fieldset>
                 <!-- personal information -->
@@ -56,28 +62,28 @@
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($firstname) ?>
                             <?= $this->formElement($firstname) ?>
-                            <?= $this->formElementErrors()->render($firstname) ?>
+                            <?= $this->formElementErrors()->render($firstname, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($surname) ?>
                             <?= $this->formElement($surname) ?>
-                            <?= $this->formElementErrors()->render($surname) ?>
+                            <?= $this->formElementErrors()->render($surname, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($email) ?>
                             <?= $this->formElement($email) ?>
-                            <?= $this->formElementErrors()->render($email) ?>
+                            <?= $this->formElementErrors()->render($email, ['class' => 'text-danger']) ?>
                         </div>
                     </div>
                     <?= $this->formLabel($address1) ?>
                     <?= $this->formElement($address1) ?>
-                    <?= $this->formElementErrors()->render($address1) ?>
+                    <?= $this->formElementErrors()->render($address1, ['class' => 'text-danger']) ?>
                     <?= $this->formElement($address2) ?>
-                    <?= $this->formElementErrors()->render($address2) ?>
+                    <?= $this->formElementErrors()->render($address2, ['class' => 'text-danger']) ?>
                     <?= $this->formElement($city) ?>
                     <?= $this->formElementErrors()->render($city) ?>
                     <?= $this->formElement($postcode) ?>
-                    <?= $this->formElementErrors()->render($postcode) ?>
+                    <?= $this->formElementErrors()->render($postcode, ['class' => 'text-danger']) ?>
                 </div>
 
                 <!-- emergency information -->
@@ -85,24 +91,24 @@
                     <h3 class="page-header pb-3 mb-3">Emergency Information</h3>
                     <?= $this->formLabel($medicalconditions) ?>
                     <?= $this->formElement($medicalconditions) ?>
-                    <?= $this->formElementErrors()->render($medicalconditions) ?>
+                    <?= $this->formElementErrors()->render($medicalconditions, ['class' => 'text-danger']) ?>
 
                     <div id="medicalDetails" class="d-none">
                         <?= $this->formLabel($medicaldetails) ?>
                         <?= $this->formElement($medicaldetails) ?>
-                        <?= $this->formElementErrors()->render($medicaldetails) ?>
+                        <?= $this->formElementErrors()->render($medicaldetails, ['class' => 'text-danger']) ?>
                     </div>
 
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
                             <?= $this->formLabel($emergencyname) ?>
                             <?= $this->formElement($emergencyname) ?>
-                            <?= $this->formElementErrors()->render($emergencyname) ?>
+                            <?= $this->formElementErrors()->render($emergencyname, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-6 col-sm-12">
                             <?= $this->formLabel($emergencynumber) ?>
                             <?= $this->formElement($emergencynumber) ?>
-                            <?= $this->formElementErrors()->render($emergencynumber) ?>
+                            <?= $this->formElementErrors()->render($emergencynumber, ['class' => 'text-danger']) ?>
                         </div>
                     </div>
                 </div>
@@ -114,34 +120,34 @@
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($boat1class) ?>
                             <?= $this->formElement($boat1class) ?>
-                            <?= $this->formElementErrors()->render($boat1class) ?>
+                            <?= $this->formElementErrors()->render($boat1class, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($boat1number) ?>
                             <?= $this->formElement($boat1number) ?>
-                            <?= $this->formElementErrors()->render($boat1number) ?>
+                            <?= $this->formElementErrors()->render($boat1number, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($boat1owned) ?>
                             <?= $this->formElement($boat1owned) ?>
-                            <?= $this->formElementErrors()->render($boat1owned) ?>
+                            <?= $this->formElementErrors()->render($boat1owned, ['class' => 'text-danger']) ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($boat2class) ?>
                             <?= $this->formElement($boat2class) ?>
-                            <?= $this->formElementErrors()->render($boat2class) ?>
+                            <?= $this->formElementErrors()->render($boat2class, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($boat2number) ?>
                             <?= $this->formElement($boat2number) ?>
-                            <?= $this->formElementErrors()->render($boat2number) ?>
+                            <?= $this->formElementErrors()->render($boat2number, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($boat2owned) ?>
                             <?= $this->formElement($boat2owned) ?>
-                            <?= $this->formElementErrors()->render($boat2owned) ?>
+                            <?= $this->formElementErrors()->render($boat2owned, ['class' => 'text-danger']) ?>
                         </div>
                     </div>
                 </div>
@@ -153,73 +159,72 @@
                         <div class="col-lg-6 col-sm-12">
                             <?= $this->formLabel($firstaid) ?>
                             <?= $this->formElement($firstaid) ?>
-                            <?= $this->formElementErrors()->render($firstaid) ?>
+                            <?= $this->formElementErrors()->render($firstaid, ['class' => 'text-danger']) ?>
                         </div>
+
                         <div id="firstAidExpire" class="col-lg-6 col-sm-12 d-none">
                             <?= $this->formLabel($firstaidexpire) ?>
                             <?= $this->formElement($firstaidexpire) ?>
-                            <?= $this->formElementErrors()->render($firstaidexpire) ?>
+                            <?= $this->formElementErrors()->render($firstaidexpire, ['class' => 'text-danger']) ?>
                         </div>
                     </div>
+
                     <?= $this->formLabel($existingqualifications) ?>
                     <?= $this->formElement($existingqualifications) ?>
-                    <?= $this->formElementErrors()->render($existingqualifications) ?>
+                    <?= $this->formElementErrors()->render($existingqualifications, ['class' => 'text-danger']) ?>
                 </div>
 
                 <!-- terms and conditions -->
                 <div class="form-group">
                     <h3 class="page-header pb-3 mb-3">Terms and Conditions</h3>
-                    <?= $this->formLabel($oodcheck) ?>
-                    <?= $this->formElement($oodcheck) ?>
-                    <?= $this->formElementErrors()->render($oodcheck) ?>
+                        <?= $this->formLabel($oodcheck) ?>
+                        <?= $this->formElement($oodcheck) ?>
+                        <?= $this->formElementErrors()->render($oodcheck, ['class' => 'text-danger']) ?>
 
-                    <?= $this->formLabel($photocheck) ?>
-                    <?= $this->formElement($photocheck) ?>
-                    <?= $this->formElementErrors()->render($photocheck) ?>
+                        <?= $this->formLabel($photocheck) ?>
+                        <?= $this->formElement($photocheck) ?>
+                        <?= $this->formElementErrors()->render($photocheck, ['class' => 'text-danger']) ?>
 
-                    <?= $this->formLabel($insurancecheck) ?>
-                    <?= $this->formElement($insurancecheck) ?>
-                    <?= $this->formElementErrors()->render($insurancecheck) ?>
+                        <?= $this->formLabel($insurancecheck) ?>
+                        <?= $this->formElement($insurancecheck) ?>
+                        <?= $this->formElementErrors()->render($insurancecheck, ['class' => 'text-danger']) ?>
 
-                    <?= $this->formLabel($clubtccheck) ?>
-                    <?= $this->formElement($clubtccheck) ?>
-                    <?= $this->formElementErrors()->render($clubtccheck) ?>
+                        <?= $this->formLabel($clubtccheck) ?>
+                        <?= $this->formElement($clubtccheck) ?>
+                        <?= $this->formElementErrors()->render($clubtccheck, ['class' => 'text-danger']) ?>
                 </div>
 
                 <!-- membership plan -->
                 <div class="form-group">
                     <h3 class="page-header pb-3 mb-3">Membership Plan</h3>
+                    <?= $this->formLabel($newmember) ?>
+                    <?= $this->formElement($newmember) ?>
+                    <?= $this->formElementErrors()->render($newmember, ['class' => 'text-danger']) ?>
 
                     <div class="row">
-                        <div class="col-lg-4 col-sm-12">
-                            <?= $this->formLabel($newmember) ?>
-                            <?= $this->formElement($newmember) ?>
-                            <?= $this->formElementErrors()->render($newmember) ?>
-                        </div>
-
-                        <div class="col-lg-4 col-sm-12">
+                        <div class="col-lg-6 col-sm-12">
                             <?= $this->formLabel($tataemployee) ?>
                             <?= $this->formElement($tataemployee) ?>
-                            <?= $this->formElementErrors()->render($tataemployee) ?>
+                            <?= $this->formElementErrors()->render($tataemployee, ['class' => 'text-danger']) ?>
                         </div>
 
-                        <div id="employeeMembershipNumber" class="col-lg-4 col-sm-12 d-none">
+                        <div id="employeeMembershipNumber" class="col-lg-6 col-sm-12 d-none">
                             <?= $this->formLabel($tataemployeenumber) ?>
                             <?= $this->formElement($tataemployeenumber) ?>
-                            <?= $this->formElementErrors()->render($tataemployeenumber) ?>
+                            <?= $this->formElementErrors()->render($tataemployeenumber, ['class' => 'text-danger']) ?>
                         </div>
                     </div>
 
                     <div id="employeeMembershipPlan" class="d-none">
                         <?= $this->formLabel($membershipplanemployee) ?>
                         <?= $this->formElement($membershipplanemployee) ?>
-                        <?= $this->formElementErrors()->render($membershipplanemployee) ?>
+                        <?= $this->formElementErrors()->render($membershipplanemployee, ['class' => 'text-danger']) ?>
                     </div>
 
                     <div id="membershipPlan">
                         <?= $this->formLabel($membershipplannonemployee) ?>
                         <?= $this->formElement($membershipplannonemployee) ?>
-                        <?= $this->formElementErrors()->render($membershipplannonemployee) ?>
+                        <?= $this->formElementErrors()->render($membershipplannonemployee, ['class' => 'text-danger']) ?>
                     </div>
                 </div>
 
@@ -228,7 +233,7 @@
                     <h3 class="page-header pb-3 mb-3">Payment</h3>
                     <?= $this->formLabel($paymentplan) ?>
                     <?= $this->formElement($paymentplan) ?>
-                    <?= $this->formElementErrors()->render($paymentplan) ?>
+                    <?= $this->formElementErrors()->render($paymentplan, ['class' => 'text-danger']) ?>
 
                     <div id="chequePaymentInstructions" class="d-none">
                         <p class="pt-3">
@@ -255,7 +260,7 @@
                 <div class="form-group pt-5">
                     <?= $this->formLabel($captcha) ?>
                     <?= $this->formElement($captcha) ?>
-                    <?= $this->formElementErrors()->render($captcha) ?>
+                    <?= $this->formElementErrors()->render($captcha, ['class' => 'text-danger']) ?>
                 </div>
             </fieldset>
 
@@ -266,7 +271,6 @@
             ?>
         </div>
     </div>
-</div>
 
 <?php
 $this->inlineScript()->captureStart();
@@ -289,6 +293,9 @@ $('#firstaid').change(function() {
 });
 
 $('#tataemployee').change(function() {
+    $('#membershipplannonemployee').val('')
+    $('#membershipplanemployee').val('')
+    $('#tataemployeenumber').val('')
     if (document.getElementById("tataemployee").checked) {
         $('#employeeMembershipNumber').removeClass("d-none");
         $('#employeeMembershipPlan').removeClass("d-none");
@@ -337,3 +344,4 @@ $('#paymentType').change(function() {
 JS;
 $this->inlineScript()->captureEnd();
 ?>
+<?php endif; ?>
