@@ -14,6 +14,7 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Application\Model\Emailer;
 use Application\Model\MembershipApplicationManager;
+use Application\Model\MembershipApplication;
 use Application\Form\MembershipForm;
 
 class JoinUsController extends AbstractActionController {
@@ -56,6 +57,8 @@ class JoinUsController extends AbstractActionController {
         }
 
         // check form is valid
+        $application = new MembershipApplication();
+        $this->membershipForm->setInputFilter($application->getInputFilter());
         $this->membershipForm->setData($this->getRequest()->getPost());
         if (!$this->membershipForm->isValid()) {
             return [
@@ -65,8 +68,8 @@ class JoinUsController extends AbstractActionController {
             ];
         }
 
-        // TODO grab valid form data
-        //$captcha = $this->membershipForm->getData()['captcha'];
+        // grab valid form data
+        $application->exchangeArray($this->membershipForm->getData());
 
         return [
             'message' => 'Form Submitted Succssfully.',

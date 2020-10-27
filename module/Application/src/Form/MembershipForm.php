@@ -204,9 +204,10 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Emergency Contact Number',
                 'class' => 'form-control input-group mb-3',
+                'type' => 'tel',
                 'data-toggle'    => 'tooltip',
                 'data-placement' => 'left',
-                'title'          => 'We will contact this person in the event of a medical emergency',
+                'title'=> 'We will contact this person in the event of a medical emergency',
             ],
         ]);
 
@@ -433,8 +434,8 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Are you a new member?',
                 'class' => 'form-control-inline input-group mb-3',
-                'data-toggle'    => 'tooltip',
-                'title'          => 'Check if you have not joined the club before. This will incur a £10 admin fee',
+                'data-toggle' => 'tooltip',
+                'title' => 'Check if you have not joined the club before. This will incur a £10 admin fee',
             ],
         ]);
 
@@ -449,14 +450,14 @@ class MembershipForm extends Form {
                 'placeholder' => 'Are you employed or retired from Tata Steel?',
                 'class' => 'form-control-inline input-group mb-3',
                 'id' => 'tataemployee',
-                'data-toggle'    => 'tooltip',
-                'title'          => 'I have or currently do work at Tata Steel',
+                'data-toggle' => 'tooltip',
+                'title' => 'I have or currently do work at Tata Steel',
             ],
         ]);
 
         // employee number
         $this->add([
-            'type' => Element\Number::class,
+            'type' => Element\Text::class,
             'name' => 'tataemployeenumber',
             'options' => [
                 'label' => 'Tata Steel Employee Number',
@@ -464,6 +465,7 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Tata Steel Employee Number',
                 'class' => 'form-control input-group mb-3',
+                'type' => 'number',
                 'id' => 'tataemployeenumber',
             ],
         ]);
@@ -473,8 +475,8 @@ class MembershipForm extends Form {
             'type' => Element\Select::class,
             'name' => 'membershipplanemployee',
             'options' => [
-                'label' => 'Select Employee/Retiree Membership Plan',
-                'empty_option' => 'Please select...',
+                'label' => 'Select Employee/Retiree Membership Plan*',
+                'unselected_value' => 0,
                 'value_options' => [
                     '0' => [
                         'label' =>'Family (yourself, partner, all children under 18) - £184',
@@ -522,8 +524,8 @@ class MembershipForm extends Form {
             'type' => Element\Select::class,
             'name' => 'membershipplannonemployee',
             'options' => [
-                'label' => 'Select Membership Plan',
-                'empty_option' => 'Please select...',
+                'label' => 'Select Membership Plan*',
+                'unselected_value' => 0,
                 'value_options' => [
                     '0' => [
                         'label' =>'Family (yourself, partner, all children under 18) - £205',
@@ -571,7 +573,7 @@ class MembershipForm extends Form {
             'type' => Element\Select::class,
             'name' => 'paymentplan',
             'options' => [
-                'label' => 'Select Payment Plan',
+                'label' => 'Select Payment Plan*',
                 'empty_option' => 'Please select...',
                 'value_options' => [
                     '0' => [

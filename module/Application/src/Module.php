@@ -28,6 +28,9 @@ class Module {
             'factories' => [
                 Model\Emailer::class => Factory\EmailerFactory::class,
                 Model\LoginAuthenticator::class => Factory\LoginAuthenticatorFactory::class,
+                Model\MembershipApplication::class => function ($container) {
+                    return new MembershipApplication();
+                },
                 Model\User::class => function ($container) {
                     return new User();
                 },
