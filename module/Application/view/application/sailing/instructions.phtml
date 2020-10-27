@@ -103,53 +103,58 @@ $this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
                 Flag P will be left hoisted at a fleet start if the next fleet is commencing its preparatory period.
                 A sound system failure will be disregarded, other than the warning signal.
                 Signals will be as follows, illustrated for 2 starts: (See opposite)
-            </p><br />
-            <table class="table table-responsive">
+            </p>
+            <table class="table shadow border-bottom-table">
                 <thead class="primary-color"></thead>
                 <tbody class="secondary-color">
+                    <thead class="primary-color">
+                        <tr>
+                            <td>Time</td>
+                            <td>Event</td>
+                            <td>Flags</td>
+                            <td>Sounds</td>
+                        </tr>
+                    </thead>
                     <tr>
                         <td>- 4 min</td>
                         <td>1<sup>st</sup> Fleet Warning Signal</td>
-                        <td>1<sup>st</sup> Fleet Flag</td>
-                        <td><i class="fa fa-arrow-up"></i></td>
-                        <td></td>
-                        <td></td>
+                        <td><i class="fa fa-arrow-up"></i> 1<sup>st</sup> Fleet Flag</td>
                         <td>1 Sound Signal</td>
                     </tr>
                     <tr>
                         <td>- 2 min</td>
-                        <td>1<sup>st</sup> Fleet Preparatory signal and 2<sup>nd</sup> Fleet Warning Signal</td>
-                        <td>Preparatory Flag</td>
-                        <td><i class="fa fa-arrow-up"></i></td>
-                        <td>2<sup>nd</sup> Fleet Flag</td>
-                        <td><i class="fa fa-arrow-up"></i></td>
+                        <td>
+                            1<sup>st</sup> Fleet Preparatory signal <br>
+                            2<sup>nd</sup> Fleet Warning Signal
+                        </td>
+                        <td>
+                            <i class="fa fa-arrow-up"></i> Preparatory Flag <br>
+                            <i class="fa fa-arrow-up"></i> 2<sup>nd</sup> Fleet Flag
+                        </td>
                         <td>1 Sound Signal</td>
                     </tr>
                     <tr>
                         <td>0 min</td>
                         <td>1<sup>st</sup> Fleet Start</td>
-                        <td>1<sup>st</sup> Fleet Flag</td>
-                        <td><i class="fa fa-arrow-down"></i></td>
-                        <td>3<sup>rd</sup> Fleet Flag</td>
-                        <td><i class="fa fa-arrow-up"></i></td>
+                        <td>
+                            <i class="fa fa-arrow-down"></i> 1<sup>st</sup> Fleet Flag <br>
+                            <i class="fa fa-arrow-up"></i> 3<sup>rd</sup> Fleet Flag
+                        </td>
                         <td>1 Sound Signal</td>
                     </tr>
                     <tr>
                         <td>+ 2 min</td>
                         <td>2<sup>nd</sup> Fleet Start</td>
-                        <td>2<sup>nd</sup> Fleet Flag</td>
-                        <td><i class="fa fa-arrow-down"></i></td>
-                        <td></td>
-                        <td></td>
+                        <td><i class="fa fa-arrow-down"></i> 2<sup>nd</sup> Fleet Flag</td>
                         <td>1 Sound Signal</td>
                     </tr>
                     <tr>
                         <td>+ 4 min</td>
                         <td>3<sup>rd</sup> Fleet Start</td>
-                        <td>3<sup>rd</sup> Fleet Flag</td>
-                        <td><i class="fa fa-arrow-down"></i></td>
-                        <td>Preparatory Flag</td>
-                        <td><i class="fa fa-arrow-down"></i></td>
+                        <td>
+                            <i class="fa fa-arrow-down"></i> 3<sup>rd</sup> Fleet Flag <br>
+                            <i class="fa fa-arrow-down"></i>Preparatory Flag
+                        </td>
                         <td>1 Sound Signal</td>
                     </tr>
                 </tbody>
