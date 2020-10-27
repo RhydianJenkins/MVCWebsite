@@ -13,6 +13,33 @@ class MembershipForm extends Form {
      */
     const FIRST_AID_LIFETIME = 5;
 
+    /**
+     * Declaration terms and condition about OOD duty.
+     */
+    CONST OOD_TOC_DEC = "
+        I/we commit to provide three dates on which I/we are able to do OOD duties during the year via the online roster in the Tata Steel Sailing Club website.
+        If you are unsure about OOD duties, put yourself down as 'Officer 2' or 'Support'";
+
+    /**
+     * Declaration terms and condition about photographs.
+     */
+    const PHOTO_TOC_DEC = "
+        The Club may arrange for photographs or videos to be taken of Club activities and published on our website or social media channels to promote the Club.
+        To consent to your image being used by the Club in this way, please tick here.
+        Family members will need to sign a consent form that you can download here.
+        Image consent can be withdrawn by contacting the Membership Secretary.
+        Any Image already published can be removed at any time by request";
+
+    /**
+     * Declaration terms and condition about insurance.
+     */
+    const INSURANCE_TOC_DEC = "All craft are to be insured for a minimum of £3M for third Party Risks.";
+
+    /**
+     * Declaration terms and condition for club T&Cs .
+     */
+    const CLUB_TOC_DEC = "I understand and accept the <a href='#TODO'>Club's Terms, Conditions and Policies</a>";
+
     public function __construct($name = null, $recaptchaOptions) {
         parent::__construct($name);
 
@@ -89,7 +116,7 @@ class MembershipForm extends Form {
                 'label' => 'Address Line 2',
             ],
             'attributes' => [
-                'placeholder' => 'Address Line 2 (optional)',
+                'placeholder' => 'Address Line 2',
                 'class' => 'form-control input-group mb-3',
             ],
         ]);
@@ -102,7 +129,7 @@ class MembershipForm extends Form {
                 'label' => 'City',
             ],
             'attributes' => [
-                'placeholder' => 'City (optional)',
+                'placeholder' => 'City',
                 'class' => 'form-control input-group mb-3',
             ],
         ]);
@@ -135,6 +162,9 @@ class MembershipForm extends Form {
                 'placeholder' => 'Medical Conditions',
                 'class' => 'form-control-inline input-group mb-3',
                 'id' => 'medicalconditions',
+                'data-toggle'    => 'tooltip',
+                'data-placement' => 'left',
+                'title'          => 'Select if you have an existing medical condition that we should know about',
             ],
         ]);
 
@@ -161,6 +191,9 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Emergency Contact Name',
                 'class' => 'form-control input-group mb-3',
+                'data-toggle'    => 'tooltip',
+                'data-placement' => 'left',
+                'title'          => 'We will contact this person in the event of a medical emergency',
             ],
         ]);
 
@@ -174,6 +207,9 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'Emergency Contact Number',
                 'class' => 'form-control input-group mb-3',
+                'data-toggle'    => 'tooltip',
+                'data-placement' => 'left',
+                'title'          => 'We will contact this person in the event of a medical emergency',
             ],
         ]);
 
@@ -191,6 +227,9 @@ class MembershipForm extends Form {
                 'required' => 'required',
                 'placeholder' => 'Boat 1 Class',
                 'class' => 'form-control input-group mb-3',
+                'data-toggle'    => 'tooltip',
+                'data-placement' => 'left',
+                'title'          => 'The class of your boat, e.g \'Osprey\'',
             ],
         ]);
 
@@ -218,6 +257,8 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'I own this boat',
                 'class' => 'form-control-inline input-group mb-3',
+                'data-toggle'    => 'tooltip',
+                'title'          => 'Check if you own this boat',
             ],
         ]);
 
@@ -257,6 +298,8 @@ class MembershipForm extends Form {
             'attributes' => [
                 'placeholder' => 'I own this boat',
                 'class' => 'form-control-inline input-group mb-3',
+                'data-toggle'    => 'tooltip',
+                'title'          => 'Check if you own this boat',
             ],
         ]);
 
@@ -274,6 +317,8 @@ class MembershipForm extends Form {
                 'placeholder' => 'First Aid',
                 'class' => 'form-control-inline input-group mb-3',
                 'id' => 'firstaid',
+                'data-toggle'    => 'tooltip',
+                'title'          => 'Check if you currently hold a First Aid certificate',
             ],
         ]);
 
@@ -313,7 +358,10 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'oodcheck',
             'options' => [
-                'label' => 'OOD*',
+                'label' => self::OOD_TOC_DEC,
+                'label_options' => [
+                    'disable_html_escape' => true,
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
@@ -327,7 +375,10 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'photocheck',
             'options' => [
-                'label' => 'Photographs*',
+                'label' => self::PHOTO_TOC_DEC,
+                'label_options' => [
+                    'disable_html_escape' => true,
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
@@ -341,7 +392,10 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'insurancecheck',
             'options' => [
-                'label' => 'Insurance*',
+                'label' => self::INSURANCE_TOC_DEC,
+                'label_options' => [
+                    'disable_html_escape' => true,
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
@@ -355,7 +409,10 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'clubtccheck',
             'options' => [
-                'label' => 'Club Terms and Conditions*',
+                'label' => self::CLUB_TOC_DEC,
+                'label_options' => [
+                    'disable_html_escape' => true,
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
@@ -372,11 +429,13 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'newmember',
             'options' => [
-                'label' => 'New Member?',
+                'label' => 'I am a new Member',
             ],
             'attributes' => [
                 'placeholder' => 'Are you a new member?',
                 'class' => 'form-control-inline input-group mb-3',
+                'data-toggle'    => 'tooltip',
+                'title'          => 'Check if you have not joined the club before. This will incur a £10 admin fee',
             ],
         ]);
 
@@ -385,12 +444,14 @@ class MembershipForm extends Form {
             'type' => Element\Checkbox::class,
             'name' => 'tataemployee',
             'options' => [
-                'label' => 'Are you a Tata Steel employee/retiree?',
+                'label' => 'I am a Tata Steel employee/retiree',
             ],
             'attributes' => [
                 'placeholder' => 'Are you employed or retired from Tata Steel?',
                 'class' => 'form-control-inline input-group mb-3',
                 'id' => 'tataemployee',
+                'data-toggle'    => 'tooltip',
+                'title'          => 'I have or currently do work at Tata Steel',
             ],
         ]);
 
@@ -550,7 +611,7 @@ class MembershipForm extends Form {
             'name' => 'submit',
             'attributes' => [
                 'value' => 'Submit',
-                'class' => 'btn btn-primary',
+                'class' => 'btn btn-primary btn-lg d-flex mx-auto',
             ],
         ]);
     }

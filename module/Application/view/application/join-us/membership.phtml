@@ -89,14 +89,18 @@ if ($this->membershipForm != NULL) {
                 <!-- emergency information -->
                 <div class="form-group">
                     <h3 class="page-header pb-3 mb-3">Emergency Information</h3>
-                    <?= $this->formLabel($medicalconditions) ?>
-                    <?= $this->formElement($medicalconditions) ?>
-                    <?= $this->formElementErrors()->render($medicalconditions, ['class' => 'text-danger']) ?>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($medicalconditions) ?>
+                            <?= $this->formElement($medicalconditions) ?>
+                            <?= $this->formElementErrors()->render($medicalconditions, ['class' => 'text-danger']) ?>
+                        </div>
 
-                    <div id="medicalDetails" class="d-none">
-                        <?= $this->formLabel($medicaldetails) ?>
-                        <?= $this->formElement($medicaldetails) ?>
-                        <?= $this->formElementErrors()->render($medicaldetails, ['class' => 'text-danger']) ?>
+                        <div id="medicalDetails" class="col-lg-6 col-sm-12 d-none">
+                            <?= $this->formLabel($medicaldetails) ?>
+                            <?= $this->formElement($medicaldetails) ?>
+                            <?= $this->formElementErrors()->render($medicaldetails, ['class' => 'text-danger']) ?>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -133,6 +137,9 @@ if ($this->membershipForm != NULL) {
                             <?= $this->formElementErrors()->render($boat1owned, ['class' => 'text-danger']) ?>
                         </div>
                     </div>
+                    
+                    <hr>
+                    
                     <div class="row">
                         <div class="col-lg-4 col-sm-12">
                             <?= $this->formLabel($boat2class) ?>
