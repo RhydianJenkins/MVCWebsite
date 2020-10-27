@@ -1,0 +1,47 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+$this->headStyle()->appendStyle($this->basePath('/css/bootstrap-toc.css'));
+$this->inlineScript()->prependFile($this->basePath('js/bootstrap-toc.js'))
+?>
+<div class="jumbotron mb-5 secondary-color">
+    <p class="container display-4">Tata Steel Sailing Club<br><span class="text-muted">Terms, Conditions, and Policies</span></p>
+</div>
+
+<div class="container-fluid document">
+    <div data-spy="scroll" data-target="#toc" class="row d-flex justify-content-center pb-5">
+        <div class="col-lg-3 col-sm-12">
+            <div class="sticky-top">
+                <!-- table of contents -->
+                <nav class="navbar navbar-light bg-light small" id="toc" data-toggle="toc"></nav>
+            </div>
+        </div>
+
+        <div id="documentContent" class="col-lg-8 col-sm-12">
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/Safeguarding_and_Child_Protection_Policy.pdf') ?>" target="_blank">1. Safeguarding and Child Protection</a></h1>
+            <h1 class="page-header pb-3 mb-3">2. Bio-security</h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/3 Standing Orders.pdf') ?>" target="_blank">3. Standing Orders</a></h1>
+            <h1 class="page-header pb-3 mb-3">4. Essential advice for new and existing members</h1>
+            <h1 class="page-header pb-3 mb-3">5. Gaining access to the club, and locking up</h1>
+            <h1 class="page-header pb-3 mb-3">6. Member (including parent) duties and responsibilities &amp; (DBS information)</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/limitation.pdf') ?>" target="_blank">7. Limitation of the club’s liability</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/Compound.pdf') ?>" target="_blank">8. Dinghy Compound Rules</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/Casual.pdf') ?>" target="_blank">9. Casual / Informal Sailing</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/10-Sailing_Management.pdf') ?>" target="_blank">10. Sailing Management</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/11-Sailing_Instructions.pdf') ?>" target="_blank">11. The Club’s Standard Sailing Instructions</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/12-Special_Events_Procedures.pdf') ?>" target="_blank">12. Special Events Procedure</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/Powerboats.pdf') ?>" target="_blank">13. Operating the powerboats &amp; procedures</a> </h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/14 General Data Protection Policy.pdf') ?>" target="_blank">14. General Data Protection Policy</a></h1>
+            <h1 class="page-header pb-3 mb-3">15. Performing Rescues</h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/training-procedure.pdf') ?>" target="_blank">16. Training Procedures</a></h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/Risk_Assessment.pdf') ?>" target="_blank">17. Risk Registers</a></h1>
+            <h1 class="page-header pb-3 mb-3">18. Emergency Procedure Flowchart</h1>
+            <h1 class="page-header pb-3 mb-3">19. Accidents, Injuries and Major Incidents</h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/20-Health_and_Safety_Policy_and_Procedures.pdf') ?>" target="_blank">20. Health and Safety Policy &amp; Procedures</a></h1>
+            <h1 class="page-header pb-3 mb-3">21. Food Safety Management</h1>
+            <h1 class="page-header pb-3 mb-3">22. The Constitution (formal rules)</h1>
+            <h1 class="page-header pb-3 mb-3"><a href="<?= $this->basePath('/docs/23-Tata_Steel_Sailing_Club_EQUALITY_POLICY.pdf') ?>" target="_blank">23. Club Equality Policy</a></h1>
+        </div>
+    </div>
+</div>

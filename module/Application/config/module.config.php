@@ -29,6 +29,16 @@ return [
                     ],
                 ],
             ],
+            'terms-and-conditions' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/terms-and-conditions',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'terms-and-conditions',
+                    ],
+                ],
+            ],
             'about' => [
                 'type'    => Literal::class,
                 'options' => [

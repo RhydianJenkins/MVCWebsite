@@ -38,7 +38,7 @@ class MembershipForm extends Form {
     /**
      * Declaration terms and condition for club T&Cs .
      */
-    const CLUB_TOC_DEC = "I understand and accept the <a href='#TODO'>Club's Terms, Conditions and Policies</a>";
+    const CLUB_TOC_DEC = "I understand and accept the <a href='/terms-and-conditions' target='_blank'>Club's Terms, Conditions and Policies</a>";
 
     public function __construct($name = null, $recaptchaOptions) {
         parent::__construct($name);

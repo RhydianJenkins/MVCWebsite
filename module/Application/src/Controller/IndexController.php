@@ -41,4 +41,8 @@ class IndexController extends AbstractActionController {
         }
         return new ViewModel($viewArray);
     }
+
+    public function termsAndConditionsAction() {
+        return new ViewModel();
+    }
 }
