@@ -13,7 +13,7 @@
     <div class="masonry-grid">
         <div class="grid-sizer"></div>
             <?php foreach($this->images as $image): ?>
-                <div class="grid-item">
+                <div class="grid-item p-1">
                     <img data-toggle="modal" data-target="#imageModal" src="<?= $this->basePath($image['path'] . $image['filename']) ?>">
                 </div>
             <?php endforeach; ?>
@@ -49,19 +49,16 @@
     ?>
 <?php else: ?>
     <!-- display all albums -->
-    <div class="container-fluid">
-        <div class="row">
-            <?php foreach($this->albums as $album): ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 pb-2 gallery-item">
-                    <a class="card shadow-lg" href="<?= $this->url('gallery', ['album' => $album['name']]) ?>">
-                        <img class="card-img-top square-image" src="<?= $album['thumbnail'] ?>">
-                        <div class="card-body primary-color rounded-bottom">
-                            <p class="card-text text-center m-0"><?= $album['title'] ?></p>
-                        </div>
-                    </a>
+    <div class="masonry-grid">
+        <div class="grid-sizer"></div>
+        <?php foreach($this->albums as $album): ?>
+            <a class="grid-item p-1" href="<?= $this->url('gallery', ['album' => $album['name']]) ?>">
+                <img src="<?= $album['thumbnail'] ?>">
+                <div class="p-3 primary-color rounded-bottom">
+                    <p class="text-center m-0"><?= $album['title'] ?></p>
                 </div>
-            <?php endforeach; ?>
-        </div>
+            </a>
+        <?php endforeach; ?>
     </div>
 <?php endif; ?>
 
