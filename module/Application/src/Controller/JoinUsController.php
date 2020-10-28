@@ -71,9 +71,7 @@ class JoinUsController extends AbstractActionController {
         // grab valid form data
         $application->exchangeArray($this->membershipForm->getData());
 
-        // echo("<pre>");
-        // var_dump($application->toString());
-        // echo("</pre>");
+        var_dump($application->toString());
 
         // return success message
         return [
