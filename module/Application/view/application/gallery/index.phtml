@@ -7,10 +7,11 @@
     <h1 class="container display-4"><a href="<?= $this->url('gallery') ?>">Albums</a><?= $this->imagesFound ? (' / ' . $this->albumName) : '' ?></h1>
 </div>
 
+
 <?php if($this->imagesFound) : ?>
     <!-- display images in given album -->
-    <div class="container-fluid p-0">
-        <div id="masonry-grid">
+    <div class="masonry-grid">
+        <div class="grid-sizer"></div>
             <?php foreach($this->images as $image): ?>
                 <div class="grid-item">
                     <img data-toggle="modal" data-target="#imageModal" src="<?= $this->basePath($image['path'] . $image['filename']) ?>">
@@ -19,6 +20,7 @@
         </div>
     </div>
 
+    <!-- image modal -->
     <div id="imageModal" class="modal fade shadow-lg" role="dialog">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -62,3 +64,7 @@
         </div>
     </div>
 <?php endif; ?>
+
+<?= $this->inlinescript()->prependFile($this->basePath('/js/masonry.dkgd.min.js')); ?>
+<?= $this->inlineScript()->prependFile($this->basePath('/js/imagesloaded.pkgd.min.js')); ?>
+<?= $this->inlineScript()->prependFile($this->basePath('/js/masonry.driver.js')); ?>

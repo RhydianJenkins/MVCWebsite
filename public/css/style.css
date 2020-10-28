@@ -244,11 +244,8 @@ h1:not(:first-child) {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-#masonry-grid {
-    max-width: 100%;
-}
-
-#masonry-grid:after {
+/* clear fix */
+.masonry-grid:after {
     content: '';
     display: block;
     clear: both;
@@ -256,11 +253,34 @@ h1:not(:first-child) {
 
 .grid-item {
     float: left;
-    cursor: pointer;
-    margin: 3px;
 }
 
 .grid-item img {
-    max-width: 100%;
-    height: 300px;
+    display: block;
+    width: 100%;
+    padding: 5px;
+}
+
+/* Masonry on large screens */
+@media only screen and (min-width: 1024px) {
+    .grid-sizer,
+    .grid-item {
+        width: 25%;
+    }
+}
+
+/* Masonry on medium-sized screens */
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+    .grid-sizer,
+    .grid-item {
+        width: 33%;
+    }
+}
+
+/* Masonry on small screens */
+@media only screen and (max-width: 767px) and (min-width: 540px) {
+    .grid-sizer,
+    .grid-item {
+        width: 100%;
+    }
 }
