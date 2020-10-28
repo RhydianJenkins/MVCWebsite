@@ -52,6 +52,7 @@ class MembershipApplication implements InputFilterAwareInterface {
         $this->id = !empty($data['id']) ? $data['id'] : null;
         $this->firstname = !empty($data['firstname']) ? $data['firstname'] : null;
         $this->surname = !empty($data['surname']) ? $data['surname'] : null;
+        $this->email = !empty($data['email']) ? $data['email'] : null;
         $this->address1 = !empty($data['address1']) ? $data['address1'] : null;
         $this->address2 = !empty($data['address2']) ? $data['address2'] : null;
         $this->city = !empty($data['city']) ? $data['city'] : null;
@@ -59,6 +60,7 @@ class MembershipApplication implements InputFilterAwareInterface {
         $this->medicalconditions = !empty($data['medicalconditions']) ? $data['medicalconditions'] : null;
         $this->medicaldetails = !empty($data['medicaldetails']) ? $data['medicaldetails'] : null;
         $this->emergencyname = !empty($data['emergencyname']) ? $data['emergencyname'] : null;
+        $this->emergencynumber = !empty($data['emergencynumber']) ? $data['emergencynumber'] : null;
         $this->boat1class = !empty($data['boat1class']) ? $data['boat1class'] : null;
         $this->boat1number = !empty($data['boat1number']) ? $data['boat1number'] : null;
         $this->boat1owned = !empty($data['boat1owned']) ? $data['boat1owned'] : null;
@@ -229,9 +231,36 @@ class MembershipApplication implements InputFilterAwareInterface {
     }
 
     /**
-     * Looks at the current data and calculates the cost of the application.
+     * Prints a human readable string of the data.
      */
-    public function calculateCost() {
-
+    public function toString() {
+        $str = "First name: " . $this->firstname . PHP_EOL;
+        $str .= "Surname: " . $this->surname . PHP_EOL;
+        $str .= "Email: " . $this->email . PHP_EOL;
+        $str .= "Address: " . PHP_EOL;
+        $str .= $this->address1 . PHP_EOL;
+        $str .= $this->address2 . PHP_EOL;
+        $str .= $this->city . PHP_EOL;
+        $str .= $this->postcode . PHP_EOL;
+        $str .= "Medical conditions: " . $this->medicalconditions . PHP_EOL;
+        $str .= "Medical details: " . $this->medicaldetails . PHP_EOL;
+        $str .= "Emergency name: " . $this->emergencyname . PHP_EOL;
+        $str .= "Emergency number: " . $this->emergencynumber . PHP_EOL;
+        $str .= "Boat 1 class: " . $this->boat1class . PHP_EOL;
+        $str .= "Boat 1 number: " . $this->boat1number . PHP_EOL;
+        $str .= "Boat 1 owned: " . $this->boat1owned . PHP_EOL;
+        $str .= "Boat 2 class: " . $this->boat2class . PHP_EOL;
+        $str .= "Boat 2 number: " . $this->boat2number . PHP_EOL;
+        $str .= "Boat 2 owned: " . $this->boat2owned . PHP_EOL;
+        $str .= "First aid certificate: " . $this->firstaid . PHP_EOL;
+        $str .= "First aid expire: " . $this->firstaidexpire . PHP_EOL;
+        $str .= "Existing qualifications: " . $this->existingqualifications . PHP_EOL;
+        $str .= "New member: " . $this->newmember . PHP_EOL;
+        $str .= "Tata employee: " . $this->tataemployee . PHP_EOL;
+        $str .= "Tata employee number: " . $this->tataemployeenumber . PHP_EOL;
+        $str .= "Membership plan employee: " . $this->membershipplanemployee . PHP_EOL;
+        $str .= "Membership plan nonemployee: " . $this->membershipplannonemployee . PHP_EOL;
+        $str .= "Payment plan: " . $this->paymentplan . PHP_EOL;
+        return $str;
     }
 }

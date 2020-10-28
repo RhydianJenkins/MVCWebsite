@@ -71,9 +71,11 @@ class JoinUsController extends AbstractActionController {
         // grab valid form data
         $application->exchangeArray($this->membershipForm->getData());
 
-        /**
-         * return success message
-         */
+        // echo("<pre>");
+        // var_dump($application->toString());
+        // echo("</pre>");
+
+        // return success message
         return [
             'message' => 'Membership application form submitted succssfully.',
             'messageAlert' => 'success',
