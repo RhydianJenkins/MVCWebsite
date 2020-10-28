@@ -93,9 +93,11 @@ if ($this->membershipForm != NULL) {
                     <h3 class="page-header pb-3 mb-3">Emergency Information</h3>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
-                            <?= $this->formLabel($medicalconditions) ?>
-                            <?= $this->formElement($medicalconditions) ?>
-                            <?= $this->formElementErrors()->render($medicalconditions, ['class' => 'text-danger']) ?>
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($medicalconditions) ?>
+                                <?= $this->formElementErrors()->render($medicalconditions, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($medicalconditions) ?>
+                            </div>
                         </div>
 
                         <div id="medicalDetails" class="col-lg-6 col-sm-12 d-none">
@@ -134,9 +136,11 @@ if ($this->membershipForm != NULL) {
                             <?= $this->formElementErrors()->render($boat1number, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
-                            <?= $this->formLabel($boat1owned) ?>
-                            <?= $this->formElement($boat1owned) ?>
-                            <?= $this->formElementErrors()->render($boat1owned, ['class' => 'text-danger']) ?>
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($boat1owned) ?>
+                                <?= $this->formElementErrors()->render($boat1owned, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($boat1owned) ?>
+                            </div>
                         </div>
                     </div>
 
@@ -154,9 +158,11 @@ if ($this->membershipForm != NULL) {
                             <?= $this->formElementErrors()->render($boat2number, ['class' => 'text-danger']) ?>
                         </div>
                         <div class="col-lg-4 col-sm-12">
-                            <?= $this->formLabel($boat2owned) ?>
-                            <?= $this->formElement($boat2owned) ?>
-                            <?= $this->formElementErrors()->render($boat2owned, ['class' => 'text-danger']) ?>
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($boat2owned) ?>
+                                <?= $this->formElementErrors()->render($boat2owned, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($boat2owned) ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -166,9 +172,11 @@ if ($this->membershipForm != NULL) {
                     <h3 class="page-header pb-3 mb-3">Existing Qualifications (optional)</h3>
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
-                            <?= $this->formLabel($firstaid) ?>
-                            <?= $this->formElement($firstaid) ?>
-                            <?= $this->formElementErrors()->render($firstaid, ['class' => 'text-danger']) ?>
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($firstaid) ?>
+                                <?= $this->formElementErrors()->render($firstaid, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($firstaid) ?>
+                            </div>
                         </div>
 
                         <div id="firstAidExpire" class="col-lg-6 col-sm-12 d-none">
@@ -186,35 +194,47 @@ if ($this->membershipForm != NULL) {
                 <!-- terms and conditions -->
                 <div class="form-group">
                     <h3 class="page-header pb-3 mb-3">Terms and Conditions</h3>
-                        <?= $this->formLabel($oodcheck) ?>
+                    <div class="form-check mb-3">
                         <?= $this->formElement($oodcheck) ?>
                         <?= $this->formElementErrors()->render($oodcheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($oodcheck) ?>
+                    </div>
 
-                        <?= $this->formLabel($photocheck) ?>
+                    <div class="form-check mb-3">
                         <?= $this->formElement($photocheck) ?>
                         <?= $this->formElementErrors()->render($photocheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($photocheck) ?>
+                    </div>
 
-                        <?= $this->formLabel($insurancecheck) ?>
+                    <div class="form-check mb-3">
                         <?= $this->formElement($insurancecheck) ?>
                         <?= $this->formElementErrors()->render($insurancecheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($insurancecheck) ?>
+                    </div>
 
-                        <?= $this->formLabel($clubtccheck) ?>
+                    <div class="form-check mb-3">
                         <?= $this->formElement($clubtccheck) ?>
                         <?= $this->formElementErrors()->render($clubtccheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($clubtccheck) ?>
+                    </div>
                 </div>
 
                 <!-- membership plan -->
                 <div class="form-group">
                     <h3 class="page-header pb-3 mb-3">Membership Plan</h3>
-                    <?= $this->formLabel($newmember) ?>
-                    <?= $this->formElement($newmember) ?>
-                    <?= $this->formElementErrors()->render($newmember, ['class' => 'text-danger']) ?>
+                    <div class="form-check mb-3">
+                        <?= $this->formElement($newmember) ?>
+                        <?= $this->formElementErrors()->render($newmember, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($newmember) ?>
+                    </div>
 
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
-                            <?= $this->formLabel($tataemployee) ?>
-                            <?= $this->formElement($tataemployee) ?>
-                            <?= $this->formElementErrors()->render($tataemployee, ['class' => 'text-danger']) ?>
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($tataemployee) ?>
+                                <?= $this->formElementErrors()->render($tataemployee, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($tataemployee) ?>
+                            </div>
                         </div>
 
                         <div id="employeeMembershipNumber" class="col-lg-6 col-sm-12 d-none">
@@ -245,17 +265,17 @@ if ($this->membershipForm != NULL) {
                     <?= $this->formElementErrors()->render($paymentplan, ['class' => 'text-danger']) ?>
 
                     <div id="chequePaymentInstructions" class="d-none">
-                        <p class="pt-3">
+                        <address>
                             Cheques must be payable to "Tata Steel Sailing Club Margam" and sent to the Membership Secretary at:<br><br>
                             2 The Burrows<br>
                             Danygraig<br>
                             Porthcawl<br>
                             CF36 5AJ
-                        </p>
+                        </address>
                     </div>
 
                     <div id="bankPaymentInstructions" class="d-none">
-                        <p class="pt-3">
+                        <p>
                             Card details to pay to:<br><br>
                             Lloyds Bank PLC<br>
                             Sort Code: <span class="font-weight-bold">30-91-18</span><br>

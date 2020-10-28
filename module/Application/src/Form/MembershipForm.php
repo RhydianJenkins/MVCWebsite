@@ -154,10 +154,13 @@ class MembershipForm extends Form {
             'name' => 'medicalconditions',
             'options' => [
                 'label' => 'I Have Medical Conditions',
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'placeholder' => 'Medical Conditions',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
                 'id' => 'medicalconditions',
                 'data-toggle'    => 'tooltip',
                 'data-placement' => 'left',
@@ -251,10 +254,13 @@ class MembershipForm extends Form {
             'name' => 'boat1owned',
             'options' => [
                 'label' => 'I own this boat',
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'placeholder' => 'I own this boat',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
                 'data-toggle'    => 'tooltip',
                 'title'          => 'Check if you own this boat',
             ],
@@ -292,10 +298,13 @@ class MembershipForm extends Form {
             'name' => 'boat2owned',
             'options' => [
                 'label' => 'I own this boat',
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'placeholder' => 'I own this boat',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
                 'data-toggle'    => 'tooltip',
                 'title'          => 'Check if you own this boat',
             ],
@@ -310,10 +319,13 @@ class MembershipForm extends Form {
             'name' => 'firstaid',
             'options' => [
                 'label' => 'I hold a First Aid certificate',
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'placeholder' => 'First Aid',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
                 'id' => 'firstaid',
                 'data-toggle'    => 'tooltip',
                 'title'          => 'Check if you currently hold a First Aid certificate',
@@ -360,11 +372,14 @@ class MembershipForm extends Form {
                 'label_options' => [
                     'disable_html_escape' => true,
                 ],
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'OOD',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
             ],
         ]);
 
@@ -377,11 +392,14 @@ class MembershipForm extends Form {
                 'label_options' => [
                     'disable_html_escape' => true,
                 ],
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Photographs',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
                 'data-toggle'    => 'tooltip',
                 'title'          => self::PHOTO_TOC_DEC_TOOLTIP,
             ],
@@ -396,11 +414,14 @@ class MembershipForm extends Form {
                 'label_options' => [
                     'disable_html_escape' => true,
                 ],
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Insurance',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
             ],
         ]);
 
@@ -413,11 +434,14 @@ class MembershipForm extends Form {
                 'label_options' => [
                     'disable_html_escape' => true,
                 ],
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'required' => 'required',
                 'placeholder' => 'Club Terms and Conditions',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
             ],
         ]);
 
@@ -430,11 +454,14 @@ class MembershipForm extends Form {
             'name' => 'newmember',
             'options' => [
                 'label' => 'I am a new Member (£10 admin fee)',
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'id' => 'newmember',
                 'placeholder' => 'Are you a new member?',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
                 'data-toggle' => 'tooltip',
                 'title' => 'Check if you have not joined the club before. This will incur a £10 admin fee',
             ],
@@ -446,10 +473,13 @@ class MembershipForm extends Form {
             'name' => 'tataemployee',
             'options' => [
                 'label' => 'I am a Tata Steel employee/retiree',
+                'label_attributes' => [
+                    'class' => 'form-check-label'
+                ],
             ],
             'attributes' => [
                 'placeholder' => 'Are you employed or retired from Tata Steel?',
-                'class' => 'form-control-inline input-group mb-3',
+                'class' => 'form-check-input',
                 'id' => 'tataemployee',
                 'data-toggle' => 'tooltip',
                 'title' => 'I have or currently do work at Tata Steel',
