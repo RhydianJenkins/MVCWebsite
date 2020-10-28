@@ -9,11 +9,11 @@
 
 <?php if($this->imagesFound) : ?>
     <!-- display images in given album -->
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid p-0">
+        <div id="masonry-grid">
             <?php foreach($this->images as $image): ?>
-                <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 pb-2 gallery-item">
-                    <img data-toggle="modal" data-target="#imageModal" class="cursor-pointer card-img square-image shadow-lg" src="<?= $this->basePath($image['path'] . $image['filename']) ?>">
+                <div class="grid-item">
+                    <img data-toggle="modal" data-target="#imageModal" src="<?= $this->basePath($image['path'] . $image['filename']) ?>">
                 </div>
             <?php endforeach; ?>
         </div>

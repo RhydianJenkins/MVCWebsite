@@ -21,9 +21,11 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
             ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
         ?>
 
-        <!-- Scripts -->
+        <!-- Head Scripts -->
         <?= $this->headScript()
             ->prependFile($this->basePath('js/fa.all.min.js'))
+            ->prependFile($this->basePath('js/bootstrap.min.js'))
+            ->prependFile($this->basePath('js/jquery-3.5.1.min.js'))
         ?>
     </head>
     <body>
@@ -134,11 +136,9 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                 <h5><i class="fa fa-copyright"></i> <?= date('Y') ?> Tata Steel Sailing Club</h5>
             </div>
         </footer>
-
-        <?= $this->inlineScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js'))
-            ->prependFile($this->basePath('js/jquery-3.5.1.min.js'))
-            ->prependFile('http://maps.google.com/maps/api/js?key=AIzaSyBL4LO7Tj2Ao6LdcFYFlC9Kf0Lo5__QYzQ')
+        
+        <?=
+            $this->headScript()->prependFile('http://maps.google.com/maps/api/js?key=AIzaSyBL4LO7Tj2Ao6LdcFYFlC9Kf0Lo5__QYzQ')
         ?>
     </body>
 </html>
