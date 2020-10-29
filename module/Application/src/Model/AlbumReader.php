@@ -39,13 +39,13 @@ class AlbumReader {
 
     public function readAlbumImages($albumFilename, $albumDir = self::ALBUM_DIR) {
         $images = [];
-        $albumPath = $albumDir . $albumFilename . '/';
+        $albumPath = $albumDir . $albumFilename . '/';  // from server root, not public root
+        $filenames = scandir($albumPath);
+        $filenames = array_values(preg_grep('/\.(jpg|jpeg|png|gif)(?:[\?\#].*)?$/i', $filenames));
         $counter = 0;
-        foreach(glob($albumPath . '*.{jpg,jpeg,png,gif}', GLOB_BRACE) as $i) {
+        foreach($filenames as $filename) {
             $counter = $counter + 1;    // useful for displaying carousel models
-            $filename = substr($i, strrpos($i, '/') + 1);   // get image filename
             $path = '/img/albums/' . $albumFilename . '/';  // get image path (client side)
-
             // add to array
             array_push($images, [
                 'id' => $counter,
