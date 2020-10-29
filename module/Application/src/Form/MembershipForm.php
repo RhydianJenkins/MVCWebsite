@@ -349,7 +349,7 @@ class MembershipForm extends Form {
 
         // Existing Qualifications
         $this->add([
-            'type' => Element\TextArea::class,
+            'type' => Element\Textarea::class,
             'name' => 'existingqualifications',
             'options' => [
                 'label' => 'Existing Qualifications',
