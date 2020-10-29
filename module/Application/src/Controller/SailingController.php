@@ -13,6 +13,7 @@ namespace Application\Controller;
 use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 use Application\Model\ResultsReader;
+use Application\Model\DatabaseReader;
 
 class SailingController extends AbstractActionController {
     /**
@@ -22,10 +23,17 @@ class SailingController extends AbstractActionController {
     private $resultsReader;
 
     /**
+     * The general purpose model which reads database entries.
+     * @var Application\Model\DatabaseReader
+     */
+    private $dbReader;
+
+    /**
      * Constructor.
      */
-    public function __construct(ResultsReader $resultsReader) {
+    public function __construct(ResultsReader $resultsReader, DatabaseReader $dbReader) {
         $this->resultsReader = $resultsReader;
+        $this->dbReader = $dbReader;
     }
 
     public function indexAction() {

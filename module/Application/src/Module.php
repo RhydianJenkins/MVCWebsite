@@ -27,6 +27,7 @@ class Module {
         return [
             'factories' => [
                 Model\Emailer::class => Factory\EmailerFactory::class,
+                Model\DatabaseReader::class => Factory\DatabaseReaderFactory::class,
                 Model\LoginAuthenticator::class => Factory\LoginAuthenticatorFactory::class,
                 Model\MembershipApplication::class => function ($container) {
                     return new MembershipApplication();

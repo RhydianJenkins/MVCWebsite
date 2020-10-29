@@ -24,7 +24,7 @@ class LoginAuthenticator extends AuthenticationService {
     const RESET_CODE_LENGTH = 6;
 
     /**
-     * The length of the salt to add to new records.
+     * The members' table name.
      */
     const MEMBERS_TABLE_NAME = 'members';
 
