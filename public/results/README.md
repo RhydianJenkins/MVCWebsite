@@ -1,3 +1,5 @@
+# About this directory
+
 Results to display on the sailing results page are dropped here. Results must be contained within a <YEAR> directory.
 
 For example:
