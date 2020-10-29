@@ -168,6 +168,15 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'pn' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/pn',
+                            'defaults' => [
+                                'action' => 'pn',
+                            ],
+                        ],
+                    ],
                     'results' => [
                         'type' => Segment::class,
                         'options' => [

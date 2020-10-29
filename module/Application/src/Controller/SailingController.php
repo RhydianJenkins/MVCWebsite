@@ -60,4 +60,8 @@ class SailingController extends AbstractActionController {
     public function instructionsAction() {
         return new ViewModel();
     }
+
+    public function pnAction() {
+        return new ViewModel();
+    }
 }
