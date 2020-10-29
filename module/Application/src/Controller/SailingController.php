@@ -71,8 +71,15 @@ class SailingController extends AbstractActionController {
 
     public function pnAction() {
         $pn = $this->dbReader->readPN();
-        return new ViewModel([
-            'pnumbers' => $pn,
-        ]);
+        if ($pn['code'] != $this->dbReader::SUCCESS) {
+            return [
+                'success' => false,
+                'errorMsg' => $pn['code'],
+            ];
+        }
+        return [
+            'success' => true,
+            'pnumbers' => iterator_to_array($pn['results'], true),
+        ];
     }
 }

@@ -14,6 +14,7 @@ class DatabaseReader {
     const NOT_FOUND = 'Not found';
     const INVALID = 'Invalid request';
     const OTHER_ERROR = 'Other error';
+    const DB_ERROR = 'Database error';
     const SUCCESS = 'Success';
 
     /**
@@ -64,10 +65,14 @@ class DatabaseReader {
             // read a specific class record
             $select->where([self::PN_CLASS_FIELDNAME => $class]);
         }
-        $PDOStatement = $sql->prepareStatementForSqlObject($select);
 
         // execute statement and fetch results
-        $result = $PDOStatement->execute();
+        try {
+            $PDOStatement = $sql->prepareStatementForSqlObject($select);
+            $result = $PDOStatement->execute();
+        } catch(\Exception $e) {
+            return ['code' => self::DB_ERROR];
+        }
 
         // check we have valid results
         if (!$result->valid()) {

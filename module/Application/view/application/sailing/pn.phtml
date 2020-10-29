@@ -8,3 +8,33 @@
         <h1 class="display-4">Club Portsmouth Numbers</h1>
     </div>
 </div>
+
+<?php if($this->success): ?>
+    <div class="container">
+        <table class="table shadow table-hover table-sm border-bottom-table">
+            <thead class="primary-color">
+                <tr>
+                    <th scope="col">Class</th>
+                    <th scope="col">Configuration</th>
+                    <th scope="col">Club PN</th>
+                </tr>
+            </thead>
+            <?php foreach($this->pnumbers as $pn): ?>
+                <tr>
+                    <td><?= ($pn['class']); ?></td>
+                    <td><?= ($pn['configuration']); ?></td>
+                    <td><?= ($pn['club_pn']); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    </div>
+<?php else: ?>
+    <div class="container">
+        <div class="alert alert-danger" role="alert">Unable to fetch numbers from database (<?= $this->errorMsg ?>). Please check back later.</div>
+    </div>
+<?php endif; ?>
+
+<!-- methodology for generating the PN -->
+<div class="container">
+    <p class="text-muted">See the <a href="<?= $this->basePath('/docs/CalculatingClubPortsmouthNumbers.pdf') ?>" target="_blank">methodology for calculating the Club Portsmouth Numbers</a>.</p>
+</div>
