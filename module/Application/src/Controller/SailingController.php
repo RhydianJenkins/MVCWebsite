@@ -70,6 +70,9 @@ class SailingController extends AbstractActionController {
     }
 
     public function pnAction() {
-        return new ViewModel();
+        $pn = $this->dbReader->readPN();
+        return new ViewModel([
+            'pnumbers' => $pn,
+        ]);
     }
 }
