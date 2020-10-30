@@ -3,7 +3,7 @@ namespace Application\Form;
 
 use Laminas\Form\Element;
 use Laminas\Form\Element\Hidden;
-use Laminas\Form\Element\TextArea;
+use Laminas\Form\Element\Textarea as TextArea;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Element\Email;
 use Laminas\Form\Element\Checkbox;
