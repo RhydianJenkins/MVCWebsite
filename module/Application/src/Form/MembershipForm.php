@@ -2,6 +2,15 @@
 namespace Application\Form;
 
 use Laminas\Form\Element;
+use Laminas\Form\Element\Hidden;
+use Laminas\Form\Element\TextArea;
+use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\DateSelect;
+use Laminas\Form\Element\Select;
+use Laminas\Form\Element\Tel;
+use Laminas\Form\Element\Submit;
 use Laminas\Form\Form;
 use Laminas\Captcha;
 use Laminas\Captcha\ReCaptcha as ReCaptcha;
@@ -42,7 +51,7 @@ class MembershipForm extends Form {
 
         // hidden ID
         $this->add([
-            'type' => Element\Hidden::class,
+            'type' => Hidden::class,
             'name' => 'id',
         ]);
 
@@ -51,7 +60,7 @@ class MembershipForm extends Form {
          */
         // First Name
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'firstname',
             'options' => [
                 'label' => 'First name*',
@@ -65,7 +74,7 @@ class MembershipForm extends Form {
 
         // Surname
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'surname',
             'options' => [
                 'label' => 'Surname*',
@@ -79,7 +88,7 @@ class MembershipForm extends Form {
 
         // Email
         $this->add([
-            'type' => Element\Email::class,
+            'type' => Email::class,
             'name' => 'email',
             'options' => [
                 'label' => 'Email*',
@@ -93,7 +102,7 @@ class MembershipForm extends Form {
 
         // Address Line 1
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'address1',
             'options' => [
                 'label' => 'Address*',
@@ -107,7 +116,7 @@ class MembershipForm extends Form {
 
         // Address Line 2
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'address2',
             'options' => [
                 'label' => 'Address Line 2',
@@ -120,7 +129,7 @@ class MembershipForm extends Form {
 
         // City
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'city',
             'options' => [
                 'label' => 'City',
@@ -133,7 +142,7 @@ class MembershipForm extends Form {
 
         // Post Code
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'postcode',
             'options' => [
                 'label' => 'Post Code',
@@ -150,7 +159,7 @@ class MembershipForm extends Form {
          */
         // Medical Conditions
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'medicalconditions',
             'options' => [
                 'label' => 'I Have Medical Conditions',
@@ -170,7 +179,7 @@ class MembershipForm extends Form {
 
         // Medical Details
         $this->add([
-            'type' => Element\TextArea::class,
+            'type' => TextArea::class,
             'name' => 'medicaldetails',
             'options' => [
                 'label' => 'Medical Details',
@@ -183,7 +192,7 @@ class MembershipForm extends Form {
 
         // Emergency Contact Name
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'emergencyname',
             'options' => [
                 'label' => 'Emergency Contact Name',
@@ -199,7 +208,7 @@ class MembershipForm extends Form {
 
         // Emergency Contact Number
         $this->add([
-            'type' => Element\Tel::class,
+            'type' => Tel::class,
             'name' => 'emergencynumber',
             'options' => [
                 'label' => 'Emergency Contact Number',
@@ -219,7 +228,7 @@ class MembershipForm extends Form {
          */
         // Boat 1 Class
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'boat1class',
             'options' => [
                 'label' => 'Boat 1 Class*',
@@ -236,7 +245,7 @@ class MembershipForm extends Form {
 
         // Boat 1 Number
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'boat1number',
             'options' => [
                 'label' => 'Boat 1 Number*',
@@ -250,7 +259,7 @@ class MembershipForm extends Form {
 
         // Boat 1 Owned
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'boat1owned',
             'options' => [
                 'label' => 'I own this boat',
@@ -268,7 +277,7 @@ class MembershipForm extends Form {
 
         // Boat 2 Class
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'boat2class',
             'options' => [
                 'label' => 'Boat 2 Class',
@@ -281,7 +290,7 @@ class MembershipForm extends Form {
 
         // Boat 2 Number
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'boat2number',
             'options' => [
                 'label' => 'Boat 2 Number',
@@ -294,7 +303,7 @@ class MembershipForm extends Form {
 
         // Boat 1 Owned
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'boat2owned',
             'options' => [
                 'label' => 'I own this boat',
@@ -315,7 +324,7 @@ class MembershipForm extends Form {
          */
         // First Aid
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'firstaid',
             'options' => [
                 'label' => 'I hold a First Aid certificate',
@@ -334,7 +343,7 @@ class MembershipForm extends Form {
 
         // First Aid Expiry
         $this->add([
-            'type' => Element\DateSelect::class,
+            'type' => DateSelect::class,
             'name' => 'firstaidexpire',
             'options' => [
                 'label' => 'First Aid Expiry Date',
@@ -349,7 +358,7 @@ class MembershipForm extends Form {
 
         // Existing Qualifications
         $this->add([
-            'type' => Element\Textarea::class,
+            'type' => TextArea::class,
             'name' => 'existingqualifications',
             'options' => [
                 'label' => 'Existing Qualifications',
@@ -365,7 +374,7 @@ class MembershipForm extends Form {
          */
         // OOD Checkbox
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'oodcheck',
             'options' => [
                 'label' => self::OOD_TOC_DEC,
@@ -385,7 +394,7 @@ class MembershipForm extends Form {
 
         // Photograhs Checkbox
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'photocheck',
             'options' => [
                 'label' => self::PHOTO_TOC_DEC,
@@ -407,7 +416,7 @@ class MembershipForm extends Form {
 
         // Insurance Checkbox
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'insurancecheck',
             'options' => [
                 'label' => self::INSURANCE_TOC_DEC,
@@ -427,7 +436,7 @@ class MembershipForm extends Form {
 
         // Club's terms Checkbox
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'clubtccheck',
             'options' => [
                 'label' => self::CLUB_TOC_DEC,
@@ -469,7 +478,7 @@ class MembershipForm extends Form {
 
         // employee
         $this->add([
-            'type' => Element\Checkbox::class,
+            'type' => Checkbox::class,
             'name' => 'tataemployee',
             'options' => [
                 'label' => 'I am a Tata Steel employee/retiree',
@@ -488,7 +497,7 @@ class MembershipForm extends Form {
 
         // employee number
         $this->add([
-            'type' => Element\Text::class,
+            'type' => Text::class,
             'name' => 'tataemployeenumber',
             'options' => [
                 'label' => 'Tata Steel Employee Number*',
@@ -503,7 +512,7 @@ class MembershipForm extends Form {
 
         // membership plan (employee)
         $this->add([
-            'type' => Element\Select::class,
+            'type' => Select::class,
             'name' => 'membershipplanemployee',
             'options' => [
                 'label' => 'Select Employee/Retiree Membership Plan*',
@@ -552,7 +561,7 @@ class MembershipForm extends Form {
 
         // membership plan (non employee)
         $this->add([
-            'type' => Element\Select::class,
+            'type' => Select::class,
             'name' => 'membershipplannonemployee',
             'options' => [
                 'label' => 'Select Membership Plan*',
@@ -601,7 +610,7 @@ class MembershipForm extends Form {
 
         // payment plan
         $this->add([
-            'type' => Element\Select::class,
+            'type' => Select::class,
             'name' => 'paymentplan',
             'options' => [
                 'label' => 'Select Payment Plan*',
@@ -639,7 +648,7 @@ class MembershipForm extends Form {
 
         // submit button
         $this->add([
-            'type' => Element\Submit::class,
+            'type' => Submit::class,
             'name' => 'submit',
             'attributes' => [
                 'value' => 'Submit',
