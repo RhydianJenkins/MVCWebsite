@@ -48,8 +48,8 @@ class Module {
                     return new Session('Laminas_Auth', 'session', $sessionManager);
                 },
                 Factory\DBAdapterFactory::class => function ($container) {
-                    return $container->get('Application\DB\ReadWriteDBAdapter');
-                    // return $container->get('Application\DB\ReadOnlyDBAdapter');
+                    // return $container->get('Application\DB\localDbAdapter');
+                    return $container->get('Application\DB\remoteDBAdapter');
                 },
             ],
         ];
