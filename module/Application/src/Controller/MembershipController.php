@@ -92,6 +92,7 @@ class MembershipController extends AbstractActionController {
         // message and code to pass to view
         $message = "";
         $code = Result::FAILURE_UNCATEGORIZED;
+        $route = $this->params()->fromQuery('redirect', 'membership');
 
         // if no post (form not submitted), just return form in view
         if (empty($this->getRequest()->getPost()->toArray())) {
@@ -131,7 +132,7 @@ class MembershipController extends AbstractActionController {
                 // success!
                 $this->session->write([MembershipController::IDENTITY_SESSION_ID => $result->getIdentity()]);
                 $message = $result->getMessages()[0];
-                return $this->redirect()->toRoute('membership');
+                return $this->redirect()->toRoute($route);
                 break;
             default:
                 // other issue

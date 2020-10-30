@@ -113,7 +113,6 @@ body {
 .our-team-main {
     width:100%;
     height:auto;
-    border-bottom: 3px var(--primary-color) solid;
     text-align:center;
     border-radius:10px;
     overflow:hidden;
