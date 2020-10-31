@@ -84,7 +84,7 @@
                                 <?php if(new DateTime('@' . $data['time_epoch']) > new DateTime()): ?>
                                     <tr>
                                         <td><?= date("H:i", strtotime($hour.':00')) ?></td>
-                                        <td><i class="fa fa-arrow-up" style="transform: rotate(<?= $data['wind_degree'] ?>deg)"></i> <?= $data['wind_mph'] ?></td>
+                                        <td><i class="fa fa-arrow-up" style="transform: rotate(<?= $data['wind_degree'] + 180 ?>deg)"></i> <?= $data['wind_mph'] ?></td>
                                         <td><?= $data['gust_mph'] ?></td>
                                         <td><?= $data['temp_c'] ?>&deg;</td>
                                         <td><img class="img-fluid"  src="<?= $data['condition']['icon'] ?>" alt="condition"></img></td>
