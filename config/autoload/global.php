@@ -26,4 +26,28 @@ return [
             Session\Validator\HttpUserAgent::class,
         ],
     ],
+    // Below settings should not be committed to version control (See README.md)
+    'db' => [
+        'adapters' => [
+            'Application\DB\localDbAdapter' => [
+                'driver' => '',
+                'dsn'    => '',
+                'user' => '',
+                'password' => '',
+            ],
+            'Application\DB\remoteDBAdapter' => [
+                'driver' => '',
+                'dsn'    => '',
+                'user' => '',
+                'password' => '',
+            ]
+        ]
+    ],
+    'keystore' => [
+        'api' => [
+            'weather' => '',
+            'reCaptchaSite' => '',
+            'reCaptchaSecret' => '',
+        ],
+    ],
 ];
