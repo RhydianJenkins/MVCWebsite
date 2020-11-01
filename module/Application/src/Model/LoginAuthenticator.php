@@ -133,7 +133,7 @@ class LoginAuthenticator extends AuthenticationService {
 
         // If there is no such user, return 'Identity Not Found' status.
         if ($member == null) {
-            return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid credetials.']);        
+            return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid credentials.']);
         }
         
         // grab the results from the database
