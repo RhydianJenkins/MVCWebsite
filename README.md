@@ -33,7 +33,7 @@ interfaces. You can then visit the site at http://localhost:8080/.
 
 Database adapter settings and API keystores are not version controlled, and therefore need to be manually added to the `config/autoload/global.php` configuration file. It is recommended that a new `config/autoload/local.php` file is created containing sensitive information that you do not want to version control. See the [Laminas Docs](https://docs.laminas.dev/laminas-config/intro/) for adding a new configuration file.
 
-After the changes, the project resultant directory should look something like:
+After the changes, the resultant project directory should look something like:
 
 ```
 project
