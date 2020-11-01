@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This is a Laminas MVC website build for the Tata Steel Sailing Club.
+This is a Laminas MVC website built for the Tata Steel Sailing Club.
 
 ## Installation using Composer
 
-The project can be build using [Composer](https://getcomposer.org/). If you don't have it already installed,
+The project can be built using [Composer](https://getcomposer.org/). If you don't have it already installed,
 then please install as per the [documentation](https://getcomposer.org/doc/00-intro.md).
 
 To create your new project:
