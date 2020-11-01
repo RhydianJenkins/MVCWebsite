@@ -119,13 +119,21 @@ class LoginAuthenticator extends AuthenticationService {
             $sql = new SQL($adapter);
         }
         $select = $sql->select()->from(self::MEMBERS_TABLE_NAME)->where([self::EMAIL_FIELDNAME => $this->email]);
-        $PDOStatement = $sql->prepareStatementForSqlObject($select);
-        $result = $PDOStatement->execute();
+
+        // try to execute statement
+        try {
+            $PDOStatement = $sql->prepareStatementForSqlObject($select);
+            $result = $PDOStatement->execute();
+        } catch (\Exception $e) {
+            return new Result(Result::FAILURE, null, ['Database error: ' . $e->getMessage() . ' .']);
+        }
+
+        // get member from sql results
         $member = $result->current();
 
         // If there is no such user, return 'Identity Not Found' status.
         if ($member == null) {
-            return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid credentials.']);        
+            return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid credetials.']);        
         }
         
         // grab the results from the database

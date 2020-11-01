@@ -91,6 +91,7 @@ class MembershipController extends AbstractActionController {
     public function loginAction() {
         // message and code to pass to view
         $message = "";
+        $messageAlert = 'warning';
         $code = Result::FAILURE_UNCATEGORIZED;
         $route = $this->params()->fromQuery('redirect', 'membership');
 
@@ -102,8 +103,11 @@ class MembershipController extends AbstractActionController {
         // check captcha is valid
         $this->loginForm->setData($this->getRequest()->getPost());
         if (!$this->loginForm->isValid()) {
+            $message = 'Invalid Form';
+            $messageAlert = 'warning';
             return [
-                'message' => 'Invalid Form',
+                'message' => $message,
+                'messageAlert' => $messageAlert,
                 'code' => Result::FAILURE_CREDENTIAL_INVALID,
                 'loginform' => $this->loginForm,
             ];
@@ -123,26 +127,36 @@ class MembershipController extends AbstractActionController {
             case Result::FAILURE_IDENTITY_NOT_FOUND:
                 // username not found
                 $message = $result->getMessages()[0];
+                $messageAlert = 'danger';
                 break;
             case Result::FAILURE_CREDENTIAL_INVALID:
                 // wrong password
                 $message = $result->getMessages()[0];
+                $messageAlert = 'danger';
+                break;
+            case Result::FAILURE:
+                // probably a database error
+                $message = $result->getMessages()[0];
+                $messageAlert = 'danger';
                 break;
             case Result::SUCCESS:
                 // success!
                 $this->session->write([MembershipController::IDENTITY_SESSION_ID => $result->getIdentity()]);
                 $message = $result->getMessages()[0];
+                $messageAlert = 'success';
                 return $this->redirect()->toRoute($route);
                 break;
             default:
                 // other issue
                 $message = $result->getMessages()[0];
+                $messageAlert = 'warning';
                 break;
         }
 
         // print login form
         $view = new ViewModel([
             'message' => $message,
+            'messageAlert' => $messageAlert,
             'code' => $code,
             'loginform' => $this->loginForm,
         ]);

@@ -14,7 +14,7 @@
 ?>
 <div class="container p-5">
     <?php if($this->message != null) : ?>
-        <div class="alert alert-<?= $this->code == 1 ? "success" : "warning" ?>" role="alert"><?= $this->message ?></div>
+        <div class="alert alert-<?= $this->messageAlert ?>" role="alert"><?= $this->message ?></div>
     <?php endif; ?>
     <div class="d-flex justify-content-center">
         <div class="card">
