@@ -25,12 +25,9 @@ $ composer run --timeout 0 serve
 ```
 
 This will start the cli-server on port 8080, and bind it to all network
-interfaces. You can then visit the site at http://localhost:8080/
-- which will bring up Laminas MVC Skeleton welcome page.
+interfaces. You can then visit the site at http://localhost:8080/.
 
 **Note:** The built-in CLI server is *for development only*.
-
-At this point, you can visit http://localhost:8080 to see the site running.
 
 ## Apache setup
 
