@@ -30,48 +30,9 @@ interfaces. You can then visit the site at http://localhost:8080/
 
 **Note:** The built-in CLI server is *for development only*.
 
-## Using docker-compose
-
-This project provides a `docker-compose.yml` for use with
-[docker-compose](https://docs.docker.com/compose/); it
-uses the provided `Dockerfile` to build a docker image 
-for the `laminas` container created with `docker-compose`.
-
-Build and start the image and container using:
-
-```bash
-$ docker-compose up -d --build
-```
-
 At this point, you can visit http://localhost:8080 to see the site running.
 
-You can also run commands such as `composer` in the container.  The container 
-environment is named "laminas" so you will pass that value to 
-`docker-compose run`:
-
-```bash
-$ docker-compose run laminas composer install
-```
-
-Some composer packages optionally use additional PHP extensions.  
-The Dockerfile contains several commented-out commands 
-which enable some of the more popular php extensions. 
-For example, to install `pdo-pgsql` support for `laminas/laminas-db`
-uncomment the lines:
-
-```sh
-# RUN apt-get install --yes libpq-dev \
-#     && docker-php-ext-install pdo_pgsql
-```
-
-then re-run the `docker-compose up -d --build` line as above.
-
-> You may also want to combine the various `apt-get` and `docker-php-ext-*`
-> statements later to reduce the number of layers created by your image.
-
-## Web server setup
-
-### Apache setup
+## Apache setup
 
 To setup apache, setup a virtual host to point to the public/ directory of the
 project and you should be ready to go! It should look something like below:
