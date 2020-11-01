@@ -20,7 +20,7 @@ if ($this->registerform != null) {
     <!-- message container -->
     <div class="container pt-5">
         <div class="d-flex justify-content-center">
-            <div class="alert alert-<?= $this->success ? 'success' : 'warning'?>" role="alert"> <?= $this->message ?> </div>
+            <div class="alert alert-<?= $this->messageAlert ?>" role="alert"> <?= $this->message ?> </div>
         </div>
     </div>
 <?php endif; ?>

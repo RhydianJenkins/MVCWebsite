@@ -190,17 +190,24 @@ class MembershipController extends AbstractActionController {
         if (!$this->registerForm->isValid()) {
             return [
                 'message' => 'Invalid form.',
-                'success' => false,
+                'messageAlert' => 'warning',
                 'registerform' => $this->registerForm,
             ];
         }
         
         // check record doesn't exist
         $emailExists = $this->loginAuthenticator->emailAlreadyExists($this->registerForm->getData()['email']);
-        if ($emailExists) {
+        if ($emailExists['error']) {
+            return [
+                'message' => 'Sorry. The database is currently down, please try again later.',
+                'messageAlert' => 'danger',
+                'registerform' => $this->registerForm,
+            ];
+        }
+        if ($emailExists['emailExists']) {
             return [
                 'message' => 'An account with that email address already exists.',
-                'success' => false,
+                'messageAlert' => 'warning',
                 'registerform' => $this->registerForm,
             ];
         }
@@ -210,15 +217,18 @@ class MembershipController extends AbstractActionController {
         $user->exchangeArray($data);
         $result = $this->loginAuthenticator->addNewUser($user);
 
-        // check 1 row was affected from results object
-        $numAffectedRows = $result->getAffectedRows();
+        // check query was a success
+        if (!$result['success']) {
+            return [
+                'message' => 'Sorry. The database is currently down, please try again later.',
+                'messageAlert' => 'danger',
+            ];
+        }
 
-        // generate return successcode
-        $success = ($numAffectedRows == 1);
-
+        // return view array
         return [
             'message' => 'Account created.',
-            'success' => $success,
+            'messageAlert' => 'success',
         ];
     }
 
@@ -255,7 +265,15 @@ class MembershipController extends AbstractActionController {
         // form valid, check email exists in database
         $email = $this->resetForm->getData()['email'];
         $emailExists = $this->loginAuthenticator->emailAlreadyExists($email);
-        if (!$emailExists) {
+        if ($emailExists['error']) {
+            return [
+                'message' => 'Sorry. The database is currently down, please try again later.',
+                'messageAlert' => 'danger',
+                'resetForm' => $this->resetForm,
+            ];
+        }
+
+        if (!$emailExists['emailExists']) {
             return [
                 'message' => 'No account with that email address exists.',
                 'messageAlert' => 'danger',

@@ -198,10 +198,23 @@ class LoginAuthenticator extends AuthenticationService {
             'surname' => $surname,
             self::EMAIL_FIELDNAME => $email,
         ]);
-        $PDOStatement = $sql->prepareStatementForSqlObject($insert);
 
-        // execute statement
-        return $PDOStatement->execute();
+        // try to execute database query
+        try {
+            $PDOStatement = $sql->prepareStatementForSqlObject($insert);
+            $PDOResult = $PDOStatement->execute();
+        } catch (\Exception $e) {
+            $resultArray = [
+                'success' => false,
+            ];
+        }
+
+        // return result array
+        $resultArray = [
+            'success' => true,
+            'PDOResult' => $PDOResult,
+        ];
+        return $resultArray;
     }
 
     /**
@@ -223,7 +236,17 @@ class LoginAuthenticator extends AuthenticationService {
             ]);
         }
 
-        return $validator->isValid($email);
+        // try to validate
+        try {
+            $isValid = $validator->isValid($email);
+        } catch (\Exception $e) {
+            return ['error' => true];
+        }
+
+        return [
+            'error' => false,
+            'emailExists' => $isValid,
+        ];
     }
 
     /**
