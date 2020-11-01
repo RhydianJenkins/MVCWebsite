@@ -11,6 +11,7 @@ use Laminas\Db\Sql\Sql;
 use Application\Model\User;
 use Laminas\Math\Rand;
 use Laminas\Validator\Db\RecordExists;
+use Application\Controller\MembershipController;
 
 class LoginAuthenticator extends AuthenticationService {
     /**
@@ -125,7 +126,7 @@ class LoginAuthenticator extends AuthenticationService {
             $PDOStatement = $sql->prepareStatementForSqlObject($select);
             $result = $PDOStatement->execute();
         } catch (\Exception $e) {
-            return new Result(Result::FAILURE, null, ['Database error: ' . $e->getMessage() . ' .']);
+            return new Result(Result::FAILURE, null, [MembershipController::DATABASE_ERROR_MESSAGE]);
         }
 
         // get member from sql results

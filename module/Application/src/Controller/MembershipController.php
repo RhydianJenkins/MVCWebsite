@@ -29,6 +29,11 @@ class MembershipController extends AbstractActionController {
     const IDENTITY_SESSION_ID = 'identity';
 
     /**
+     * Error message to show when the database is down.
+     */
+    const DATABASE_ERROR_MESSAGE = 'Sorry. The database is currently down, please try again later.';
+
+    /**
      * @var LoginForm
      */
     private $loginForm;
@@ -199,7 +204,7 @@ class MembershipController extends AbstractActionController {
         $emailExists = $this->loginAuthenticator->emailAlreadyExists($this->registerForm->getData()['email']);
         if ($emailExists['error']) {
             return [
-                'message' => 'Sorry. The database is currently down, please try again later.',
+                'message' => self::DATABASE_ERROR_MESSAGE,
                 'messageAlert' => 'danger',
                 'registerform' => $this->registerForm,
             ];
@@ -220,7 +225,7 @@ class MembershipController extends AbstractActionController {
         // check query was a success
         if (!$result['success']) {
             return [
-                'message' => 'Sorry. The database is currently down, please try again later.',
+                'message' => self::DATABASE_ERROR_MESSAGE,
                 'messageAlert' => 'danger',
             ];
         }
@@ -267,7 +272,7 @@ class MembershipController extends AbstractActionController {
         $emailExists = $this->loginAuthenticator->emailAlreadyExists($email);
         if ($emailExists['error']) {
             return [
-                'message' => 'Sorry. The database is currently down, please try again later.',
+                'message' => self::DATABASE_ERROR_MESSAGE,
                 'messageAlert' => 'danger',
                 'resetForm' => $this->resetForm,
             ];
