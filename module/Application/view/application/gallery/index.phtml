@@ -49,17 +49,19 @@
     ?>
 <?php else: ?>
     <!-- display all albums -->
-    <div class="masonry-grid">
-        <div class="grid-sizer"></div>
-        <?php foreach($this->albums as $album): ?>
-            <a class="grid-item p-1" href="<?= $this->url('gallery', ['album' => $album['name']]) ?>">
-                <img src="<?= $album['thumbnail'] ?>">
-                <div class="p-3 primary-color rounded-bottom">
-                    <p class="text-center m-0"><?= $album['title'] ?></p>
-                </div>
-            </a>
-        <?php endforeach; ?>
-    </div>
+    <ul class="container">
+        <div class="row">
+            <?php foreach($this->albums as $album): ?>
+                <a class="col-lg-6 col-sm-12 p-1" href="<?= $this->url('gallery', ['album' => $album['name']]) ?>">
+                    <li class="list-group-item d-flex justify-content-between align-items-center shadow-sm">
+                        <div role="button" class="btn btn-primary" href="<?= $this->url('training/sailing') ?>"><i class="fa fa-images"></i></div>
+                        <?= $album['title'] ?>
+                        <span class="badge primary-color badge-pill"><?= $album['number'] ?></span>
+                    </li>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </ul>
 <?php endif; ?>
 
 <?= $this->inlinescript()->prependFile($this->basePath('/js/masonry.dkgd.min.js')); ?>

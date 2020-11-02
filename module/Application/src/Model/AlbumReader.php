@@ -26,12 +26,16 @@ class AlbumReader {
             $randomImg = $images[array_rand($images)];
             $thumbnail = '/img/albums/' . $albumName . '/' . $randomImg;
 
+            // count the number of images in album
+            $number = count($images);
+
             // add to array
             array_push($albums, [
                 'name' => $albumName,
                 'title' => $title,
                 'path' => $dir,
                 'thumbnail' => $thumbnail,
+                'number' => $number,
             ]);
         }
         return $albums;
