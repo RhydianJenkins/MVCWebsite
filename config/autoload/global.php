@@ -30,13 +30,13 @@ return [
     'db' => [
         'adapters' => [
             'Application\DB\localDbAdapter' => [
-                'driver' => '',
+                'driver' => 'Pdo',
                 'dsn'    => '',
                 'user' => '',
                 'password' => '',
             ],
             'Application\DB\remoteDBAdapter' => [
-                'driver' => '',
+                'driver' => 'Pdo',
                 'dsn'    => '',
                 'user' => '',
                 'password' => '',
