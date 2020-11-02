@@ -67,7 +67,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'required' => 'required',
-                'placeholder' => 'First name',
+                'placeholder' => 'John',
                 'class' => 'form-control input-group mb-3',
             ],
         ]);
@@ -81,7 +81,7 @@ class MembershipForm extends Form {
             ],
             'attributes' => [
                 'required' => 'required',
-                'placeholder' => 'Surname',
+                'placeholder' => 'Smith',
                 'class' => 'form-control input-group mb-3',
             ],
         ]);
@@ -214,7 +214,7 @@ class MembershipForm extends Form {
                 'label' => 'Emergency Contact Number',
             ],
             'attributes' => [
-                'placeholder' => 'Emergency Contact Number',
+                'placeholder' => '07123 456 789',
                 'class' => 'form-control input-group mb-3',
                 'type' => 'tel',
                 'data-toggle'    => 'tooltip',
