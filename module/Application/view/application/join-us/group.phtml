@@ -261,7 +261,7 @@ $(document).ready(function() {
 );
 
 // init leader ID
-var leaderID = 1;
+var leaderID = 0;
 
 // Retrieve new element's html from controller
 function ajaxAddLeader() {
@@ -274,10 +274,10 @@ function ajaxAddLeader() {
         success: function(newLeader) {
             // Insert new leader before the Add button
             //$("#addNewLeadersBefore").before(newLeader);
-            $("#addNewLeadersBefore").before("<p id='additionalLeader"+leaderID+"'>NEW LEADER</p>");
+            $("#addNewLeadersBefore").before("<p id='additionalLeader"+leaderID+"'>TODO: ADD A NEW LEADER</p>");
 
             // Increment and store id
-            $("#id").val(++leaderID)
+            leaderID++;
         },
         error: function(data){
             alert("fail: " + JSON.stringify(data));
@@ -298,7 +298,7 @@ function removeLeader() {
     $(searchString).remove()
 
     // check if all additional leaders have been removed
-    if (leaderID <= 1) {
+    if (leaderID <= 0) {
         $('#removeLeader').hide();
     }
 }
