@@ -45,6 +45,7 @@ return [
     ],
     'keystore' => [
         'api' => [
+            'maps' => '',
             'weather' => '',
             'reCaptchaSite' => '',
             'reCaptchaSecret' => '',
