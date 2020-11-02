@@ -140,9 +140,11 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                 <h5><i class="fa fa-copyright"></i> <?= date('Y') ?> Tata Steel Sailing Club</h5>
             </div>
         </footer>
-        
+
         <?=
-            $this->inlineScript()->prependFile('http://maps.google.com/maps/api/js?key=AIzaSyBL4LO7Tj2Ao6LdcFYFlC9Kf0Lo5__QYzQ');
+            $this->inlineScript()
+                ->prependFile('http://maps.google.com/maps/api/js?key=AIzaSyBL4LO7Tj2Ao6LdcFYFlC9Kf0Lo5__QYzQ')
+                ->prependFile($this->basePath('js/alert.driver.js'));
         ?>
     </body>
 </html>
