@@ -16,6 +16,8 @@ use Application\Model\Emailer;
 use Application\Model\MembershipApplicationManager;
 use Application\Model\MembershipApplication;
 use Application\Form\MembershipForm;
+use Application\Form\GroupMembershipForm;
+use Laminas\Form\Element;
 
 class JoinUsController extends AbstractActionController {
     /**
@@ -32,14 +34,16 @@ class JoinUsController extends AbstractActionController {
      * Forms.
      */
     private $membershipForm;
+    private $groupMembershipForm;
 
     /**
      * Constructor.
      */
-    public function __construct(Emailer $emailer, MembershipApplicationManager $manager, MembershipForm $membershipForm) {
+    public function __construct(Emailer $emailer, MembershipApplicationManager $manager, MembershipForm $membershipForm, GroupMembershipForm $groupMembershipForm) {
         $this->emailer = $emailer;
         $this->applicationManager = $manager;
         $this->membershipForm = $membershipForm;
+        $this->groupMembershipForm = $groupMembershipForm;
     }
 
     public function indexAction() {
@@ -47,7 +51,33 @@ class JoinUsController extends AbstractActionController {
     }
 
     public function groupAction() {
-        return new ViewModel();
+        // if no post (form not submitted), just return form in view
+        if (empty($this->getRequest()->getPost()->toArray())) {
+            return ['groupMembershipForm' => $this->groupMembershipForm];
+        }
+
+        // check form is valid
+        $application = new GroupMembershipApplication();
+        $this->groupMembershipForm->setInputFilter($application->getInputFilter());
+        $this->groupMembershipForm->setData($this->getRequest()->getPost());
+        if (!$this->groupMembershipForm->isValid()) {
+            return [
+                'message' => 'Invalid Form',
+                'messageAlert' => 'danger',
+                'membershipForm' => $this->groupMembershipForm,
+            ];
+        }
+
+        // grab valid form data
+        $application->exchangeArray($this->groupMembershipForm->getData());
+
+        var_dump($application->toString());
+
+        // return success message
+        return [
+            'message' => 'Group membership application form submitted succssfully.',
+            'messageAlert' => 'success',
+        ];
     }
 
     public function membershipAction() {
@@ -82,5 +112,12 @@ class JoinUsController extends AbstractActionController {
 
     public function openAction() {
         return new ViewModel();
+    }
+
+    /**
+     * Ajax action that returns the dynamic additional leaders group membership form field
+     */
+    public function newLeaderAction() {
+        return "";  // TODO
     }
 }

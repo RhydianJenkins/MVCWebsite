@@ -234,6 +234,18 @@ return [
                                 'action' => 'group',
                             ],
                         ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'new-leader' => [
+                                'type' => Literal::class,
+                                'options' => [
+                                    'route' => '/new-leader',
+                                    'defaults' => [
+                                        'action' => 'new-leader',
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],

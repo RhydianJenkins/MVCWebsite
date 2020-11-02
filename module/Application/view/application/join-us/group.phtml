@@ -2,7 +2,308 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+if ($this->groupMembershipForm != NULL) {
+    $form = $this->groupMembershipForm;
+    $form->setAttribute('action', $this->url());
+    $contactname = $form->get('contactname');
+    $email = $form->get('email');
+    $phone = $form->get('phone');
+    $address1 = $form->get('address1');
+    $address2 = $form->get('address2');
+    $city = $form->get('city');
+    $postcode = $form->get('postcode');
+    $medicalconditions = $form->get('medicalconditions');
+    $medicaldetails = $form->get('medicaldetails');
+    $emergencyname = $form->get('emergencyname');
+    $emergencynumber = $form->get('emergencynumber');
+    $lead1name = $form->get('lead1name');
+    $btnaddleader = $form->get('addLeader');
+    $btnremoveleader = $form->get('removeLeader');
+    $numusingclub = $form->get('numusingclub');
+
+    $numusingclub = $form->get('numusingclub');
+    $numboats = $form->get('numboats');
+    $numdays = $form->get('numdays');
+    $numdoubledinghy = $form->get('numdoubledinghy');
+    $numsingledinghy = $form->get('numsingledinghy');
+    $numwindsurfingboards = $form->get('numwindsurfingboards');
+    $numpowerboat = $form->get('numpowerboat');
+
+    $photocheck = $form->get('photocheck');
+    $insurancecheck = $form->get('insurancecheck');
+    $clubtccheck = $form->get('clubtccheck');
+    $captcha = $form->get('captcha');
+    $submit = $form->get('submit');
+    $form->prepare();
+}
 ?>
+
 <div class="jumbotron mb-0 secondary-color">
     <h1 class="container display-4">Group Membership Application Form</h1>
 </div>
+
+<?php if($this->message != null) : ?>
+    <div class="container p-5">
+        <div class="alert alert-<?= $this->messageAlert ?>" role="alert">
+            <?= $this->message ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->groupMembershipForm != NULL): ?>
+    <div class="container p-5">
+        <?= $this->form()->openTag($form); ?>
+            <fieldset>
+                <!-- personal information -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Organisation details</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($contactname) ?>
+                            <?= $this->formElement($contactname) ?>
+                            <?= $this->formElementErrors()->render($contactname, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($email) ?>
+                            <?= $this->formElement($email) ?>
+                            <?= $this->formElementErrors()->render($email, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($phone) ?>
+                            <?= $this->formElement($phone) ?>
+                            <?= $this->formElementErrors()->render($phone, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+                    <?= $this->formLabel($address1) ?>
+                    <?= $this->formElement($address1) ?>
+                    <?= $this->formElementErrors()->render($address1, ['class' => 'text-danger']) ?>
+                    <?= $this->formElement($address2) ?>
+                    <?= $this->formElementErrors()->render($address2, ['class' => 'text-danger']) ?>
+                    <?= $this->formElement($city) ?>
+                    <?= $this->formElementErrors()->render($city) ?>
+                    <?= $this->formElement($postcode) ?>
+                    <?= $this->formElementErrors()->render($postcode, ['class' => 'text-danger']) ?>
+                </div>
+
+                <!-- emergency information -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Emergency Information</h3>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($medicalconditions) ?>
+                                <?= $this->formElementErrors()->render($medicalconditions, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($medicalconditions) ?>
+                            </div>
+                        </div>
+
+                        <div id="medicalDetails" class="col-lg-6 col-sm-12 d-none">
+                            <?= $this->formLabel($medicaldetails) ?>
+                            <?= $this->formElement($medicaldetails) ?>
+                            <?= $this->formElementErrors()->render($medicaldetails, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($emergencyname) ?>
+                            <?= $this->formElement($emergencyname) ?>
+                            <?= $this->formElementErrors()->render($emergencyname, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($emergencynumber) ?>
+                            <?= $this->formElement($emergencynumber) ?>
+                            <?= $this->formElementErrors()->render($emergencynumber, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaders/Instructors -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Leaders/Instructors</h3>
+                    <?= $this->formLabel($lead1name) ?>
+                    <?= $this->formElement($lead1name) ?>
+                    <?= $this->formElementErrors()->render($lead1name, ['class' => 'text-danger']) ?>
+
+                    <div id="addNewLeadersBefore"></div>
+                    <?= $this->formElement($btnaddleader) ?>
+                    <?= $this->formElement($btnremoveleader) ?>
+                </div>
+
+                <!-- Group Numbers -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Group Numbers</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($numusingclub) ?>
+                            <?= $this->formElement($numusingclub) ?>
+                            <?= $this->formElementErrors()->render($numusingclub, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($numboats) ?>
+                            <?= $this->formElement($numboats) ?>
+                            <?= $this->formElementErrors()->render($numboats, ['class' => 'text-danger']) ?>
+                            </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($numdays) ?>
+                            <?= $this->formElement($numdays) ?>
+                            <?= $this->formElementErrors()->render($numdays, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Hire Requirements -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Additional Hire Requirements (optional)</h3>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-12">
+                            <?= $this->formLabel($numdoubledinghy) ?>
+                            <?= $this->formElement($numdoubledinghy) ?>
+                            <?= $this->formElementErrors()->render($numdoubledinghy, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <?= $this->formLabel($numsingledinghy) ?>
+                            <?= $this->formElement($numsingledinghy) ?>
+                            <?= $this->formElementErrors()->render($numsingledinghy, ['class' => 'text-danger']) ?>
+                            </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <?= $this->formLabel($numwindsurfingboards) ?>
+                            <?= $this->formElement($numwindsurfingboards) ?>
+                            <?= $this->formElementErrors()->render($numwindsurfingboards, ['class' => 'text-danger']) ?>
+                            </div>
+                        <div class="col-lg-3 col-sm-12">
+                            <?= $this->formLabel($numpowerboat) ?>
+                            <?= $this->formElement($numpowerboat) ?>
+                            <?= $this->formElementErrors()->render($numpowerboat, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- terms and conditions -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Terms and Conditions</h3>
+                    <div class="form-check mb-3">
+                        <?= $this->formElement($photocheck) ?>
+                        <?= $this->formElementErrors()->render($photocheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($photocheck) ?>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <?= $this->formElement($insurancecheck) ?>
+                        <?= $this->formElementErrors()->render($insurancecheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($insurancecheck) ?>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <?= $this->formElement($clubtccheck) ?>
+                        <?= $this->formElementErrors()->render($clubtccheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($clubtccheck) ?>
+                    </div>
+                </div>
+
+                <!-- payment -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Payment</h3>
+                    <div>
+                        <p>
+                            Once this Application Form has been accepted,
+                            an invoice will be sent to the email address supplied,
+                            and a paper copy sent to the Invioce Address supplied above.
+                            Please contact the <a href="mailto:treasurer@tatasteelsailing.org.uk">Club's Treasurer</a> with any queries regarding invoicing,
+                            payment or any other aspects of your application.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- captcha -->
+                <div class="form-group pt-5">
+                    <?= $this->formLabel($captcha) ?>
+                    <?= $this->formElement($captcha) ?>
+                    <?= $this->formElementErrors()->render($captcha, ['class' => 'text-danger']) ?>
+                </div>
+            </fieldset>
+
+            <?php
+                echo $this->formSubmit($submit);
+                echo $this->formHidden($form->get('id'));
+                echo $this->form()->closeTag();
+            ?>
+        </div>
+    </div>
+<?php
+
+$this->inlineScript()->captureStart();
+echo <<<JS
+
+$(document).ready(function() {
+    // hide/show medical details
+    $('#medicalconditions').change(function() {
+        if (document.getElementById("medicalconditions").checked) {
+            $('#medicalDetails').removeClass("d-none");
+        } else {
+            $('#medicalDetails').addClass("d-none");
+        }
+    });
+
+    // add more leaders
+    $("#addLeader").click(function() {
+        ajaxAddLeader();
+    });
+
+    // remove a leader
+    $("#removeLeader").click(function() {
+        removeLeader();
+    });
+
+    // initially hide remove leader button
+    $('#removeLeader').hide();
+}
+);
+
+// init leader ID
+var leaderID = 1;
+
+// Retrieve new element's html from controller
+function ajaxAddLeader() {
+    console.log("ajaxAddLeader, leaderID: " + leaderID);
+    $('#removeLeader').show();
+    $.ajax({
+        type: "POST",
+        url: "/join/group/new-leader",
+        data: "id=additionalLeader" + leaderID,
+        success: function(newLeader) {
+            // Insert new leader before the Add button
+            //$("#addNewLeadersBefore").before(newLeader);
+            $("#addNewLeadersBefore").before("<p id='additionalLeader"+leaderID+"'>NEW LEADER</p>");
+
+            // Increment and store id
+            $("#id").val(++leaderID)
+        },
+        error: function(data){
+            alert("fail: " + JSON.stringify(data));
+        }
+    });
+}
+
+function removeLeader() {
+    // decrement leader id
+    leaderID--;
+    console.log("ajaxRemoveLeader, leaderID: " + leaderID);
+
+    // Build the attribute search string.  This will match the last added dt and dd elements.
+    // Specifically, it matches any element where the id begins with 'newName<int>-'.
+    searchString = "*[id^='additionalLeader" + leaderID + "']";
+
+    // Remove the elements that match the search string.
+    $(searchString).remove()
+
+    // check if all additional leaders have been removed
+    if (leaderID <= 1) {
+        $('#removeLeader').hide();
+    }
+}
+JS;
+$this->inlineScript()->captureEnd();
+?>
+
+<?php endif; ?>
