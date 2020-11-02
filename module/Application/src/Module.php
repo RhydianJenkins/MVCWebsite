@@ -72,7 +72,8 @@ class Module {
                 },
                 Controller\IndexController::class => function($container) {
                     $weatherReader = $container->get(Model\WeatherReader::class);
-                    return new Controller\IndexController($weatherReader);
+                    $mapApiKey = $container->get('config')['keystore']['api']['maps'];
+                    return new Controller\IndexController($weatherReader, $mapApiKey);
                 },
                 Controller\GalleryController::class => function($container) {
                     $albumReader = $container->get(Model\AlbumReader::class);

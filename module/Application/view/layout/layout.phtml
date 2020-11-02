@@ -26,6 +26,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
             ->prependFile($this->basePath('js/fa.all.min.js'))
             ->prependFile($this->basePath('js/bootstrap.min.js'))
             ->prependFile($this->basePath('js/jquery-3.5.1.min.js'))
+            ->prependFile($this->basePath('js/alert.driver.js'))
         ?>
     </head>
     <body>
@@ -140,11 +141,5 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                 <h5><i class="fa fa-copyright"></i> <?= date('Y') ?> Tata Steel Sailing Club</h5>
             </div>
         </footer>
-
-        <?=
-            $this->inlineScript()
-                ->prependFile('http://maps.google.com/maps/api/js?key=AIzaSyBL4LO7Tj2Ao6LdcFYFlC9Kf0Lo5__QYzQ')
-                ->prependFile($this->basePath('js/alert.driver.js'));
-        ?>
     </body>
 </html>

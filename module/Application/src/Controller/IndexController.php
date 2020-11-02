@@ -21,10 +21,16 @@ class IndexController extends AbstractActionController {
     private $weatherReader;
 
     /**
+     * The private Google Maps API key.
+     */
+    private $mapAPIKey;
+
+    /**
      * Constructor.
      */
-    public function __construct(WeatherReader $weatherReader) {
+    public function __construct(WeatherReader $weatherReader, $mapAPIKey) {
         $this->weatherReader = $weatherReader;
+        $this->mapApiKey = $mapAPIKey;
     }
 
     public function indexAction() {
@@ -33,10 +39,12 @@ class IndexController extends AbstractActionController {
             $viewArray = [
                 'weatherOk' => true,
                 'weather' => $weather,
+                'mapApiKey' => $this->mapApiKey,
             ];
         } else {
             $viewArray = [
                 'weatherOk' => false,
+                'mapApiKey' => $this->mapApiKey,
             ];
         }
         return new ViewModel($viewArray);
