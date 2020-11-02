@@ -320,13 +320,6 @@ return [
             AuthenticationService::class => LoginAuthenticatorFactory::class,
         ],
     ],
-    // 'controllers' => [
-    //     'factories' => [
-    //         Controller\IndexController::class      => InvokableFactory::class,
-    //         Controller\AboutController::class      => InvokableFactory::class,
-    //         Controller\MembershipController::class => InvokableFactory::class,
-    //     ],
-    // ],
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
@@ -335,8 +328,6 @@ return [
         'exception_template'       => 'error/index',
         'template_map' => [
             'layout/layout'                     => __DIR__ . '/../view/layout/layout.phtml',
-            'application/about/about'           => __DIR__ . '/../view/application/about/index.phtml',
-            'application/membership/logout'     => __DIR__ . '/../view/application/membership/index.phtml',
             'error/404'                         => __DIR__ . '/../view/error/404.phtml',
             'error/index'                       => __DIR__ . '/../view/error/index.phtml',
         ],
