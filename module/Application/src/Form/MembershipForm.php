@@ -32,7 +32,7 @@ class MembershipForm extends Form {
     /**
      * Declaration terms and condition about photographs.
      */
-    const PHOTO_TOC_DEC = "I consent for my images to be used by the Club. Family members will need to sign a <a href='#TODO' target='_blank'>consent form</a>";
+    const PHOTO_TOC_DEC = "I consent for my images to be used by the Club. Family members will need to sign a <a href='/docs/gdprForm.pdf' target='_blank'>consent form</a>";
 
     const PHOTO_TOC_DEC_TOOLTIP = "The Club may arrange for photographs or videos to be taken of Club activities and published on our website or social media channels to promote the Club. Image consent can be withdrawn by contacting the Membership Secretary. Any Image already published can be removed at any time by request";
 
