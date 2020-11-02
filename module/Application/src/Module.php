@@ -80,7 +80,8 @@ class Module {
                     return new Controller\GalleryController($albumReader);
                 },
                 Controller\AboutController::class => function($container) {
-                    return new Controller\AboutController();
+                    $mapApiKey = $container->get('config')['keystore']['api']['maps'];
+                    return new Controller\AboutController($mapApiKey);
                 },
             ],
         ];

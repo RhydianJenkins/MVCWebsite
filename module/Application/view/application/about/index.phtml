@@ -115,7 +115,8 @@
     </div>
 </div>
 
-<?php
-    // for google map
-    $this->inlineScript()->prependFile($this->basePath('js/map.driver.js'));
+<?=
+    $this->inlineScript()
+        ->prependFile($this->basePath('js/map.driver.js'))
+        ->prependFile('http://maps.google.com/maps/api/js?key=' . $this->mapApiKey);
 ?>

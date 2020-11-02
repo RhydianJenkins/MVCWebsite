@@ -14,11 +14,21 @@ use Laminas\Mvc\Controller\AbstractActionController;
 use Laminas\View\Model\ViewModel;
 
 class AboutController extends AbstractActionController {
-    public function aboutAction() {
-        return new ViewModel();
+    /**
+     * The private Google Maps API key.
+     */
+    private $mapApiKey;
+
+    /**
+     * Constructor.
+     */
+    public function __construct($mapAPIKey) {
+        $this->mapApiKey = $mapAPIKey;
     }
 
-    public function teamAction() {
-        return new ViewModel();
+    public function indexAction() {
+        return new ViewModel([
+            'mapApiKey' => $this->mapApiKey,
+        ]);
     }
 }

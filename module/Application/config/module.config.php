@@ -45,7 +45,7 @@ return [
                     'route'    => '/about',
                     'defaults' => [
                         'controller' => Controller\AboutController::class,
-                        'action'     => 'about',
+                        'action'     => 'index',
                     ],
                 ],
                 'may_terminate' => true,
@@ -64,7 +64,7 @@ return [
                         'options' => [
                             'route' => '/team',
                             'defaults' => [
-                                'action' => 'team',
+                                'action' => 'index',
                             ],
                         ],
                     ],
