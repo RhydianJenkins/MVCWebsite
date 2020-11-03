@@ -20,8 +20,8 @@ body {
     flex: 1 0 auto;
 }
 
-.footer {
-    flex-shrink: 0;
+.footer-copyright {
+    background-image: linear-gradient(var(--primary-color), rgba(0, 0, 0, 0.5));
 }
 
 .logo {
