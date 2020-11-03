@@ -19,6 +19,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
         <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
             ->prependStylesheet($this->basePath('css/style.css'))
             ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
+            ->prependStylesheet($this->basePath('css/footer-waves.css'))
         ?>
 
         <!-- Head Scripts -->
@@ -105,7 +106,23 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
             <?= $this->content ?>
         </div>
 
-        <footer class="footer primary-color pt-5">
+        <!-- footer waves -->
+        <div>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                <defs>
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                </defs>
+                <g class="parallax">
+                    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(var(--primary-color-rgb), 0.75)" />
+                    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(var(--primary-color-rgb), 0.5)" />
+                    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(var(--primary-color-rgb), 0.25)" />
+                    <use xlink:href="#gentle-wave" x="48" y="7" fill="var(--primary-color)" />
+                </g>
+            </svg>
+        </div>
+
+        <!-- footer -->
+        <footer class="page-footer font-small primary-color pt-4">
             <div class="container">
                 <div class="row">
                     <!-- address -->
@@ -135,9 +152,9 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                     </div>
                 </div>
             </div>
-
-            <div class="faded-bg text-center p-2 text-muted">
-                <h5><i class="fa fa-copyright"></i> <?= date('Y') ?> Tata Steel Sailing Club</h5>
+            <div class="footer-copyright text-center py-3">
+                <h7><i class="fa fa-copyright"></i> <?= date('Y') ?> </h7>
+                <h7>Tata Steel Sailing Club</h7>
             </div>
         </footer>
     </body>
