@@ -31,4 +31,8 @@ class AboutController extends AbstractActionController {
             'mapApiKey' => $this->mapApiKey,
         ]);
     }
+
+    public function teamAction() {
+        return new ViewModel();
+    }
 }
