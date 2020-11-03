@@ -22,6 +22,11 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
             ->prependStylesheet($this->basePath('css/footer-waves.css'))
         ?>
 
+        <?php if (isset($stylesheet)): ?>
+            <!-- page specific styles -->
+            <?= $this->headLink()->prependStylesheet($this->basePath($stylesheet)); ?>
+        <?php endif; ?>
+
         <!-- Head Scripts -->
         <?= $this->headScript()
             ->prependFile($this->basePath('js/fa.all.min.js'))
