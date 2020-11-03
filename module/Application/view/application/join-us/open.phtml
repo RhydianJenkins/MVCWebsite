@@ -2,6 +2,43 @@
 /**
  * @var Laminas\View\Renderer\PhpRenderer $this
  */
+if ($this->openSeriesMembershipForm != NULL) {
+    $form = $this->openSeriesMembershipForm;
+    $form->setAttribute('action', $this->url());
+    $firstname = $form->get('firstname');
+    $surname = $form->get('surname');
+    $email = $form->get('email');
+    $address1 = $form->get('address1');
+    $address2 = $form->get('address2');
+    $city = $form->get('city');
+    $postcode = $form->get('postcode');
+    $medicalconditions = $form->get('medicalconditions');
+    $medicaldetails = $form->get('medicaldetails');
+    $emergencyname = $form->get('emergencyname');
+    $emergencynumber = $form->get('emergencynumber');
+    $boat1class = $form->get('boat1class');
+    $boat1number = $form->get('boat1number');
+    $boat1owned = $form->get('boat1owned');
+    $boat2class = $form->get('boat2class');
+    $boat2number = $form->get('boat2number');
+    $boat2owned = $form->get('boat2owned');
+    $firstaid = $form->get('firstaid');
+    $firstaidexpire = $form->get('firstaidexpire');
+    $existingqualifications = $form->get('existingqualifications');
+    $oodcheck = $form->get('oodcheck');
+    $photocheck = $form->get('photocheck');
+    $insurancecheck = $form->get('insurancecheck');
+    $clubtccheck = $form->get('clubtccheck');
+    $newmember = $form->get('newmember');
+    $tataemployee = $form->get('tataemployee');
+    $tataemployeenumber = $form->get('tataemployeenumber');
+    $membershipplannonemployee = $form->get('membershipplannonemployee');
+    $membershipplanemployee = $form->get('membershipplanemployee');
+    $paymentplan = $form->get('paymentplan');
+    $captcha = $form->get('captcha');
+    $submit = $form->get('submit');
+    $form->prepare();
+}
 ?>
 <div class="jumbotron mb-0 secondary-color">
     <h1 class="container display-4">Open Series Application Form</h1>

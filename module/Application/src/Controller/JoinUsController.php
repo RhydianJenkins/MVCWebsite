@@ -17,6 +17,7 @@ use Application\Model\MembershipApplicationManager;
 use Application\Model\MembershipApplication;
 use Application\Form\MembershipForm;
 use Application\Form\GroupMembershipForm;
+use Application\Form\OpenSeriesMembershipForm;
 use Laminas\Form\Element;
 
 class JoinUsController extends AbstractActionController {
@@ -35,15 +36,17 @@ class JoinUsController extends AbstractActionController {
      */
     private $membershipForm;
     private $groupMembershipForm;
+    private $openSeriesMembershipForm;
 
     /**
      * Constructor.
      */
-    public function __construct(Emailer $emailer, MembershipApplicationManager $manager, MembershipForm $membershipForm, GroupMembershipForm $groupMembershipForm) {
+    public function __construct(Emailer $emailer, MembershipApplicationManager $manager, MembershipForm $membershipForm, GroupMembershipForm $groupMembershipForm, OpenSeriesMembershipForm $openSeriesMembershipForm) {
         $this->emailer = $emailer;
         $this->applicationManager = $manager;
         $this->membershipForm = $membershipForm;
         $this->groupMembershipForm = $groupMembershipForm;
+        $this->openSeriesMembershipForm = $openSeriesMembershipForm;
     }
 
     public function indexAction() {
@@ -111,7 +114,33 @@ class JoinUsController extends AbstractActionController {
     }
 
     public function openAction() {
-        return new ViewModel();
+        // if no post (form not submitted), just return form in view
+        if (empty($this->getRequest()->getPost()->toArray())) {
+            return ['openSeriesMembershipForm' => $this->openSeriesMembershipForm];
+        }
+
+        // check form is valid
+        $application = new OpenSeriesMembershipApplication();
+        $this->membershipForm->setInputFilter($application->getInputFilter());
+        $this->membershipForm->setData($this->getRequest()->getPost());
+        if (!$this->membershipForm->isValid()) {
+            return [
+                'message' => 'Invalid Form',
+                'messageAlert' => 'danger',
+                'openSeriesMembershipForm' => $this->openSeriesMembershipForm,
+            ];
+        }
+
+        // grab valid form data
+        $application->exchangeArray($this->openSeriesMembershipForm->getData());
+
+        var_dump($application->toString());
+
+        // return success message
+        return [
+            'message' => 'Open Series Membership application form submitted succssfully.',
+            'messageAlert' => 'success',
+        ];
     }
 
     /**
