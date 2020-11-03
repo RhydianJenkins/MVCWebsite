@@ -122,7 +122,7 @@ class MembershipController extends AbstractActionController {
         $email = $this->loginForm->getData()['email'];
         $password = $this->loginForm->getData()['password'];
         $captcha = $this->loginForm->getData()['captcha'];
-        
+
         // login attempt, authenticate
         $this->loginAuthenticator->setEmail($email);
         $this->loginAuthenticator->setPassword($password);
@@ -199,7 +199,7 @@ class MembershipController extends AbstractActionController {
                 'registerform' => $this->registerForm,
             ];
         }
-        
+
         // check record doesn't exist
         $emailExists = $this->loginAuthenticator->emailAlreadyExists($this->registerForm->getData()['email']);
         if ($emailExists['error']) {
@@ -328,7 +328,7 @@ class MembershipController extends AbstractActionController {
                 'resetPasswordForm' => $this->resetPasswordForm,
                 'email' => $email,
                 'code' => $code,
-            ];       
+            ];
         }
 
         // form submitted, reset code in url, record found. check form's valid

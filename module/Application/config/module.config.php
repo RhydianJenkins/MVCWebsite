@@ -252,9 +252,9 @@ return [
                 'may_terminate' => true,
                 'child_routes' => [
                     'login' => [
-                        'type' => Literal::class,
+                        'type' => Segment::class,
                         'options' => [
-                            'route' => '/login',
+                            'route' => '/login[/:redirect]',
                             'defaults' => [
                                 'action' => 'login',
                             ],
