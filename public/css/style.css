@@ -20,8 +20,13 @@ body {
     flex: 1 0 auto;
 }
 
-.footer-copyright {
+#wave-footer {
     background-image: linear-gradient(var(--primary-color), rgba(0, 0, 0, 0.5));
+}
+
+#wave-footer img {
+    width: 128px;
+    height: 128px;
 }
 
 .logo {
@@ -74,10 +79,7 @@ body {
     min-height: 90vh !important;
 }
 
-.footer-img {
-    width: 128px;
-    height: 128px;
-}
+
 
 .carousel-item {
     height: 60vh;

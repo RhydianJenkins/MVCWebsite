@@ -127,7 +127,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
         </div>
 
         <!-- footer -->
-        <footer class="page-footer font-small primary-color pt-4">
+        <footer id="wave-footer" class="page-footer font-small primary-color pt-4">
             <div class="container">
                 <div class="row">
                     <!-- address -->
@@ -144,8 +144,8 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
 
                     <!-- images -->
                     <div class="col-lg-4 col-sm-12 mb-4 text-center">
-                        <img class="rounded-circle footer-img" src="<?= $this->basePath('/img/tssc_logo.jpg') ?>" alt="Club Logo" />
-                        <img class="rounded-circle footer-img" src="<?= $this->basePath('/img/RYA_TC_Logo.jpg') ?>" alt="RYA Approved" />
+                        <img class="rounded-circle" src="<?= $this->basePath('/img/tssc_logo.jpg') ?>" alt="Club Logo" />
+                        <img class="rounded-circle" src="<?= $this->basePath('/img/RYA_TC_Logo.jpg') ?>" alt="RYA Approved" />
                     </div>
 
                     <!-- contact -->
@@ -156,10 +156,9 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                         <a href="mailto:webmaster@tatasteelsailing.org.uk">webmaster@tatasteelsailing.org.uk</a>
                     </div>
                 </div>
-            </div>
-            <div class="footer-copyright text-center py-3">
-                <h7><i class="fa fa-copyright"></i> <?= date('Y') ?> </h7>
-                <h7>Tata Steel Sailing Club</h7>
+                <div class="row">
+                    <h7 class="p-3 text-center col-lg-12"><i class="fa fa-copyright"></i> <?= date('Y') ?> Tata Steel Sailing Club</h7>
+                </div>
             </div>
         </footer>
     </body>
