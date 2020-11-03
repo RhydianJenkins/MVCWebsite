@@ -12,7 +12,8 @@ class OpenSeriesMembershipApplication implements InputFilterAwareInterface {
      * Form values.
      */
     private $id;
-    private $contactname;
+    private $firstname;
+    private $surname;
     private $email;
     private $phone;
     private $address1;
@@ -23,12 +24,14 @@ class OpenSeriesMembershipApplication implements InputFilterAwareInterface {
     private $medicaldetails;
     private $emergencyname;
     private $emergencynumber;
-    private $lead1name;
-    private $additionalleaders;
-    private $photocheck;
-    private $insurancecheck;
-    private $clubtccheck;
-
+    private $boat1class;
+    private $boat1number;
+    private $boat1owned;
+    private $boat2class;
+    private $boat2number;
+    private $boat2owned;
+    private $applicationplan;
+    private $paymentplan;
     private $captcha;
     private $submit;
 
@@ -48,8 +51,14 @@ class OpenSeriesMembershipApplication implements InputFilterAwareInterface {
         $this->medicaldetails = !empty($data['medicaldetails']) ? $data['medicaldetails'] : NULL;
         $this->emergencyname = !empty($data['emergencyname']) ? $data['emergencyname'] : NULL;
         $this->emergencynumber = !empty($data['emergencynumber']) ? $data['emergencynumber'] : NULL;
-
-
+        $this->boat1class = !empty($data['boat1class']) ? $data['boat1class'] : NULL;
+        $this->boat1number = !empty($data['boat1number']) ? $data['boat1number'] : NULL;
+        $this->boat1owned = !empty($data['boat1owned']) ? $data['boat1owned'] : NULL;
+        $this->boat2class = !empty($data['boat2class']) ? $data['boat2class'] : NULL;
+        $this->boat2number = !empty($data['boat2number']) ? $data['boat2number'] : NULL;
+        $this->boat2owned = !empty($data['boat2owned']) ? $data['boat2owned'] : NULL;
+        $this->applicationplan = !empty($data['applicationplan']) ? $data['applicationplan'] : NULL;
+        $this->paymentplan = !empty($data['paymentplan']) ? $data['paymentplan'] : NULL;
         $this->captcha = !empty($data['captcha']) ? $data['captcha'] : NULL;
         $this->submit = !empty($data['submit']) ? $data['submit'] : NULL;
     }

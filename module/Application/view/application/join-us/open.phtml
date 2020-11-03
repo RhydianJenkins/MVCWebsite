@@ -22,18 +22,10 @@ if ($this->openSeriesMembershipForm != NULL) {
     $boat2class = $form->get('boat2class');
     $boat2number = $form->get('boat2number');
     $boat2owned = $form->get('boat2owned');
-    $firstaid = $form->get('firstaid');
-    $firstaidexpire = $form->get('firstaidexpire');
-    $existingqualifications = $form->get('existingqualifications');
-    $oodcheck = $form->get('oodcheck');
     $photocheck = $form->get('photocheck');
     $insurancecheck = $form->get('insurancecheck');
     $clubtccheck = $form->get('clubtccheck');
-    $newmember = $form->get('newmember');
-    $tataemployee = $form->get('tataemployee');
-    $tataemployeenumber = $form->get('tataemployeenumber');
-    $membershipplannonemployee = $form->get('membershipplannonemployee');
-    $membershipplanemployee = $form->get('membershipplanemployee');
+    $applicationplan = $form->get('applicationplan');
     $paymentplan = $form->get('paymentplan');
     $captcha = $form->get('captcha');
     $submit = $form->get('submit');
@@ -43,3 +35,247 @@ if ($this->openSeriesMembershipForm != NULL) {
 <div class="jumbotron mb-0 secondary-color">
     <h1 class="container display-4">Open Series Application Form</h1>
 </div>
+
+
+<?php if($this->message != null) : ?>
+    <div class="container p-5">
+        <div class="alert alert-<?= $this->messageAlert ?>" role="alert">
+            <?= $this->message ?>
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php if ($this->openSeriesMembershipForm != NULL): ?>
+    <div class="container p-5">
+        <?= $this->form()->openTag($form); ?>
+            <fieldset>
+                <!-- personal information -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Personal Information</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($firstname) ?>
+                            <?= $this->formElement($firstname) ?>
+                            <?= $this->formElementErrors()->render($firstname, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($surname) ?>
+                            <?= $this->formElement($surname) ?>
+                            <?= $this->formElementErrors()->render($surname, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($email) ?>
+                            <?= $this->formElement($email) ?>
+                            <?= $this->formElementErrors()->render($email, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+                    <?= $this->formLabel($address1) ?>
+                    <?= $this->formElement($address1) ?>
+                    <?= $this->formElementErrors()->render($address1, ['class' => 'text-danger']) ?>
+                    <?= $this->formElement($address2) ?>
+                    <?= $this->formElementErrors()->render($address2, ['class' => 'text-danger']) ?>
+                    <?= $this->formElement($city) ?>
+                    <?= $this->formElementErrors()->render($city) ?>
+                    <?= $this->formElement($postcode) ?>
+                    <?= $this->formElementErrors()->render($postcode, ['class' => 'text-danger']) ?>
+                </div>
+
+                <!-- emergency information -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Emergency Information</h3>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($medicalconditions) ?>
+                                <?= $this->formElementErrors()->render($medicalconditions, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($medicalconditions) ?>
+                            </div>
+                        </div>
+
+                        <div id="medicalDetails" class="col-lg-6 col-sm-12 d-none">
+                            <?= $this->formLabel($medicaldetails) ?>
+                            <?= $this->formElement($medicaldetails) ?>
+                            <?= $this->formElementErrors()->render($medicaldetails, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($emergencyname) ?>
+                            <?= $this->formElement($emergencyname) ?>
+                            <?= $this->formElementErrors()->render($emergencyname, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <?= $this->formLabel($emergencynumber) ?>
+                            <?= $this->formElement($emergencynumber) ?>
+                            <?= $this->formElementErrors()->render($emergencynumber, ['class' => 'text-danger']) ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- boats -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Boats</h3>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat1class) ?>
+                            <?= $this->formElement($boat1class) ?>
+                            <?= $this->formElementErrors()->render($boat1class, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat1number) ?>
+                            <?= $this->formElement($boat1number) ?>
+                            <?= $this->formElementErrors()->render($boat1number, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($boat1owned) ?>
+                                <?= $this->formElementErrors()->render($boat1owned, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($boat1owned) ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat2class) ?>
+                            <?= $this->formElement($boat2class) ?>
+                            <?= $this->formElementErrors()->render($boat2class, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <?= $this->formLabel($boat2number) ?>
+                            <?= $this->formElement($boat2number) ?>
+                            <?= $this->formElementErrors()->render($boat2number, ['class' => 'text-danger']) ?>
+                        </div>
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-check mb-3">
+                                <?= $this->formElement($boat2owned) ?>
+                                <?= $this->formElementErrors()->render($boat2owned, ['class' => 'text-danger']) ?>
+                                <?= $this->formLabel($boat2owned) ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- terms and conditions -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Terms and Conditions</h3>
+                    <div class="form-check mb-3">
+                        <?= $this->formElement($photocheck) ?>
+                        <?= $this->formElementErrors()->render($photocheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($photocheck) ?>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <?= $this->formElement($insurancecheck) ?>
+                        <?= $this->formElementErrors()->render($insurancecheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($insurancecheck) ?>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <?= $this->formElement($clubtccheck) ?>
+                        <?= $this->formElementErrors()->render($clubtccheck, ['class' => 'text-danger']) ?>
+                        <?= $this->formLabel($clubtccheck) ?>
+                    </div>
+                </div>
+
+                <!-- application plan -->
+                <div class="form-group">
+                    <h3 class="page-header pb-3 mb-3">Application Plan</h3>
+                    <div id="application-plan">
+                        <?= $this->formLabel($applicationplan) ?>
+                        <?= $this->formElement($applicationplan) ?>
+                        <?= $this->formElementErrors()->render($applicationplan, ['class' => 'text-danger']) ?>
+                    </div>
+                </div>
+
+                <!-- payment -->
+                <div class="form-group">
+                    <h3 id="payment-header" class="page-header pb-3 mb-3">Payment</h3>
+                    <?= $this->formLabel($paymentplan) ?>
+                    <?= $this->formElement($paymentplan) ?>
+                    <?= $this->formElementErrors()->render($paymentplan, ['class' => 'text-danger']) ?>
+
+                    <div id="chequePaymentInstructions" class="d-none">
+                        <address>
+                            Cheques must be payable to "Tata Steel Sailing Club Margam" and sent to the Membership Secretary at:<br><br>
+                            2 The Burrows<br>
+                            Danygraig<br>
+                            Porthcawl<br>
+                            CF36 5AJ
+                        </address>
+                    </div>
+
+                    <div id="bankPaymentInstructions" class="d-none">
+                        <p>
+                            Card details to pay to:<br><br>
+                            Lloyds Bank PLC<br>
+                            Sort Code: <span class="font-weight-bold">30-91-18</span><br>
+                            Account Number: <span class="font-weight-bold">02386779</span><br>
+                            Reference: <span class="font-italic">Your Name</span><br>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- captcha -->
+                <div class="form-group pt-5">
+                    <?= $this->formLabel($captcha) ?>
+                    <?= $this->formElement($captcha) ?>
+                    <?= $this->formElementErrors()->render($captcha, ['class' => 'text-danger']) ?>
+                </div>
+            </fieldset>
+
+            <?php
+                echo $this->formSubmit($submit);
+                echo $this->formHidden($form->get('id'));
+                echo $this->form()->closeTag();
+            ?>
+        </div>
+    </div>
+
+<?php
+$this->inlineScript()->captureStart();
+echo <<<JS
+
+$('#medicalconditions').change(function() {
+    if (document.getElementById("medicalconditions").checked) {
+        $('#medicalDetails').removeClass("d-none");
+    } else {
+        $('#medicalDetails').addClass("d-none");
+    }
+});
+
+$('#paymentplan').change(function() {
+    $('#chequePaymentInstructions').addClass("d-none");
+    $('#bankPaymentInstructions').addClass("d-none");
+    if (document.getElementById("paymentplan").value == 'cheque') {
+        $('#chequePaymentInstructions').removeClass("d-none");
+    } else if (document.getElementById("paymentplan").value == 'bank') {
+        $('#bankPaymentInstructions').removeClass("d-none");
+    }
+});
+
+/**
+ * Note: this function is only called to inform the user on how much their membership is going to cost.
+ * The true cost is calculated server side.
+ */
+$('#applicationplan').change(function() {
+    console.log("changed");
+    // calculate cost
+    var totalcharge = parseInt(0);
+    totalcharge += parseInt($("#applicationplan").val());
+
+    // update header
+    if (totalcharge > 0) {
+        $('#payment-header').text("Payment: £" + totalcharge);
+    } else {
+        $('#payment-header').text("Payment DUNNO");
+    }
+});
+
+JS;
+$this->inlineScript()->captureEnd();
+?>
+<?php endif; ?>

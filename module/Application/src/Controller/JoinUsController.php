@@ -15,6 +15,8 @@ use Laminas\View\Model\ViewModel;
 use Application\Model\Emailer;
 use Application\Model\MembershipApplicationManager;
 use Application\Model\MembershipApplication;
+use Application\Model\GroupMembershipApplication;
+use Application\Model\OpenSeriesMembershipApplication;
 use Application\Form\MembershipForm;
 use Application\Form\GroupMembershipForm;
 use Application\Form\OpenSeriesMembershipForm;
