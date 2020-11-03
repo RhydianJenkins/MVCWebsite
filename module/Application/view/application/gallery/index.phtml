@@ -64,6 +64,9 @@
     </ul>
 <?php endif; ?>
 
-<?= $this->inlinescript()->prependFile($this->basePath('/js/masonry.dkgd.min.js')); ?>
-<?= $this->inlineScript()->prependFile($this->basePath('/js/imagesloaded.pkgd.min.js')); ?>
-<?= $this->inlineScript()->prependFile($this->basePath('/js/masonry.driver.js')); ?>
+<?php
+    $this->inlinescript()
+        ->prependFile($this->basePath('/js/masonry.driver.js'))
+        ->prependFile($this->basePath('/js/masonry.dkgd.min.js'))
+        ->prependFile($this->basePath('/js/imagesloaded.pkgd.min.js'))
+?>
