@@ -135,8 +135,7 @@ class DatabaseReader {
         // success! build and return array
         $returnArray = [
             'code' => self::SUCCESS,
-            'results' => $result,
-            'numResultsFound' => $result->getAffectedRows(),
+            'result' => $result,
             'image64' => $image64,
         ];
         return $returnArray;

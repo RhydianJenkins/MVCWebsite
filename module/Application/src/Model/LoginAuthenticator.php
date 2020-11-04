@@ -32,7 +32,7 @@ class LoginAuthenticator extends AuthenticationService {
     /**
      * The public path of the default profile picture, used if no picture exists in the database.
      */
-    const DEFAULT_PICTURE_PATH = '/img/facebank/Placeholder.png';
+    const DEFAULT_PICTURE_PATH = 'public/img/facebank/Placeholder.png';
 
     /**
      * The database fieldnames.
@@ -126,7 +126,7 @@ class LoginAuthenticator extends AuthenticationService {
     }
 
     /**
-     * Thebase64 encoded profile picture of the user.
+     * The base64 encoded profile picture of the user.
      */
     public function setProfilePicture($picture) {
         $this->profilepicture = $picture;
@@ -166,7 +166,7 @@ class LoginAuthenticator extends AuthenticationService {
         $storedPasswordHash = $member[self::PASSWORD_FIELDNAME];
         $firstname = $member[self::FIRSTNAME_FIELDNAME];
         $surname = $member[self::SURNAME_FIELDNAME];
-        $profilepicture64 = empty($member[self::PICTURE_FIELDNAME]) ? base64_encode(self::DEFAULT_PICTURE_PATH) : $member[self::PICTURE_FIELDNAME];
+        $profilepicture64 = empty($member[self::PICTURE_FIELDNAME]) ? base64_encode(file_get_contents(self::DEFAULT_PICTURE_PATH)) : $member[self::PICTURE_FIELDNAME];
 
         // Now we need to calculate hash based on user-entered password and compare
         // it with the password hash stored in database.
@@ -186,7 +186,7 @@ class LoginAuthenticator extends AuthenticationService {
                 'firstname' => $this->firstname,
                 'surname' => $this->surname,
                 'email' => $this->email,
-                'profilepicture64' => $this->profilepicture64,
+                'profilepicture64' => 'data:image;base64,' . $this->profilepicture,
             ];
 
             // return user identity (name) to be saved in session for later use
