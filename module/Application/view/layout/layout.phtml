@@ -91,7 +91,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                                 <a class="nav-link" href="<?= $this->url('membership/my_account') ?>">My Account</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello <?= $user['firstname'] ?> (Log out)</a>
+                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Log out</a>
                             </li>
                         <?php else : ?>
                             <li class="nav-item">
