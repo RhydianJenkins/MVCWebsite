@@ -29,6 +29,10 @@ body {
     height: 128px;
 }
 
+#wave-footer a {
+    color: #fff;
+}
+
 .logo {
     font-weight: 600;
     font-size: 32px;
