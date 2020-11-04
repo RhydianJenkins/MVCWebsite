@@ -26,21 +26,24 @@ $profilePictureForm->prepare();
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-3 col-sm-12 text-center mb-3">
+        <div class="col-lg-3 col-sm-12 mb-3">
             <img src="<?= $user['profilepicture64'] ?>" class="img-circle img-thumbnail" alt="Profile picture">
             <?= $this->form()->openTag($profilePictureForm); ?>
             <fieldset>
+
                 <div class="form-group">
-                    <?= $this->formLabel($profileimage) ?>
+                    <div class="text-center text-muted">
+                        <?= $this->formLabel($profileimage) ?>
+                    </div>
+                    <?= $this->formSubmit($submit); ?>
                     <?= $this->formElement($profileimage) ?>
                     <?= $this->formElementErrors()->render($profileimage, ['class' => 'text-danger']) ?>
                 </div>
+
             </fieldset>
-            <?php
-                echo $this->formSubmit($submit);
-                echo $this->formHidden($profilePictureForm->get('id'));
-                echo $this->form()->closeTag();
-            ?>
+
+            <?= $this->formHidden($profilePictureForm->get('id')); ?>
+            <?= $this->form()->closeTag(); ?>
         </div>
 
         <div class="col-lg-9 col-sm-12">

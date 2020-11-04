@@ -18,18 +18,22 @@ class ProfileImageUploadForm extends Form {
             'name' => 'id',
         ]);
 
-        // Image
+        // File upload
         $this->add([
             'type' => File::class,
             'name' => 'profileimage',
             'options' => [
-                'label' => 'Upload a new profile picture',
+                'label' => 'Upload a new picture',
+                'label_attributes' => [
+                    'for' => 'profileimage',
+                ],
+
             ],
             'attributes' => [
+                'type' => 'file',
+                'class' => 'mw-100',
                 'id' => 'profileimage',
                 'required' => 'required',
-                'placeholder' => 'YOU.jpg',
-                'class' => 'w-100',
             ],
         ]);
 
@@ -37,9 +41,10 @@ class ProfileImageUploadForm extends Form {
         $this->add([
             'type' => Submit::class,
             'name' => 'submit',
+            'disable_escape_html' => true,
             'attributes' => [
-                'value' => 'Upload Image',
-                'class' => 'btn btn-primary btn-sm',
+                'value' => 'Upload',
+                'class' => '',
             ],
         ]);
     }
