@@ -16,7 +16,8 @@ for (var i = 0; i < tables.length; i++) {
             var cell = tables[i].rows[j].cells[windIndexes[k]];
             var wind = parseFloat(cell.textContent);
             var color = getColorForWind(wind);
-            cell.style.background = color;
+            //cell.background = color;
+            $("<i style='color: " + color + "' class='pl-1 fa fa-circle'></i>").appendTo(cell);
         }
     }
 }

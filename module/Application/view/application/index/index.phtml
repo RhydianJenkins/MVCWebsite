@@ -72,10 +72,10 @@
                     <table class="table shadow table-hover table-sm weather-table border-bottom-table">
                         <thead class="primary-color">
                             <tr>
-                                <th scope="col">Hour</th>
-                                <th scope="col">Wind (mph)</th>
-                                <th scope="col">Gust (mph)</th>
-                                <th scope="col">Temp</th>
+                                <th data-toggle="tooltip" title="Time" scope="p-5 col"><i class="fa fa-clock"></i></th>
+                                <th data-toggle="tooltip" title="Wind speed (mph)" scope="col"><i class="fa fa-wind"></i></th>
+                                <th data-toggle="tooltip" title="Wind gust speed (mph)"scope="col"><i class="fa fa-wind"></i> (Gust)</th>
+                                <th data-toggle="tooltip" title="Temperature (celcius)" scope="col"><i class="fa fa-temperature-low"></i></th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -84,9 +84,12 @@
                                 <?php if(new DateTime('@' . $data['time_epoch']) > new DateTime()): ?>
                                     <tr>
                                         <td><?= date("H:i", strtotime($hour.':00')) ?></td>
-                                        <td><i class="fa fa-arrow-up" style="transform: rotate(<?= $data['wind_degree'] + 180 ?>deg)"></i> <?= $data['wind_mph'] ?></td>
-                                        <td><?= $data['gust_mph'] ?></td>
-                                        <td><?= $data['temp_c'] ?>&deg;</td>
+                                        <td>
+                                            <i class="fa fa-arrow-down" style="transform: rotate(<?= $data['wind_degree'] ?>deg)"></i>
+                                            <?= number_format($data['wind_mph'], 1) ?>
+                                        </td>
+                                        <td><?= number_format($data['gust_mph'], 1) ?></td>
+                                        <td><?= number_format($data['temp_c'], 1) ?>&deg;</td>
                                         <td><img class="img-fluid"  src="<?= $data['condition']['icon'] ?>" alt="condition"></img></td>
                                     </tr>
                                 <?php endif; ?>
