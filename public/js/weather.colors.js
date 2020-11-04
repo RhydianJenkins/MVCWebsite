@@ -17,7 +17,7 @@ for (var i = 0; i < tables.length; i++) {
             var wind = parseFloat(cell.textContent);
             var color = getColorForWind(wind);
             //cell.background = color;
-            $("<i style='color: " + color + "' class='pl-1 fa fa-circle'></i>").appendTo(cell);
+            $("<div class='d-block'><i style='color: " + color + "' class='pl-1 fa fa-wind fa-2x'></i></div>").appendTo(cell);
         }
     }
 }
