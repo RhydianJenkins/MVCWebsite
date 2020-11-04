@@ -12,6 +12,19 @@
  * It will be enabled when you enable development mode.
  */
 return [
+    'view_manager' => [
+        'display_exceptions' => true,
+    ],
+    'db' => [
+        'adapters' => [
+            'Application\DB\DBAdapter' => [
+                'driver' => 'Pdo',
+                'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost',
+                'user' => 'readwrite',
+                'password' => 'password2',
+            ]
+        ]
+    ],
     'laminas-developer-tools' => [
         /**
          * General Profiler settings

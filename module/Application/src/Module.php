@@ -51,8 +51,7 @@ class Module {
                     return new Session('Laminas_Auth', 'session', $sessionManager);
                 },
                 Factory\DBAdapterFactory::class => function ($container) {
-                    // return $container->get('Application\DB\localDbAdapter');
-                    return $container->get('Application\DB\remoteDBAdapter');
+                    return $container->get('Application\DB\DBAdapter');
                 },
             ],
         ];

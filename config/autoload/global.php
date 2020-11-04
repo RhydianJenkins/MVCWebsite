@@ -13,6 +13,9 @@
  */
 
 return [
+    'view_manager' => [
+        'display_exceptions' => false,
+    ],
     'session_manager' => [
         'config' => [
             'class' => Session\Config\SessionConfig::class,
@@ -29,18 +32,12 @@ return [
     // Below settings should not be committed to version control (See README.md)
     'db' => [
         'adapters' => [
-            'Application\DB\localDbAdapter' => [
+            'Application\DB\DbAdapter' => [
                 'driver' => 'Pdo',
                 'dsn'    => '',
                 'user' => '',
                 'password' => '',
             ],
-            'Application\DB\remoteDBAdapter' => [
-                'driver' => 'Pdo',
-                'dsn'    => '',
-                'user' => '',
-                'password' => '',
-            ]
         ]
     ],
     'keystore' => [
