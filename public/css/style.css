@@ -87,7 +87,10 @@ body {
     min-height: 90vh !important;
 }
 
-
+#map-container-fluid {
+    border-top: 3px solid var(--primary-color) !important;
+    border-bottom: 3px solid var(--primary-color) !important;
+}
 
 .carousel-item {
     height: 60vh;
