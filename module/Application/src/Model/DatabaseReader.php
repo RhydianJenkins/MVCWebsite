@@ -21,6 +21,7 @@ class DatabaseReader {
     const OTHER_ERROR = 'Other error';
     const DB_ERROR = 'Database error';
     const IMG_TOO_BIG = 'Image is too big';
+    const IMG_NOT_ALLOWED = 'Image type not supported (jpg, jpeg, png, and gif only)';
     const SUCCESS = 'Success';
 
     /**
@@ -107,6 +108,14 @@ class DatabaseReader {
         $size = $image['size'];
         if ($size > self::MAX_IMAGE_SIZE) {
             return ['code' => self::IMG_TOO_BIG];
+        }
+
+        // check image type is allowed
+        $fileName = $image['name'];
+        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+        $allowedTypes = ['jpg','png','jpeg','gif'];
+        if (!in_array($fileType, $allowedTypes)) {
+            return ['code' => self::IMG_NOT_ALLOWED];
         }
 
         // encode image to base64

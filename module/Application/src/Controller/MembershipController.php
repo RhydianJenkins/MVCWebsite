@@ -382,8 +382,6 @@ class MembershipController extends AbstractActionController {
 
         // set up return array
         $returnArray = [];
-        $returnArray['user'] = $user;
-        $returnArray['profileImageUploadForm'] = $this->profileImageUploadForm;
 
         // check they have selected to reset profile picture
         if ($this->getRequest()->isPost()) {
@@ -397,29 +395,35 @@ class MembershipController extends AbstractActionController {
             $this->profileImageUploadForm->setData($post);
 
             // check form validity
-            if (!$this->profileImageUploadForm->isValid()) {
-                return $returnArray;
-            }
+            if ($this->profileImageUploadForm->isValid()) {
+                // get valid form data
+                $data = $this->profileImageUploadForm->getData();
 
-            // get valid form data
-            $data = $this->profileImageUploadForm->getData();
+                // save to database
+                $result = $this->databaseReader->uploadNewProfilePicture($data['profileimage'], $user['id']);
 
-            // save to database
-            $result = $this->databaseReader->uploadNewProfilePicture($data['profileimage'], $user['id']);
+                // check success
+                if ($result['code'] != $this->databaseReader::SUCCESS) {
+                    $returnArray['success'] = false;
+                    $returnArray['message'] = 'Unable to upload image. ' . $result['code'] . '.';
+                    $returnArray['messageAlert'] = 'danger';
+                } else {
+                    $returnArray['success'] = true;
+                    $returnArray['message'] = 'Profile picture successfully updated.';
+                    $returnArray['messageAlert'] = 'success';
 
-            // check success
-            if ($result['code'] != $this->databaseReader::SUCCESS) {
-                $returnArray['success'] = false;
-                $returnArray['message'] = 'Unable to upload image. ' . $result['code'] . '.';
-                $returnArray['messageAlert'] = 'danger';
-            } else {
-                $returnArray['success'] = true;
-                $returnArray['message'] = 'Profile picture successfully updated.';
-                $returnArray['messageAlert'] = 'success';
-
-                // $result['image64'];  // new base64 encoded image
+                    // save image to session
+                    $newImage = 'data:image;base64,' . $result['image64'];  // new base64 encoded image
+                    $user['profilepicture64'] = $newImage;
+                    $this->loginAuthenticator->setProfilePicture($newImage);
+                    $this->session->write([MembershipController::IDENTITY_SESSION_ID => $user]);
+                }
             }
         }
+
+        // finally add user and form(s) to return array
+        $returnArray['user'] = $user;
+        $returnArray['profileImageUploadForm'] = $this->profileImageUploadForm;
 
         // return view with user in it
         return $returnArray;
