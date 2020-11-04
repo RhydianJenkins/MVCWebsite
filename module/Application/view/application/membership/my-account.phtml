@@ -37,7 +37,10 @@ $profilePictureForm->prepare();
                     </div>
                     <?= $this->formSubmit($submit); ?>
                     <?= $this->formElement($profileimage) ?>
-                    <?= $this->formElementErrors()->render($profileimage, ['class' => 'text-danger']) ?>
+                    <?= $this->formElementErrors()
+                        ->setMessageOpenFormat('<div class="mt-1 alert alert-danger">')
+                        ->setMessageCloseString('</div>')
+                        ->render($profileimage) ?>
                 </div>
 
             </fieldset>
