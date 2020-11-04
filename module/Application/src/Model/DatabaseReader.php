@@ -9,12 +9,18 @@ use Laminas\Db\Sql\Sql;
 
 class DatabaseReader {
     /**
+     * General constants.
+     */
+    const MAX_IMAGE_SIZE = 10000000;  // 10MB in bytes
+
+    /**
      * Result codes.
      */
     const NOT_FOUND = 'Not found';
     const INVALID = 'Invalid request';
     const OTHER_ERROR = 'Other error';
     const DB_ERROR = 'Database error';
+    const IMG_TOO_BIG = 'Image is too big';
     const SUCCESS = 'Success';
 
     /**
@@ -28,6 +34,7 @@ class DatabaseReader {
     const MEMBERS_RESET_CODE_FIELDNAME = 'resetcode';
     const MEMBERS_PASSWORD_FIELDNAME = 'password';
     const MEMBERS_SALT_FIELDNAME = 'salt';
+    const MEMBERS_IMAGE_FIELDNAME = 'picture';
 
     /**
      * The club's portsmouth numbers table information.
@@ -79,8 +86,6 @@ class DatabaseReader {
             return ['code' => self::INVALID];
         } else if (!$result->isQueryResult()) {
             return ['code' => self::OTHER_ERROR];
-        } else if ($result->getAffectedRows() === 0) {
-            return ['code' => self::NOT_FOUND];
         }
 
         // success! build and return array
@@ -88,6 +93,51 @@ class DatabaseReader {
             'code' => self::SUCCESS,
             'results' => $result,
             'numResultsFound' => $result->getAffectedRows(),
+        ];
+        return $returnArray;
+    }
+
+    /**
+     * Uploads a given profile picture image to a given user's record.
+     *
+     * Warning: does no form of validation.
+     */
+    public function uploadNewProfilePicture($image, $userID) {
+        // check image isn't too big
+        $size = $image['size'];
+        if ($size > self::MAX_IMAGE_SIZE) {
+            return ['code' => self::IMG_TOO_BIG];
+        }
+
+        // encode image to base64
+        $tmpFileContents = file_get_contents($image['tmp_name']);
+        $image64 = base64_encode($tmpFileContents);
+
+        // create the sql statement
+        $sql = new SQL($this->dbAdapter);
+        $update = $sql->update(self::MEMBERS_TABLE_NAME)
+            ->where([self::MEMBERS_ID_FIELDNAME => $userID])
+            ->set([self::MEMBERS_IMAGE_FIELDNAME => $image64]);
+
+        // execute statement and fetch results
+        try {
+            $PDOStatement = $sql->prepareStatementForSqlObject($update);
+            $result = $PDOStatement->execute();
+        } catch(\Exception $e) {
+            return ['code' => self::DB_ERROR];
+        }
+
+        // check we have valid results
+        if (!$result->valid()) {
+            return ['code' => self::INVALID];
+        }
+
+        // success! build and return array
+        $returnArray = [
+            'code' => self::SUCCESS,
+            'results' => $result,
+            'numResultsFound' => $result->getAffectedRows(),
+            'image64' => $image64,
         ];
         return $returnArray;
     }

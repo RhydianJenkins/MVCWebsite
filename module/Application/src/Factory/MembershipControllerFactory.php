@@ -6,10 +6,12 @@ use Application\Form\LoginForm;
 use Application\Form\RegisterForm;
 use Application\Form\ResetForm;
 use Application\Form\ResetPasswordForm;
+use Application\Form\ProfileImageUploadForm;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 use Application\Model\LoginAuthenticator;
 use Application\Model\Emailer;
+use Application\Model\DatabaseReader;
 
 class MembershipControllerFactory implements FactoryInterface {
     /**
@@ -26,7 +28,9 @@ class MembershipControllerFactory implements FactoryInterface {
         $registerForm = $formManager->get(RegisterForm::class, ['site_key' => $siteKey, 'secret_key' => $secretKey]);
         $resetForm = $formManager->get(ResetForm::class, ['site_key' => $siteKey, 'secret_key' => $secretKey]);
         $resetPasswordForm = $formManager->get(ResetPasswordForm::class);
+        $profileImageUploadForm = $formManager->get(ProfileImageUploadForm::class);
         $authenticator = $container->get(LoginAuthenticator::class);
+        $dbReader = $container->get(DatabaseReader::class);
         $authStorage = $container->get(SessionStorageFactory::class);
         $emailer = $container->get(Emailer::class);
         return new MembershipController(
@@ -34,7 +38,9 @@ class MembershipControllerFactory implements FactoryInterface {
             $registerForm,
             $resetForm,
             $resetPasswordForm,
+            $profileImageUploadForm,
             $authenticator,
+            $dbReader,
             $authStorage,
             $emailer
         );

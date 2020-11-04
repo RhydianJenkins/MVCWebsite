@@ -81,17 +81,15 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                         <li class="nav-item">
                             <a class="nav-link" href="<?= $this->url('calendar') ?>">Calendar</a>
                         </li>
-                        <?php if($user != null) : ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="<?= $this->url('membership/my_account') ?>">My Account</a>
-                            </li>
-                        <?php endif; ?>
                         <li class="nav-item">
                             <a class="nav-link" href="https://apex.oracle.com/pls/apex/f?p=76809:1" target="_blank">OOD Rota</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <?php if($user != null) : ?>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?= $this->url('membership/my_account') ?>">My Account</a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Hello <?= $user['firstname'] ?> (Log out)</a>
                             </li>

@@ -18,10 +18,12 @@ use Application\Form\LoginForm as LoginForm;
 use Application\Form\RegisterForm as RegisterForm;
 use Application\Form\ResetForm as ResetForm;
 use Application\Form\ResetPasswordForm as ResetPasswordForm;
+use Application\Form\ProfileImageUploadForm as ProfileImageUploadForm;
 use Application\Model\LoginAuthenticator;
 use Application\Model\Emailer;
 use Laminas\Authentication\Result;
 use Laminas\Session\Container;
+use Application\Model\DatabaseReader;
 use Laminas\Authentication\Storage\Session;
 use Application\Model\User;
 
@@ -34,29 +36,19 @@ class MembershipController extends AbstractActionController {
     const DATABASE_ERROR_MESSAGE = 'Sorry. The database is currently down, please try again later.';
 
     /**
-     * @var LoginForm
+     * Forms
      */
     private $loginForm;
-
-    /**
-     * @var RegisterForm
-     */
     private $registerForm;
-
-    /**
-     * @var ResetForm
-     */
     private $resetForm;
-
-    /**
-     * @var ResetPasswordForm
-     */
     private $resetPasswordForm;
+    private $loginAuthenticator;
+    private $profileImageUploadForm;
 
     /**
-     * @var LoginAuthenticator
+     * @var Application\Model\DatabaseReader
      */
-    private $loginAuthenticator;
+    private $databaseReader;
 
     /**
      * The session.
@@ -70,12 +62,24 @@ class MembershipController extends AbstractActionController {
      */
     private $emailer;
 
-    public function __construct(LoginForm $loginForm, RegisterForm $registerForm, ResetForm $resetForm, ResetPasswordForm $resetPasswordForm, LoginAuthenticator $loginAuthenticator, Session $session, Emailer $emailer) {
+    public function __construct(
+        LoginForm $loginForm,
+        RegisterForm $registerForm,
+        ResetForm $resetForm,
+        ResetPasswordForm $resetPasswordForm,
+        ProfileImageUploadForm $profileImageUploadForm,
+        LoginAuthenticator $loginAuthenticator,
+        DatabaseReader $databaseReader,
+        Session $session,
+        Emailer $emailer
+    ) {
         $this->loginForm = $loginForm;
         $this->registerForm = $registerForm;
         $this->resetForm = $resetForm;
         $this->resetPasswordForm = $resetPasswordForm;
         $this->loginAuthenticator = $loginAuthenticator;
+        $this->profileImageUploadForm = $profileImageUploadForm;
+        $this->databaseReader = $databaseReader;
         $this->session = $session;
         $this->emailer = $emailer;
     }
@@ -376,7 +380,48 @@ class MembershipController extends AbstractActionController {
         // get user identity
         $user = $this->loginAuthenticator->getIdentity()['identity'];
 
+        // set up return array
+        $returnArray = [];
+        $returnArray['user'] = $user;
+        $returnArray['profileImageUploadForm'] = $this->profileImageUploadForm;
+
+        // check they have selected to reset profile picture
+        if ($this->getRequest()->isPost()) {
+            // Make certain to merge the $_FILES info!
+            $post = array_merge_recursive(
+                $this->getRequest()->getPost()->toArray(),
+                $this->getRequest()->getFiles()->toArray()
+            );
+
+            // save form data
+            $this->profileImageUploadForm->setData($post);
+
+            // check form validity
+            if (!$this->profileImageUploadForm->isValid()) {
+                return $returnArray;
+            }
+
+            // get valid form data
+            $data = $this->profileImageUploadForm->getData();
+
+            // save to database
+            $result = $this->databaseReader->uploadNewProfilePicture($data['profileimage'], $user['id']);
+
+            // check success
+            if ($result['code'] != $this->databaseReader::SUCCESS) {
+                $returnArray['success'] = false;
+                $returnArray['message'] = 'Unable to upload image. ' . $result['code'] . '.';
+                $returnArray['messageAlert'] = 'danger';
+            } else {
+                $returnArray['success'] = true;
+                $returnArray['message'] = 'Profile picture successfully updated.';
+                $returnArray['messageAlert'] = 'success';
+
+                // $result['image64'];  // new base64 encoded image
+            }
+        }
+
         // return view with user in it
-        return ['user' => $user];
+        return $returnArray;
     }
 }

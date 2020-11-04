@@ -126,9 +126,9 @@ class LoginAuthenticator extends AuthenticationService {
     }
 
     /**
-     * The profile picture of the user.
+     * Thebase64 encoded profile picture of the user.
      */
-    private function setProfilePicture($picture) {
+    public function setProfilePicture($picture) {
         $this->profilepicture = $picture;
     }
 
@@ -166,7 +166,7 @@ class LoginAuthenticator extends AuthenticationService {
         $storedPasswordHash = $member[self::PASSWORD_FIELDNAME];
         $firstname = $member[self::FIRSTNAME_FIELDNAME];
         $surname = $member[self::SURNAME_FIELDNAME];
-        $profilepicture = empty($member[self::PICTURE_FIELDNAME]) ? self::DEFAULT_PICTURE_PATH : $member[self::PICTURE_FIELDNAME];
+        $profilepicture64 = empty($member[self::PICTURE_FIELDNAME]) ? base64_encode(self::DEFAULT_PICTURE_PATH) : $member[self::PICTURE_FIELDNAME];
 
         // Now we need to calculate hash based on user-entered password and compare
         // it with the password hash stored in database.
@@ -178,7 +178,7 @@ class LoginAuthenticator extends AuthenticationService {
             $this->setId($id);
             $this->setFirstname($firstname);
             $this->setSurame($surname);
-            $this->setProfilePicture($profilepicture);
+            $this->setProfilePicture($profilepicture64);
 
             // build user identity to save
             $identityArray = [
@@ -186,7 +186,7 @@ class LoginAuthenticator extends AuthenticationService {
                 'firstname' => $this->firstname,
                 'surname' => $this->surname,
                 'email' => $this->email,
-                'profilepicture' => $this->profilepicture,
+                'profilepicture64' => $this->profilepicture64,
             ];
 
             // return user identity (name) to be saved in session for later use
