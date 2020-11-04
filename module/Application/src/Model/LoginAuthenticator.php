@@ -30,42 +30,58 @@ class LoginAuthenticator extends AuthenticationService {
     const MEMBERS_TABLE_NAME = 'members';
 
     /**
+     * The public path of the default profile picture, used if no picture exists in the database.
+     */
+    const DEFAULT_PICTURE_PATH = '/img/facebank/Placeholder.png';
+
+    /**
      * The database fieldnames.
      */
+    const ID_FIELDNAME = 'ID';
     const RESET_CODE_FIELDNAME = 'resetcode';
     const EMAIL_FIELDNAME = 'email';
+    const FIRSTNAME_FIELDNAME = 'firstname';
+    const SURNAME_FIELDNAME = 'surname';
     const PASSWORD_FIELDNAME = 'password';
     const SALT_FIELDNAME = 'salt';
+    const PICTURE_FIELDNAME = 'picture';
 
     /**
      * First name
-     * @var string 
+     * @var string
      */
     private $firstname;
 
     /**
      * Surname
-     * @var string 
+     * @var string
      */
     private $surname;
     /**
      * Email
-     * @var string 
+     * @var string
      */
     private $email;
 
     /**
      * Password
-     * @var string 
+     * @var string
      */
     private $password;
-    
+
     /**
      * The database adapter.
      * @var Laminas\Authentication\Adapter\Adapter
      */
     private $dbAdapter;
-        
+
+    /**
+     * The profile picture of the user, or the placeholder path.
+     * You should be able to show the image as:
+     * <img src="<?= $profilepicture ?>" />
+     */
+    private $profilepicture;
+
     /**
      * Constructor.
      */
@@ -87,32 +103,39 @@ class LoginAuthenticator extends AuthenticationService {
     public function setEmail($email) {
         $this->email = $email;
     }
-    
+
     /**
-     * Sets first name.     
+     * Sets first name.
      */
     public function setFirstname($firstname) {
-        $this->firstname = $firstname;        
+        $this->firstname = $firstname;
     }
 
     /**
-     * Sets surname.     
+     * Sets surname.
      */
     public function setSurame($surname) {
-        $this->surname = $surname;        
+        $this->surname = $surname;
     }
 
     /**
-     * Sets password.     
+     * Sets password.
      */
     public function setPassword($password) {
-        $this->password = (string)$password;        
+        $this->password = (string)$password;
     }
-    
+
+    /**
+     * The profile picture of the user.
+     */
+    private function setProfilePicture($picture) {
+        $this->profilepicture = $picture;
+    }
+
     /**
      * Performs an authentication attempt.
      */
-    public function authenticate(AdapterInterface $adapter = NULL) {                
+    public function authenticate(AdapterInterface $adapter = NULL) {
         // query the database to check if there's a user with such username
         if ($adapter == NULL) {
             $sql = new SQL($this->dbAdapter);
@@ -136,24 +159,26 @@ class LoginAuthenticator extends AuthenticationService {
         if ($member == null) {
             return new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid credentials.']);
         }
-        
+
         // grab the results from the database
-        $salt = $member['salt'];
+        $salt = $member[self::SALT_FIELDNAME];
         $id = $member['ID'];
-        $storedPasswordHash = $member['password'];
-        $firstname = $member['firstname'];
-        $surname = $member['surname'];
+        $storedPasswordHash = $member[self::PASSWORD_FIELDNAME];
+        $firstname = $member[self::FIRSTNAME_FIELDNAME];
+        $surname = $member[self::SURNAME_FIELDNAME];
+        $profilepicture = empty($member[self::PICTURE_FIELDNAME]) ? self::DEFAULT_PICTURE_PATH : $member[self::PICTURE_FIELDNAME];
 
         // Now we need to calculate hash based on user-entered password and compare
         // it with the password hash stored in database.
         $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT, ['salt' => $salt]);
-        
+
         // compare passwords
         if ($hashedPassword == $storedPasswordHash) {
             // successful login, get user details for identity
             $this->setId($id);
             $this->setFirstname($firstname);
             $this->setSurame($surname);
+            $this->setProfilePicture($profilepicture);
 
             // build user identity to save
             $identityArray = [
@@ -161,14 +186,15 @@ class LoginAuthenticator extends AuthenticationService {
                 'firstname' => $this->firstname,
                 'surname' => $this->surname,
                 'email' => $this->email,
+                'profilepicture' => $this->profilepicture,
             ];
 
             // return user identity (name) to be saved in session for later use
-            return new Result(Result::SUCCESS, $identityArray, ['Authenticated successfully.']);        
-        }             
-        
+            return new Result(Result::SUCCESS, $identityArray, ['Authenticated successfully.']);
+        }
+
         // If password check didn't pass return 'Invalid Credential' failure status.
-        return new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid credentials.']);        
+        return new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid credentials.']);
     }
 
     public function addNewUser(User $newUser, AdapterInterface $adapter = NULL) {
@@ -192,11 +218,11 @@ class LoginAuthenticator extends AuthenticationService {
 
         // build sql statement to add to database
         $insert = $sql->insert()->into(self::MEMBERS_TABLE_NAME)->values([
-            'id' => NULL, 
-            'password' => $hashedPassword,
-            'salt' => $salt,
-            'firstname' => $firstname,
-            'surname' => $surname,
+            self::ID_FIELDNAME => NULL,
+            self::PASSWORD_FIELDNAME => $hashedPassword,
+            self::SALT_FIELDNAME => $salt,
+            self::FIRSTNAME_FIELDNAME => $firstname,
+            self::SURNAME_FIELDNAME => $surname,
             self::EMAIL_FIELDNAME => $email,
         ]);
 
