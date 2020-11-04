@@ -35,6 +35,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
         ?>
     </head>
     <body>
+        <!-- nav bar -->
         <nav class="navbar navbar-expand-xl navbar-dark" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -107,6 +108,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
             </div>
         </nav>
 
+        <!-- page content -->
         <div class="content">
             <?= $this->content ?>
         </div>
@@ -163,5 +165,6 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
         </footer>
     </body>
 
+    <!-- js -->
     <?= $this->inlineScript() ?>
 </html>
