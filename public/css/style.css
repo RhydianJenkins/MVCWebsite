@@ -54,6 +54,10 @@ body {
     color: #ffffff
 }
 
+.primary-text {
+    color: var(--primary-color);
+}
+
 .secondary-color {
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);

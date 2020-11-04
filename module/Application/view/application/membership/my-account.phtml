@@ -6,13 +6,38 @@ $user = $this->identity()['identity'];
 ?>
 <div class="jumbotron secondary-color">
     <div class="container">
-        <h1 class="display-4">My Account</h1>
+        <h1 class="display-4"><i class="fa fa-user-cog primary-text"></i> <?= $user['firstname'] . ' ' . $user['surname'] ?></h1>
     </div>
 </div>
 
+
 <div class="container">
-    <p>ID: <?= $user['id'] ?></p>
-    <p>Name: <?= $user['firstname'] ?></p>
-    <p>Surame: <?= $user['surname'] ?></p>
-    <p>Email: <?= $user['email'] ?></p>
+    <div class="row">
+        <div class="col-lg-3 col-sm-12 text-center mb-3">
+            <img src="<?= $this->basePath('/img/facebank/Placeholder.png') ?>" class="avatar img-circle img-thumbnail" alt="avatar">
+            <h6 class="text-muted">Upload a different photo...</h6>
+            <input type="file" class="text-center file-upload">
+        </div>
+
+        <div class="col-lg-9 col-sm-12">
+            <form class="form" action="##" method="post" id="registrationForm">
+                <div class="form-group">
+                    <label for="first_name"><h4>First name</h4></label>
+                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="<?= $user['firstname'] ?>" title="enter your first name if any.">
+                </div>
+                <div class="form-group">
+                    <label for="last_name"><h4>Last name</h4></label>
+                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="<?= $user['surname'] ?>" title="enter your last name if any.">
+                </div>
+                <div class="form-group">
+                    <label for="email"><h4>Email</h4></label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="<?= $user['email'] ?>" title="enter your email.">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary" type="submit"><i class="fa fa-save"></i> Save</button>
+                    <button class="btn btn-lg btn-secondary" type="reset"><i class="fa fa-redo"></i> Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
