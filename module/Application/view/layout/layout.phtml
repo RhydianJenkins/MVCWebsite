@@ -59,6 +59,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                             <div class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <a class="dropdown-item" href="<?= $this->url('about') ?>">The Club</a>
                                 <a class="dropdown-item" href="<?= $this->url('about/team') ?>">Our Team</a>
+                                <a class="dropdown-item" href="<?= $this->url('sailing/pn') ?>">Club Portsmouth Numbers</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -66,7 +67,6 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                             <div class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <a class="dropdown-item" href="<?= $this->url('sailing/results') ?>">Results</a>
                                 <a class="dropdown-item" href="<?= $this->url('sailing/instructions') ?>">Instructions</a>
-                                <a class="dropdown-item" href="<?= $this->url('sailing/pn') ?>">Club Portsmouth Numbers</a>
                             </div>
                         </li>
                         <li class="nav-item">
