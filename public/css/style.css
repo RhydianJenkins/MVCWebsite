@@ -50,6 +50,10 @@ body {
     transition: background-color 1s ease 0s;
 }
 
+.jumbotron {
+    margin-top: 3rem!important;
+}
+
 .btn-primary {
     background-color: var(--primary-color);
     border-color: var(--primary-color);
