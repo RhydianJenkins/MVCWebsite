@@ -1,0 +1,20 @@
+<?php
+/**
+ * @var Laminas\View\Renderer\PhpRenderer $this
+ */
+?>
+<div class="jumbotron mb-5 secondary-color">
+    <div class="container">
+        <h1 class="display-4">Book a Sailing Session</h1>
+    </div>
+</div>
+
+<?php if($this->message != null) : ?>
+    <!-- message from controller -->
+    <div class="container alert-dismissible fade show alert alert-<?= $this->messageAlert ?>" role="alert">
+        <?= $this->message ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true"><i class="fa fa-times"></i></span>
+        </button>
+    </div>
+<?php endif; ?>
