@@ -41,7 +41,7 @@
 </div>
 
 <!-- sail, wind, race -->
-<div class="container-fluid pt-5">
+<div class="container-fluid pt-5 secondary-color">
     <div class="row justify-content-lg-center text-center">
         <div class="col-xl-3 col-lg-4 col-md-12 p-5">
             <h3 class="page-header pb-3 mb-3">Sailing</h3>
@@ -62,15 +62,42 @@
 </div>
 
 <!-- Booking a sailing session -->
+<div class="container-fluid p-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-lg-6 col-md-12 p-5 text-center align-self-center">
+                <h2 class="container page-header pb-3 mb-3 text-center">Book a Sailing Session</h2>
+                <p class="lead">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis velit massa.
+                    In sit amet iaculis diam. Aenean laoreet placerat tincidunt. Vivamus vehicula ut sapien ut viverra.
+                    Proin venenatis nec velit sit amet porttitor. Praesent in dignissim dui.
+                    Vestibulum velit lacus, ullamcorper sed nibh eu, vestibulum egestas augue.
+                    Aenean quis mauris aliquam, sagittis sem eu, mollis lectus.
+                </p>
+                <a role="button" class="btn btn-primary btn-lg shadow" href="<?= $this->url('sailing/book') ?>">Book a Session <i class="fa fa-angle-double-right"></i></a>
+            </div>
+            <div class="col-xl-5 col-lg-6 col-md-12 p-5 align-self-center">
+                <img class="rounded shadow w-100" src="<?= $this->basePath('/img/front-page-sailing.jpg') ?>">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Join the club -->
 <div class="container-fluid p-5 secondary-color">
         <div class="row justify-content-center">
-            <div class="col-xl-4 col-lg-6 col-md-12 pb-5 text-center">
-                <h2 class="container page-header pb-3 mb-3 text-center">Booking a Sailing Session</h2>
-                <p class="lead">TESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTEST</p>
-                <a role="button" class="btn btn-primary" href="<?= $this->url('sailing/book') ?>">Book a Session <i class="fa fa-angle-double-right"></i></a>
+            <div class="col-xl-5 col-lg-6 col-md-12 order-lg-1 order-md-2 p-5 align-self-center">
+                <img class="rounded shadow w-100" src="<?= $this->basePath('/img/front-page-sailing.jpg') ?>">
             </div>
-            <div class="col-xl-5 col-lg-6 col-md-12 pb-5">
-                <img class="w-100" src="<?= $this->basePath('/img/front-page-sailing.jpg') ?>">
+            <div class="col-xl-4 col-lg-6 col-md-12 order-lg-2 order-md-1 p-5 text-center align-self-center">
+                <h2 class="container page-header pb-3 mb-3 text-center">Join the Club</h2>
+                <p class="lead">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis velit massa.
+                    In sit amet iaculis diam. Aenean laoreet placerat tincidunt. Vivamus vehicula ut sapien ut viverra.
+                    Proin venenatis nec velit sit amet porttitor. Praesent in dignissim dui.
+                    Vestibulum velit lacus, ullamcorper sed nibh eu, vestibulum egestas augue.
+                    Aenean quis mauris aliquam, sagittis sem eu, mollis lectus.
+                </p>
+                <a role="button" class="btn btn-primary btn-lg shadow" href="<?= $this->url('sailing/book') ?>">Join Us <i class="fa fa-angle-double-right"></i></a>
             </div>
         </div>
     </div>
