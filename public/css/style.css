@@ -39,8 +39,15 @@ body {
     line-height: 32px;
 }
 
-.navbar {
+#navigationbar {
     background-color: var(--primary-color);
+    transition: background-color 1s ease 0s;
+}
+
+#navigationbar.opaque {
+    background-color: rgba(255,255,255,0);
+    color: var(--primary-color);
+    transition: background-color 1s ease 0s;
 }
 
 .btn-primary {
@@ -93,7 +100,7 @@ body {
 }
 
 .carousel-item {
-    height: 80vh;
+    height: 100vh;
     min-height: 350px;
     background: no-repeat center center scroll;
     -webkit-background-size: cover;

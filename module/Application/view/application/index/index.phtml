@@ -277,5 +277,6 @@
     $this->inlineScript()
         ->prependFile($this->basePath('/js/map.driver.js'))
         ->prependFile($this->basePath('/js/weather.colors.js'))
-        ->prependFile('http://maps.google.com/maps/api/js?key=' . $this->mapApiKey);
+        ->prependFile('http://maps.google.com/maps/api/js?key=' . $this->mapApiKey)
+        ->prependFile($this->basePath('/js/navbar-fader.js'))
 ?>
