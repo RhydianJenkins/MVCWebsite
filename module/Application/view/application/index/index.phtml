@@ -12,22 +12,22 @@
     </ol>
     <div class="carousel-inner" role="listbox">
         <!-- Slide One: Sailing -->
-        <div class="carousel-item active" style="background-image: url('<?= $this->basePath('/img/front-page-sailing.jpg') ?>')">
-        <div class="carousel-caption rounded pl-3 pr-3 faded-bg">
-            <h3 class="h3-responsive">Sailing</h2>
-        </div>
+        <div class="carousel-item active" style="background-position: bottom; background-image: url('<?= $this->basePath('/img/sailing6.jpg') ?>')">
+            <div class="carousel-caption">
+                <h3 class="h3-responsive display-4">Sailing</h2>
+            </div>
         </div>
         <!-- Slide Two: Windsurfing -->
-        <div class="carousel-item" style="background-image: url('<?= $this->basePath('/img/front-page-windsurfing.jpg') ?>')">
-        <div class="carousel-caption rounded pl-3 pr-3 faded-bg">
-            <h3 class="h3-responsive">Windsurfing</h2>
-        </div>
+        <div class="carousel-item" style="background-position: bottom; background-image: url('<?= $this->basePath('/img/windsurfing1.jpg') ?>')">
+            <div class="carousel-caption">
+                <h3 class="h3-responsive display-4">Windsurfing</h2>
+            </div>
         </div>
         <!-- Slide Three: Racing -->
-        <div class="carousel-item" style="background-image: url('<?= $this->basePath('/img/front-page-racing.jpg') ?>')">
-        <div class="carousel-caption rounded pl-3 pr-3 faded-bg">
-            <h3 class="h3-responsive">Racing</h2>
-        </div>
+        <div class="carousel-item" style="background-position: bottom; background-image: url('<?= $this->basePath('/img/sailing3.jpg') ?>')">
+            <div class="carousel-caption">
+                <h3 class="h3-responsive display-4">Racing</h2>
+            </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -63,42 +63,40 @@
 
 <!-- Booking a sailing session -->
 <div class="container-fluid pt-5">
-        <div class="row align-self-center justify-content-center text-center">
-            <div class="col-xl-4 col-lg-6 col-md-12 p-5">
-                <h2 class="container page-header pb-3 mb-3">Book a Sailing Session</h2>
-                <p class="lead">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis velit massa.
-                    In sit amet iaculis diam. Aenean laoreet placerat tincidunt. Vivamus vehicula ut sapien ut viverra.
-                    Proin venenatis nec velit sit amet porttitor. Praesent in dignissim dui.
-                    Vestibulum velit lacus, ullamcorper sed nibh eu, vestibulum egestas augue.
-                    Aenean quis mauris aliquam, sagittis sem eu, mollis lectus.
-                </p>
-                <a role="button" class="btn btn-primary btn-lg shadow" href="<?= $this->url('sailing/book') ?>">Book a Session <i class="fa fa-angle-double-right"></i></a>
-            </div>
-            <div class="col-xl-5 col-lg-6 col-md-12 p-5 align-self-center">
-                <img class="rounded shadow w-100" src="<?= $this->basePath('/img/sailing1.jpg') ?>">
-            </div>
+    <div class="row align-self-center justify-content-center text-center">
+        <div class="col-xl-4 col-lg-6 col-md-12 p-5">
+            <h2 class="container page-header pb-3 mb-3">Book a Sailing Session</h2>
+            <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis velit massa.
+                In sit amet iaculis diam. Aenean laoreet placerat tincidunt. Vivamus vehicula ut sapien ut viverra.
+                Proin venenatis nec velit sit amet porttitor. Praesent in dignissim dui.
+                Vestibulum velit lacus, ullamcorper sed nibh eu, vestibulum egestas augue.
+                Aenean quis mauris aliquam, sagittis sem eu, mollis lectus.
+            </p>
+            <a role="button" class="btn btn-primary btn-lg shadow" href="<?= $this->url('sailing/book') ?>">Book a Session <i class="fa fa-angle-double-right"></i></a>
+        </div>
+        <div class="col-xl-5 col-lg-6 col-md-12 p-5 align-self-center">
+            <img class="rounded shadow w-100" src="<?= $this->basePath('/img/sailing1.jpg') ?>">
         </div>
     </div>
 </div>
 
 <!-- Join the club -->
 <div class="container-fluid pt-5 secondary-color">
-        <div class="row align-self-center justify-content-center text-center">
-            <div class="col-xl-5 col-lg-6 col-md-12 order-xl-1 order-lg-1 order-md-2 order-sm-2 order-2 p-5 align-self-center">
-                <img class="rounded shadow w-100" src="<?= $this->basePath('/img/sailing6.jpg') ?>">
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-12 order-xl-2 order-lg-2 order-md-1 order-sm-1 order-1 p-5">
-                <h2 class="container page-header pb-3 mb-3">Join the Club</h2>
-                <p class="lead">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis velit massa.
-                    In sit amet iaculis diam. Aenean laoreet placerat tincidunt. Vivamus vehicula ut sapien ut viverra.
-                    Proin venenatis nec velit sit amet porttitor. Praesent in dignissim dui.
-                    Vestibulum velit lacus, ullamcorper sed nibh eu, vestibulum egestas augue.
-                    Aenean quis mauris aliquam, sagittis sem eu, mollis lectus.
-                </p>
-                <a role="button" class="btn btn-primary btn-lg shadow" href="<?= $this->url('join') ?>">Join Us <i class="fa fa-angle-double-right"></i></a>
-            </div>
+    <div class="row align-self-center justify-content-center text-center">
+        <div class="col-xl-5 col-lg-6 col-md-12 order-xl-1 order-lg-1 order-md-2 order-sm-2 order-2 p-5 align-self-center">
+            <img class="rounded shadow w-100" src="<?= $this->basePath('/img/sailing6.jpg') ?>">
+        </div>
+        <div class="col-xl-4 col-lg-6 col-md-12 order-xl-2 order-lg-2 order-md-1 order-sm-1 order-1 p-5">
+            <h2 class="container page-header pb-3 mb-3">Join the Club</h2>
+            <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse quis velit massa.
+                In sit amet iaculis diam. Aenean laoreet placerat tincidunt. Vivamus vehicula ut sapien ut viverra.
+                Proin venenatis nec velit sit amet porttitor. Praesent in dignissim dui.
+                Vestibulum velit lacus, ullamcorper sed nibh eu, vestibulum egestas augue.
+                Aenean quis mauris aliquam, sagittis sem eu, mollis lectus.
+            </p>
+            <a role="button" class="btn btn-primary btn-lg shadow" href="<?= $this->url('join') ?>">Join Us <i class="fa fa-angle-double-right"></i></a>
         </div>
     </div>
 </div>
