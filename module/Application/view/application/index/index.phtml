@@ -43,20 +43,35 @@
 <!-- sail, wind, race -->
 <div class="container-fluid pt-5">
     <div class="row justify-content-lg-center text-center">
-        <div class="col-lg-3 p-5 m-5">
-            <h3 class="page-header pb-3 mb-3 ">Sailing</h3>
-            <p>The reservoir is over one mile long by approximately half a mile wide, where cruising can be enjoyed under the safe visibility of the on-duty safety boat crews.</p>
-            <p>Tuesday evenings through the Spring and Summer months provide a safe environment for casual sailing as well as the opportunity to practice skills in a non-raciing environment.</p>
+        <div class="col-xl-3 col-lg-4 col-md-12 p-5">
+            <h3 class="page-header pb-3 mb-3">Sailing</h3>
+            <p class="lead">The reservoir is over one mile long by approximately half a mile wide, where cruising can be enjoyed under the safe visibility of the on-duty safety boat crews.</p>
+            <p class="lead">Tuesday evenings through the Spring and Summer months provide a safe environment for casual sailing as well as the opportunity to practice skills in a non-raciing environment.</p>
         </div>
-        <div class="col-lg-3 p-5 m-5">
-            <h3 class="page-header pb-3 mb-3 ">Windsurfing</h3>
-            <p>Whatever your ability, the Lake is ideal for windsurfing in most wind directions, with a spacious grassy area for rigging, and an easy launching area.</p>
-            <p>You don’t have to worry about tides and you can enjoy the luxury of hot showers, hot drinks and the chance to have a chat with other members.</p>
+        <div class="col-xl-3 col-lg-4 col-md-12 p-5">
+            <h3 class="page-header pb-3 mb-3">Windsurfing</h3>
+            <p class="lead">Whatever your ability, the Lake is ideal for windsurfing in most wind directions, with a spacious grassy area for rigging, and an easy launching area.</p>
+            <p class="lead">You don’t have to worry about tides and you can enjoy the luxury of hot showers, hot drinks and the chance to have a chat with other members.</p>
         </div>
-        <div class="col-lg-3 p-5 m-5">
+        <div class="col-xl-3 col-lg-4 col-md-12 p-5">
             <h3 class="page-header pb-3 mb-3">Racing</h3>
-            <p>We have racing all year round at the club, as the resevior is warm enough to sail in without too much discomfort even in the winter months. During the warmer months we have racing three days a week as well as various class and club regattas.</p>
-            <p>You will find club racing competitive and friendly at the same time in both the General Handicap Fleet as well as the well established Solo Class Fleet.</p>
+            <p class="lead">We have racing all year round at the club, as the resevior is warm enough to sail in without too much discomfort even in the winter months. During the warmer months we have racing three days a week as well as various class and club regattas.</p>
+            <p class="lead">You will find club racing competitive and friendly at the same time in both the General Handicap Fleet as well as the well established Solo Class Fleet.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Booking a sailing session -->
+<div class="container-fluid p-5 secondary-color">
+        <div class="row justify-content-center">
+            <div class="col-xl-4 col-lg-6 col-md-12 pb-5 text-center">
+                <h2 class="container page-header pb-3 mb-3 text-center">Booking a Sailing Session</h2>
+                <p class="lead">TESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTESTTESTTESTTESTTEST TESTTEST TESTTEST</p>
+                <a role="button" class="btn btn-primary" href="<?= $this->url('sailing/book') ?>">Book a Session <i class="fa fa-angle-double-right"></i></a>
+            </div>
+            <div class="col-xl-5 col-lg-6 col-md-12 pb-5">
+                <img class="w-100" src="<?= $this->basePath('/img/front-page-sailing.jpg') ?>">
+            </div>
         </div>
     </div>
 </div>
@@ -128,8 +143,8 @@
 
             <div class="cursor-pointer mb-3">
                 <div class="shadow-sm panel-heading collapsed secondary-color rounded p-3" data-toggle="collapse" data-parent="#faq" href="#collapseOne">
-                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2">
-                        <strong>Do I need to be an employee of Tata Steel to join the club?</strong>
+                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2 lead">
+                        Do I need to be an employee of Tata Steel to join the club?
                         <i class="fa fa-angle-down"></i>
                     </p>
                 </div>
@@ -144,8 +159,8 @@
 
             <div class="cursor-pointer mb-3">
                 <div class="shadow-sm panel-heading collapsed secondary-color rounded p-3" data-toggle="collapse" data-parent="#faq" href="#collapseTwo">
-                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2">
-                        <strong>Where do I apply to join Tata Steel Sailing Club?</strong>
+                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2 lead">
+                        Where do I apply to join Tata Steel Sailing Club?
                         <i class="fa fa-angle-down"></i>
                     </p>
                 </div>
@@ -161,8 +176,8 @@
 
             <div class="cursor-pointer mb-3">
                 <div class="shadow-sm panel-heading collapsed secondary-color rounded p-3" data-toggle="collapse" data-parent="#faq" href="#collapseThree">
-                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2">
-                        <strong>When is Tata Steel Sailing Club open?</strong>
+                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2 lead">
+                        When is Tata Steel Sailing Club open?
                         <i class="fa fa-angle-down"></i>
                     </p>
                 </div>
@@ -178,8 +193,8 @@
 
             <div class="cursor-pointer mb-3">
                 <div class="shadow-sm panel-heading collapsed secondary-color rounded p-3" data-toggle="collapse" data-parent="#faq" href="#collapseFour">
-                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2">
-                        <strong>How much does it cost to join the club?</strong>
+                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2 lead">
+                        How much does it cost to join the club?
                         <i class="fa fa-angle-down"></i>
                     </p>
                 </div>
@@ -196,8 +211,8 @@
 
             <div class="cursor-pointer mb-3">
                 <div class="shadow-sm panel-heading collapsed secondary-color rounded p-3" data-toggle="collapse" data-parent="#faq" href="#collapseFive">
-                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2">
-                        <strong>Are there any age restrictions?</strong>
+                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2 lead">
+                        Are there any age restrictions?
                         <i class="fa fa-angle-down"></i>
                     </p>
                 </div>
@@ -213,8 +228,8 @@
 
             <div class="cursor-pointer mb-3">
                 <div class="shadow-sm panel-heading collapsed secondary-color rounded p-3" data-toggle="collapse" data-parent="#faq" href="#collapseSix">
-                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2">
-                        <strong>I'd like some training; What can you do for me?</strong>
+                    <p class="d-flex align-items-center justify-content-between mb-0 px-3 py-2 lead">
+                        I'd like some training; What can you do for me?
                         <i class="fa fa-angle-down"></i>
                     </p>
                 </div>
