@@ -186,6 +186,15 @@ return [
                             ],
                         ],
                     ],
+                    'book' => [
+                        'type' => Literal::class,
+                        'options' => [
+                            'route' => '/book',
+                            'defaults' => [
+                                'action' => 'book',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'join' => [

@@ -82,4 +82,11 @@ class SailingController extends AbstractActionController {
             'pnumbers' => iterator_to_array($pn['results'], true),
         ];
     }
+
+    public function bookAction() {
+        return new ViewModel([
+            'message' => 'The club is closed during the current Welsh "Firebreak" lockdown.',
+            'messageAlert' => 'danger',
+        ]);
+    }
 }
