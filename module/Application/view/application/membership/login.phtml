@@ -12,13 +12,18 @@
     $submit = $form->get('submit');
     $form->prepare();
 ?>
+<div class="jumbotron secondary-color">
+    <div class="container">
+        <h1 class="display-4">Log In</h1>
+    </div>
+</div>
+
 <div class="container p-5">
     <?php if($this->message != null) : ?>
         <div class="alert alert-<?= $this->messageAlert ?>" role="alert"><?= $this->message ?></div>
     <?php endif; ?>
     <div class="d-flex justify-content-center">
         <div class="card">
-            <div class="card-header"><h3 class="text-center">Log in</h3></div>
             <div class="card-body">
                 <?= $this->form()->openTag($form); ?>
                 <fieldset>
@@ -35,7 +40,6 @@
                     </div>
 
                     <div class="form-group">
-                        <?= $this->formLabel($captcha) ?>
                         <?= $this->formElement($captcha) ?>
                         <?= $this->formElementErrors()->render($captcha, ['class' => 'text-danger']) ?>
                     </div>

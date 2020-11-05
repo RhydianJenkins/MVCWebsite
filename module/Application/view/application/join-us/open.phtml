@@ -221,7 +221,6 @@ if ($this->openSeriesMembershipForm != NULL) {
 
                 <!-- captcha -->
                 <div class="form-group pt-5">
-                    <?= $this->formLabel($captcha) ?>
                     <?= $this->formElement($captcha) ?>
                     <?= $this->formElementErrors()->render($captcha, ['class' => 'text-danger']) ?>
                 </div>
