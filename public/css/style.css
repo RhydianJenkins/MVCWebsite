@@ -44,7 +44,7 @@ body {
     transition: background-color 1s ease 0s;
 }
 
-#navigationbar.opaque {
+#navigationbar.opaque:not(:hover) {
     background-color: rgba(255,255,255,0);
     color: var(--primary-color);
     transition: background-color 1s ease 0s;
