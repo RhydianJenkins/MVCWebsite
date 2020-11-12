@@ -49,7 +49,7 @@ body {
 }
 
 #navigationbar.opaque:not(:hover) {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0);
     color: var(--primary-color);
     transition: background-color 1s, box-shadow 1.5s ease 0s;
     box-shadow: none;
@@ -58,27 +58,12 @@ body {
 .navbar-dark .navbar-nav .nav-link {
     color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
-  }
+}
   
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
     color: rgba(255,255,255,1);
     text-shadow: 1px 1px 20px rgb(0 0 0 / .4);
-  }
-
-.nav-joinus {
-    background: rgba(255,255,255,.9);
-    border: 2px solid #fefefe;
-    border-radius: .3rem;
-    color: var(--primary-color)!important;
-    margin-left: 10px;
-    font-weight: 500;
-    box-shadow: 1px 1px 3px 0px rgb(0 0 0 / .3);
 }
-
-.nav-joinus a {
-    color: var(--primary-color)!important;
-}
-
 
 .jumbotron {
     margin-top: 3rem !important;
