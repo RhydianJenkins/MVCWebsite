@@ -278,15 +278,15 @@ return [
                             ],
                         ],
                     ],
-                    'register' => [
-                        'type' => Literal::class,
-                        'options' => [
-                            'route' => '/register',
-                            'defaults' => [
-                                'action' => 'register',
-                            ],
-                        ],
-                    ],
+                    // 'register' => [
+                    //     'type' => Literal::class,
+                    //     'options' => [
+                    //         'route' => '/register',
+                    //         'defaults' => [
+                    //             'action' => 'register',
+                    //         ],
+                    //     ],
+                    // ],
                     'reset' => [
                         'type' => Segment::class,
                         'options' => [
