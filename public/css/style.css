@@ -17,7 +17,8 @@ body {
 }
 
 .content {
-    flex: 1 0 auto;
+    padding-top: 4rem !important; /* for fixed navbar */
+    flex: 1 0 auto; /* for minimum page height */
 }
 
 #wave-footer {
@@ -31,6 +32,10 @@ body {
 
 #wave-footer a {
     color: #fff;
+}
+
+.sticky-top {
+    top: 4rem;  /* for fixed navbar */
 }
 
 .logo {
@@ -63,10 +68,6 @@ body {
 .navbar-dark .navbar-nav .nav-link:hover, .navbar-dark .navbar-nav .nav-link:focus {
     color: rgba(255,255,255,1);
     text-shadow: 1px 1px 20px rgb(0 0 0 / .4);
-}
-
-.jumbotron {
-    margin-top: 3rem !important;
 }
 
 .btn-primary {
@@ -116,6 +117,10 @@ body {
 #map-container-fluid {
     border-top: 3px solid var(--primary-color) !important;
     border-bottom: 3px solid var(--primary-color) !important;
+}
+
+#carouselExampleIndicators {
+    margin-top: -4rem !important;
 }
 
 .carousel-item {
