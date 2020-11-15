@@ -1,4 +1,4 @@
-# dockerfile: Dockerfile
+version: "3"
 
 services:
   tata_db:
