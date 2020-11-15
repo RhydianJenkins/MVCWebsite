@@ -19,9 +19,9 @@ return [
         'adapters' => [
             'Application\DB\DBAdapter' => [
                 'driver' => 'Pdo',
-                'dsn'    => 'mysql:dbname=tata_steel_membership;host=localhost',
+                'dsn'    => 'mysql:dbname=tata_db;host=tata_db;port=3306;',
                 'user' => 'readwrite',
-                'password' => 'password2',
+                'password' => 'secret',
             ]
         ]
     ],

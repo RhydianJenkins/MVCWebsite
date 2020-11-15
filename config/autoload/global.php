@@ -33,7 +33,7 @@ return [
     'db' => [
         'adapters' => [
             'Application\DB\DbAdapter' => [
-                'driver' => 'Pdo',
+                'driver' => '',
                 'dsn'    => '',
                 'user' => '',
                 'password' => '',

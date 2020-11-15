@@ -1,7 +1,27 @@
-tatawebsite:
-  build: .
-  dockerfile: Dockerfile
-  ports:
-   - "8080:80"
-  volumes:
-   - .:/var/www
+# dockerfile: Dockerfile
+
+services:
+  tata_db:
+    container_name: tata_db
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./data/application/init.sql:/data/application/init.sql
+    environment:
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: tata_db
+      MYSQL_USER: readwrite
+      MYSQL_PASSWORD: secret
+
+  tatawebsite:
+    container_name: tata_website
+    depends_on:
+      - tata_db
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www

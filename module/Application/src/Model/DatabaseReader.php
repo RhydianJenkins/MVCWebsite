@@ -75,12 +75,12 @@ class DatabaseReader {
         }
 
         // execute statement and fetch results
-        try {
+        //try {
             $PDOStatement = $sql->prepareStatementForSqlObject($select);
             $result = $PDOStatement->execute();
-        } catch(\Exception $e) {
-            return ['code' => self::DB_ERROR];
-        }
+        //} catch(\Exception $e) {
+        //    return ['code' => self::DB_ERROR];
+        //}
 
         // check we have valid results
         if (!$result->valid()) {
