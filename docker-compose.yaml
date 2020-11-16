@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  tata_db:
-    container_name: tata_db
+  database:
+    container_name: ${DB_CONTAINER_NAME}
     image: mysql:5.7
     ports:
       - "3306:3306"
@@ -10,18 +10,51 @@ services:
     volumes:
       - ./data/application/init.sql:/data/application/init.sql
     environment:
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: tata_db
-      MYSQL_USER: readwrite
-      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_USER: ${SQL_ROOT_USER}
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE}
+      MYSQL_USER: ${SQL_USER}
+      MYSQL_PASSWORD: ${SQL_PASSWORD}
 
-  tatawebsite:
-    container_name: tata_website
+  website:
+    container_name: ${WEB_CONTAINER_NAME}
     depends_on:
-      - tata_db
+      - database
     build: .
     ports:
       - "80:80"
     volumes:
       - .:/var/www
+
+  mail:
+    container_name: ${MAIL_CONTAINER_NAME}
+    image: tvial/docker-mailserver:latest
+    hostname: ${HOST_NAME}
+    domainname: ${DOMAIN_NAME}
+    ports:
+      - "25:25"
+      - "143:143"
+      - "587:587"
+      - "993:993"
+    volumes:
+      - maildata:/var/mail
+      - mailstate:/var/mail-state
+      - maillogs:/var/log/mail
+      - ./config/:/tmp/docker-mailserver/
+    environment:
+      - ENABLE_SPAMASSASSIN=1
+      - SPAMASSASSIN_SPAM_TO_INBOX=1
+      - ENABLE_CLAMAV=1
+      - ENABLE_FAIL2BAN=1
+      - ENABLE_POSTGREY=1
+      - ONE_DIR=1
+      - DMS_DEBUG=1
+    cap_add:
+      - NET_ADMIN
+      - SYS_PTRACE
+    restart: always
+
+volumes:
+  maildata:
+  mailstate:
+  maillogs:

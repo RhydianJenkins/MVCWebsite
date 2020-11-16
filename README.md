@@ -18,7 +18,7 @@ Build and start the image and container using:
 ```bash
 $ git clone https://github.com/RhydianJenkins/MVCWebsite.git path/to/install
 $ cd path/to/install
-$ docker-compose up -d --build
+$ docker-compose --env-file ./.env up -d --build
 ```
 
 At this point, you can visit http://localhost:8080 to see the site running.
