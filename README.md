@@ -21,7 +21,11 @@ $ cd path/to/install
 $ docker-compose --env-file ./.env up -d --build
 ```
 
-At this point, you can visit http://localhost:8080 to see the site running.
+At this point, you can visit http://localhost:80 to see the site running.
+
+Docker will also install a [phpmyadmin](https://www.phpmyadmin.net/) client and host it at http://localhost:8080.
+
+Environment variables such as usernames, passwords, database names, and container names be customised in the provided `.env` file.
 
 You can also run commands such as `composer` in the container.  The container 
 environment is named "tatawebsite" so you will pass that value to 
