@@ -20,7 +20,7 @@ return [
             'Application\DB\DBAdapter' => [
                 'driver' => 'Pdo',
                 'dsn'    => 'mysql:dbname=tata_db;host=tata_db;port=3306;',
-                'user' => 'readwrite',
+                'user' => 'root',
                 'password' => 'secret',
             ]
         ]
