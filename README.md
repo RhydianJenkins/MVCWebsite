@@ -1,17 +1,19 @@
 # Tata Steel Sailing Club Website
 
-## Introduction
+## About
 
-This is a Laminas MVC website built for the Tata Steel Sailing Club.
+This is a Laminas MVC website built for the Tata Steel Sailing Club, which comes with a database, web server, and phpmyadmin.
+
+The website makes external calls to ReCaptcha, WeatherApi, and Google Maps. API keys will need to be obtained for these services.
 
 ## Installation with Docker
 
 The easiest way to build the project and ensure all dependencies are taken care of is to use [Docker](https://www.docker.com/).
 
-A `docker-compose.yml` file is provided for use with
+A `docker-compose.yaml` file is provided for use with
 [docker-compose](https://docs.docker.com/compose/); it
 uses the provided `Dockerfile` to build a docker image 
-for the `tatawebsite` container created with `docker-compose`.
+for the `tata_web` container created with `docker-compose`.
 
 Build and start the image and container using:
 
@@ -23,16 +25,16 @@ $ docker-compose --env-file ./.env up -d --build
 
 At this point, you can visit http://localhost:80 to see the site running.
 
-Docker will also install a [phpmyadmin](https://www.phpmyadmin.net/) client and host it at http://localhost:8080.
+`docker-compose` will also install a [phpmyadmin](https://www.phpmyadmin.net/) client and host it at http://localhost:8080, a mySQL database, and a mailing server.
 
-Environment variables such as usernames, passwords, database names, and container names be customised in the provided `.env` file.
+Environment variables such as usernames, passwords, and container names can be customised in the provided `.env` file.
 
 You can also run commands such as `composer` in the container.  The container 
-environment is named "tatawebsite" so you will pass that value to 
+environment is named "tata_web" so you will pass that value to 
 `docker-compose run`:
 
 ```bash
-$ docker-compose run tatawebsite composer install
+$ docker-compose run tata_web composer install
 ```
 
 ## Installing With Composer
