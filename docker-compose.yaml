@@ -16,6 +16,18 @@ services:
       MYSQL_USER: ${SQL_USER}
       MYSQL_PASSWORD: ${SQL_PASSWORD}
 
+  phpmyadmin:
+    container_name: ${PMA_CONTAINER_NAME}
+    depends_on:
+      - database
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: ${DB_CONTAINER_NAME}
+      MYSQL_ROOT_PASSWORD: ${SQL_ROOT_PASSWORD}
+
   website:
     container_name: ${WEB_CONTAINER_NAME}
     depends_on:
