@@ -6,7 +6,7 @@ This is a Laminas MVC website built for the Tata Steel Sailing Club, which comes
 
 The website makes external API calls to [ReCaptcha](http://www.google.com/recaptcha/about), [WeatherApi](http://www.weatherapi.com), and [Google Maps](http://developers.google.com/maps/documentation/javascript/get-api-key). API keys will need to be obtained for these services.
 
-## Installation with Docker
+## Installing with Docker
 
 The easiest way to build the project and ensure all dependencies are taken care of is to use [Docker](https://www.docker.com/).
 
