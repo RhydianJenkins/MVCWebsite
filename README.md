@@ -37,7 +37,7 @@ environment is named "tata_web" so you will pass that value to
 $ docker-compose run tata_web composer install
 ```
 
-## Installing With Composer
+## Installing with Composer
 
 The project can be built using [Composer](https://getcomposer.org/). If you don't have it already installed, then please install as per the [documentation](https://getcomposer.org/doc/00-intro.md).
 
