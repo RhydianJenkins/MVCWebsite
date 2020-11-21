@@ -49,7 +49,7 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $this->url('home') ?>">Home</a>
+                            <a class="nav-link" href="<?= $this->url('home') ?>">Home <i class="fas fa-home"></i></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
@@ -68,35 +68,35 @@ $user = $this->identity() == null ? null : $this->identity()['identity'];
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $this->url('gallery') ?>">Gallery</a>
+                            <a class="nav-link" href="<?= $this->url('gallery') ?>">Gallery <i class="far fa-images"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $this->url('news') ?>">News</a>
+                            <a class="nav-link" href="<?= $this->url('news') ?>">News <i class="fas fa-newspaper"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $this->url('training') ?>">Training</a>
+                            <a class="nav-link" href="<?= $this->url('training') ?>">Training <i class="fas fa-drafting-compass"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= $this->url('calendar') ?>">Calendar</a>
+                            <a class="nav-link" href="<?= $this->url('calendar') ?>">Calendar <i class="far fa-calendar-alt"></i></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="https://apex.oracle.com/pls/apex/f?p=76809:1" target="_blank">OOD Rota</a>
+                            <a class="nav-link" href="https://apex.oracle.com/pls/apex/f?p=76809:1" target="_blank">OOD Rota <i class="far fa-calendar-times"></i></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <?php if($user != null) : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= $this->url('membership/my_account') ?>">My Account</a>
+                                <a class="nav-link" href="<?= $this->url('membership/my_account') ?>">My Account <i class="fas fa-user-circle"></i></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Log out</a>
+                                <a class="nav-link" href="<?= $this->url('membership/logout') ?>">Log out <i class="fas fa-door-closed"></i></a>
                             </li>
                         <?php else : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= $this->url('membership/login') ?>">Log in</a>
+                                <a class="nav-link" href="<?= $this->url('membership/login') ?>">Log in <i class="fas fa-door-open"></i></a>
                             </li>
                             <li class="nav-item">
-                                <button class="btn tertiary-color primary-text shadow font-weight-bold" onclick="location.href='<?= $this->url('join') ?>'">Join Us</button>
+                                <button class="btn tertiary-color primary-text shadow font-weight-bold" onclick="location.href='<?= $this->url('join') ?>'">Join Us <i class="fas fa-file-signature"></i></button>
                             </li>
                         <?php endif; ?>
                     </ul>
